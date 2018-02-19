@@ -75,7 +75,58 @@ of each interface and each method within the interface (note this code can be ge
 you plan to throw because of errors that might occur within your methods. Note, this does not require that all of these types will remain as 
 interfaces in the final implementation, just that the goal is for you to focus on each type's behavior and purpose.
 
-## Front-end API's
+## Front-end Internal API's - Andy
+* VariableBox
+    * addVariable(variableString) [Internal API, Visualizer -> VariableBox]
+    * addUserCommand(variableString) [Internal API, Visualizer -> VariableBox]
+* CommandBox
+    * clear() [Internal API, Visualizer -> CommandBox]
+* ConsoleBox
+    * addCommand(commandString) [Internal API, Visualizer -> ConsoleBox]
+* Drawer
+    * Public setBackgroundColor(color) [Internal API, Visualizer -> Drawer]
+    * Public setPenColor(color) [Internal API, Visualizer -> Drawer]
+    * Public setImage(img) [Internal API, Visualizer -> Drawer]
+    * Public penUp() [Internal API, Visualizer -> Drawer]
+    * Public penDown() [Internal API, Visualizer -> Drawer]
+    * Public draw()  [Internal API, Visualizer -> Drawer]
+    * Public moveToPoint(x,y) [Internal API, Visualizer -> Drawer]
+
+## Front-end External API's - Eddie
+
+* Visualizer
+    * Public draw(attributes) [External API, Model -> View]
+    * Public toOrigin() [External API, Model -> View]
+    * Public penUp()  [External API, Model -> View]
+    * Public penDown()  [External API, Model -> View]
+    * Public displayError(msg) [External API, Model -> View]
+    * Public setBackgroundColor(color) [External API, Model -> View]
+    * Public setPenColor(color) [External API, Model -> View]
+    * Public setImage(img) [External API, Model -> View]
+    * Public displayCommandHistory() [External API, Model -> View]	//maybe private
+    * Public displayVariables [External API, Model -> View]	//maybe private
+    * Public displayUserCommands [External API, Model -> View]	//maybe private
+    * Public showCommandHelp [External API, Controller -> View]
+    * Public clearCommandBox [External API, Controller -> View]	//extra
+* VariableBox
+    
+* CommandBox
+* ConsoleBox
+* Drawer
+
+
+
+Controller
+ViewController
+Public showCommandHelp [External API, View -> Controller]
+Public clearCommandBox [External API, View -> Controller]
+
+ModelController
+Methods:
+Public passCommand() [External API, View -> Controller]
+Public clearConsoleBox()  [External API, View -> Controller]
+Public clearVariableBox()  [External API, View -> Controller]
+
 
 ## Back-end Internal API's - Charlie
 
