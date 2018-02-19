@@ -62,7 +62,7 @@ display the message “No variable value provided” or “Variable :Y does not 
 
 Below is an example design of our planned user interface:
 
-![Turtle UI Example] (file path)
+![Turtle UI Example] (./doc/slogo_mockup.PNG)
 
 
 # API Details 
