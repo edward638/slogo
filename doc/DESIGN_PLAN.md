@@ -21,12 +21,49 @@ regards to the program's functionality, and how they collaborate with each other
 Include a picture of how the components are related (these pictures can be hand drawn and scanned in, created with a standard drawing program, 
 or screen shots from a UML design program). Discuss specific classes, methods, and data structures, but not individual lines of code.
 
+## Interal Front-end
+* (how the front end works within itself)
+
+## External Front-end
+* (how the front end communicates w back-end)
+
+## Internal Back-end
+* (how the back end works among itself) -Charlie
+
+## External Back-end
+* (how to back end sends data to the front end) - Belanie
+
+Here is a picture of how our compenents are related:
+
+![Components Overview] (file pale)
+
 # User Interface
 This section describes how the user will interact with your program (keep it simple to start). Describe the overall appearance of program's user 
 interface components and how users interact with these components (especially those specific to your program, i.e., means of input other than 
 menus or toolbars). Include one or more pictures of the user interface (these pictures can be hand drawn and scanned in, created with a standard 
 drawing program, or screen shots from a dummy program that serves as a exemplar). Describe any erroneous situations that are reported to the 
 user (i.e., bad input data, empty data, etc.).
+
+
+For our user interface, we plan to have four main components: the turtle graphics window, the command box, the console, and the variable display 
+window. The turtle graphics window is responsible for displaying all graphics relevant to the SLogo turtle. The command box will be a combination
+of a text box and run button. The user will be able to type in commands in the text box, and tell the program to execute these commands by 
+pressing the run button. We may also incorporate additional buttons to allow for greater user control, such as a clear button which would clear 
+the text box, or a previous button which would fill the text box with the previously executed command. The third component we plan on including 
+is the console. The console’s responsibility is to provide a history of previous commands executed and inform the user if an invalid command has 
+been inputted. In addition, the console will be accompanied with a clear button which will erase the history of commands from the display. The 
+final component is the variable display window, which will be used to show the user all currently stored variables within the program. Similar 
+to both the command box and the console, the variable box will have a clear button which clears all variable values. 
+
+When an invalid command is submitted to the command box, the user will receive a notification within the console that there was an issue with 
+the command. For example, if a user mistypes a command (ex. “RY 50”) the console will display the message “Not a valid command”. If a user 
+fails to correctly assign a value to a variable (ex.  MAKE :X) or attempts to retrieve an unallocated variable (ex. SUM :Y 3), the console will 
+display the message “No variable value provided” or “Variable :Y does not exist”. We plan on having a specific error message for each error.
+
+Below is an example design of our planned user interface:
+
+![Turtle UI Example] (file path)
+
 
 # API Details 
 This section describes each API introduced in the Overview in detail. Describe how each API supports specific features given in the assignment 
@@ -38,16 +75,41 @@ of each interface and each method within the interface (note this code can be ge
 you plan to throw because of errors that might occur within your methods. Note, this does not require that all of these types will remain as 
 interfaces in the final implementation, just that the goal is for you to focus on each type's behavior and purpose.
 
+## Front-end API's
+
+## Back-end Internal API's - Charlie
+
+### Nodes
+* Assign
+* Return
+* Compare
+* BinOp
+* Command
+
+### Data types
+* Variable
+* Constant
+* List
+* Comment
+* Command
+
+## Back-end External API's - Belanie
+
+### Parser
+
+### Turtle
+
 # API Example Code
 It is especially important in helping others understand how to use your APIs to provide example code. It should be clear from this code which 
 objects are responsible for completing each part of the task, but you do not have to implement the called functions.
 
 * Show an actual "sequence of code" that implements the following use case using only methods described in your APIs:  
-    * The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the 
-environment's history.
+    * The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to 
+    the environment's history.
     * Note, clearly show the flow of calls to public methods needed to complete this example, indicating which class contains each method called. 
     * It is not necessary to understand exactly how parsing works in order to complete this example, just what the result of parsing the command
     will be.
+
 * Additionally, each member of the team should create two use cases of their own (and example code) for the part of the project for which they 
 intend to take responsibility. These can still be done as a group, but should represent a variety of areas of the overall project.
 
