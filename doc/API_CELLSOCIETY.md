@@ -1,14 +1,14 @@
-###Analysis of Team 19's API###
+### Analysis of Team 19's API
 
-##Simulation##
+## Simulation
 
-#External#
+# External
 
 The project has a lot of external methods when it comes to the simulation, as the simultion classes all interact with the grid class. 
 The constructors rely on another class to call them, except for the super constructor. A grid is made and then stored, which is used
 for the update methods. The methods to get the names are also external, as the runner needs these names when making the grapher.
 
-#Internal#
+# Internal
 
 The getKeys and getRand methods are internal as it is just interactions between the super and sub classes, as these variables are stored 
 in the super because all sims use this feature. The cells are also closed between themselves and their super classes, as it only
