@@ -3,6 +3,17 @@ This section describes the problem your team is trying to solve by writing this 
 it most flexible), and the primary architecture of the design (i.e., what is closed and what is open). Discuss the program at a high-level 
 (i.e., without referencing specific classes, data structures, or code).
 
+In this project, we are trying to create the simple computer programming language SLOGO, which takes in user input, interprets commands, and 
+performs some action that appears on the screen. We hope to make several areas in our program flexible. Some of these areas include being able
+to make our program flexible enough in the back end to take in and interpret additional commands. In addition, we want to minimize the amount 
+of dependencies our working parts have between each other in order to avoid issues with adding new features. In discussing the program at a high
+level, we plan to divide it into three simple modules: Model, View, and Controller. In this program, we hope to have the View display information 
+to the user and be able to take in user interactions. These interactions are meant to go to the Controller, which can interpret the interaction. 
+The Controller can then either tell the View to change its display or delegate the Model to perform some action if backend specific information 
+is necessary to perform the interaction. The Controller can then change its state and/or tell the View to change its information. We feel that 
+splitting the design of the program simplifies the program into three separate, smaller problems and can help our program to achieve better 
+flexibility as a whole.
+
 # Design Overview
 This section serves as a map of your design for other programmers to gain a general understanding of how and why the program was divided up, and 
 how the individual parts work together to provide the desired functionality. Describe the four APIs you intend to create (their purpose with 
@@ -45,10 +56,32 @@ This section describes any issues which need to be addressed or resolved before 
 design decisions that the group discussed at length (include pros and cons from all sides of the discussion) as well as any ambiguities, 
 assumptions, or dependencies regarding the program that impact the overall design.
 
+## Potential issues
+* (add potential issues)
+
+## Design decisions
+* (add decisions the group discussed at length)
+
+## Ambiguities, assumptions and dependencies
+* (talk about ambiguities, assumptions and dependencies)
+
 # Team Responsibilities
 This section describes the program components each team member plans to take primary and secondary responsibility for and a high-level plan of 
 how the team will complete the program.
 
 ### Edward
 * His primary responsibility is also within the View component of this program. He will work on the CommandBox, ConsoleBox, and VariableBox 
-* classes (designed to be contained within the Visualizer). He will also work on the Controller.
+  classes (designed to be contained within the Visualizer). He will also work on the Controller.
+
+### Andy 
+* His primary responsibility is within the View component of this program. He will work on the Visualizer class in particular. In addition, he 
+  will contribute to some aspects of the Controller.
+
+### Belanie
+* (Belanie's responsibilites)
+
+### Charlie 
+* (Charlie's responsibilites)
+
+### High-Level Plan
+* (plan of how the team will complete the program)
