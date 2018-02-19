@@ -48,3 +48,7 @@ assumptions, or dependencies regarding the program that impact the overall desig
 # Team Responsibilities
 This section describes the program components each team member plans to take primary and secondary responsibility for and a high-level plan of 
 how the team will complete the program.
+
+### Edward
+* His primary responsibility is also within the View component of this program. He will work on the CommandBox, ConsoleBox, and VariableBox 
+* classes (designed to be contained within the Visualizer). He will also work on the Controller.
