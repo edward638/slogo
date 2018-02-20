@@ -131,7 +131,7 @@ No external API
     1. Assign
     2. Return
     3. Compare
-    4. BinOp
+    4. BinOp  
     5.Command
 
 ### Data types
