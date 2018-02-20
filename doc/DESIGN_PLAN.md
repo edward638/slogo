@@ -207,7 +207,8 @@ how the team will complete the program.
 * (Belanie's responsibilites)
 
 ### Charlie 
-* (Charlie's responsibilites)
+* He will be responsible for creating the tree that will then evaluate any given expression from the command line, then communicating 
+  with the Model (Turtle) and updating its values. He also will create the syntax type classes which will be used during parsing and Tree making. 
 
 ### High-Level Plan
 * (plan of how the team will complete the program)
