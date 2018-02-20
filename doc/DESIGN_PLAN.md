@@ -132,7 +132,7 @@ No external API
     2. Return
     3. Compare
     4. BinOp  
-    5.Command
+    5. Command
 
 ### Data types
 * Variable
