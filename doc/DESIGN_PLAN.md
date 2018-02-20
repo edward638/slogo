@@ -28,7 +28,17 @@ or screen shots from a UML design program). Discuss specific classes, methods, a
 * (how the front end communicates w back-end)
 
 ## Internal Back-end
-* (how the back end works among itself) -Charlie
+* The internal back-end is composed of the TreeMaker classes as well as the classes which represent different types of basic syntax types 
+  (Variable, Constant, Command, List, and Comment). The TreeMaker classes are composed of a TreeMaker and and TreeEvaluator. The former reads 
+  in the list of syntax types which are created by the parser then reads through them and creates a tree meant that can later be evaluated by 
+  the TreeEvaluator. Any tree starts with the method type in the first node which dictates how many and which kind of children nodes it will in 
+  turn have, depending on the other types in the list passed to the TreeMaker. The TreeEvaluator then reads through this tree to evaluate the 
+  given Command, calling the appropriate methods to update the model and then returning the value expected of the command. The syntax types are 
+  basic classes which store values associated with how a type would be represented and which actions would need to be done. For example, the 
+  Constant class would store a single double constant and allow itself to be accessed by nodes in the future, not allowing children nodes to 
+  come from it. This is similar to Variable, which would then store a name for the Variable as well. A Command would be a head node and have 
+  a certain amount of children depending on how many parameters are passed when it is called. These classes also check for errors, as if a type 
+  does not match what is actually passed, then the method will not be able to run. 
 
 ## External Back-end
 The back end will provide data to the front end through the Parser class. This class will serve as the main intermediary between the front and 
