@@ -31,7 +31,9 @@ or screen shots from a UML design program). Discuss specific classes, methods, a
 * (how the back end works among itself) -Charlie
 
 ## External Back-end
-* (how to back end sends data to the front end) - Belanie
+The back end will provide data to the front end through the Parser class. This class will serve as the only intermediary between the front and 
+back ends. The front end will call the getReturn() method in the Parser class which will provide the coordinates and/or lines needed to move 
+the turtle. This data will be passed in the form of a list where the last item in the list is the most recent move. 
 
 Here is a picture of how our compenents are related:
 
