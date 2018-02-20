@@ -128,11 +128,11 @@ No external API
 	* getNext()
 
 * These will be the nodes which have their own functions:
-1. Assign
-2. Return
-3. Compare
-4. BinOp
-5. Command
+    1. Assign
+    2. Return
+    3. Compare
+    4. BinOp
+    5.Command
 
 ### Data types
 * Variable
@@ -149,7 +149,7 @@ No external API
 	* public hasNext()
 	* public next()
 * Comment
-* No public methods
+    * No public methods
 * Command
 	* public Command (Object o, Object o)
 	* public evaluate()
