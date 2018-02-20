@@ -28,7 +28,7 @@ The External back end will be made up of the Parser class and the Model class. T
 
 Here is a picture of how our components are related:
 
-![Components Overview] (file pale)
+![Components Overview] (./doc/design_slogo.PDF)
 
 # User Interface
 
