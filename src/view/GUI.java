@@ -1,5 +1,8 @@
 package view;
 
+
+import controller.ModelControllerInterface;
+import controller.ViewControllerInterface;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Group;
@@ -13,7 +16,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class GUI extends Application {
-
+    
+    ModelControllerInterface modelController;
+	ViewControllerInterface viewController;
     private static final String NAME = "SLogo";
     public static final int COMMAND_BUTTON_OFFSET = 25;
     private Group root = new Group();
@@ -97,4 +102,5 @@ public class GUI extends Application {
     public static void main(String[] args){
         Application.launch(args);
     }
+
 }
