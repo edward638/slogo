@@ -1,5 +1,12 @@
 package view;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import controller.ModelControllerInterface;
+import controller.ViewControllerInterface;
+	
+
 
 import controller.ModelControllerInterface;
 import controller.ViewControllerInterface;
@@ -19,7 +26,8 @@ import javafx.stage.Stage;
 
 public class GUI extends Application {
 
-
+	ModelControllerInterface modelController;
+	ViewControllerInterface viewController;
     public static final int COMMAND_TEXT_Y = 530;
     public static final int COMMAND_TEXT_X = 70;
     public static final int COMMAND_COLUMNS = 30;
@@ -32,8 +40,6 @@ public class GUI extends Application {
     public static final int OTHER_ROWS = 20;
     public static final int FONT_SIZE = 13;
     public static final int LABEL_OFFSET = 25;
-    ModelControllerInterface modelController;
-	ViewControllerInterface viewController;
     private static final String NAME = "SLogo";
     private static final int COMMAND_BUTTON_OFFSET = 25;
     private Group root = new Group();
@@ -67,6 +73,8 @@ public class GUI extends Application {
     private Label historyLabel;
     private Label variableLabel;
     /**
+<<<<<<< HEAD
+=======
      * Begins GUI
      *
      * @param stage window holding simulation
@@ -81,6 +89,7 @@ public class GUI extends Application {
     }
     
     /**
+>>>>>>> 7ab264ca6ceeb6712d783e91f83af1bcf1a98d7b
      * Initializes beginning JavaFX Stage
      *
      * @param stage window holding simulation

@@ -1,10 +1,11 @@
 package controller;
 
-import model.ModelInterface;
+import view.ViewInterface;
 
-public class ViewController extends Controller implements ViewControllerInterface{
-	public ViewController(ModelInterface model){
-		super(model);
+public class ViewController implements ViewControllerInterface{
+	private ViewInterface view;
+	public ViewController(ViewInterface view){
+		this.view = view;
 	}
 	@Override
 	public void showCommandHelp(){

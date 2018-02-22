@@ -1,10 +1,12 @@
 package controller;
 
 import model.ModelInterface;
+import view.GUI;
 
-public class ModelController extends Controller implements ModelControllerInterface{
+public class ModelController implements ModelControllerInterface{
+	private ModelInterface model;
 	public ModelController(ModelInterface model){
-		super(model);
+		this.model = model;
 	}
     @Override
 	public void passCommand(String s){
