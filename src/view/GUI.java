@@ -1,5 +1,8 @@
 package view;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import controller.ModelControllerInterface;
 import controller.ViewControllerInterface;
 	
@@ -16,7 +19,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class GUI extends Application {
+public class GUI implements TurtleObserver, LineObserver, CommandHistoryObserver, VariableHistoryObserver{
 	ModelControllerInterface modelController;
 	ViewControllerInterface viewController;
 	
@@ -38,17 +41,6 @@ public class GUI extends Application {
     private Button commandRunButton;
     private Button variableClearButton;
     private Button historyClearButton;
-
-    /**
-     * Begins GUI
-     *
-     * @param stage window holding simulation
-     */
-    @Override
-    public void start(Stage stage) {
-        setStage(stage);
-        addButtons();
-    }
 
     /**
      * Initializes beginning JavaFX Stage
@@ -103,4 +95,5 @@ public class GUI extends Application {
     public static void main(String[] args){
         Application.launch(args);
     }
+
 }
