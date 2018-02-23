@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,6 +16,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,16 +26,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import view.constants.ButtonConstants;
+import view.constants.CanvasConstants;
+import view.constants.LabelConstants;
+import view.constants.TextAreaConstants;
+import view.factories.ButtonFactory;
+import view.factories.LabelFactory;
 
-public class GUI extends Application {
-
+public class GUI extends Application implements ActionListener{
 	ModelControllerInterface modelController;
 	ViewControllerInterface viewController;
-    public static final int COMMAND_TEXT_Y = 530;
-    public static final int COMMAND_TEXT_X = 70;
-    public static final int COMMAND_COLUMNS = 30;
-    public static final int COMMAND_ROWS = 4;
-    public static final String COMMAND_START_TEXT = "FD 50";
+    
     public static final int HBOX_Y = 200;
     public static final int HBOX_X = 525;
     public static final int HBOX_SPACING = 20;
@@ -42,33 +46,26 @@ public class GUI extends Application {
     public static final int LABEL_OFFSET = 25;
     private static final String NAME = "SLogo";
     private static final int COMMAND_BUTTON_OFFSET = 25;
-    private Group root = new Group();
-    private static final int SIM_WIDTH = 900;
+    private static final int SIM_WIDTH = 950;
     private static final int SIM_HEIGHT = 650;
-    private static final int COMMAND_BUTTON_X = 450;
-    private static final int COMMAND_BUTTON_Y = 550;
-    private static final int VARIABLE_BUTTON_X = 830;
-    private static final int VARIABLE_BUTTON_Y = 170;
-    private static final int HISTORY_BUTTON_X = 645;
-    private static final int HISTORY_BUTTON_Y = 170;
-    private static final int RECTANGLE_X = 50;
-    private static final int RECTANGLE_Y = 50;
-    private static final int RECTANGLE_WIDTH = 450;
-    private static final int RECTANGLE_HEIGHT = 450;
     private final String SLOGO_IMAGE = "SLogo.PNG";
-    private Image slogoImage = new Image(getClass().getClassLoader().getResourceAsStream("SLogo.PNG"));
+    
+    private final Image slogoImage = new Image(getClass().getClassLoader().getResourceAsStream("SLogo.PNG"));
 
+    private Group root = new Group();
     private HBox hbTextAreas;
-    private VBox vbButtons;
+    
     private Button commandClearButton;
     private Button commandRunButton;
     private Button variableClearButton;
     private Button historyClearButton;
+    private Button commandHelpButton;
+    
     private TextArea commandTextArea;
     private TextArea historyTextArea;
     private TextArea variableTextArea;
 
-    private Rectangle viewWindow;
+    private Canvas canvas;
     private Label commandLabel;
     private Label historyLabel;
     private Label variableLabel;
@@ -84,6 +81,7 @@ public class GUI extends Application {
         setStage(stage);
         addDisplays();
         addButtons();
+        addCommandTextArea();
         addLabels();
         addTitle();
     }
@@ -112,16 +110,16 @@ public class GUI extends Application {
     }
 
     private void addButtons(){
-        vbButtons = new VBox();
-        vbButtons.setPrefWidth(50);
-        vbButtons.setPadding(new Insets(COMMAND_BUTTON_Y, 0, 0, COMMAND_BUTTON_X));
-        addCommandRunButton(vbButtons);
-        addCommandClearButton(vbButtons);
-        root.getChildren().add(vbButtons);
-
-        addHistoryClearButton();
-        addVariableClearButton();
-        addCommandTextArea();
+    	this.commandClearButton = ButtonFactory.getButtonOfType(ButtonFactory.COMMAND_CLEAR);
+    	this.commandRunButton = ButtonFactory.getButtonOfType(ButtonFactory.COMMAND_RUN);
+    	this.historyClearButton = ButtonFactory.getButtonOfType(ButtonFactory.HISTORY);
+    	this.variableClearButton = ButtonFactory.getButtonOfType(ButtonFactory.VARIABLE);
+        root.getChildren().add(commandClearButton);
+        root.getChildren().add(commandRunButton);
+        root.getChildren().add(historyClearButton);
+        root.getChildren().add(variableClearButton);
+    	
+    	addCommandTextArea();
     }
 
     private void addDisplays(){
@@ -132,72 +130,32 @@ public class GUI extends Application {
         addHistoryTextArea(hbTextAreas);
         addVariableTextArea(hbTextAreas);
         root.getChildren().add(hbTextAreas);
-
     }
 
     private void addLabels(){
-        commandLabel = new Label("Enter a command:");
-        commandLabel.setFont(new Font(FONT_SIZE));
-        commandLabel.setLayoutY(COMMAND_TEXT_Y - LABEL_OFFSET);
-        commandLabel.setLayoutX(COMMAND_TEXT_X);
+    	this.commandLabel = LabelFactory.getLabelOfType(LabelFactory.COMMAND);
+    	this.historyLabel = LabelFactory.getLabelOfType(LabelFactory.HISTORY);
+    	this.variableLabel = LabelFactory.getLabelOfType(LabelFactory.VARIABLE);
         root.getChildren().add(commandLabel);
-
-        historyLabel = new Label("Command History");
-        historyLabel.setFont(new Font(FONT_SIZE));
-        historyLabel.setLayoutY(HBOX_Y - LABEL_OFFSET);
-        historyLabel.setLayoutX(HBOX_X);
         root.getChildren().add(historyLabel);
-
-        variableLabel = new Label("Current Variables");
-        variableLabel.setFont(new Font(FONT_SIZE));
-        variableLabel.setLayoutY(HBOX_Y - LABEL_OFFSET);
-        variableLabel.setLayoutX(HBOX_X + 185);
         root.getChildren().add(variableLabel);
-
-
-
-    }
-
-    private void addCommandRunButton(VBox box){
-        commandRunButton = new Button("Run");
-        commandRunButton.setMinWidth(box.getPrefWidth());
-        box.getChildren().add(commandRunButton);
-    }
-
-    private void addCommandClearButton(VBox box){
-        commandClearButton = new Button("Clear");
-        commandClearButton.setMinWidth(box.getPrefWidth());
-        box.getChildren().add(commandClearButton);
-    }
-
-    private void addHistoryClearButton(){
-        historyClearButton = new Button("Clear");
-        historyClearButton.setLayoutY(HISTORY_BUTTON_Y);
-        historyClearButton.setLayoutX(HISTORY_BUTTON_X);
-        root.getChildren().add(historyClearButton);
-    }
-
-    private void addVariableClearButton(){
-        variableClearButton = new Button("Clear");
-        variableClearButton.setLayoutY(VARIABLE_BUTTON_Y);
-        variableClearButton.setLayoutX(VARIABLE_BUTTON_X);
-        root.getChildren().add(variableClearButton);
     }
 
     private void addViewWindow(){
-        viewWindow = new Rectangle(RECTANGLE_X, RECTANGLE_Y, RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
-        viewWindow.setFill(Color.WHITE);
-        viewWindow.setStroke(Color.BLACK);
-        root.getChildren().add(viewWindow);
+        canvas = new Canvas(CanvasConstants.RECTANGLE_WIDTH, CanvasConstants.RECTANGLE_HEIGHT);
+        canvas.setLayoutX(CanvasConstants.RECTANGLE_X);
+        canvas.setLayoutY(CanvasConstants.RECTANGLE_Y);
+        canvas.getGraphicsContext2D().setFill(Color.GREEN);
+        canvas.getGraphicsContext2D().setStroke(Color.BLACK);
+        root.getChildren().add(canvas);
     }
 
     private void addCommandTextArea(){
         commandTextArea = new TextArea();
-        commandTextArea.setLayoutY(COMMAND_TEXT_Y);
-        commandTextArea.setLayoutX(COMMAND_TEXT_X);
-        commandTextArea.setPrefColumnCount(COMMAND_COLUMNS);
-        commandTextArea.setPrefRowCount(COMMAND_ROWS);
-        commandTextArea.setText(COMMAND_START_TEXT);
+        commandTextArea.setLayoutY(TextAreaConstants.COMMAND_TEXT_Y);
+        commandTextArea.setLayoutX(TextAreaConstants.COMMAND_TEXT_X);
+        commandTextArea.setPrefColumnCount(TextAreaConstants.COMMAND_COLUMNS);
+        commandTextArea.setPrefRowCount(TextAreaConstants.COMMAND_ROWS);
         root.getChildren().add(commandTextArea);
     }
 
@@ -218,10 +176,27 @@ public class GUI extends Application {
     }
 
 
+    private String getCommandAndClear(){
+    	String command = commandTextArea.getText();
+    	commandTextArea.clear();
+    	return command;
+    }
 
-
+    @Override
+	public void actionPerformed(ActionEvent event) {
+        if(event.getSource() == commandClearButton){
+        	viewController.clearCommandBox();
+        }else if(event.getSource() == commandHelpButton){
+        	viewController.showCommandHelp();
+        }else if(event.getSource() == commandRunButton){
+        	modelController.passCommand(this.getCommandAndClear());
+        }else if(event.getSource() == variableClearButton){
+        	modelController.clearVariableBox();
+        }else if(event.getSource() == historyClearButton){
+        	modelController.clearConsoleBox();
+        }
+	}
     public static void main(String[] args){
         Application.launch(args);
     }
-
 }
