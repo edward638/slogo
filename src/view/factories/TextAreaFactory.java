@@ -1,8 +1,7 @@
 package view.factories;
 
-import javafx.scene.control.Label;
-import javafx.scene.text.Font;
-import view.constants.LabelConstants;
+import javafx.scene.control.TextArea;
+import view.constants.TextAreaConstants;
 import view.view_exceptions.BadResourceNameException;
 
 public class TextAreaFactory {
@@ -10,23 +9,24 @@ public class TextAreaFactory {
 	public static final String HISTORY = "History";
 	public static final String VARIABLE = "Variable";
 
-	public static Label getLabelOfType(String labelType){
-		switch(labelType){
-		case "Command":
-			return getSpecifiedLabel(LabelConstants.COMMAND_LABEL_X, LabelConstants.COMMAND_LABEL_Y, LabelConstants.COMMAND_LABEL_TEXT);
-		case "History":
-			return getSpecifiedLabel(LabelConstants.HISTORY_LABEL_X, LabelConstants.HISTORY_LABEL_Y, LabelConstants.HISTORY_LABEL_TEXT);
-		case "Variable":
-			return getSpecifiedLabel(LabelConstants.VARIABLE_LABEL_X, LabelConstants.VARIABLE_LABEL_Y, LabelConstants.VARIABLE_LABEL_TEXT);
-		default: throw new BadResourceNameException();
+	public static TextArea generateTextAreaOfType(String textAreaType){
+		switch(textAreaType){
+			case "Command":
+				return getSpecifiedTextArea(TextAreaConstants.COMMAND_TEXT_X, TextAreaConstants.COMMAND_TEXT_Y, TextAreaConstants.COMMAND_ROWS, TextAreaConstants.COMMAND_COLUMNS);
+			case "History":
+				return getSpecifiedTextArea(TextAreaConstants.HISTORY_TEXT_X, TextAreaConstants.HISTORY_TEXT_Y, TextAreaConstants.HISTORY_ROWS, TextAreaConstants.HISTORY_COLUMNS);
+			case "Variable":
+				return getSpecifiedTextArea(TextAreaConstants.VARIABLE_TEXT_X, TextAreaConstants.VARIABLE_TEXT_Y, TextAreaConstants.VARIABLE_ROWS, TextAreaConstants.VARIABLE_COLUMNS);
+			default: throw new BadResourceNameException();
 		}
 	}
 
-	private static Label getSpecifiedLabel(int x, int y, String labelText){
-		Label label = new Label(labelText);
-        label.setLayoutX(x);
-        label.setLayoutY(y);
-        label.setFont(new Font(LabelConstants.FONT_SIZE));
-        return label;
+	private static TextArea getSpecifiedTextArea(int x, int y, int rows, int cols){
+		TextArea textArea = new TextArea();
+		textArea.setLayoutX(x);
+        textArea.setLayoutY(y);
+        textArea.setPrefRowCount(rows);
+        textArea.setPrefColumnCount(cols);
+        return textArea;
 	}
 }

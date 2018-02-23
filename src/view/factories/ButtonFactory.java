@@ -9,7 +9,8 @@ public class ButtonFactory {
 	public static final String COMMAND_CLEAR = "CommandClear";
 	public static final String VARIABLE = "Variable";
 	public static final String HISTORY = "History";
-	public static Button getButtonOfType(String buttonType){
+	public static final String HELP = "Help";
+	public static Button generateButtonOfType(String buttonType){
 		switch(buttonType){
 			case "CommandRun":
 				return getSpecifiedButton(ButtonConstants.COMMAND_RUN_BUTTON_X, ButtonConstants.COMMAND_RUN_BUTTON_Y, ButtonConstants.COMMAND_RUN_BUTTON_LABEL);
@@ -19,6 +20,8 @@ public class ButtonFactory {
 				return getSpecifiedButton(ButtonConstants.VARIABLE_BUTTON_X, ButtonConstants.VARIABLE_BUTTON_Y, ButtonConstants.VARIABLE_BUTTON_LABEL);
 			case "History":
 				return getSpecifiedButton(ButtonConstants.HISTORY_BUTTON_X, ButtonConstants.HISTORY_BUTTON_Y, ButtonConstants.HISTORY_BUTTON_LABEL);
+			case "Help":
+				return getSpecifiedButton(ButtonConstants.COMMAND_HELP_BUTTON_X, ButtonConstants.COMMAND_HELP_BUTTON_Y, ButtonConstants.COMMAND_HELP_BUTTON_LABEL);
 			default: throw new BadResourceNameException();
 		}
 	}

@@ -10,9 +10,6 @@ public final class LabelConstants {
 	public static final int COMMAND_LABEL_X = 70;
 	public static final int COMMAND_LABEL_Y = 505;
 	public static final String COMMAND_LABEL_TEXT = "Enter a command";
-	public static final int COMMAND_TEXT_Y = 530;
-    public static final int HBOX_Y = 200;
-    public static final int HBOX_X = 525;
     public static final int LABEL_OFFSET = 25;
     public static final int FONT_SIZE = 13;
 }
