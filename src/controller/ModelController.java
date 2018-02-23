@@ -1,12 +1,17 @@
 package controller;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import model.ModelInterface;
 import view.GUI;
 
 public class ModelController implements ModelControllerInterface{
 	private ModelInterface model;
-	public ModelController(ModelInterface model){
-		this.model = model;
+	private GUI gui;
+	public ModelController(Stage stage){
+//		this.model = model;
+		gui = new GUI(this);
+		gui.start(stage);
 	}
     @Override
 	public void passCommand(String s){
@@ -20,4 +25,15 @@ public class ModelController implements ModelControllerInterface{
     public void clearVariableBox(){
         
     }
+
+    @Override
+    public void showCommandHelp() {
+
+    }
+
+    @Override
+    public void clearCommandBox() {
+	        gui.clearCommandTextArea();
+    }
+
 }
