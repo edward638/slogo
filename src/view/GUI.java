@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import controller.ModelControllerInterface;
 import controller.ViewControllerInterface;
-	
-
 
 import controller.ModelControllerInterface;
 import controller.ViewControllerInterface;
