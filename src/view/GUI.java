@@ -15,13 +15,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import view.factories.ButtonFactory;
-import view.factories.CanvasFactory;
-import view.factories.LabelFactory;
-import view.factories.TextAreaFactory;
-import view.factories.TitleFactory;
+import view.factories.*;
 
-public class GUI extends Application{
+public class GUI{
 	private static final String NAME = "SLogo";
 	private static final int SIM_WIDTH = 950;
     private static final int SIM_HEIGHT = 650;
@@ -45,13 +41,19 @@ public class GUI extends Application{
     private Label commandLabel;
     private Label historyLabel;
     private Label variableLabel;
+    private ComboBox languageBox;
+    private ComboBox colorBox;
     
     /**
      * Begins GUI
      *
      * @param stage window holding simulation
      */
-    @Override
+    public GUI(ModelControllerInterface controller){
+        this.modelController = controller;
+    }
+
+
     public void start(Stage stage) {
         this.setStage(stage);
         this.addTextAreas();
@@ -59,6 +61,7 @@ public class GUI extends Application{
         this.addButtons();
         this.addLabels();
         this.addTitle();
+        this.addComboBoxes();
         this.attachEventHandlers();
     }
     
@@ -116,6 +119,13 @@ public class GUI extends Application{
         root.getChildren().add(canvas);
     }
 
+    private void addComboBoxes(){
+       this.languageBox = ComboBoxFactory.generateComboBoxOfType(ComboBoxFactory.LANGUAGE);
+       this.colorBox = ComboBoxFactory.generateComboBoxOfType(ComboBoxFactory.COLOR);
+       root.getChildren().add(languageBox);
+       root.getChildren().add(colorBox);
+    }
+
 
     private String getCommandAndClear(){
     	String command = commandTextArea.getText();
@@ -123,14 +133,18 @@ public class GUI extends Application{
     	return command;
     }
 
+    public void clearCommandTextArea() {
+        commandTextArea.clear();
+    }
+
     private void attachEventHandlers(){
     	commandClearButton.setOnAction((e) -> {
     		//TODO: initialize view controller, will crash right now
-    		viewController.clearCommandBox();
+    		modelController.clearCommandBox();
 		});
     	commandHelpButton.setOnAction((e) -> {
     		//TODO: initialize view controller, will crash right now
-    		viewController.showCommandHelp();
+    		modelController.showCommandHelp();
 		});
     	commandRunButton.setOnAction((e) -> {
     		//TODO: initialize model controller, will crash right now
@@ -148,7 +162,5 @@ public class GUI extends Application{
     
     
     
-    public static void main(String[] args){
-        Application.launch(args);
-    }
+
 }
