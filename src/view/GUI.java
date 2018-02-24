@@ -1,13 +1,6 @@
 package view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import controller.ModelControllerInterface;
-import controller.ViewControllerInterface;
-
-import controller.ModelControllerInterface;
-import controller.ViewControllerInterface;
-import javafx.application.Application;
+import controller.ControllerInterface;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -22,8 +15,7 @@ public class GUI{
 	private static final int SIM_WIDTH = 950;
     private static final int SIM_HEIGHT = 650;
     
-	ModelControllerInterface modelController;
-	ViewControllerInterface viewController;
+	ControllerInterface controller;
 
     private Group root = new Group();
     
@@ -41,6 +33,7 @@ public class GUI{
     private Label commandLabel;
     private Label historyLabel;
     private Label variableLabel;
+    
     private ComboBox languageBox;
     private ComboBox colorBox;
     
@@ -49,8 +42,8 @@ public class GUI{
      *
      * @param stage window holding simulation
      */
-    public GUI(ModelControllerInterface controller){
-        this.modelController = controller;
+    public GUI(ControllerInterface controller){
+        this.controller = controller;
     }
 
 
@@ -140,23 +133,23 @@ public class GUI{
     private void attachEventHandlers(){
     	commandClearButton.setOnAction((e) -> {
     		//TODO: initialize view controller, will crash right now
-    		modelController.clearCommandBox();
+    		controller.clearCommandBox();
 		});
     	commandHelpButton.setOnAction((e) -> {
     		//TODO: initialize view controller, will crash right now
-    		modelController.showCommandHelp();
+    		controller.showCommandHelp();
 		});
     	commandRunButton.setOnAction((e) -> {
     		//TODO: initialize model controller, will crash right now
-    		modelController.passCommand(this.getCommandAndClear());
+    		controller.passCommand(this.getCommandAndClear());
 		});
     	variableClearButton.setOnAction((e) -> {
     		//TODO: initialize model controller, will crash right now
-    		modelController.clearVariableBox();
+    		controller.clearVariableBox();
 		});
     	historyClearButton.setOnAction((e) -> {
     		//TODO: initialize model controller, will crash right now
-    		modelController.clearConsoleBox();
+    		controller.clearConsoleBox();
 		});
     }
     
