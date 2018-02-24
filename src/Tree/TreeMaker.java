@@ -3,30 +3,34 @@ package Tree;
 import java.util.ArrayList;
 import java.util.List;
 
-import typeNodes.typeNode;
-
 public class TreeMaker {
-	private ArrayList<typeNode> nodes;
-	private ArrayList<typeNode> heads;
+	private ArrayList<tNode> nodes;
+	private ArrayList<tNode> heads;
 	private int index;
 	
-	public TreeMaker (List<typeNode> nodes) {
-		this.nodes = (ArrayList<typeNode>) nodes;
-		heads = new ArrayList<typeNode>();
+	public TreeMaker (List<tNode> nodes) {
+		this.nodes = (ArrayList<tNode>) nodes;
+		heads = new ArrayList<tNode>();
 		index = 0;
-		heads.add(makeTree(nodes.get(index)));
+		while (index < this.nodes.size()-1) {
+			heads.add(makeTree(this.nodes.get(index)));
+		}
 	}
 	
-	private typeNode makeTree(typeNode node) {
-		typeNode head = node;
-		while (head.hasNext()) {
-			index++;
-			head.addChild(nodes.get(index));
-			node = head.getChild();
-			makeTree(node);
-			head = node.getParent();
+	private tNode makeTree(tNode node) {
+		while (node!=null && node.hasNext()) {
+			index+=1;
+			node.addChild(nodes.get(index));
+			tNode curr = node.getChild();
+			curr.setParent(node);
+			makeTree(curr);
 		}
-		return head;
+		node.reset();
+		return node;
+	}
+	
+	protected List<tNode> getHeads() {
+		return heads;
 	}
 	
 	
