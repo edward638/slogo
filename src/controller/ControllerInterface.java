@@ -1,7 +1,7 @@
 package controller;
 
-public interface ModelControllerInterface {
-    public void passCommand(String s);
+public interface ControllerInterface {
+	public void passCommand(String s);
     public void clearConsoleBox();
     public void clearVariableBox();
     public void showCommandHelp();
