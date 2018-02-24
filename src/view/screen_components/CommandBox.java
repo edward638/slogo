@@ -5,8 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
 
-public class CommandBox extends ControllerHolder{
+public class CommandBox extends ScreenComponent{
 	private Button commandClearButton;
     private Button commandRunButton;
     private Button commandHelpButton;
@@ -16,5 +17,9 @@ public class CommandBox extends ControllerHolder{
 	public CommandBox(ControllerInterface controller) {
 		super(controller);
 	}
-	
+	public BorderPane generateGUIComponent(){
+		BorderPane borderPane = super.getBorderPane();
+		//TODO: create borderpane layout
+		return borderPane;
+	}
 }
