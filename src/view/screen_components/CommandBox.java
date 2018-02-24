@@ -12,6 +12,7 @@ import view.constants.ComboBoxConstants;
 import view.constants.TextAreaConstants;
 
 public class CommandBox extends ScreenComponent{
+	public static final int ITEM_WIDTH = 50;
 	private Button commandClearButton;
     private Button commandRunButton;
     private Button commandHelpButton;
@@ -40,6 +41,10 @@ public class CommandBox extends ScreenComponent{
 		commandClearButton = new Button(ButtonConstants.COMMAND_CLEAR_BUTTON_LABEL);
 		commandHelpButton = new Button(ButtonConstants.COMMAND_HELP_BUTTON_LABEL);
 		languageBox = this.getLanguageBox();
+		commandRunButton.setMinWidth(ITEM_WIDTH);
+		commandClearButton.setMinWidth(ITEM_WIDTH);
+		commandHelpButton.setMinWidth(ITEM_WIDTH);
+		languageBox.setMinWidth(ITEM_WIDTH);
 		rightComponent.getChildren().add(commandRunButton);
 		rightComponent.getChildren().add(commandClearButton);
 		rightComponent.getChildren().add(commandHelpButton);

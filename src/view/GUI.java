@@ -3,9 +3,12 @@ package view;
 import controller.ControllerInterface;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.constants.BorderPaneConstants;
+import view.factories.TitleFactory;
 
 public class GUI{
 
@@ -28,9 +31,16 @@ public class GUI{
         stage.setTitle("NAME");
         Scene startScene = new Scene(root, 950, 650);
         stage.setScene(startScene);
+        addTitle();
         stage.show();
     }
-    
+
+    private void addTitle() {
+        Image titleImage = new Image(getClass().getClassLoader().getResourceAsStream(TitleFactory.SLOGO_IMAGE));
+        ImageView title = TitleFactory.generateTitle(titleImage);
+        root.getChildren().add(title);
+    }
+
     public void addDrawerBorderPane(BorderPane borderPane){
         borderPane.setLayoutX(BorderPaneConstants.DRAWER_X);
         borderPane.setLayoutY(BorderPaneConstants.DRAWER_Y);
