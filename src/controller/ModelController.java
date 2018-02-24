@@ -3,13 +3,13 @@ package controller;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.ModelInterface;
-import view.GUI;
+import view.OutdatedGUI;
 
 
 public class ModelController implements ModelControllerInterface{
 	
 	private ModelInterface model;
-	private GUI gui;
+	private OutdatedGUI gui;
 	public ModelController(Stage stage){
 //		this.model = model;
 //		gui = new GUI(this);

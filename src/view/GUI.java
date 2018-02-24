@@ -3,61 +3,20 @@ package view;
 import controller.ControllerInterface;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import view.factories.*;
-import view.screen_components.VariableHistoryBox;
+import view.constants.BorderPaneConstants;
 
 public class GUI{
-	private static final String NAME = "SLogo";
-	private static final int SIM_WIDTH = 950;
-    private static final int SIM_HEIGHT = 650;
-    
-	ControllerInterface controller;
 
     private Group root = new Group();
-    
-    private Button commandClearButton;
-    private Button commandRunButton;
-    private Button variableClearButton;
-    private Button historyClearButton;
-    private Button commandHelpButton;
-    
-    private TextArea commandTextArea;
-    private TextArea historyTextArea;
-    private TextArea variableTextArea;
 
-    private Canvas canvas;
-    private Label commandLabel;
-    private Label historyLabel;
-    private Label variableLabel;
-    
-    private ComboBox languageBox;
-    private ComboBox colorBox;
-    
-    /**
-     * Begins GUI
-     *
-     * @param stage window holding simulation
-     */
-    public GUI(ControllerInterface controller){
-        this.controller = controller;
+    public GUI(){
+    	
     }
-
-
+    
     public void start(Stage stage) {
         this.setStage(stage);
-        this.addTextAreas();
-        this.addCanvas();
-        this.addButtons();
-        this.addLabels();
-        this.addTitle();
-        this.addComboBoxes();
-        this.attachEventHandlers();
     }
     
     /**
@@ -66,96 +25,33 @@ public class GUI{
      * @param stage window holding simulation
      */
     private void setStage(Stage stage) {
-        stage.setTitle(NAME);
-        Scene startScene = new Scene(root, SIM_WIDTH, SIM_HEIGHT);
+        stage.setTitle("NAME");
+        Scene startScene = new Scene(root, 950, 650);
         stage.setScene(startScene);
         stage.show();
     }
-
-    private void addTitle() {
-    	Image titleImage = new Image(getClass().getClassLoader().getResourceAsStream(TitleFactory.SLOGO_IMAGE));
-        ImageView title = TitleFactory.generateTitle(titleImage);
-        root.getChildren().add(title);
-    }
-
-    private void addButtons(){
-    	this.commandClearButton = ButtonFactory.generateButtonOfType(ButtonFactory.COMMAND_CLEAR);
-    	this.commandRunButton = ButtonFactory.generateButtonOfType(ButtonFactory.COMMAND_RUN);
-    	this.historyClearButton = ButtonFactory.generateButtonOfType(ButtonFactory.HISTORY);
-    	this.variableClearButton = ButtonFactory.generateButtonOfType(ButtonFactory.VARIABLE);
-    	this.commandHelpButton = ButtonFactory.generateButtonOfType(ButtonFactory.HELP);
-        root.getChildren().add(commandClearButton);
-        root.getChildren().add(commandRunButton);
-        root.getChildren().add(historyClearButton);
-        root.getChildren().add(variableClearButton);
-        root.getChildren().add(commandHelpButton);
-    }
     
-    private void addTextAreas(){
-    	this.commandTextArea = TextAreaFactory.generateTextAreaOfType(TextAreaFactory.COMMAND);
-    	this.historyTextArea = TextAreaFactory.generateTextAreaOfType(TextAreaFactory.HISTORY);
-    	this.variableTextArea = TextAreaFactory.generateTextAreaOfType(TextAreaFactory.VARIABLE);
-    	root.getChildren().add(commandTextArea);
-    	root.getChildren().add(historyTextArea);
-    	root.getChildren().add(variableTextArea);
+    public void addDrawerBorderPane(BorderPane borderPane){
+        borderPane.setLayoutX(BorderPaneConstants.DRAWER_X);
+        borderPane.setLayoutY(BorderPaneConstants.DRAWER_Y);
+        root.getChildren().add(borderPane);
     }
 
-    private void addLabels(){
-    	this.commandLabel = LabelFactory.getLabelOfType(LabelFactory.COMMAND);
-    	this.historyLabel = LabelFactory.getLabelOfType(LabelFactory.HISTORY);
-    	this.variableLabel = LabelFactory.getLabelOfType(LabelFactory.VARIABLE);
-        root.getChildren().add(commandLabel);
-        root.getChildren().add(historyLabel);
-        root.getChildren().add(variableLabel);
+    public void addCommandHistoryBoxBorderPane(BorderPane borderPane){
+        borderPane.setLayoutX(BorderPaneConstants.COMMAND_HISTORY_BOX_X);
+        borderPane.setLayoutY(BorderPaneConstants.COMMAND_HISTORY_BOX_Y);
+        root.getChildren().add(borderPane);
     }
 
-    private void addCanvas(){
-        this.canvas = CanvasFactory.generateCanvas();
-        root.getChildren().add(canvas);
+    public void addCommandBoxBorderPane(BorderPane borderPane){
+        borderPane.setLayoutX(BorderPaneConstants.COMMAND_BOX_X);
+        borderPane.setLayoutY(BorderPaneConstants.COMMAND_BOX_Y);
+        root.getChildren().add(borderPane);
     }
-
-    private void addComboBoxes(){
-       this.languageBox = ComboBoxFactory.generateComboBoxOfType(ComboBoxFactory.LANGUAGE);
-       this.colorBox = ComboBoxFactory.generateComboBoxOfType(ComboBoxFactory.COLOR);
-       root.getChildren().add(languageBox);
-       root.getChildren().add(colorBox);
+    public void addVariableHistoryBoxBorderPane(BorderPane borderPane){
+        borderPane.setLayoutX(BorderPaneConstants.VARIABLE_HISTORY_BOX_X);
+        borderPane.setLayoutY(BorderPaneConstants.VARIABLE_HISTORY_BOX_Y);
+        root.getChildren().add(borderPane);
     }
-
-
-    private String getCommandAndClear(){
-    	String command = commandTextArea.getText();
-    	commandTextArea.clear();
-    	return command;
-    }
-
-    public void clearCommandTextArea() {
-        commandTextArea.clear();
-    }
-
-    private void attachEventHandlers(){
-    	commandClearButton.setOnAction((e) -> {
-    		//TODO: initialize view controller, will crash right now
-    		controller.clearCommandBox();
-		});
-    	commandHelpButton.setOnAction((e) -> {
-    		//TODO: initialize view controller, will crash right now
-    		controller.showCommandHelp();
-		});
-    	commandRunButton.setOnAction((e) -> {
-    		//TODO: initialize model controller, will crash right now
-    		controller.passCommand(this.getCommandAndClear());
-		});
-    	variableClearButton.setOnAction((e) -> {
-    		//TODO: initialize model controller, will crash right now
-    		controller.clearVariableBox();
-		});
-    	historyClearButton.setOnAction((e) -> {
-    		//TODO: initialize model controller, will crash right now
-    		controller.clearConsoleBox();
-		});
-    }
-    
-    
-    
 
 }
