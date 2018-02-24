@@ -22,18 +22,25 @@ public class CommandBox extends ScreenComponent{
 	public CommandBox(ControllerInterface controller) {
 		super(controller);
 	}
-	public BorderPane generateGUIComponent(){
+
+	@Override
+	protected void mapUserActions() {
+		commandClearButton.setOnAction((event -> {
+			commandTextArea.clear();
+		}));
+	}
+
+	public void generateGUIComponent(){
 		BorderPane borderPane = super.getBorderPane();
 		borderPane.setRight(this.getRightComponent());
 		borderPane.setCenter(this.getConsoleWindow());
-		return borderPane;
 	}
 	
 	private TextArea getConsoleWindow(){
-		TextArea consoleWindow = new TextArea();
-		consoleWindow.setPrefRowCount(TextAreaConstants.COMMAND_ROWS);
-		consoleWindow.setPrefColumnCount(TextAreaConstants.COMMAND_COLUMNS);
-		return consoleWindow;
+		commandTextArea = new TextArea();
+		commandTextArea.setPrefRowCount(TextAreaConstants.COMMAND_ROWS);
+		commandTextArea.setPrefColumnCount(TextAreaConstants.COMMAND_COLUMNS);
+		return commandTextArea;
 	}
 	private VBox getRightComponent(){
 		VBox rightComponent = new VBox();

@@ -24,10 +24,10 @@ public class Controller implements ControllerInterface{
 		CommandHistoryBox commandHistoryBox = new CommandHistoryBox(this);
 		Drawer drawer = new Drawer(this);
 		VariableHistoryBox variableHistoryBox = new VariableHistoryBox(this);
-		gui.addCommandBoxBorderPane(commandBox.generateGUIComponent());
-		gui.addCommandHistoryBoxBorderPane(commandHistoryBox.generateGUIComponent());
-		gui.addDrawerBorderPane(drawer.generateGUIComponent());
-		gui.addVariableHistoryBoxBorderPane(variableHistoryBox.generateGUIComponent());
+		gui.addCommandBoxBorderPane(commandBox.getGUIComponent());
+		gui.addCommandHistoryBoxBorderPane(commandHistoryBox.getGUIComponent());
+		gui.addDrawerBorderPane(drawer.getGUIComponent());
+		gui.addVariableHistoryBoxBorderPane(variableHistoryBox.getGUIComponent());
 	}
 	
     @Override

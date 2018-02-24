@@ -27,12 +27,11 @@ public abstract class HistoryBox extends ScreenComponent{
 		this.cols = cols;
 	}
 	
-	public BorderPane generateGUIComponent(){
+	public void generateGUIComponent(){
 		BorderPane borderPane = super.getBorderPane();
 		TextArea textArea = this.getTextArea();
 		borderPane.setTop(this.getTopComponent());
 		borderPane.setCenter(textArea);
-		return borderPane;
 	}
 	
 	private HBox getTopComponent(){

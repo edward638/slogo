@@ -10,9 +10,15 @@ public class VariableHistoryBox extends HistoryBox{
 	public VariableHistoryBox(ControllerInterface controller){
 		super(controller);
 	}
-	public BorderPane generateGUIComponent(){
+
+	@Override
+	protected void mapUserActions() {
+
+	}
+
+	public void generateGUIComponent(){
 		super.setDimensions(TextAreaConstants.VARIABLE_ROWS, TextAreaConstants.VARIABLE_COLUMNS);
 		super.setUpLabels(LabelConstants.VARIABLE_LABEL_TEXT, ButtonConstants.VARIABLE_BUTTON_LABEL);
-		return super.generateGUIComponent();
+		super.generateGUIComponent();
 	}
 }
