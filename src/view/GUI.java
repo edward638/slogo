@@ -7,8 +7,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.factories.*;
+import view.screen_components.VariableHistoryBox;
 
 public class GUI{
 	private static final String NAME = "SLogo";
