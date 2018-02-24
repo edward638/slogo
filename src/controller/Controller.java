@@ -1,18 +1,15 @@
 package controller;
 
-import javafx.application.Application;
 import javafx.stage.Stage;
 import model.ModelInterface;
 import view.GUI;
 
-
-public class ModelController implements ModelControllerInterface{
-	
+public class Controller implements ControllerInterface{
 	private ModelInterface model;
 	private GUI gui;
-	public ModelController(Stage stage){
+	public Controller(Stage stage){
 //		this.model = model;
-//		gui = new GUI(this);
+		gui = new GUI(this);
 		gui.start(stage);
 	}
     @Override
