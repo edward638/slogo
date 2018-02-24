@@ -9,6 +9,7 @@ public class Binop {
 	
 	public Binop (typeNode left, String opType) {
 		this.left = left;
+		right = null;
 		this.opType = opType;
 	}
 	

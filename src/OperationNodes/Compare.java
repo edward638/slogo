@@ -37,7 +37,7 @@ public class Compare {
 			if (left.evaluate()!=0 && right.evaluate()!=0) return 1;
 			return 0;
 		}
-		else if (compType.equals("AND")) {
+		else if (compType.equals("OR")) {
 			if (left.evaluate()!=0 || right.evaluate()!=0) return 1;
 			return 0;
 		}

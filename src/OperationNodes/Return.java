@@ -1,13 +1,10 @@
 package OperationNodes;
 
 public class Return {
-	private CommandNode child;
 
-	public Return(CommandNode child) {
-		this.child = child;
-	}
+	public Return() {   }
 
-	public double returnValue() {
-		return child.evaluate();
+	public double returnValue(double value) {
+		return value;
 	}
 }
