@@ -9,12 +9,17 @@ public abstract class ScreenComponent {
 	public ScreenComponent(ControllerInterface controller){
 		this.controller = controller;
 		borderPane = new BorderPane();
-		
+		generateGUIComponent();
 	}
+	protected abstract void mapUserActions();
 	protected ControllerInterface getController(){
 		return controller;
 	}
-	public abstract BorderPane generateGUIComponent();
+	protected abstract void generateGUIComponent();
+	public BorderPane getGUIComponent(){
+		mapUserActions();
+		return borderPane;
+	};
 	protected BorderPane getBorderPane(){
 		return borderPane;
 	}

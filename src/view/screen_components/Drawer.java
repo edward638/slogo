@@ -1,6 +1,8 @@
 package view.screen_components;
 
 import controller.ControllerInterface;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -20,13 +22,23 @@ public class Drawer extends ScreenComponent{
 	public Drawer(ControllerInterface controller){
 		super(controller);
 	}
-	public BorderPane generateGUIComponent(){
+
+	@Override
+	protected void mapUserActions() {
+		backgroundColorBox.valueProperty().addListener(new ChangeListener() {
+			@Override
+			public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+				changeColor();
+			}
+		});
+	}
+
+	public void generateGUIComponent(){
 		BorderPane borderPane = super.getBorderPane();
 		borderPane.setPadding(new Insets(10,20,10,20));
 		//TODO: create borderpane layout
 		generateCanvas(borderPane);
 		generateBackgroundColorBox(borderPane);
-		return borderPane;
 	}
 
 	private void generateCanvas(BorderPane borderPane){
@@ -48,4 +60,17 @@ public class Drawer extends ScreenComponent{
 		borderPane.setBottom(backgroundColorBox);
 	}
 
+	private void changeColor(){
+		String color = (String) backgroundColorBox.getValue();
+		if (color.equals("White")){
+			gc.setFill(Color.WHITE);
+			gc.fillRect(0,0,canvas.getWidth(), canvas.getHeight());
+			gc.strokeRect(0,0, canvas.getWidth(),canvas.getHeight());
+		}
+		if (color.equals("Black")){
+			gc.setFill(Color.BLACK);
+			gc.fillRect(0,0,canvas.getWidth(), canvas.getHeight());
+			gc.strokeRect(0,0, canvas.getWidth(),canvas.getHeight());
+		}
+	}
 }
