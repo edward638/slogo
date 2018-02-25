@@ -1,9 +1,6 @@
 package commandNode;
 
-import java.util.ArrayList;
-
 import model.Turtle;
-import nodes.CommandNode;
 import java.util.List;
 import nodes.Node;
 
