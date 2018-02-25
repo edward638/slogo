@@ -23,9 +23,11 @@ public class Parser
 	
 	//possibly change to list because order of checking regex matters
 	private Map<String,Pattern> regex;
+	private Map<String,Integer> children;
 	private String languageFilePath;
 	private static final String REGEX_FILE = "parsers/regex";
 	private static final String NODE_PACKAGE = "commandNode.";
+	private Turtle turt;
 	
 	/**
 	 * Class Constructor
@@ -44,6 +46,16 @@ public class Parser
 		myTranslation = new HashMap<>();
 		addResources(languageFilePath, myTranslation);
 		
+		children = new HashMap<>();
+		ResourceBundle numChildren = ResourceBundle.getBundle("parsers/numChildren");
+		Enumeration<String> keys = numChildren.getKeys();
+		while(keys.hasMoreElements())
+		{
+			String key = keys.nextElement();
+			children.put(key, Integer.parseInt(numChildren.getString(key)));	
+		}
+		
+		turt = new Turtle(0,0);
 	}
 	
 	/**
@@ -92,7 +104,7 @@ public class Parser
 	private void checkSyntax(String[] commandList, Node[] nodeList) 
 	{
 		//NEED TO PASS IT A TURTLE
-		Turtle sample = new Turtle(0,0);
+		
 		
 		for (int i = 0; i<commandList.length; i++)
 		{
@@ -110,7 +122,7 @@ public class Parser
 						
 						try 
 						{
-							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), sample, 2);
+							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
 							nodeList[i] = n;
 							System.out.println(n.getValue());
 						}
@@ -125,7 +137,7 @@ public class Parser
 					{
 						try 
 						{
-							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + key), sample, 2);
+							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + key), turt,children.get(key));
 							nodeList[i] = n;
 							System.out.println(n.getValue());
 						}
