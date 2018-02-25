@@ -3,6 +3,8 @@ package parsers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.shape.Line;
+
 
 public class Turtle 
 {
@@ -10,7 +12,7 @@ public class Turtle
 	private double YCoordinate;
 	private double[] home = new double[2];
 	private double directionAngle;
-	private List<String> lines;
+	private List<Line> lines;
 	private boolean penShowing;
 	private boolean turtleShowing;
 	
@@ -24,7 +26,7 @@ public class Turtle
 		directionAngle = 90;
 		penShowing = true;
 		turtleShowing = true;
-		lines = new ArrayList<>();
+		lines = new ArrayList<Line>();
 	}
 
 
@@ -38,9 +40,10 @@ public class Turtle
 
 
 	public void setCoordinates(double xCoordinate, double yCoordinate) {
+		Line l = new Line(XCoordinate, YCoordinate, xCoordinate, yCoordinate);
 		XCoordinate = xCoordinate;
 		YCoordinate = yCoordinate;
-		addLine("Insert new line here");
+		addLine(l);
 	}
 
 	public double getDirectionAngle() {
@@ -53,12 +56,12 @@ public class Turtle
 	}
 
 
-	public List<String> getLines() {
+	public List<Line> getLines() {
 		return lines;
 	}
 
 
-	public void addLine(String line) {
+	public void addLine(Line line) {
 		lines.add(line);
 	}
 
@@ -81,5 +84,4 @@ public class Turtle
 	public void setTurtleShowing(boolean turtleShowing) {
 		this.turtleShowing = turtleShowing;
 	}
-
 }

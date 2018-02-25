@@ -4,10 +4,10 @@ In this project, we are trying to create the simple computer programming languag
 performs some action that appears on the screen. We hope to make several areas in our program flexible. Some of these areas include being able
 to make our program flexible enough in the back end to take in and interpret additional commands. In addition, we want to minimize the amount 
 of dependencies our working parts have between each other in order to avoid issues with adding new features. In discussing the program at a high
-level, we plan to divide it into three simple modules: Model, View, and Controller. In this program, we hope to have the View display information 
+level, we plan to divide it into three simple modules: Model, view, and Controller. In this program, we hope to have the view display information 
 to the user and be able to take in user interactions. These interactions are meant to go to the Controller, which can interpret the interaction. 
-The Controller can then either tell the View to change its display or delegate the Model to perform some action if backend specific information 
-is necessary to perform the interaction. The Controller can then change its state and/or tell the View about this state change so that they View can make queries. We feel that 
+The Controller can then either tell the view to change its display or delegate the Model to perform some action if backend specific information 
+is necessary to perform the interaction. The Controller can then change its state and/or tell the view about this state change so that they view can make queries. We feel that 
 splitting the design of the program simplifies the program into three separate, smaller problems and can help our program to achieve better 
 flexibility as a whole.
 
@@ -79,9 +79,9 @@ Below is an example design of our planned user interface:
 
 * Visualizer
     * Visualizer()
-    * Public updateGUI() [External API, Model -> View]
-    * Public showCommandHelp [External API, Controller -> View]
-    * Public clearCommandBox [External API, Controller -> View]
+    * Public updateGUI() [External API, Model -> view]
+    * Public showCommandHelp [External API, Controller -> view]
+    * Public clearCommandBox [External API, Controller -> view]
 * VariableBox
 
 No external API
@@ -102,13 +102,13 @@ No external API
 
 * Controller
     * ViewController
-        * Public showCommandHelp [External API, View -> Controller]
-        * Public clearCommandBox [External API, View -> Controller]
+        * Public showCommandHelp [External API, view -> Controller]
+        * Public clearCommandBox [External API, view -> Controller]
     * ModelController
         * Methods:
-            * Public passCommand() [External API, View -> Controller]
-            * Public clearConsoleBox()  [External API, View -> Controller]
-            * Public clearVariableBox()  [External API, View -> Controller]
+            * Public passCommand() [External API, view -> Controller]
+            * Public clearConsoleBox()  [External API, view -> Controller]
+            * Public clearVariableBox()  [External API, view -> Controller]
 
 
 ## Back-end Internal API's - Charlie
@@ -182,21 +182,21 @@ No external API
 
 ### Model
 * Public Model() 
-* Public List getLines(); [External API, Model -> View]
+* Public List getLines(); [External API, Model -> view]
 * Public List setLines(); [External API, Tree-> Model]
-* Public double getTurtleX(); [External API, Model -> View]
+* Public double getTurtleX(); [External API, Model -> view]
 * Public double setTurtleX(); [External API, Tree-> Model]
-* Public double getTurtleY(); [External API, Model -> View]
+* Public double getTurtleY(); [External API, Model -> view]
 * Public double setTurtleY(); [External API, Tree-> Model]
-* Public double getTurtleDegrees(); [External API, Model -> View]
+* Public double getTurtleDegrees(); [External API, Model -> view]
 * Public double setTurtleDegrees(); [External API, Tree-> Model]
-* public List getVariables(); [External API, Model -> View]
+* public List getVariables(); [External API, Model -> view]
 * public List setVariables(); [External API, Tree-> Model]
-* public List getCommandHistory(); [External API, Model -> View]
+* public List getCommandHistory(); [External API, Model -> view]
 * Public List setCommandHistory(); [External API, Tree-> Model]
-* public clearVariables(); [External API, Model -> View]
-* public clearCommandHistory(); [External API, Model -> View]
-* Public notifyViewObservers(); [External API, Model -> View]
+* public clearVariables(); [External API, Model -> view]
+* public clearCommandHistory(); [External API, Model -> view]
+* Public notifyViewObservers(); [External API, Model -> view]
 
 
 # API Example Code
@@ -217,13 +217,13 @@ objects are responsible for completing each part of the task, but you do not hav
     * Tree.getNext(Object parsedObject) would then take from this list the next object and update the tree accordingly
     * TreeEvaluator.evaluate(Tree tree) would then go through the made tree and update the model, returning the necessary values
     * Model.setTurtleX(50); //changes the model in order to update the view
-    * Model.notifyViewObservers() // lets View know that Model database has been updated
-    * View.updateGUI() // calls all methods necessary to update GUI
-    * Drawer.draw() // called by main View class (Visualizer)
+    * Model.notifyViewObservers() // lets view know that Model database has been updated
+    * view.updateGUI() // calls all methods necessary to update GUI
+    * Drawer.draw() // called by main view class (Visualizer)
 
 2. Second example: The user hits the clear button within the command box and sees the text in the command box disappear
     * Controller.clearCommandBox()
-    * View.CommandBox.clear()
+    * view.CommandBox.clear()
    
 3. Third example: The user inputs ‘CLEARSCREEN’
     * User inputs ‘CLEARSCREEN’ into the Command Box in the GUI and presses the Run button.
@@ -234,9 +234,9 @@ objects are responsible for completing each part of the task, but you do not hav
     * Model.setLines() //remove all of the lines
     * Model.setTurtleX() // set to 0
     * Model.setTurtleY() // set to 0
-    * Model.notifyViewObservers() // lets View know that Model database has been updated
-    * View.updateGUI() // calls all methods necessary to update GUI
-    * Drawer.draw() // called by main View class (Visualizer)
+    * Model.notifyViewObservers() // lets view know that Model database has been updated
+    * view.updateGUI() // calls all methods necessary to update GUI
+    * Drawer.draw() // called by main view class (Visualizer)
 
 4. Fourth example: The user inputs ‘MAKE :X 5’
     * User inputs ‘MAKE :X 5’ into the Command Box in the GUI and presses the Run button.
@@ -245,9 +245,9 @@ objects are responsible for completing each part of the task, but you do not hav
     * Tree.makeTree(List MAKE :X 5’) would create nodes of a new variable and assign the new variable a value
     * TreeEvaluator(Tree MakeX5) would go through the nodes and see a new variable was created then call the model of the node’s Variable object
     * Model.setVariables() //Stores :X as variable within the database with value 5
-    * Model.notifyViewObservers() // lets View know that Model database has been updated
-    * View.updateGUI() // calls all methods necessary to update GUI
-    * Variable.addVariable() // called by main View class (Visualizer)
+    * Model.notifyViewObservers() // lets view know that Model database has been updated
+    * view.updateGUI() // calls all methods necessary to update GUI
+    * Variable.addVariable() // called by main view class (Visualizer)
 
 5. Fifth example: The user inputs ‘PENUP’
     * Controller.passCommand(‘PENUP’)
@@ -297,29 +297,29 @@ objects are responsible for completing each part of the task, but you do not hav
 * One issue that we may have is that the Model component of our design may end up taking on too many tasks/getting too many variables to keep track of. Another issue that we may have to be aware of is that drawing is done through a list of available lines with attributes all at one time rather than dynamically, as time progresses. Based off of these current implementation guidelines, this doesn’t seem to be an issue as of now, but it could potentially be an issue since drawing is done in a taboo way as of now.
 
 ## Design decisions
-* One design decision we considered was where we wanted to put the Parser class after a command was passed through to the Controller. At first we thought about locating the Parser within the Model, but we decided that we wanted the Model to be strictly responsible for containing data pertinent to the View. In addition, we also did not want to put the Parser in the Controller, as we did not want the Controller to pass the command and parse it; this seemed to be giving the Controller work outside of its responsibility and it may be the case that the Model has back-end information that may be useful to parse a command. To resolve this issue, we decided that we would create an intermediate class between the Controller and the Model that would parse the command and supply the Model with any relevant data.
-* Another design decision we originally made was to have the Model call specific functions within the View in order to perform a specific command. For instance, the model would parse the move forward command and then immediately tell the View to move the turtle forward on the screen. An issue we found with this decision was that this design seemed to have several dependencies: the view depended on methods in the controller, the controller depended on methods in the model, and then the model depended on methods within the view. This appeared to be a red flag, since if one wanted to make functional changes to the View, such as erase a method, the model would be directly impacted, which is not what we want. In order to fix this issue, we decided to keep the model less aware about the View it affects; we decided to have the model perform its normal functions, but rather than telling the View what to do with the functions, all it does is notify its observers (in this case, the View, but it doesn’t have to be) that its own state has changed. The View can then do the work of querying state information to display to the screen. We felt that doing it this way limited dependencies and keeps information encapsulated between model and view.
+* One design decision we considered was where we wanted to put the Parser class after a command was passed through to the Controller. At first we thought about locating the Parser within the Model, but we decided that we wanted the Model to be strictly responsible for containing data pertinent to the view. In addition, we also did not want to put the Parser in the Controller, as we did not want the Controller to pass the command and parse it; this seemed to be giving the Controller work outside of its responsibility and it may be the case that the Model has back-end information that may be useful to parse a command. To resolve this issue, we decided that we would create an intermediate class between the Controller and the Model that would parse the command and supply the Model with any relevant data.
+* Another design decision we originally made was to have the Model call specific functions within the view in order to perform a specific command. For instance, the model would parse the move forward command and then immediately tell the view to move the turtle forward on the screen. An issue we found with this decision was that this design seemed to have several dependencies: the view depended on methods in the controller, the controller depended on methods in the model, and then the model depended on methods within the view. This appeared to be a red flag, since if one wanted to make functional changes to the view, such as erase a method, the model would be directly impacted, which is not what we want. In order to fix this issue, we decided to keep the model less aware about the view it affects; we decided to have the model perform its normal functions, but rather than telling the view what to do with the functions, all it does is notify its observers (in this case, the view, but it doesn’t have to be) that its own state has changed. The view can then do the work of querying state information to display to the screen. We felt that doing it this way limited dependencies and keeps information encapsulated between model and view.
 * One of the design decisions we made was to store the commands in tree form. This is because the commands are not always on just constants or variables, which have easy-to-access values to be used in the command. Sometimes a command with have to perform an operation on another command. This command would then have to be evaluated first and returned before the previous command can continue. As this can be nested further, the complexity of keeping track of how to return becomes very difficult to follow. A tree puts the one or two values a command needs to use as nodes and then splits these up as events to follow before it is evaluated. When there are two arguments, the first or second one could be a command, and the children of a node would then represent these respective options. We felt a tree was the best way to represent this complexity. We considered using a stack but decided that comparisons and while loops would be difficult to implement, as commands would have to be looped over which cannot be done in a stack as once it is popped it cannot be accessed again, and if statement are just generally tricky to implement on a stack, as decisions to skip a item is not possible. 
 
 ## Ambiguities, assumptions and dependencies
-* One large dependency within our program is that the Parser must collect information from the View to actually parse a command and pass information to the Model. To accomplish this task, we will have the View have a Command Box, which will be responsible for calling a Controller method passCommand(). This passCommand() method will contain the command called in the form of a string, and this will be passed to the Parser. 
-* When deciding how to transfer the data from the Model to the View, we assumed that it would be acceptable to have the View collect all data and update all parts of the GUI, regardless of whether a specific portion had any changes (ex. updating variable box after a non variable related command). While this would not be the most efficient method to update the GUI, it would be much simpler on the front-end. We assumed that the performance losses would be negligible and outweighed by the benefits of this implementation.
+* One large dependency within our program is that the Parser must collect information from the view to actually parse a command and pass information to the Model. To accomplish this task, we will have the view have a Command Box, which will be responsible for calling a Controller method passCommand(). This passCommand() method will contain the command called in the form of a string, and this will be passed to the Parser. 
+* When deciding how to transfer the data from the Model to the view, we assumed that it would be acceptable to have the view collect all data and update all parts of the GUI, regardless of whether a specific portion had any changes (ex. updating variable box after a non variable related command). While this would not be the most efficient method to update the GUI, it would be much simpler on the front-end. We assumed that the performance losses would be negligible and outweighed by the benefits of this implementation.
 
 # Team Responsibilities
 
 ### Edward
-* His primary responsibility is within the View component of this program. He will work on the CommandBox, ConsoleBox, and VariableBox classes (designed to be contained within the Visualizer). He will also work on the Controller.
+* His primary responsibility is within the view component of this program. He will work on the CommandBox, ConsoleBox, and VariableBox classes (designed to be contained within the Visualizer). He will also work on the Controller.
 
 ### Andy 
-* His primary responsibility is within the View component of this program. He will work on the Visualizer class in particular. In addition, he will contribute to some aspects of the Controller.
+* His primary responsibility is within the view component of this program. He will work on the Visualizer class in particular. In addition, he will contribute to some aspects of the Controller.
 
 ### Belanie
-* She will be responsible for creating the Parser class that will convert the string of commands into a list of node objects for the tree and will also convert the string of commands into the proper language for the tree to interpret. She will also be responsible for the Model class that will store information for updating the View.
+* She will be responsible for creating the Parser class that will convert the string of commands into a list of node objects for the tree and will also convert the string of commands into the proper language for the tree to interpret. She will also be responsible for the Model class that will store information for updating the view.
 
 ### Charlie 
 * He will be responsible for creating the tree that will then evaluate any given expression from the command line, then communicating with the Model (Turtle) and updating its values. He also will create the syntax type classes which will be used during parsing and Tree making.
 
 
 ### High-Level Plan
-* We will work on these components (Model, View, Controller) separately, but Edward and Andy will work together closely to create the View/Controller in a way that makes sense to both of them. Belanie and Charlie will work together on the Model, but will split responsibilities with regards to making the Parser and Tree structure.
+* We will work on these components (Model, view, Controller) separately, but Edward and Andy will work together closely to create the view/Controller in a way that makes sense to both of them. Belanie and Charlie will work together on the Model, but will split responsibilities with regards to making the Parser and Tree structure.
 
