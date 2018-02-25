@@ -33,7 +33,7 @@ public class TreeMaker {
 				node.addChild(nodes.get(index));
 			}
 			catch (IndexOutOfBoundsException e){
-				throw new NodeArgumentException(e);
+				throw new NodeArgumentException();
 			}
 			tNode curr = node.getChild();
 			makeTree(curr);
