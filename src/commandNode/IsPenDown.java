@@ -1,12 +1,13 @@
 package commandNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import model.Turtle;
 import nodes.CommandNode;
 import nodes.Node;
-import parsers.Turtle;
 
-public class IsPenDown extends Node implements CommandNode{
+public class IsPenDown extends Node{
 
 	public IsPenDown(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +19,7 @@ public class IsPenDown extends Node implements CommandNode{
 	 * 
 	 * @return turtle's pen status
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		if(turtle.getPenShowing())
 		{
 			value = 1;

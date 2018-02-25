@@ -2,9 +2,8 @@ package commandNode;
 
 import java.util.List;
 
-
+import model.Turtle;
 import nodes.Node;
-import parsers.Turtle;
 
 public class Random extends Node {
 

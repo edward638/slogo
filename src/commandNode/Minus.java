@@ -1,12 +1,13 @@
 package commandNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import model.Turtle;
 import nodes.CommandNode;
 import nodes.Node;
-import parsers.Turtle;
 
-public class Minus extends Node implements CommandNode{
+public class Minus extends Node{
 
 	public Minus(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -19,7 +20,7 @@ public class Minus extends Node implements CommandNode{
 	 * 
 	 * @return -expr
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		value = -1*arguments.get(0);
 		return value;
 	}

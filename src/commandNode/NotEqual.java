@@ -1,12 +1,13 @@
 package commandNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import model.Turtle;
 import nodes.CommandNode;
 import nodes.Node;
-import parsers.Turtle;
 
-public class NotEqual extends Node implements CommandNode{
+public class NotEqual extends Node{
 
 	public NotEqual(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +19,7 @@ public class NotEqual extends Node implements CommandNode{
 	 * 
 	 * @returns expr1 != expr2
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		if(arguments.get(0) != arguments.get(1))
 		{
 			value = 1;

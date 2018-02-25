@@ -2,8 +2,8 @@ package commandNode;
 
 import java.util.List;
 
+import model.Turtle;
 import nodes.Node;
-import parsers.Turtle;
 
 public class ShowTurtle extends Node {
 

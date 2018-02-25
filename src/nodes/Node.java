@@ -1,8 +1,9 @@
 package nodes;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import parsers.Turtle;
+import model.Turtle;
 
 public abstract class Node 
 {
