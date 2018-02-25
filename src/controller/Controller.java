@@ -34,22 +34,14 @@ public class Controller implements ControllerInterface{
 	public void passCommand(String s){
         
     }
-    @Override
-    public void clearConsoleBox(){
-        
-    }
+
     @Override
     public void clearVariableBox(){
         
     }
 
     @Override
-    public void showCommandHelp() {
-
-    }
-
-    @Override
-    public void clearCommandBox() {
+    public void clearCommandHistoryBox() {
 
     }
 

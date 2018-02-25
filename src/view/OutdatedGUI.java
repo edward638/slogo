@@ -13,6 +13,7 @@ import view.factories.*;
 import view.screen_components.VariableHistoryBox;
 
 public class OutdatedGUI{
+	/*
 	private static final String NAME = "SLogo";
 	private static final int SIM_WIDTH = 950;
     private static final int SIM_HEIGHT = 650;
@@ -38,12 +39,13 @@ public class OutdatedGUI{
     
     private ComboBox languageBox;
     private ComboBox colorBox;
-    
+    */
     /**
      * Begins GUI
      *
      * @param stage window holding simulation
      */
+	/*
     public OutdatedGUI(ControllerInterface controller){
         this.controller = controller;
     }
@@ -59,12 +61,13 @@ public class OutdatedGUI{
         this.addComboBoxes();
         this.attachEventHandlers();
     }
-    
+    */
     /**
      * Initializes beginning JavaFX Stage
      *
      * @param stage window holding simulation
      */
+	/*
     private void setStage(Stage stage) {
         stage.setTitle(NAME);
         Scene startScene = new Scene(root, SIM_WIDTH, SIM_HEIGHT);
@@ -155,7 +158,7 @@ public class OutdatedGUI{
 		});
     }
     
-    
+    */
     
 
 }

@@ -1,7 +1,6 @@
 package view.screen_components;
 
 import controller.ControllerInterface;
-import javafx.scene.layout.BorderPane;
 import view.constants.ButtonConstants;
 import view.constants.LabelConstants;
 import view.constants.TextAreaConstants;
@@ -13,7 +12,9 @@ public class CommandHistoryBox extends HistoryBox{
 
 	@Override
 	protected void mapUserActions() {
-
+		super.getButton().setOnAction((event -> {
+			super.getController().clearCommandHistoryBox();
+		}));
 	}
 
 	public void generateGUIComponent(){

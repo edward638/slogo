@@ -5,6 +5,7 @@ import view.constants.ButtonConstants;
 import view.view_exceptions.BadResourceNameException;
 
 public class ButtonFactory {
+	/*
 	public static final String COMMAND_RUN = "CommandRun";
 	public static final String COMMAND_CLEAR = "CommandClear";
 	public static final String VARIABLE = "Variable";
@@ -31,4 +32,5 @@ public class ButtonFactory {
         button.setLayoutY(y);
         return button;
 	}
+	*/
 }

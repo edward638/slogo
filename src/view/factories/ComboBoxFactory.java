@@ -6,6 +6,7 @@ import view.constants.ComboBoxConstants;
 import view.view_exceptions.BadResourceNameException;
 
 public class ComboBoxFactory {
+	/*
     public static final String LANGUAGE = "Language";
     public static final String COLOR = "Color";
 
@@ -31,5 +32,6 @@ public class ComboBoxFactory {
             }
             return comboBox;
         }
-    }
+        */
+}
 
