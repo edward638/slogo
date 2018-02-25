@@ -8,11 +8,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public abstract class HistoryBox extends ScreenComponent{
-	public static final int HBOX_SPACING = 50;
+	private static final int HBOX_SPACING = 50;
 	private String historyBoxLabel;
 	private String buttonLabel;
 	private int rows;
 	private int cols;
+	private Button button;
 	public HistoryBox(ControllerInterface controller) {
 		super(controller);
 	}
@@ -27,28 +28,31 @@ public abstract class HistoryBox extends ScreenComponent{
 		this.cols = cols;
 	}
 	
-	public void generateGUIComponent(){
-		BorderPane borderPane = super.getBorderPane();
-		TextArea textArea = this.getTextArea();
-		borderPane.setTop(this.getTopComponent());
-		borderPane.setCenter(textArea);
+	protected Button getButton(){
+		return button;
 	}
 	
-	private HBox getTopComponent(){
+	public void generateGUIComponent(){
+		BorderPane borderPane = super.getBorderPane();
+		this.addButtonAndLabels(borderPane);
+		this.addTextArea(borderPane);
+	}
+	
+	private void addButtonAndLabels(BorderPane borderPane){
 		HBox topComponent = new HBox();
 		topComponent.setSpacing(HBOX_SPACING);
-		Button button = new Button(buttonLabel);
+		button = new Button(buttonLabel);
 		Label label = new Label(historyBoxLabel);
 		topComponent.getChildren().add(label);
 		topComponent.getChildren().add(button);
-		return topComponent;
+		borderPane.setTop(topComponent);
 	}
 	
-	private TextArea getTextArea(){
+	private void addTextArea(BorderPane borderPane){
 		TextArea textArea = new TextArea();
 		textArea.setPrefRowCount(rows);
 		textArea.setPrefColumnCount(cols);
-		return textArea;
+		borderPane.setCenter(textArea);
 	}
 	
 }
