@@ -1,5 +1,7 @@
 package nodes;
 
+import java.util.List;
+
 import parsers.Turtle;
 
 public abstract class Node 
@@ -40,8 +42,14 @@ public abstract class Node
 		return null;
 	}
 	
+	public void reset() {
+		current = 0;
+	}
+	
 	public Double getValue() 
 	{
 		return value;
 	}
+	
+	public abstract Double evaluate (List<Double> args);
 }

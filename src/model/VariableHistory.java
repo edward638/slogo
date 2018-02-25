@@ -1,9 +1,10 @@
 package model;
 
 import java.util.HashMap;
+
 import java.util.NoSuchElementException;
 
-import nodes.VariableNode;
+import nodes.Variable;
 
 public class VariableHistory {
 	private HashMap<String, Double> variables;
@@ -19,7 +20,7 @@ public class VariableHistory {
 		return variables.get(name);
 	}
 	
-	public void add (VariableNode VN) {
+	public void add (Variable VN) {
 		variables.put(VN.getName(), VN.getValue());
 	}
 }
