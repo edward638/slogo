@@ -1,12 +1,11 @@
 package commandNode;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
 import nodes.Node;
 
-public class PenDown extends Node implements CommandNode{
+public class PenDown extends Node {
 
 	public PenDown(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +17,7 @@ public class PenDown extends Node implements CommandNode{
 	 * 
 	 * @return 1
 	 */
-	public double evalute(ArrayList<Double> arguments) 
+	public double evaluate(List<Double> arguments) 
 	{
 		turtle.setPenShowing(true);
 		value = 1;

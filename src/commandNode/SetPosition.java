@@ -1,12 +1,11 @@
 package commandNode;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
 import nodes.Node;
 
-public class SetPosition extends Node implements CommandNode{
+public class SetPosition extends Node {
 
 	public SetPosition(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +17,7 @@ public class SetPosition extends Node implements CommandNode{
 	 * 
 	 * @return the distance the turtle moved
 	 */
-	public double evalute(ArrayList<Double> arguments) 
+	public double evaluate(List<Double> arguments) 
 	{
 		double distance = Math.sqrt(Math.pow(arguments.get(0) - turtle.getXCoordinate(), 2) + Math.pow(arguments.get(1) - turtle.getYCoordinate(), 2) );
 		turtle.setCoordinates(arguments.get(0), arguments.get(1));

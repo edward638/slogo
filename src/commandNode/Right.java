@@ -1,12 +1,11 @@
 package commandNode;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
 import nodes.Node;
 
-public class Right extends Node implements CommandNode{
+public class Right extends Node {
 
 	public Right(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +17,7 @@ public class Right extends Node implements CommandNode{
 	 * 
 	 * @return the value of degrees
 	 */
-	public double evalute(ArrayList<Double> arguments) 
+	public double evaluate(List<Double> arguments) 
 	{
 		double deg = turtle.getDirectionAngle() - arguments.get(0);
 		if (deg < 0)

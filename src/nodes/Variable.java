@@ -6,7 +6,7 @@ import model.VariableHistory;
 
 public class Variable extends Node{
 	private String name;
-	private Double value;
+	private double value;
 
 	public Variable (String name, Double value) {
 		super(null, 0);
@@ -24,7 +24,7 @@ public class Variable extends Node{
 		return name;
 	}
 
-	public Double evaluate(List<Double> args) {
+	public double evaluate(List<Double> args) {
 		return value;
 	}
 }
