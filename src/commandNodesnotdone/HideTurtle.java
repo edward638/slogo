@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class SetPosition extends Node{
+import nodes.Node;
+
+public class HideTurtle extends Node{
 
 	@Override
 	public double getValue() {

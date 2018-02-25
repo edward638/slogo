@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class SetTowards extends Node{
+import nodes.Node;
+
+public class Cosine extends Node{
 
 	@Override
 	public double getValue() {

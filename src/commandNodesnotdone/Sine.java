@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class Difference extends Node{
+import nodes.Node;
+
+public class Sine extends Node {
 
 	@Override
 	public double getValue() {

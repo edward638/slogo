@@ -1,15 +1,64 @@
 package nodes;
 
+import parsers.Turtle;
+
 public abstract class Node 
 {
-	public Node()
+	private Node[] children;
+	private Node parent;
+	private int current;
+	private double value;
+	protected Turtle turtle;
+	
+	public Node(Turtle turt, int numChildren)
 	{
+		children = new Node[numChildren];
+		current = 0;
+		value = 0;
+		turtle = turt;
 		//Node(value,children)
 		//initialize value at zero
 		//children = arguments + 1
 	}
 	
-	public abstract double getValue();
+	public boolean hasNext() 
+	{
+		if (current!=children.length) return true;
+		return false;
+	}
 	
-	public abstract void evalute();
+	public void setParent(Node n) 
+	{
+		if (n==null) {
+			this.parent = this;
+		}
+		else { this.parent = n; }
+	}
+	
+	public void addChild(Node n) 
+	{
+		if (current != children.length) {
+			children[current] = n;
+		}
+	}
+	
+	public Node getChild() 
+	{
+		if (current!=children.length) {
+			Node child = children[current];
+			current++;
+			return child;
+		}
+		return null;
+	}
+	
+	public Node getParent() 
+	{
+		return parent;
+	}
+	
+	public Double getValue() 
+	{
+		return value;
+	}
 }

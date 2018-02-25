@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class SetHeading extends Node{
+import nodes.Node;
+
+public class Difference extends Node{
 
 	@Override
 	public double getValue() {

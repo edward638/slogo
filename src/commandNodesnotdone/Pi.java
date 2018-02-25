@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class Right extends Node {
+import nodes.Node;
+
+public class Pi extends Node{
 
 	@Override
 	public double getValue() {
@@ -13,5 +15,4 @@ public class Right extends Node {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

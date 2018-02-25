@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class Home extends Node{
+import nodes.Node;
+
+public class Random extends Node{
 
 	@Override
 	public double getValue() {

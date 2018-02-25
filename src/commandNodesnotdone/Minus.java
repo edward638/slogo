@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class ClearScreen extends Node{
+import nodes.Node;
+
+public class Minus extends Node{
 
 	@Override
 	public double getValue() {

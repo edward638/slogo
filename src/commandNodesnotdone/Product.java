@@ -1,7 +1,9 @@
-package nodes;
+package commandNodesnotdone;
 
-public class Sum extends Node 
-{
+import nodes.Node;
+
+public class Product extends Node {
+
 	@Override
 	public double getValue() {
 		// TODO Auto-generated method stub
@@ -11,7 +13,7 @@ public class Sum extends Node
 	@Override
 	public void evalute() {
 		// TODO Auto-generated method stub
-		//some turtle call
+		
 	}
 
 }

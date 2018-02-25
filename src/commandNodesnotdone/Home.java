@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class PenUp extends Node{
+import nodes.Node;
+
+public class Home extends Node{
 
 	@Override
 	public double getValue() {

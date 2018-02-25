@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class Left extends Node {
+import nodes.Node;
+
+public class Tangent extends Node {
 
 	@Override
 	public double getValue() {
@@ -10,8 +12,7 @@ public class Left extends Node {
 
 	@Override
 	public void evalute() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 }

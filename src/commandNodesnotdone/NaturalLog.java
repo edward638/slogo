@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class HideTurtle extends Node{
+import nodes.Node;
+
+public class NaturalLog extends Node{
 
 	@Override
 	public double getValue() {

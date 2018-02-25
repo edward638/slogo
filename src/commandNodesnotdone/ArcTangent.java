@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class Forward extends Node{
+import nodes.Node;
+
+public class ArcTangent extends Node {
 
 	@Override
 	public double getValue() {

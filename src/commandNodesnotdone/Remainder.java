@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class PenDown extends Node{
+import nodes.Node;
+
+public class Remainder extends Node {
 
 	@Override
 	public double getValue() {
@@ -13,5 +15,4 @@ public class PenDown extends Node{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

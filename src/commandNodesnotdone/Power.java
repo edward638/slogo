@@ -1,6 +1,8 @@
-package nodes;
+package commandNodesnotdone;
 
-public class Backward extends Node{
+import nodes.Node;
+
+public class Power extends Node{
 
 	@Override
 	public double getValue() {
