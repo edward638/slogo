@@ -1,12 +1,13 @@
 package commandNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
 import nodes.Node;
 
-public class Not extends Node implements CommandNode {
+public class Not extends Node{
 
 	public Not(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +19,7 @@ public class Not extends Node implements CommandNode {
 	 * 
 	 * @return is the argument 0
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		if(arguments.get(0) == 0)
 		{
 			value = 1;

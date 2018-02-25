@@ -1,12 +1,13 @@
 package commandNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
 import nodes.Node;
 
-public class Cosine extends Node implements CommandNode{
+public class Cosine extends Node{
 
 	public Cosine(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -19,7 +20,7 @@ public class Cosine extends Node implements CommandNode{
 	 * 
 	 * @return cos(degrees)
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		double cos = Math.cos(arguments.get(0));
 		value = cos;
 		return value;
