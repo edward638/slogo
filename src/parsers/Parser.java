@@ -25,7 +25,7 @@ public class Parser
 	private Map<String,Pattern> regex;
 	private String languageFilePath;
 	private static final String REGEX_FILE = "parsers/regex";
-	private static final String NODE_PACKAGE = "nodes.";
+	private static final String NODE_PACKAGE = "commandNode.";
 	
 	/**
 	 * Class Constructor
@@ -91,6 +91,9 @@ public class Parser
 	 */
 	private void checkSyntax(String[] commandList, Node[] nodeList) 
 	{
+		//NEED TO PASS IT A TURTLE
+		Turtle sample = new Turtle(0,0);
+		
 		for (int i = 0; i<commandList.length; i++)
 		{
 			String text = commandList[i];
@@ -104,9 +107,10 @@ public class Parser
 					{
 						String commandType = checkLanguage(text);
 						System.out.println(commandType);
+						
 						try 
 						{
-							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType));
+							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), sample, 2);
 							nodeList[i] = n;
 							System.out.println(n.getValue());
 						}
@@ -121,7 +125,7 @@ public class Parser
 					{
 						try 
 						{
-							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + key));
+							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + key), sample, 2);
 							nodeList[i] = n;
 							System.out.println(n.getValue());
 						}

@@ -7,7 +7,6 @@ import nodes.Node;
 import parsers.Turtle;
 
 public class Forward extends Node implements CommandNode{
-
 	public Forward(Turtle turt, int numChildren) {
 		super(turt, numChildren);
 	}

@@ -1,12 +1,16 @@
 package parsers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Turtle 
 {
 	private double XCoordinate;
 	private double YCoordinate;
 	private double[] home = new double[2];
 	private double directionAngle;
-	private String[] lines;
+	private List<String> lines;
 	private boolean penShowing;
 	private boolean turtleShowing;
 	
@@ -19,7 +23,8 @@ public class Turtle
 		home[1] = yHome; 
 		directionAngle = 90;
 		penShowing = true;
-		turtleShowing = true;	
+		turtleShowing = true;
+		lines = new ArrayList<>();
 	}
 
 
@@ -35,7 +40,7 @@ public class Turtle
 	public void setCoordinates(double xCoordinate, double yCoordinate) {
 		XCoordinate = xCoordinate;
 		YCoordinate = yCoordinate;
-		//add a new line
+		addLine("Insert new line here");
 	}
 
 	public double getDirectionAngle() {
@@ -48,14 +53,14 @@ public class Turtle
 	}
 
 
-	public String[] getLines() {
+	public List<String> getLines() {
 		return lines;
 	}
 
 
-//	public void addLine(String[] lines) {
-//		this.lines = lines;
-//	}
+	public void addLine(String line) {
+		lines.add(line);
+	}
 
 
 	public boolean getPenShowing() {
