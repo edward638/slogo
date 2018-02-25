@@ -1,19 +1,21 @@
 package commandNodesnotdone;
 
+import java.util.ArrayList;
+
+import nodes.CommandNode;
 import nodes.Node;
+import parsers.Turtle;
 
-public class ArcTangent extends Node {
+public class ArcTangent extends Node implements CommandNode{
 
-	@Override
-	public double getValue() {
-		// TODO Auto-generated method stub
-		return 0;
+	public ArcTangent(Turtle turt, int numChildren) {
+		super(turt, numChildren);
 	}
 
 	@Override
-	public void evalute() {
-		// TODO Auto-generated method stub
-		
+	public double evalute(ArrayList<Double> arguments) 
+	{
+		return 0;
 	}
 
 }
