@@ -5,7 +5,6 @@ import parsers.Turtle;
 public abstract class Node 
 {
 	private Node[] children;
-	private Node parent;
 	private int current;
 	protected double value;
 	protected Turtle turtle;
@@ -24,14 +23,6 @@ public abstract class Node
 		return false;
 	}
 	
-	public void setParent(Node n) 
-	{
-		if (n==null) {
-			this.parent = this;
-		}
-		else { this.parent = n; }
-	}
-	
 	public void addChild(Node n) 
 	{
 		if (current != children.length) {
@@ -47,11 +38,6 @@ public abstract class Node
 			return child;
 		}
 		return null;
-	}
-	
-	public Node getParent() 
-	{
-		return parent;
 	}
 	
 	public Double getValue() 

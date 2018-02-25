@@ -3,6 +3,8 @@ package Tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import nodes.CommandNode;
+
 public class TreeMaker {
 	private ArrayList<tNode> nodes;
 	private ArrayList<tNode> heads;
@@ -13,6 +15,9 @@ public class TreeMaker {
 		heads = new ArrayList<tNode>();
 		index = 0;
 		while (index < this.nodes.size()) {
+			if (!(this.nodes.get(index) instanceof tNode)) {
+				throw new HeadException();
+			}
 			heads.add(makeTree(this.nodes.get(index)));
 		}
 	}
@@ -24,7 +29,12 @@ public class TreeMaker {
 	private tNode makeTree(tNode node) {
 		index+=1;
 		while (node!=null && node.hasNext()) {
-			node.addChild(nodes.get(index));
+			try {
+				node.addChild(nodes.get(index));
+			}
+			catch (IndexOutOfBoundsException e){
+				throw new NodeArgumentException(e);
+			}
 			tNode curr = node.getChild();
 			makeTree(curr);
 		}
