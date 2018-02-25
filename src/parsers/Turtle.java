@@ -64,6 +64,11 @@ public class Turtle
 	public void addLine(Line line) {
 		lines.add(line);
 	}
+	
+	public void clearLines()
+	{
+		lines = new ArrayList<Line>();
+	}
 
 
 	public boolean getPenShowing() {
