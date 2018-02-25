@@ -40,8 +40,14 @@ public abstract class Node
 		return null;
 	}
 	
+	public void reset() {
+		current = 0;
+	}
+	
 	public Double getValue() 
 	{
 		return value;
 	}
+	
+	public abstract Double evaluate (List<Double> args);
 }
