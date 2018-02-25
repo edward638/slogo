@@ -24,5 +24,4 @@ public class HideTurtle extends Node{
 		value = 0;
 		return 0;
 	}
-
 }

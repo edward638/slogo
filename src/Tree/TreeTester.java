@@ -7,7 +7,7 @@ public class TreeTester {
 	
 	public static void main (String [] args) {
 		nodes = new ArrayList<tNode>();
-		nodes.add(new tNode(0, 3));
+		nodes.add(new tNode(0, 2));
 		nodes.add(new tNode(6, 2));
 		nodes.add(new tNode (4, 0));
 		nodes.add(new tNode (3, 1));
