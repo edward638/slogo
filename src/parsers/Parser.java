@@ -137,7 +137,7 @@ public class Parser
 					{
 						try 
 						{
-							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + key), turt,children.get(key));
+							Node n = (Node)NodeFactory.makeNode(Class.forName("nodes." + key), turt,children.get(key));
 							nodeList[i] = n;
 							System.out.println(n.getValue());
 						}

@@ -1,7 +1,6 @@
 package parsers;
 
-import nodes.NodeFactory;
-import nodes.Node;
+import nodes.*;
 
 public class SampleMain {
 	
@@ -11,7 +10,7 @@ public class SampleMain {
 		
 		Parser newnew = new Parser(m, "English");
 		//newnew.addResources("parsers/regex");
-		newnew.parseString("fd fd");
+		newnew.parseString("fd fd 50");
 	}
 
 }

@@ -1,12 +1,11 @@
 package commandNode;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import nodes.CommandNode;
 import nodes.Node;
 import parsers.Turtle;
 
-public class Power extends Node implements CommandNode{
+public class Power extends Node{
 
 	public Power(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -19,7 +18,7 @@ public class Power extends Node implements CommandNode{
 	 * 
 	 * @return base^exponent
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		value = Math.pow(arguments.get(0), arguments.get(1));
 		return value;
 	}

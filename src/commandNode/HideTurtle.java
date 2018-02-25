@@ -1,6 +1,7 @@
 package commandNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import nodes.CommandNode;
 import nodes.Node;
@@ -23,5 +24,4 @@ public class HideTurtle extends Node implements CommandNode{
 		value = 0;
 		return 0;
 	}
-
 }

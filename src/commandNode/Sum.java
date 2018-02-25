@@ -1,12 +1,11 @@
 package commandNode;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import nodes.CommandNode;
 import nodes.Node;
 import parsers.Turtle;
 
-public class Sum extends Node implements CommandNode
+public class Sum extends Node 
 {
 
 	public Sum(Turtle turt, int numChildren) {
@@ -20,7 +19,7 @@ public class Sum extends Node implements CommandNode
 	 * 
 	 * @return expr1 + expr2
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		double sum = arguments.get(0) + arguments.get(1);
 		value = sum;
 		return value;

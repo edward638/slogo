@@ -1,12 +1,11 @@
 package commandNode;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import nodes.CommandNode;
 import nodes.Node;
 import parsers.Turtle;
 
-public class SetTowards extends Node implements CommandNode
+public class SetTowards extends Node 
 {
 
 	public SetTowards(Turtle turt, int numChildren) {
@@ -19,7 +18,7 @@ public class SetTowards extends Node implements CommandNode
 	 * 
 	 * @return the number of degrees turtle turned
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		double deg = Math.atan(arguments.get(0)/arguments.get(1));
 		double change = Math.abs(turtle.getDirectionAngle() - deg);
 		turtle.setDirectionAngle(deg);

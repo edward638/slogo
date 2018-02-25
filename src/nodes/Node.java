@@ -51,5 +51,5 @@ public abstract class Node
 		return value;
 	}
 	
-	public abstract Double evaluate (List<Double> args);
+	public abstract double evaluate (List<Double> args);
 }

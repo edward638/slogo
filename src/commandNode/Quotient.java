@@ -1,12 +1,12 @@
 package commandNode;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import nodes.CommandNode;
+
 import nodes.Node;
 import parsers.Turtle;
 
-public class Quotient extends Node implements CommandNode{
+public class Quotient extends Node{
 
 	public Quotient(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -19,7 +19,7 @@ public class Quotient extends Node implements CommandNode{
 	 * 
 	 * @return expr1/expr2
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		if(arguments.get(1) != 0)
 		{
 			double quot = arguments.get(0)/arguments.get(1);

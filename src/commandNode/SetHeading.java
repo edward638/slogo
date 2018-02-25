@@ -1,12 +1,11 @@
 package commandNode;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import nodes.CommandNode;
 import nodes.Node;
 import parsers.Turtle;
 
-public class SetHeading extends Node implements CommandNode{
+public class SetHeading extends Node{
 
 	public SetHeading(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +17,7 @@ public class SetHeading extends Node implements CommandNode{
 	 * 
 	 * @return number of degrees moved
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		double deg = Math.abs(turtle.getDirectionAngle() - arguments.get(0));
 		turtle.setDirectionAngle(arguments.get(0));
 		value = deg;

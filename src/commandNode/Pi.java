@@ -1,12 +1,11 @@
 package commandNode;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import nodes.CommandNode;
 import nodes.Node;
 import parsers.Turtle;
 
-public class Pi extends Node implements CommandNode{
+public class Pi extends Node{
 
 	public Pi(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -19,7 +18,7 @@ public class Pi extends Node implements CommandNode{
 	 * 
 	 * @return Pi
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		value = Math.PI;
 		return value;
 	}

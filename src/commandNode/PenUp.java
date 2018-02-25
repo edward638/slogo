@@ -1,12 +1,11 @@
 package commandNode;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import nodes.CommandNode;
 import nodes.Node;
 import parsers.Turtle;
 
-public class PenUp extends Node implements CommandNode{
+public class PenUp extends Node{
 
 	public PenUp(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,11 +17,10 @@ public class PenUp extends Node implements CommandNode{
 	 * 
 	 * @return 0
 	 */
-	public double evalute(ArrayList<Double> arguments) 
+	public double evaluate(List<Double> arguments) 
 	{
 		turtle.setPenShowing(false);
 		value = 1;
 		return 0;
 	}
-
 }

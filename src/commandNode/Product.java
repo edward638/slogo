@@ -1,12 +1,12 @@
 package commandNode;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import nodes.CommandNode;
+
 import nodes.Node;
 import parsers.Turtle;
 
-public class Product extends Node implements CommandNode {
+public class Product extends Node {
 
 	public Product(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -19,7 +19,7 @@ public class Product extends Node implements CommandNode {
 	 * 
 	 * @return expr1 * expr2
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		double prod = arguments.get(0)*arguments.get(1);
 		value = prod;
 		return value;
