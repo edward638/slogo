@@ -1,4 +1,4 @@
-package commandNodesnotdone;
+package commandNode;
 
 import java.util.ArrayList;
 
@@ -13,9 +13,16 @@ public class ArcTangent extends Node implements CommandNode{
 	}
 
 	@Override
+	/**
+	 * return arctangent of degrees
+	 * 
+	 * @return arctan(degrees)
+	 */
 	public double evalute(ArrayList<Double> arguments) 
 	{
-		return 0;
+		double arctan = Math.atan(arguments.get(0));
+		value = arctan;
+		return value;
 	}
 
 }

@@ -1,4 +1,4 @@
-package commandNodesnotdone;
+package commandNode;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,15 @@ public class Tangent extends Node implements CommandNode {
 	}
 
 	@Override
+	/**
+	 *return tangent of degrees
+	 * 
+	 * @return tan(degrees)
+	 */
 	public double evalute(ArrayList<Double> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		double tan = Math.tan(arguments.get(0));
+		value = tan;
+		return value;
 	}
 	
 

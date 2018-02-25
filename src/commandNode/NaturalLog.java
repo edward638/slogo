@@ -1,4 +1,4 @@
-package commandNodesnotdone;
+package commandNode;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,14 @@ public class NaturalLog extends Node implements CommandNode{
 	}
 
 	@Override
+	/**
+	 * returns natural log of expr
+	 * 
+	 * @return ln(expr)
+	 */
 	public double evalute(ArrayList<Double> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		value = Math.log(arguments.get(0));
+		return value;
 	}
 
 }

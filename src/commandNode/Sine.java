@@ -1,4 +1,4 @@
-package commandNodesnotdone;
+package commandNode;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,15 @@ public class Sine extends Node implements CommandNode {
 	}
 
 	@Override
+	/**
+	 * returns sine of degrees
+	 * 
+	 * @return sin(degrees)
+	 */
 	public double evalute(ArrayList<Double> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		double sin = Math.sin(arguments.get(0));
+		value = sin;
+		return value;
 	}
 
 

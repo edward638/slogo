@@ -1,4 +1,4 @@
-package commandNodesnotdone;
+package commandNode;
 
 import java.util.ArrayList;
 
@@ -15,9 +15,15 @@ public class Sum extends Node implements CommandNode
 	}
 
 	@Override
+	/**
+	 * returns sum of the values of expr1 and expr2
+	 * 
+	 * @return expr1 + expr2
+	 */
 	public double evalute(ArrayList<Double> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		double sum = arguments.get(0) + arguments.get(1);
+		value = sum;
+		return value;
 	}
 	
 
