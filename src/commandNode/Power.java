@@ -1,4 +1,4 @@
-package commandNodesnotdone;
+package commandNode;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,14 @@ public class Power extends Node implements CommandNode{
 	}
 
 	@Override
+	/**
+	 * returns base raised to the power of the exponent
+	 * 
+	 * @return base^exponent
+	 */
 	public double evalute(ArrayList<Double> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		value = Math.pow(arguments.get(0), arguments.get(1));
+		return value;
 	}
 
 

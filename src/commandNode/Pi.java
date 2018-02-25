@@ -1,4 +1,4 @@
-package commandNodesnotdone;
+package commandNode;
 
 import java.util.ArrayList;
 
@@ -6,16 +6,22 @@ import nodes.CommandNode;
 import nodes.Node;
 import parsers.Turtle;
 
-public class Difference extends Node implements CommandNode{
+public class Pi extends Node implements CommandNode{
 
-	public Difference(Turtle turt, int numChildren) {
+	public Pi(Turtle turt, int numChildren) {
 		super(turt, numChildren);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
+	/**
+	 * reports the number Pi
+	 * 
+	 * @return Pi
+	 */
 	public double evalute(ArrayList<Double> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		value = Math.PI;
+		return value;
 	}
+
 }

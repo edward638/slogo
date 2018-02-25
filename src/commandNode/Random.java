@@ -1,4 +1,4 @@
-package commandNodesnotdone;
+package commandNode;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,14 @@ public class Random extends Node implements CommandNode{
 	}
 
 	@Override
+	/**
+	 * returns random non-negative number strictly less than max
+	 * 
+	 * @return num between 0 and max
+	 */
 	public double evalute(ArrayList<Double> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		value = Math.floor(Math.random() * arguments.get(0));
+		return value;
 	}
 
 

@@ -1,4 +1,4 @@
-package commandNodesnotdone;
+package commandNode;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,15 @@ public class Cosine extends Node implements CommandNode{
 	}
 
 	@Override
+	/**
+	 * return cosine of degrees
+	 * 
+	 * @return cos(degrees)
+	 */
 	public double evalute(ArrayList<Double> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		double cos = Math.cos(arguments.get(0));
+		value = cos;
+		return value;
 	}
 
 }

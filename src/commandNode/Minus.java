@@ -1,4 +1,4 @@
-package commandNodesnotdone;
+package commandNode;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,14 @@ public class Minus extends Node implements CommandNode{
 	}
 
 	@Override
+	/**
+	 * returns negative of the values of expr
+	 * 
+	 * @return -expr
+	 */
 	public double evalute(ArrayList<Double> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		value = -1*arguments.get(0);
+		return value;
 	}
 
 

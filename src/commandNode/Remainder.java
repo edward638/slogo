@@ -1,4 +1,4 @@
-package commandNodesnotdone;
+package commandNode;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,15 @@ public class Remainder extends Node implements CommandNode {
 	}
 
 	@Override
+	/**
+	 * returns remainder on dividing the values of expr1 by expr2
+	 * 
+	 * @return expr1 % expr2
+	 */
 	public double evalute(ArrayList<Double> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		double remainder = arguments.get(0) % arguments.get(1);
+		value = remainder;
+		return value;
 	}
 
 }
