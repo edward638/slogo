@@ -1,5 +1,8 @@
 package nodes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Turtle;
 
 public abstract class Node 
@@ -49,5 +52,5 @@ public abstract class Node
 		return value;
 	}
 	
-	public abstract Double evaluate (List<Double> args);
+	public abstract double evaluate (List<Double> args);
 }

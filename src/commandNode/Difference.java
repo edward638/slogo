@@ -1,12 +1,13 @@
 package commandNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
 import nodes.Node;
 
-public class Difference extends Node implements CommandNode{
+public class Difference extends Node{
 
 	public Difference(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -19,7 +20,7 @@ public class Difference extends Node implements CommandNode{
 	 * 
 	 * @return expr1 - expr2
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		double diff = arguments.get(0) - arguments.get(1);
 		value = diff;
 		return value;

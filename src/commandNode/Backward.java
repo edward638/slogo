@@ -1,12 +1,13 @@
 package commandNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
 import nodes.Node;
 
-public class Backward extends Node implements CommandNode
+public class Backward extends Node
 {
 
 	public Backward(Turtle turt, int numChildren) {
@@ -19,7 +20,7 @@ public class Backward extends Node implements CommandNode
 	 * 
 	 * @return the value of pixels
 	 */
-	public double evalute(ArrayList<Double> arguments) 
+	public double evaluate(List<Double> arguments) 
 	{
 		double xCor = turtle.getXCoordinate() - arguments.get(0)*Math.sin(turtle.getDirectionAngle());
 		double yCor = turtle.getYCoordinate() - arguments.get(0)*Math.cos(turtle.getDirectionAngle());

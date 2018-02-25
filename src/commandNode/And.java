@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import model.Turtle;
 import nodes.CommandNode;
+import java.util.List;
 import nodes.Node;
 
-public class And extends Node implements CommandNode{
+public class And extends Node{
 
 	public And(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +19,7 @@ public class And extends Node implements CommandNode{
 	 * 
 	 * @return are the two arguments non-zero
 	 */
-	public double evalute(ArrayList<Double> arguments) {
+	public double evaluate(List<Double> arguments) {
 		if(arguments.get(0) != 0 && arguments.get(1) != 0)
 		{
 			value = 1;
@@ -30,5 +31,4 @@ public class And extends Node implements CommandNode{
 			return value;
 		}
 	}
-
 }
