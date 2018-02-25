@@ -13,27 +13,29 @@ public class TreeEvaluator {
 		this.heads = (ArrayList<tNode>) heads;
 		args = new HashMap<tNode, ArrayList<Double>>();
 		returnValue = 0.0;
-		execute();
+		evaluate();
 	}
 	
-	private void execute() {
+	private void evaluate() {
 		for (int i = 0; i < heads.size(); i++) {
-			evaluate(heads.get(i));
+			evaluateHead(heads.get(i));
 		}
 	}
 	
-	private void evaluate(tNode node) {
+	private void evaluateHead(tNode node) {
 		ArrayList<Double> nArgs = new ArrayList<Double>();
 		args.put(node, nArgs);
 		while (node.hasNext()) {	
 			tNode curr = node.getChild();
 			System.out.println(curr.getValue());
-			if (curr.getChild()==null) {
+			if (!curr.hasNext()) {
 				nArgs.add(curr.getValue());
 				args.put(node, nArgs);
 			}
 			else {
-				evaluate(curr);
+				evaluateHead(curr);
+				nArgs.add(curr.getValue());
+				args.put(node, nArgs);
 			}
 		}
 		returnValue = node.evaluate(args.get(node));

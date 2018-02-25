@@ -12,17 +12,16 @@ public class TreeMaker {
 		this.nodes = (ArrayList<tNode>) nodes;
 		heads = new ArrayList<tNode>();
 		index = 0;
-		while (index < this.nodes.size()-1) {
+		while (index < this.nodes.size()) {
 			heads.add(makeTree(this.nodes.get(index)));
 		}
 	}
 	
 	private tNode makeTree(tNode node) {
+		index+=1;
 		while (node!=null && node.hasNext()) {
-			index+=1;
 			node.addChild(nodes.get(index));
 			tNode curr = node.getChild();
-			curr.setParent(node);
 			makeTree(curr);
 		}
 		node.reset();
@@ -32,6 +31,4 @@ public class TreeMaker {
 	protected List<tNode> getHeads() {
 		return heads;
 	}
-	
-	
 }
