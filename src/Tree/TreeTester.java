@@ -7,11 +7,14 @@ public class TreeTester {
 	
 	public static void main (String [] args) {
 		nodes = new ArrayList<tNode>();
-		nodes.add(new tNode(0, 2));
+		nodes.add(new tNode(0, 3));
 		nodes.add(new tNode(6, 2));
 		nodes.add(new tNode (4, 0));
-		nodes.add(new tNode (3, 0));
+		nodes.add(new tNode (3, 1));
 		nodes.add(new tNode (2, 0));
+		nodes.add(new tNode (7, 1));
+		nodes.add(new tNode (10, 0));
+		nodes.add(new tNode (8, 0));
 		TreeMaker tm  = new TreeMaker(nodes);
 		ArrayList<tNode> heads = (ArrayList<tNode>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator(heads);

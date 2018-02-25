@@ -4,7 +4,6 @@ import java.util.List;
 
 public class tNode {
 	private tNode[] children;
-	private tNode parent;
 	private Double value;
 	private int current;
 	
@@ -17,13 +16,6 @@ public class tNode {
 	public boolean hasNext() {
 		if (current!=children.length) return true;
 		return false;
-	}
-	
-	public void setParent(tNode n) {
-		if (n==null) {
-			this.parent = this;
-		}
-		else { this.parent = n; }
 	}
 	
 	public void addChild(tNode n) {
@@ -39,10 +31,6 @@ public class tNode {
 			return child;
 		}
 		return null;
-	}
-	
-	public tNode getParent() {
-		return parent;
 	}
 	
 	public Double getValue() {
