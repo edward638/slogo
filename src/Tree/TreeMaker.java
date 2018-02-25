@@ -17,6 +17,10 @@ public class TreeMaker {
 		}
 	}
 	
+	protected List<tNode> getHeads() {
+		return heads;
+	}
+	
 	private tNode makeTree(tNode node) {
 		index+=1;
 		while (node!=null && node.hasNext()) {
@@ -26,9 +30,5 @@ public class TreeMaker {
 		}
 		node.reset();
 		return node;
-	}
-	
-	protected List<tNode> getHeads() {
-		return heads;
 	}
 }

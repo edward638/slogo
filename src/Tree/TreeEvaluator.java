@@ -15,6 +15,10 @@ public class TreeEvaluator {
 		returnValue = 0.0;
 		evaluate();
 	}
+		
+	public Double getValue() {
+		return returnValue;
+	}
 	
 	private void evaluate() {
 		for (int i = 0; i < heads.size(); i++) {
@@ -27,7 +31,7 @@ public class TreeEvaluator {
 		args.put(node, nArgs);
 		while (node.hasNext()) {	
 			tNode curr = node.getChild();
-			System.out.println(curr.getValue());
+			//System.out.println(curr.getValue());
 			if (!curr.hasNext()) {
 				nArgs.add(curr.getValue());
 				args.put(node, nArgs);
@@ -39,9 +43,5 @@ public class TreeEvaluator {
 			}
 		}
 		returnValue = node.evaluate(args.get(node));
-	}
-	
-	public Double getValue() {
-		return returnValue;
 	}
 }
