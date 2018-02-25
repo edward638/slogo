@@ -2,9 +2,9 @@ package commandNode;
 
 import java.util.ArrayList;
 
+import model.Turtle;
 import nodes.CommandNode;
 import nodes.Node;
-import parsers.Turtle;
 
 public class Forward extends Node implements CommandNode{
 	public Forward(Turtle turt, int numChildren) {

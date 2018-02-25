@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import model.Turtle;
 import nodes.Node;
 import nodes.NodeFactory;
 
@@ -137,7 +138,7 @@ public class Parser
 					{
 						try 
 						{
-							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + key), turt,children.get(key));
+							Node n = (Node)NodeFactory.makeNode(Class.forName("nodes." + key), turt,children.get(key));
 							nodeList[i] = n;
 							System.out.println(n.getValue());
 						}

@@ -2,7 +2,7 @@ package nodes;
 
 import java.util.ArrayList;
 
-import parsers.Turtle;
+import model.Turtle;
 
 public interface CommandNode 
 {

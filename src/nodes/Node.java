@@ -1,6 +1,6 @@
 package nodes;
 
-import parsers.Turtle;
+import model.Turtle;
 
 public abstract class Node 
 {
