@@ -2,7 +2,7 @@ package nodes;
 
 import java.lang.reflect.*;
 
-import parsers.Turtle;
+import model.Turtle;
 import nodes.Node;
 
 public class NodeFactory 

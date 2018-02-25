@@ -1,4 +1,4 @@
-package parsers;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +63,11 @@ public class Turtle
 
 	public void addLine(Line line) {
 		lines.add(line);
+	}
+	
+	public void clearLines()
+	{
+		lines = new ArrayList<Line>();
 	}
 
 
