@@ -26,7 +26,7 @@ public class Left extends Node implements CommandNode{
 			deg = deg - 360;
 		}
 		turtle.setDirectionAngle(deg);
-		
+		value = arguments.get(0);
 		return arguments.get(0);
 	}
 

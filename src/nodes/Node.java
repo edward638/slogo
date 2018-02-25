@@ -7,7 +7,7 @@ public abstract class Node
 	private Node[] children;
 	private Node parent;
 	private int current;
-	private double value;
+	protected double value;
 	protected Turtle turtle;
 	
 	public Node(Turtle turt, int numChildren)
@@ -16,9 +16,6 @@ public abstract class Node
 		current = 0;
 		value = 0;
 		turtle = turt;
-		//Node(value,children)
-		//initialize value at zero
-		//children = arguments + 1
 	}
 	
 	public boolean hasNext() 

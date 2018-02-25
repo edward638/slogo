@@ -24,7 +24,7 @@ public class Forward extends Node implements CommandNode{
 		double yCor = turtle.getYCoordinate() + arguments.get(0)*Math.cos(turtle.getDirectionAngle());
 		turtle.setCoordinates(xCor,yCor);
 		//add a line
-		
+		value = arguments.get(0);
 		return arguments.get(0);
 	}
 

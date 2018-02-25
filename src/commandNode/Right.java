@@ -26,7 +26,7 @@ public class Right extends Node implements CommandNode{
 			deg = 360 - deg;
 		}
 		turtle.setDirectionAngle(deg);
-		
+		value = arguments.get(0);
 		return arguments.get(0);
 	}
 

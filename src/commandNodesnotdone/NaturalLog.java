@@ -1,19 +1,22 @@
 package commandNodesnotdone;
 
+import java.util.ArrayList;
+
+import nodes.CommandNode;
 import nodes.Node;
+import parsers.Turtle;
 
-public class NaturalLog extends Node{
+public class NaturalLog extends Node implements CommandNode{
 
-	@Override
-	public double getValue() {
-		// TODO Auto-generated method stub
-		return 0;
+	public NaturalLog(Turtle turt, int numChildren) {
+		super(turt, numChildren);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void evalute() {
+	public double evalute(ArrayList<Double> arguments) {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
 }

@@ -20,6 +20,7 @@ public class ShowTurtle extends Node implements CommandNode{
 	 */
 	public double evalute(ArrayList<Double> arguments) {
 		turtle.setTurtleShowing(true);
+		value = 1;
 		return 1;
 	}
 

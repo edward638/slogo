@@ -1,19 +1,23 @@
 package commandNodesnotdone;
 
-import nodes.Node;
+import java.util.ArrayList;
 
-public class Product extends Node {
+import nodes.CommandNode;
+import nodes.Node;
+import parsers.Turtle;
+
+public class Product extends Node implements CommandNode {
+
+	public Product(Turtle turt, int numChildren) {
+		super(turt, numChildren);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
-	public double getValue() {
+	public double evalute(ArrayList<Double> arguments) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
-	public void evalute() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
