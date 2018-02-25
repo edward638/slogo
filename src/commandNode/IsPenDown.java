@@ -1,10 +1,7 @@
 package commandNode;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
 import nodes.Node;
 
 public class IsPenDown extends Node{
