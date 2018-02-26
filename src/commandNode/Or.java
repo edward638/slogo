@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Or extends Node{
+public class Or extends Node implements CommandNode {
 
 	public Or(Turtle turt, int numChildren) {
 		super(turt, numChildren);

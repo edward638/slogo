@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Sum extends Node 
+public class Sum extends Node implements CommandNode 
 {
 
 	public Sum(Turtle turt, int numChildren) {

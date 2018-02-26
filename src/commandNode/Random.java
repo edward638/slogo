@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Random extends Node {
+public class Random extends Node implements CommandNode {
 
 	public Random(Turtle turt, int numChildren) {
 		super(turt, numChildren);

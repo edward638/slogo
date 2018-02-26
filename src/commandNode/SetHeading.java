@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class SetHeading extends Node{
+public class SetHeading extends Node implements CommandNode {
 
 	public SetHeading(Turtle turt, int numChildren) {
 		super(turt, numChildren);

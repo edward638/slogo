@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Not extends Node{
+public class Not extends Node implements CommandNode {
 
 	public Not(Turtle turt, int numChildren) {
 		super(turt, numChildren);

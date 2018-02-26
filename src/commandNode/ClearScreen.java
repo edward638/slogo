@@ -4,9 +4,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class ClearScreen extends Node{
+public class ClearScreen extends Node implements CommandNode {
 
 	public ClearScreen(Turtle turt, int numChildren) {
 		super(turt, numChildren);

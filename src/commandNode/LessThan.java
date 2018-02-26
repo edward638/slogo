@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class LessThan extends Node{
+public class LessThan extends Node implements CommandNode {
 
 	public LessThan(Turtle turt, int numChildren) {
 		super(turt, numChildren);

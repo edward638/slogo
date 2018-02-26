@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class PenUp extends Node{
+public class PenUp extends Node implements CommandNode{
 
 	public PenUp(Turtle turt, int numChildren) {
 		super(turt, numChildren);

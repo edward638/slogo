@@ -12,7 +12,7 @@ public class TreeTester {
 	public static void main (String [] args) {
 		Turtle t = new Turtle(0, 0);
 		nodes = new ArrayList<Node>();
-		nodes.add(new Difference(null, 2));
+		nodes.add(new Quotient(t, 2));
 		nodes.add(new Constant(50));
 		nodes.add(new Forward(t, 1));
 		nodes.add(new Constant (20));
