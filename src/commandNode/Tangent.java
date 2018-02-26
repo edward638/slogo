@@ -19,8 +19,8 @@ public class Tangent extends Node implements CommandNode {
 	 * 
 	 * @return tan(degrees)
 	 */
-	public double evaluate(List<Double> arguments) {
-		double tan = Math.tan(arguments.get(0));
+	public double evaluate(List<Node> arguments) {
+		double tan = Math.tan(arguments.get(0).getValue());
 		value = tan;
 		return value;
 	}

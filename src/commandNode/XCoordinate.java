@@ -18,7 +18,7 @@ public class XCoordinate extends Node implements CommandNode {
 	 * 
 	 * @return turtle's x
 	 */
-	public double evaluate(List<Double> arguments) {
+	public double evaluate(List<Node> arguments) {
 		value = turtle.getXCoordinate();
 		return value;
 	}

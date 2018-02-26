@@ -19,8 +19,8 @@ public class SetTowards extends Node implements CommandNode
 	 * 
 	 * @return the number of degrees turtle turned
 	 */
-	public double evaluate(List<Double> arguments) {
-		double deg = Math.atan(arguments.get(0)/arguments.get(1));
+	public double evaluate(List<Node> arguments) {
+		double deg = Math.atan(arguments.get(0).getValue()/arguments.get(1).getValue());
 		double change = Math.abs(turtle.getDirectionAngle() - deg);
 		turtle.setDirectionAngle(deg);
 		value = change;

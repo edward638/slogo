@@ -19,8 +19,8 @@ public class Random extends Node implements CommandNode {
 	 * 
 	 * @return num between 0 and max
 	 */
-	public double evaluate(List<Double> arguments) {
-		value = Math.floor(Math.random() * arguments.get(0));
+	public double evaluate(List<Node> arguments) {
+		value = Math.floor(Math.random() * arguments.get(0).getValue());
 		return value;
 	}
 

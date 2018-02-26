@@ -18,7 +18,7 @@ public class PenDown extends Node implements CommandNode {
 	 * 
 	 * @return 1
 	 */
-	public double evaluate(List<Double> arguments) 
+	public double evaluate(List<Node> arguments) 
 	{
 		turtle.setPenShowing(true);
 		value = 1;

@@ -18,7 +18,7 @@ public class PenUp extends Node implements CommandNode{
 	 * 
 	 * @return 0
 	 */
-	public double evaluate(List<Double> arguments) 
+	public double evaluate(List<Node> arguments) 
 	{
 		turtle.setPenShowing(false);
 		value = 0;
