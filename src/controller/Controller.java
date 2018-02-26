@@ -37,7 +37,7 @@ public class Controller implements ControllerInterface{
 	
     @Override
 	public void passCommand(String s){
-        parser.parseString(s);
+        //parser.parseString(s);
     }
 
     @Override
