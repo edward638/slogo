@@ -1,9 +1,7 @@
 package parsers;
 
-public class Model 
-{
-	public Model(){
-		
-	}
+public class Model {
+	
+	public Model() {}
 
 }

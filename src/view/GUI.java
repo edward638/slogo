@@ -1,6 +1,5 @@
 package view;
 
-import controller.ControllerInterface;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -15,7 +14,6 @@ public class GUI{
 	private static final int WIDTH = 950;
 	private static final int HEIGHT = 650;
     private Group root = new Group();
-
     public GUI(){
     	
     }
