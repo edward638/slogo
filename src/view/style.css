@@ -8,7 +8,9 @@
     -fx-background-radius: 10;
     -fx-border-radius: 10;
 }
-
+HBox{
+	-fx-spacing: 50;
+}
 .button:hover{
     -fx-background-color:red;
 }
