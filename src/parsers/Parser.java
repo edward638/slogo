@@ -1,7 +1,9 @@
 package parsers;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -84,10 +86,10 @@ public class Parser
 	 * @param command The string command from the GUI
 	 * @return a list of nodes that the tree builder can use to create the tree
 	 */
-	public Node[] parseString(String command)
+	public List<Node> parseString(String command)
 	{
 		String[] commandList = command.trim().split("\\s+");
-		Node[] nodeList = new Node[commandList.length];
+		List<Node> nodeList = new ArrayList<>();
 		
 		checkSyntax(commandList, nodeList);
 		
@@ -102,7 +104,7 @@ public class Parser
 	 * @param commandList the list of strings given by the user
 	 * @param nodeList the empty nodeList that will be filled
 	 */
-	private void checkSyntax(String[] commandList, Node[] nodeList) 
+	private void checkSyntax(String[] commandList, List<Node> nodeList) 
 	{
 		//NEED TO PASS IT A TURTLE
 		
@@ -119,13 +121,10 @@ public class Parser
 					if (key.equals("Command"))
 					{
 						String commandType = checkLanguage(text);
-						System.out.println(commandType);
-						
 						try 
 						{
 							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
-							nodeList[i] = n;
-							System.out.println(n.getValue());
+							nodeList.add(n);
 						}
 						catch(Exception e)
 						{
@@ -139,7 +138,7 @@ public class Parser
 						try 
 						{
 							Node n = (Node)NodeFactory.makeNode(Class.forName("nodes." + key), turt,children.get(key));
-							nodeList[i] = n;
+							nodeList.add(n);
 							System.out.println(n.getValue());
 						}
 						catch(Exception e)

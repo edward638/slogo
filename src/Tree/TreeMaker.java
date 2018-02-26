@@ -25,7 +25,7 @@ public class TreeMaker {
 		}
 	}
 	
-	protected List<Node> getHeads() {
+	public List<Node> getHeads() {
 		return heads;
 	}
 	
