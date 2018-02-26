@@ -2,22 +2,19 @@ package Tree;
 
 import java.util.ArrayList;
 
-import nodes.*;
-import commandNode.*;
-import model.Turtle;
-
 public class TreeTester {
-	private static ArrayList<Node> nodes;
+	private static ArrayList<tNode> nodes;
 	
 	public static void main (String [] args) {
-		Turtle t = new Turtle(0, 0);
-		nodes = new ArrayList<Node>();
-		nodes.add(new Difference(null, 2));
-		nodes.add(new Constant(50));
-		nodes.add(new Forward(t, 1));
-		nodes.add(new Constant (20));
+		nodes = new ArrayList<tNode>();
+		nodes.add(new tNode(0, 2));
+		nodes.add(new tNode(6, 2));
+		nodes.add(new tNode (4, 0));
+		nodes.add(new tNode (3, 1));
+		nodes.add(new tNode (2, 0));
+		nodes.add(new tNode (7, 0));
 		TreeMaker tm  = new TreeMaker(nodes);
-		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
+		ArrayList<tNode> heads = (ArrayList<tNode>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator(heads);
 		System.out.println(te.getValue());
 	}
