@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class NotEqual extends Node{
+public class NotEqual extends Node implements CommandNode { 
 
 	public NotEqual(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -17,8 +18,8 @@ public class NotEqual extends Node{
 	 * 
 	 * @returns expr1 != expr2
 	 */
-	public double evaluate(List<Double> arguments) {
-		if(arguments.get(0) != arguments.get(1))
+	public double evaluate(List<Node> arguments) {
+		if(arguments.get(0).getValue() != arguments.get(1).getValue())
 		{
 			value = 1;
 			return value;

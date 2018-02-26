@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Sine extends Node {
+public class Sine extends Node implements CommandNode {
 
 	public Sine(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,8 +19,8 @@ public class Sine extends Node {
 	 * 
 	 * @return sin(degrees)
 	 */
-	public double evaluate(List<Double> arguments) {
-		double sin = Math.sin(arguments.get(0));
+	public double evaluate(List<Node> arguments) {
+		double sin = Math.sin(arguments.get(0).getValue());
 		value = sin;
 		return value;
 	}

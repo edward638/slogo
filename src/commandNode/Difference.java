@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Difference extends Node{
+public class Difference extends Node implements CommandNode{
 
 	public Difference(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,8 +19,8 @@ public class Difference extends Node{
 	 * 
 	 * @return expr1 - expr2
 	 */
-	public double evaluate(List<Double> arguments) {
-		double diff = arguments.get(0) - arguments.get(1);
+	public double evaluate(List<Node> arguments) {
+		double diff = arguments.get(0).getValue() - arguments.get(1).getValue();
 		value = diff;
 		return value;
 	}

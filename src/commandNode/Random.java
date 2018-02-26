@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Random extends Node {
+public class Random extends Node implements CommandNode {
 
 	public Random(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,8 +19,8 @@ public class Random extends Node {
 	 * 
 	 * @return num between 0 and max
 	 */
-	public double evaluate(List<Double> arguments) {
-		value = Math.floor(Math.random() * arguments.get(0));
+	public double evaluate(List<Node> arguments) {
+		value = Math.floor(Math.random() * arguments.get(0).getValue());
 		return value;
 	}
 

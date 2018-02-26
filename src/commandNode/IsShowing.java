@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class IsShowing extends Node{
+public class IsShowing extends Node implements CommandNode {
 
 	public IsShowing(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -17,7 +18,7 @@ public class IsShowing extends Node{
 	 * 
 	 * @return turtle's visibility status
 	 */
-	public double evaluate(List<Double> arguments) {
+	public double evaluate(List<Node> arguments) {
 		if(turtle.getTurtleShowing())
 		{
 			value = 1;

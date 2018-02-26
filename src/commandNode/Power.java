@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Power extends Node{
+public class Power extends Node implements CommandNode {
 
 	public Power(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,8 +19,8 @@ public class Power extends Node{
 	 * 
 	 * @return base^exponent
 	 */
-	public double evaluate(List<Double> arguments) {
-		value = Math.pow(arguments.get(0), arguments.get(1));
+	public double evaluate(List<Node> arguments) {
+		value = Math.pow(arguments.get(0).getValue(), arguments.get(1).getValue());
 		return value;
 	}
 

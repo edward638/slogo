@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Heading extends Node{
+public class Heading extends Node implements CommandNode {
 
 	public Heading(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -17,7 +18,7 @@ public class Heading extends Node{
 	 * 
 	 * @return turtle's direction angle
 	 */
-	public double evaluate(List<Double> arguments) {
+	public double evaluate(List<Node> arguments) {
 		value = turtle.getDirectionAngle();
 		return value;
 	}
