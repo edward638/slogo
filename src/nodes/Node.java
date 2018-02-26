@@ -16,6 +16,7 @@ public abstract class Node
 	{
 		children = new Node[numChildren];
 		current = 0;
+		value = 0;
 		turtle = turt;
 	}
 	
@@ -46,7 +47,7 @@ public abstract class Node
 		current = 0;
 	}
 	
-	public double getValue() 
+	public Double getValue() 
 	{
 		return value;
 	}
