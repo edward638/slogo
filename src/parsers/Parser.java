@@ -127,6 +127,7 @@ public class Parser
 			{
 				if(regex.get(key).matcher(text).matches())
 				{
+					System.out.println("matched" + key);
 					match = true;
 					if (key.equals("Command"))
 					{
@@ -134,6 +135,7 @@ public class Parser
 						try 
 						{
 							System.out.println("got to command");
+							System.out.println(commandType);
 							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
 							nodeList.add(n);
 						}
