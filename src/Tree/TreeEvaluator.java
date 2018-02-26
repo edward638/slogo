@@ -1,7 +1,6 @@
 package Tree;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import nodes.Node;
@@ -9,11 +8,9 @@ import nodes.Node;
 public class TreeEvaluator {
 	private Double returnValue;
 	private ArrayList<Node> heads;
-	private HashMap<Node, ArrayList<Double>> args;
 	
 	public TreeEvaluator (List<Node> heads) {
 		this.heads = (ArrayList<Node>) heads;
-		args = new HashMap<Node, ArrayList<Double>>();
 		returnValue = 0.0;
 		evaluate();
 	}
@@ -29,21 +26,18 @@ public class TreeEvaluator {
 	}
 	
 	private void evaluateHead(Node node) {
-		ArrayList<Double> nArgs = new ArrayList<Double>();
-		args.put(node, nArgs);
+		ArrayList<Node> nArgs = new ArrayList<Node>();
 		while (node.hasNext()) {	
 			Node curr = node.getChild();
-			//System.out.println(curr.getValue());
 			if (!curr.hasNext()) {
-				nArgs.add(curr.getValue());
-				args.put(node, nArgs);
+				nArgs.add(curr);
+				return;
 			}
 			else {
 				evaluateHead(curr);
-				nArgs.add(curr.getValue());
-				args.put(node, nArgs);
+				nArgs.add(curr);
 			}
 		}
-		returnValue = node.evaluate(args.get(node));
+		returnValue = node.evaluate(nArgs);
 	}
 }
