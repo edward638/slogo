@@ -20,10 +20,10 @@ public class SetPosition extends Node implements CommandNode {
 	 */
 	public double evaluate(List<Node> arguments) 
 	{
-		double distance = Math.sqrt(Math.pow(arguments.get(0).getValue() - 
-				turtle.getXCoordinate(), 2) + Math.pow(arguments.get(1).getValue() - 
+		double distance = Math.sqrt(Math.pow(arguments.get(0).getValue() + turtle.getHome()[0] - 
+				turtle.getXCoordinate(), 2) + Math.pow(arguments.get(1).getValue() + turtle.getHome()[1] - 
 						turtle.getYCoordinate(), 2) );
-		turtle.setCoordinates(arguments.get(0).getValue(), arguments.get(1).getValue());
+		turtle.setCoordinates(arguments.get(0).getValue() + turtle.getHome()[0], arguments.get(1).getValue() + turtle.getHome()[1]);
 		value = distance;
 		return value;
 	}
