@@ -13,10 +13,9 @@ public class TreeTester {
 		nodes.add(new tNode (3, 1));
 		nodes.add(new tNode (2, 0));
 		nodes.add(new tNode (7, 0));
-		TreeMaker tm  = new TreeMaker(nodes);
-		ArrayList<tNode> heads = (ArrayList<tNode>) tm.getHeads();
-		TreeEvaluator te = new TreeEvaluator(heads);
-		System.out.println(te.getValue());
+//		TreeMaker tm  = new TreeMaker(nodes);
+//		ArrayList<tNode> heads = (ArrayList<tNode>) tm.getHeads();
+//		TreeEvaluator te = new TreeEvaluator(heads);
 	}
 
 }
