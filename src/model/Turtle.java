@@ -37,8 +37,7 @@ public class Turtle
 	public double getYCoordinate() {
 		return YCoordinate;
 	}
-
-
+	
 	public void setCoordinates(double xCoordinate, double yCoordinate) {
 		//System.out.println("old y" + YCoordinate);
 		Line l = new Line(XCoordinate, YCoordinate, xCoordinate, yCoordinate);
@@ -46,6 +45,10 @@ public class Turtle
 		YCoordinate = yCoordinate;
 		//System.out.println("new y" + YCoordinate);
 		addLine(l);
+	}
+	
+	public double[] getHome(){
+		return home;
 	}
 
 	public double getDirectionAngle() {

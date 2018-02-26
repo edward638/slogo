@@ -17,7 +17,11 @@ public class SampleMain {
 
 		Parser newnew = new Parser(turt, "English");
 		//newnew.addResources("parsers/regex");
+<<<<<<< HEAD
 		List<Node> nodes = newnew.parseString("make :x fd 50");
+=======
+		List<Node> nodes = newnew.parseString("make :x [ fd 50 ] 50 70 [ :x 2 ]");
+>>>>>>> 2908dd6bd35456718edf46a12da48306d8cb44d9
 		
 		TreeMaker tm  = new TreeMaker(nodes);
 		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
