@@ -9,8 +9,11 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 import model.Turtle;
+import model.VariableHistory;
+import nodes.Constant;
 import nodes.Node;
 import nodes.NodeFactory;
+import nodes.Variable;
 
 /**
  * @author Belanie Nagiel
@@ -31,6 +34,7 @@ public class Parser
 	private static final String REGEX_FILE = "parsers/regex";
 	private static final String NODE_PACKAGE = "commandNode.";
 	private Turtle turt;
+	private VariableHistory history;
 	
 	/**
 	 * Class Constructor
@@ -40,7 +44,7 @@ public class Parser
 	 * @param m the current model
 	 * @param language the current language
 	 */
-	public Parser(Model m, String language)
+	public Parser(Turtle t, String language)
 	{
 		regex = new HashMap<>();
 		addResources(REGEX_FILE, regex);
@@ -57,8 +61,8 @@ public class Parser
 			String key = keys.nextElement();
 			children.put(key, Integer.parseInt(numChildren.getString(key)));	
 		}
-		
-		turt = new Turtle(0,0);
+		turt = t;
+		history = new VariableHistory();
 	}
 	
 	/**
@@ -85,8 +89,10 @@ public class Parser
 	 * 
 	 * @param command The string command from the GUI
 	 * @return a list of nodes that the tree builder can use to create the tree
+	 * @throws ClassNotFoundException 
+	 * @throws InvalidEntryException 
 	 */
-	public List<Node> parseString(String command)
+	public List<Node> parseString(String command) throws ClassNotFoundException, InvalidEntryException
 	{
 		String[] commandList = command.trim().split("\\s+");
 		List<Node> nodeList = new ArrayList<>();
@@ -103,8 +109,10 @@ public class Parser
 	 * 
 	 * @param commandList the list of strings given by the user
 	 * @param nodeList the empty nodeList that will be filled
+	 * @throws ClassNotFoundException 
+	 * @throws InvalidEntryException 
 	 */
-	private void checkSyntax(String[] commandList, List<Node> nodeList) 
+	private void checkSyntax(String[] commandList, List<Node> nodeList) throws ClassNotFoundException, InvalidEntryException 
 	{
 		//NEED TO PASS IT A TURTLE
 		
@@ -123,37 +131,33 @@ public class Parser
 						String commandType = checkLanguage(text);
 						try 
 						{
+							System.out.println("got to command");
 							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
 							nodeList.add(n);
 						}
-						catch(Exception e)
+						catch(ClassNotFoundException e)
 						{
-							//throw class doesnt exist error
-							e.printStackTrace();
+							throw new ClassNotFoundException("Error: Could not access Node constructor");
 						}
 						
 					}
-					else 
+					else if (key.equals("Constant"))
 					{
-						try 
-						{
-							Node n = (Node)NodeFactory.makeNode(Class.forName("nodes." + key), turt,children.get(key));
-							nodeList.add(n);
-							System.out.println(n.getValue());
-						}
-						catch(Exception e)
-						{
-							//throw class doesnt exist error
-							e.printStackTrace();
-						}
+						System.out.println("got to constant");
+						Node n = new Constant(Integer.parseInt(text));
+						nodeList.add(n);
+					}
+					else if(key.equals("Variable"))
+					{
+						System.out.println("got to variable");
+						Node n = new Variable(text.substring(1), history);
+						nodeList.add(n);
 					}
 				}
 			}
 			if(!match)
 			{
-//				throw exception for invalid entry
-				System.out.println(text);
-//				System.out.println("no match");
+				throw new InvalidEntryException("Error: Invalid entry, no such command");
 			}
 		}
 		
@@ -165,10 +169,10 @@ public class Parser
 	 * 
 	 * @param command string identified as command syntax in a user input
 	 * @return a string indicating the appropriate command typ
+	 * @throws InvalidEntryException 
 	 */
-	private String checkLanguage(String command) 
+	private String checkLanguage(String command) throws InvalidEntryException 
 	{
-		String x = "?";
 		for (String key: myTranslation.keySet())
 		{
 			//check if it is a command
@@ -178,6 +182,6 @@ public class Parser
 			}
 		}
 		//throw error if it didnt match a specific command
-		return x;
+		throw new InvalidEntryException("Error: Cannot recognize language");
 	}
 }
