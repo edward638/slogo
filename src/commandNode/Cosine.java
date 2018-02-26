@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Cosine extends Node{
+public class Cosine extends Node implements CommandNode {
 
 	public Cosine(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,8 +19,8 @@ public class Cosine extends Node{
 	 * 
 	 * @return cos(degrees)
 	 */
-	public double evaluate(List<Double> arguments) {
-		double cos = Math.cos(arguments.get(0));
+	public double evaluate(List<Node> arguments) {
+		double cos = Math.cos(arguments.get(0).getValue());
 		value = cos;
 		return value;
 	}

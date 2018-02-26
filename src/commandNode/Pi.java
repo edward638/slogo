@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Pi extends Node{
+public class Pi extends Node implements CommandNode {
 
 	public Pi(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +19,7 @@ public class Pi extends Node{
 	 * 
 	 * @return Pi
 	 */
-	public double evaluate(List<Double> arguments) {
+	public double evaluate(List<Node> arguments) {
 		value = Math.PI;
 		return value;
 	}

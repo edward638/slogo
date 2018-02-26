@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class NaturalLog extends Node{
+public class NaturalLog extends Node implements CommandNode {
 
 	public NaturalLog(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,8 +19,8 @@ public class NaturalLog extends Node{
 	 * 
 	 * @return ln(expr)
 	 */
-	public double evaluate(List<Double> arguments) {
-		value = Math.log(arguments.get(0));
+	public double evaluate(List<Node> arguments) {
+		value = Math.log(arguments.get(0).getValue());
 		return value;
 	}
 

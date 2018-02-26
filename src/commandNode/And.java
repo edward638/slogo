@@ -2,9 +2,11 @@ package commandNode;
 
 import model.Turtle;
 import java.util.List;
+
+import nodes.CommandNode;
 import nodes.Node;
 
-public class And extends Node{
+public class And extends Node implements CommandNode {
 
 	public And(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -16,8 +18,8 @@ public class And extends Node{
 	 * 
 	 * @return are the two arguments non-zero
 	 */
-	public double evaluate(List<Double> arguments) {
-		if(arguments.get(0) != 0 && arguments.get(1) != 0)
+	public double evaluate(List<Node> arguments) {
+		if(arguments.get(0).getValue() != 0 && arguments.get(1).getValue() != 0)
 		{
 			value = 1;
 			return value;

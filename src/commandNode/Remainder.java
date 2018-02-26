@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Remainder extends Node {
+public class Remainder extends Node implements CommandNode {
 
 	public Remainder(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,8 +19,8 @@ public class Remainder extends Node {
 	 * 
 	 * @return expr1 % expr2
 	 */
-	public double evaluate(List<Double> arguments) {
-		double remainder = arguments.get(0) % arguments.get(1);
+	public double evaluate(List<Node> arguments) {
+		double remainder = arguments.get(0).getValue() % arguments.get(1).getValue();
 		value = remainder;
 		return value;
 	}

@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class SetTowards extends Node 
+public class SetTowards extends Node implements CommandNode
 {
 
 	public SetTowards(Turtle turt, int numChildren) {
@@ -18,12 +19,12 @@ public class SetTowards extends Node
 	 * 
 	 * @return the number of degrees turtle turned
 	 */
-	public double evaluate(List<Double> arguments) {
-		double deg = Math.atan(arguments.get(0)/arguments.get(1));
+	public double evaluate(List<Node> arguments) {
+		double deg = Math.atan(arguments.get(0).getValue()/arguments.get(1).getValue());
 		double change = Math.abs(turtle.getDirectionAngle() - deg);
 		turtle.setDirectionAngle(deg);
 		value = change;
-		return change;
+		return value;
 	}
 
 

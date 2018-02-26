@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class XCoordinate extends Node {
+public class XCoordinate extends Node implements CommandNode {
 
 	public XCoordinate(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -17,7 +18,7 @@ public class XCoordinate extends Node {
 	 * 
 	 * @return turtle's x
 	 */
-	public double evaluate(List<Double> arguments) {
+	public double evaluate(List<Node> arguments) {
 		value = turtle.getXCoordinate();
 		return value;
 	}

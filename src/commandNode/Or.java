@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Or extends Node{
+public class Or extends Node implements CommandNode {
 
 	public Or(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -17,8 +18,8 @@ public class Or extends Node{
 	 * 
 	 * @return is one of the arguments non-zero
 	 */
-	public double evaluate(List<Double> arguments) {
-		if(arguments.get(0) != 0 || arguments.get(1) != 0)
+	public double evaluate(List<Node> arguments) {
+		if(arguments.get(0).getValue() != 0 || arguments.get(1).getValue() != 0)
 		{
 			value = 1;
 			return value;

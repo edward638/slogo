@@ -7,24 +7,27 @@ import model.VariableHistory;
 public class Variable extends Node{
 	private String name;
 	private double value;
-
-	public Variable (String name, Double value) {
-		super(null, 0);
-		this.name = name;
-		this.value = value;
-	}
+	private VariableHistory VH;
 	
 	public Variable (String name, VariableHistory VH) {
 		super(null, 0);
 		this.name = name;
-		this.value = VH.getValue(this.name);
+		this.VH = VH;
 	}
 	
 	public String getName() {
 		return name;
 	}
+	
+	public double getValue() {
+		return VH.getValue(name);
+	}
+	
+	public VariableHistory getVH() {
+		return VH;
+	}
 
-	public double evaluate(List<Double> args) {
+	public double evaluate(List<Node> args) {
 		return value;
 	}
 }

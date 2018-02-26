@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Minus extends Node{
+public class Minus extends Node implements CommandNode {
 
 	public Minus(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,8 +19,8 @@ public class Minus extends Node{
 	 * 
 	 * @return -expr
 	 */
-	public double evaluate(List<Double> arguments) {
-		value = -1*arguments.get(0);
+	public double evaluate(List<Node> arguments) {
+		value = -1*arguments.get(0).getValue();
 		return value;
 	}
 

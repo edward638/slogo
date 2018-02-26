@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Quotient extends Node{
+public class Quotient extends Node implements CommandNode {
 
 	public Quotient(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,10 +19,10 @@ public class Quotient extends Node{
 	 * 
 	 * @return expr1/expr2
 	 */
-	public double evaluate(List<Double> arguments) {
-		if(arguments.get(1) != 0)
+	public double evaluate(List<Node> arguments) {
+		if(arguments.get(1).getValue() != 0)
 		{
-			double quot = arguments.get(0)/arguments.get(1);
+			double quot = arguments.get(0).getValue()/arguments.get(1).getValue();
 			value = quot;
 			return value;
 		}
