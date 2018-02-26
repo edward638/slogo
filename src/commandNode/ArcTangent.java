@@ -4,9 +4,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class ArcTangent extends Node{
+public class ArcTangent extends Node implements CommandNode{
 
 	public ArcTangent(Turtle turt, int numChildren) {
 		super(turt, numChildren);

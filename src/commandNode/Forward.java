@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Forward extends Node{
+public class Forward extends Node implements CommandNode {
 	private static double radianConversion = Math.PI/180;
 	
 	public Forward(Turtle turt, int numChildren) {

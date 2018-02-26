@@ -2,9 +2,11 @@ package commandNode;
 
 import model.Turtle;
 import java.util.List;
+
+import nodes.CommandNode;
 import nodes.Node;
 
-public class And extends Node{
+public class And extends Node implements CommandNode {
 
 	public And(Turtle turt, int numChildren) {
 		super(turt, numChildren);

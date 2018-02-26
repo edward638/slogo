@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Quotient extends Node{
+public class Quotient extends Node implements CommandNode {
 
 	public Quotient(Turtle turt, int numChildren) {
 		super(turt, numChildren);

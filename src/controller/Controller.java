@@ -2,6 +2,8 @@ package controller;
 
 import javafx.stage.Stage;
 import model.ModelInterface;
+import model.Turtle;
+import parsers.Parser;
 import view.OutdatedGUI;
 import view.GUI;
 import view.screen_components.CommandBox;
@@ -12,8 +14,12 @@ import view.screen_components.VariableHistoryBox;
 public class Controller implements ControllerInterface{
 	private ModelInterface model;
 	private GUI gui;
+	private Turtle turtle;
+	private Parser parser;
 	public Controller(Stage stage){
 //		this.model = model;
+		turtle = new Turtle(Drawer.turtleStartX, Drawer.turtleStartY);
+		//parser = new Parser(turtle, "English");
 		gui = new GUI();
 		gui.start(stage);
 		this.initializeGUIComponents();
@@ -32,7 +38,7 @@ public class Controller implements ControllerInterface{
 	
     @Override
 	public void passCommand(String s){
-        
+        parser.parseString(s);
     }
 
     @Override
