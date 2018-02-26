@@ -17,7 +17,7 @@ public class IsPenDown extends Node implements CommandNode {
 	 * 
 	 * @return turtle's pen status
 	 */
-	public double evaluate(List<Double> arguments) {
+	public double evaluate(List<Node> arguments) {
 		if(turtle.getPenShowing())
 		{
 			value = 1;

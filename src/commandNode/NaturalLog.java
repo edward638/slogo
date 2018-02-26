@@ -19,8 +19,8 @@ public class NaturalLog extends Node implements CommandNode {
 	 * 
 	 * @return ln(expr)
 	 */
-	public double evaluate(List<Double> arguments) {
-		value = Math.log(arguments.get(0));
+	public double evaluate(List<Node> arguments) {
+		value = Math.log(arguments.get(0).getValue());
 		return value;
 	}
 

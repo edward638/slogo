@@ -19,8 +19,8 @@ public class Minus extends Node implements CommandNode {
 	 * 
 	 * @return -expr
 	 */
-	public double evaluate(List<Double> arguments) {
-		value = -1*arguments.get(0);
+	public double evaluate(List<Node> arguments) {
+		value = -1*arguments.get(0).getValue();
 		return value;
 	}
 

@@ -18,7 +18,7 @@ public class IsShowing extends Node implements CommandNode {
 	 * 
 	 * @return turtle's visibility status
 	 */
-	public double evaluate(List<Double> arguments) {
+	public double evaluate(List<Node> arguments) {
 		if(turtle.getTurtleShowing())
 		{
 			value = 1;

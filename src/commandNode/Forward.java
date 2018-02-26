@@ -19,18 +19,18 @@ public class Forward extends Node implements CommandNode {
 	 * 
 	 * @return the value of pixels
 	 */
-	public double evaluate(List<Double> arguments) 
+	public double evaluate(List<Node> arguments) 
 	{
 		//System.out.println(arguments.toString());
 		double xCor = turtle.getXCoordinate() + 
-				arguments.get(0)*Math.cos(turtle.getDirectionAngle()*radianConversion);
+				arguments.get(0).getValue()*Math.cos(turtle.getDirectionAngle()*radianConversion);
 		//System.out.println("xCor" + xCor);
 		double yCor = turtle.getYCoordinate() + 
-				arguments.get(0)*Math.sin(turtle.getDirectionAngle()*radianConversion);
+				arguments.get(0).getValue()*Math.sin(turtle.getDirectionAngle()*radianConversion);
 		//System.out.println("yCor" + yCor);
 		turtle.setCoordinates(xCor,yCor);
 		//add a line
-		value = arguments.get(0);
+		value = arguments.get(0).getValue();
 		return value;
 	}
 

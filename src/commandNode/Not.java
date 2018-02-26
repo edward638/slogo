@@ -18,8 +18,8 @@ public class Not extends Node implements CommandNode {
 	 * 
 	 * @return is the argument 0
 	 */
-	public double evaluate(List<Double> arguments) {
-		if(arguments.get(0) == 0)
+	public double evaluate(List<Node> arguments) {
+		if(arguments.get(0).getValue() == 0)
 		{
 			value = 1;
 			return value;
