@@ -95,6 +95,6 @@ public class Drawer extends ScreenComponent{
 	}
 
 	public void moveTurtle(Turtle turtle){
-
+			gc.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
 	}
 }
