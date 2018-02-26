@@ -18,15 +18,15 @@ public class Right extends Node implements CommandNode {
 	 * 
 	 * @return the value of degrees
 	 */
-	public double evaluate(List<Double> arguments) 
+	public double evaluate(List<Node> arguments) 
 	{
-		double deg = turtle.getDirectionAngle() - arguments.get(0);
+		double deg = turtle.getDirectionAngle() - arguments.get(0).getValue();
 		if (deg < 0)
 		{
 			deg = 360 - deg;
 		}
 		turtle.setDirectionAngle(deg);
-		value = arguments.get(0);
+		value = arguments.get(0).getValue();
 		return value;
 	}
 

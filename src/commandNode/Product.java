@@ -19,8 +19,8 @@ public class Product extends Node implements CommandNode {
 	 * 
 	 * @return expr1 * expr2
 	 */
-	public double evaluate(List<Double> arguments) {
-		double prod = arguments.get(0)*arguments.get(1);
+	public double evaluate(List<Node> arguments) {
+		double prod = arguments.get(0).getValue()*arguments.get(1).getValue();
 		value = prod;
 		return value;
 	}

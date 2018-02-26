@@ -31,7 +31,6 @@ public class TreeEvaluator {
 			Node curr = node.getChild();
 			if (!curr.hasNext()) {
 				nArgs.add(curr);
-				return;
 			}
 			else {
 				evaluateHead(curr);

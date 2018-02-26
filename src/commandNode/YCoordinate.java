@@ -18,7 +18,7 @@ public class YCoordinate extends Node implements CommandNode {
 	 * 
 	 * @return turtle's Y
 	 */
-	public double evaluate(List<Double> arguments) {
+	public double evaluate(List<Node> arguments) {
 		value = turtle.getYCoordinate();
 		return value;
 	}

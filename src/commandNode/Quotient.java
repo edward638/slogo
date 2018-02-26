@@ -19,10 +19,10 @@ public class Quotient extends Node implements CommandNode {
 	 * 
 	 * @return expr1/expr2
 	 */
-	public double evaluate(List<Double> arguments) {
-		if(arguments.get(1) != 0)
+	public double evaluate(List<Node> arguments) {
+		if(arguments.get(1).getValue() != 0)
 		{
-			double quot = arguments.get(0)/arguments.get(1);
+			double quot = arguments.get(0).getValue()/arguments.get(1).getValue();
 			value = quot;
 			return value;
 		}
