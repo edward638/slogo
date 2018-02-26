@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Left extends Node{
+public class Left extends Node implements CommandNode {
 
 	public Left(Turtle turt, int numChildren) {
 		super(turt, numChildren);

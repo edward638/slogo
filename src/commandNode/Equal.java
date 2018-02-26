@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Equal extends Node{
+public class Equal extends Node implements CommandNode {
 
 	public Equal(Turtle turt, int numChildren) {
 		super(turt, numChildren);

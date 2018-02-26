@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class SetTowards extends Node 
+public class SetTowards extends Node implements CommandNode
 {
 
 	public SetTowards(Turtle turt, int numChildren) {

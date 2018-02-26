@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Tangent extends Node {
+public class Tangent extends Node implements CommandNode {
 
 	public Tangent(Turtle turt, int numChildren) {
 		super(turt, numChildren);

@@ -3,9 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Sine extends Node {
+public class Sine extends Node implements CommandNode {
 
 	public Sine(Turtle turt, int numChildren) {
 		super(turt, numChildren);

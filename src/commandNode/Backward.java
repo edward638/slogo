@@ -4,9 +4,10 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
+import nodes.CommandNode;
 import nodes.Node;
 
-public class Backward extends Node
+public class Backward extends Node implements CommandNode
 {
 
 	public Backward(Turtle turt, int numChildren) {

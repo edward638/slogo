@@ -10,8 +10,7 @@ public class Constant extends Node{
 		this.value = value;
 	}
 	
-	@Override
-	public double getValue () {
+	public double getValue() {
 		return value;
 	}
 
