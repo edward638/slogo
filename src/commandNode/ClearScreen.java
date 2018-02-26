@@ -24,7 +24,7 @@ public class ClearScreen extends Node implements CommandNode {
 		turtle.setCoordinates(0, 0);
 		turtle.clearLines();
 		value = distance;
-		return distance;
+		return value;
 	}
 
 

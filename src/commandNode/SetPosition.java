@@ -23,7 +23,7 @@ public class SetPosition extends Node implements CommandNode {
 		double distance = Math.sqrt(Math.pow(arguments.get(0) - turtle.getXCoordinate(), 2) + Math.pow(arguments.get(1) - turtle.getYCoordinate(), 2) );
 		turtle.setCoordinates(arguments.get(0), arguments.get(1));
 		value = distance;
-		return distance;
+		return value;
 	}
 
 

@@ -27,6 +27,6 @@ public class Backward extends Node implements CommandNode
 		turtle.setCoordinates(xCor,yCor);
 		//add a line
 		value = arguments.get(0);
-		return arguments.get(0);
+		return value;
 	}
 }

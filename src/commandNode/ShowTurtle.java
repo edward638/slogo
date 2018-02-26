@@ -21,7 +21,7 @@ public class ShowTurtle extends Node implements CommandNode {
 	public double evaluate(List<Double> arguments) {
 		turtle.setTurtleShowing(true);
 		value = 1;
-		return 1;
+		return value;
 	}
 
 }
