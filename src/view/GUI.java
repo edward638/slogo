@@ -30,6 +30,7 @@ public class GUI{
     private void setStage(Stage stage) {
         stage.setTitle(NAME);
         Scene startScene = new Scene(root, WIDTH, HEIGHT);
+        startScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setScene(startScene);
         addTitle();
         stage.show();

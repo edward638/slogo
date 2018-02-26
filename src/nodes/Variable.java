@@ -20,14 +20,18 @@ public class Variable extends Node{
 	}
 	
 	public double getValue() {
-		return VH.getValue(name);
+		return value;
 	}
 	
 	public VariableHistory getVH() {
 		return VH;
 	}
+	
+	public void setValue (double value) {
+		this.value = value;
+	}
 
 	public double evaluate(List<Node> args) {
-		return value;
+		return VH.getValue(name);
 	}
 }

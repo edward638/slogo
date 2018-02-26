@@ -1,9 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CommandHistory {
-	private ArrayList<String> commands;
+	private List<String> commands;
 	private int index;
 	
 	public CommandHistory() {
@@ -18,5 +19,13 @@ public class CommandHistory {
 	public void addCommand (String command) {
 		commands.add(command);
 		index++;
+	}
+	
+	public List<String> getCommands(){
+		return commands;
+	}
+	
+	public void clearHistory(){
+		commands.clear();
 	}
 }
