@@ -1,6 +1,5 @@
 package view;
 
-import controller.ControllerInterface;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -32,6 +31,7 @@ public class GUI{
     private void setStage(Stage stage) {
         stage.setTitle(NAME);
         Scene startScene = new Scene(root, WIDTH, HEIGHT);
+        startScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setScene(startScene);
         addTitle();
         stage.show();

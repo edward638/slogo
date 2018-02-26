@@ -56,10 +56,12 @@ public class CommandBox extends ScreenComponent{
 		commandClearButton = new Button(ButtonConstants.COMMAND_CLEAR_BUTTON_LABEL);
 		commandHelpButton = new Button(ButtonConstants.COMMAND_HELP_BUTTON_LABEL);
 		languageBox = this.getLanguageBox();
+		/*
 		commandRunButton.setMinWidth(MIN_INPUT_WIDTH);
 		commandClearButton.setMinWidth(MIN_INPUT_WIDTH);
 		commandHelpButton.setMinWidth(MIN_INPUT_WIDTH);
 		languageBox.setMinWidth(MIN_INPUT_WIDTH);
+		*/
 		rightComponent.getChildren().add(commandRunButton);
 		rightComponent.getChildren().add(commandClearButton);
 		rightComponent.getChildren().add(commandHelpButton);
