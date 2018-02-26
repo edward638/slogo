@@ -18,7 +18,7 @@ public class Heading extends Node implements CommandNode {
 	 * 
 	 * @return turtle's direction angle
 	 */
-	public double evaluate(List<Double> arguments) {
+	public double evaluate(List<Node> arguments) {
 		value = turtle.getDirectionAngle();
 		return value;
 	}

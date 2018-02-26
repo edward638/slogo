@@ -19,8 +19,8 @@ public class Cosine extends Node implements CommandNode {
 	 * 
 	 * @return cos(degrees)
 	 */
-	public double evaluate(List<Double> arguments) {
-		double cos = Math.cos(arguments.get(0));
+	public double evaluate(List<Node> arguments) {
+		double cos = Math.cos(arguments.get(0).getValue());
 		value = cos;
 		return value;
 	}

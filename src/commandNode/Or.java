@@ -18,8 +18,8 @@ public class Or extends Node implements CommandNode {
 	 * 
 	 * @return is one of the arguments non-zero
 	 */
-	public double evaluate(List<Double> arguments) {
-		if(arguments.get(0) != 0 || arguments.get(1) != 0)
+	public double evaluate(List<Node> arguments) {
+		if(arguments.get(0).getValue() != 0 || arguments.get(1).getValue() != 0)
 		{
 			value = 1;
 			return value;

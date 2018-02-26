@@ -14,7 +14,8 @@ public class MakeVariable extends Node implements CommandNode{
 
 	@Override
 	public double evaluate(List<Double> args) {
-		Node n = args.get(0);
+		Node history = args.get(0);
+		
 		
 	}
 

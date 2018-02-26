@@ -19,8 +19,8 @@ public class Difference extends Node implements CommandNode{
 	 * 
 	 * @return expr1 - expr2
 	 */
-	public double evaluate(List<Double> arguments) {
-		double diff = arguments.get(0) - arguments.get(1);
+	public double evaluate(List<Node> arguments) {
+		double diff = arguments.get(0).getValue() - arguments.get(1).getValue();
 		value = diff;
 		return value;
 	}

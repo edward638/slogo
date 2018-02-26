@@ -19,9 +19,9 @@ public class ArcTangent extends Node implements CommandNode{
 	 * 
 	 * @return arctan(degrees)
 	 */
-	public double evaluate(List<Double> arguments) 
+	public double evaluate(List<Node> arguments) 
 	{
-		double arctan = Math.atan(arguments.get(0));
+		double arctan = Math.atan(arguments.get(0).getValue());
 		value = arctan;
 		return value;
 	}
