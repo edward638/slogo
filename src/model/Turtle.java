@@ -40,11 +40,9 @@ public class Turtle
 
 
 	public void setCoordinates(double xCoordinate, double yCoordinate) {
-		//System.out.println("old y" + YCoordinate);
 		Line l = new Line(XCoordinate, YCoordinate, xCoordinate, yCoordinate);
 		XCoordinate = xCoordinate;
 		YCoordinate = yCoordinate;
-		//System.out.println("new y" + YCoordinate);
 		addLine(l);
 	}
 
