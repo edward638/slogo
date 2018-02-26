@@ -19,7 +19,7 @@ public class Pi extends Node implements CommandNode {
 	 * 
 	 * @return Pi
 	 */
-	public double evaluate(List<Double> arguments) {
+	public double evaluate(List<Node> arguments) {
 		value = Math.PI;
 		return value;
 	}

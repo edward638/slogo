@@ -14,7 +14,6 @@ public class TreeTester {
 		nodes = new ArrayList<Node>();
 		nodes.add(new Quotient(t, 2));
 		nodes.add(new Constant(50));
-		nodes.add(new Forward(t, 1));
 		nodes.add(new Constant (20));
 		TreeMaker tm  = new TreeMaker(nodes);
 		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();

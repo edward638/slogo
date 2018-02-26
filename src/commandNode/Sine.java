@@ -19,8 +19,8 @@ public class Sine extends Node implements CommandNode {
 	 * 
 	 * @return sin(degrees)
 	 */
-	public double evaluate(List<Double> arguments) {
-		double sin = Math.sin(arguments.get(0));
+	public double evaluate(List<Node> arguments) {
+		double sin = Math.sin(arguments.get(0).getValue());
 		value = sin;
 		return value;
 	}
