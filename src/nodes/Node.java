@@ -51,9 +51,5 @@ public abstract class Node
 		return value;
 	}
 	
-	public void setValue (double value) {
-		this.value = value;
-	}
-	
 	public abstract double evaluate (List<Node> args);
 }
