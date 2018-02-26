@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import Tree.TreeEvaluator;
+import Tree.TreeMaker;
 import model.Turtle;
 import model.VariableHistory;
 import nodes.Constant;
@@ -103,6 +105,12 @@ public class Parser
 		List<Node> nodeList = new ArrayList<>();
 		
 		checkSyntax(commandList, nodeList);
+		
+		//check this
+		TreeMaker tm  = new TreeMaker(nodeList);
+		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
+		TreeEvaluator te = new TreeEvaluator(heads);
+		System.out.println(te.getValue());
 		
 		return nodeList;
 		
