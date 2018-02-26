@@ -13,7 +13,9 @@ public class VariableHistoryBox extends HistoryBox{
 
 	@Override
 	protected void mapUserActions() {
-
+		super.getButton().setOnAction((event -> {
+			super.getController().clearVariableBox();
+		}));
 	}
 
 	public void generateGUIComponent(){

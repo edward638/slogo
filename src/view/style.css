@@ -1,0 +1,22 @@
+.root{
+    -fx-background-color:#666666;
+}
+.button{
+	-fx-border-color:black;
+    -fx-background-color:grey;
+    -fx-min-width:54px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.button:hover{
+    -fx-background-color:red;
+}
+
+.button:pressed{
+    -fx-font-weight: bold;
+}
+
+.text-area{
+	-fx-background-color:#666666;
+}

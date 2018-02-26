@@ -10,6 +10,7 @@ public class LabelFactory {
 	public static final String HISTORY = "History";
 	public static final String VARIABLE = "Variable";
 
+	/*
 	public static Label getLabelOfType(String labelType){
 		switch(labelType){
 		case "Command":
@@ -29,4 +30,5 @@ public class LabelFactory {
         label.setFont(new Font(LabelConstants.FONT_SIZE));
         return label;
 	}
+	*/
 }

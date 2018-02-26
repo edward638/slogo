@@ -5,6 +5,7 @@ import view.constants.TextAreaConstants;
 import view.view_exceptions.BadResourceNameException;
 
 public class TextAreaFactory {
+	/*
 	public static final String COMMAND = "Command";
 	public static final String HISTORY = "History";
 	public static final String VARIABLE = "Variable";
@@ -29,4 +30,5 @@ public class TextAreaFactory {
         textArea.setPrefColumnCount(cols);
         return textArea;
 	}
+	*/
 }
