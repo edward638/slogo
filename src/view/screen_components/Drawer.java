@@ -13,6 +13,9 @@ import view.constants.CanvasConstants;
 import view.constants.ComboBoxConstants;
 
 public class Drawer extends ScreenComponent{
+	public static final double turtleStartX = CanvasConstants.CANVAS_WIDTH/2;
+	public static final double turtleStartY = CanvasConstants.CANVAS_HEIGHT/2;
+	
 	private Canvas canvas;
 	private GraphicsContext gc;
 	private ComboBox<String> backgroundColorBox;

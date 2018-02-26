@@ -8,7 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public abstract class HistoryBox extends ScreenComponent{
-	private static final int HBOX_SPACING = 50;
+	//private static final int HBOX_SPACING = 50;
 	private String historyBoxLabel;
 	private String buttonLabel;
 	private int rows;
@@ -40,7 +40,7 @@ public abstract class HistoryBox extends ScreenComponent{
 	
 	private void addButtonAndLabels(BorderPane borderPane){
 		HBox topComponent = new HBox();
-		topComponent.setSpacing(HBOX_SPACING);
+		//topComponent.setSpacing(HBOX_SPACING);
 		button = new Button(buttonLabel);
 		Label label = new Label(historyBoxLabel);
 		topComponent.getChildren().add(label);
