@@ -19,8 +19,8 @@ public class Home extends Node implements CommandNode {
 	 * @return the distance turtle moved
 	 */
 	public double evaluate(List<Node> arguments) {
-		double distance = Math.sqrt(Math.pow(0 - turtle.getXCoordinate(), 2) + Math.pow(0 - turtle.getYCoordinate(), 2) );
-		turtle.setCoordinates(0, 0);
+		double distance = Math.sqrt(Math.pow(turtle.getHome()[0] - turtle.getXCoordinate(), 2) + Math.pow(turtle.getHome()[1] - turtle.getYCoordinate(), 2) );
+		turtle.setCoordinates(turtle.getHome()[0], turtle.getHome()[1]);
 		value = distance;
 		return distance;
 	}
