@@ -1,34 +1,47 @@
 package Tree;
 
 import java.util.ArrayList;
+
+
 import java.util.List;
 
+import commandNode.*;
+import nodes.Node;;
+
 public class TreeMaker {
-	private ArrayList<tNode> nodes;
-	private ArrayList<tNode> heads;
+	private ArrayList<Node> nodes;
+	private ArrayList<Node> heads;
 	private int index;
 	
-	public TreeMaker (List<tNode> nodes) {
-		this.nodes = (ArrayList<tNode>) nodes;
-		heads = new ArrayList<tNode>();
+	public TreeMaker (List<Node> nodes) {
+		this.nodes = (ArrayList<Node>) nodes;
+		heads = new ArrayList<Node>();
 		index = 0;
 		while (index < this.nodes.size()) {
+			if (!this.nodes.get(index).hasNext()) {
+				throw new HeadException();
+			}
 			heads.add(makeTree(this.nodes.get(index)));
 		}
 	}
 	
-	private tNode makeTree(tNode node) {
+	public List<Node> getHeads() {
+		return heads;
+	}
+	
+	private Node makeTree(Node node) {
 		index+=1;
 		while (node!=null && node.hasNext()) {
-			node.addChild(nodes.get(index));
-			tNode curr = node.getChild();
+			try {
+				node.addChild(nodes.get(index));
+			}
+			catch (IndexOutOfBoundsException e){
+				throw new NodeArgumentException();
+			}
+			Node curr = node.getChild();
 			makeTree(curr);
 		}
 		node.reset();
 		return node;
-	}
-	
-	protected List<tNode> getHeads() {
-		return heads;
 	}
 }

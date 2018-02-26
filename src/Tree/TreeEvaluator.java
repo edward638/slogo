@@ -4,16 +4,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import nodes.Node;
+
 public class TreeEvaluator {
 	private Double returnValue;
-	private ArrayList<tNode> heads;
-	private HashMap<tNode, ArrayList<Double>> args;
+	private ArrayList<Node> heads;
+	private HashMap<Node, ArrayList<Double>> args;
 	
-	public TreeEvaluator (List<tNode> heads) {
-		this.heads = (ArrayList<tNode>) heads;
-		args = new HashMap<tNode, ArrayList<Double>>();
+	public TreeEvaluator (List<Node> heads) {
+		this.heads = (ArrayList<Node>) heads;
+		args = new HashMap<Node, ArrayList<Double>>();
 		returnValue = 0.0;
 		evaluate();
+	}
+		
+	public Double getValue() {
+		return returnValue;
 	}
 	
 	private void evaluate() {
@@ -22,12 +28,12 @@ public class TreeEvaluator {
 		}
 	}
 	
-	private void evaluateHead(tNode node) {
+	private void evaluateHead(Node node) {
 		ArrayList<Double> nArgs = new ArrayList<Double>();
 		args.put(node, nArgs);
 		while (node.hasNext()) {	
-			tNode curr = node.getChild();
-			System.out.println(curr.getValue());
+			Node curr = node.getChild();
+			//System.out.println(curr.getValue());
 			if (!curr.hasNext()) {
 				nArgs.add(curr.getValue());
 				args.put(node, nArgs);
@@ -39,9 +45,5 @@ public class TreeEvaluator {
 			}
 		}
 		returnValue = node.evaluate(args.get(node));
-	}
-	
-	public Double getValue() {
-		return returnValue;
 	}
 }
