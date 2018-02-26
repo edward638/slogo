@@ -94,7 +94,12 @@ public class Parser
 	 */
 	public List<Node> parseString(String command) throws ClassNotFoundException, InvalidEntryException
 	{
-		String[] commandList = command.trim().split("\\s+");
+		
+		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
+		for(String s: commandList)
+		{
+			System.out.println(s);
+		}
 		List<Node> nodeList = new ArrayList<>();
 		
 		checkSyntax(commandList, nodeList);
@@ -109,14 +114,11 @@ public class Parser
 	 * 
 	 * @param commandList the list of strings given by the user
 	 * @param nodeList the empty nodeList that will be filled
-	 * @throws ClassNotFoundException 
-	 * @throws InvalidEntryException 
+	 * @throws ClassNotFoundException can't find the node class
+	 * @throws InvalidEntryException didn't match any of entry types
 	 */
 	private void checkSyntax(String[] commandList, List<Node> nodeList) throws ClassNotFoundException, InvalidEntryException 
 	{
-		//NEED TO PASS IT A TURTLE
-		
-		
 		for (int i = 0; i<commandList.length; i++)
 		{
 			String text = commandList[i];
@@ -168,20 +170,18 @@ public class Parser
 	 * Checks for invalid command errors
 	 * 
 	 * @param command string identified as command syntax in a user input
-	 * @return a string indicating the appropriate command typ
-	 * @throws InvalidEntryException 
+	 * @return a string indicating the appropriate command type
+	 * @throws InvalidEntryException didnt match any of the commands in the given language
 	 */
 	private String checkLanguage(String command) throws InvalidEntryException 
 	{
 		for (String key: myTranslation.keySet())
 		{
-			//check if it is a command
 			if(myTranslation.get(key).matcher(command).matches())
 			{
 				return key;
 			}
 		}
-		//throw error if it didnt match a specific command
 		throw new InvalidEntryException("Error: Cannot recognize language");
 	}
 }
