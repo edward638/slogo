@@ -24,7 +24,7 @@ public class SetTowards extends Node implements CommandNode
 		double change = Math.abs(turtle.getDirectionAngle() - deg);
 		turtle.setDirectionAngle(deg);
 		value = change;
-		return change;
+		return value;
 	}
 
 

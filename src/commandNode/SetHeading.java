@@ -22,7 +22,7 @@ public class SetHeading extends Node implements CommandNode {
 		double deg = Math.abs(turtle.getDirectionAngle() - arguments.get(0));
 		turtle.setDirectionAngle(arguments.get(0));
 		value = deg;
-		return deg;
+		return value;
 	}
 
 

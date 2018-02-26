@@ -21,6 +21,6 @@ public class HideTurtle extends Node implements CommandNode {
 	public double evaluate(List<Double> arguments) {
 		turtle.setTurtleShowing(false);
 		value = 0;
-		return 0;
+		return value;
 	}
 }

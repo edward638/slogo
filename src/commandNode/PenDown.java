@@ -22,6 +22,6 @@ public class PenDown extends Node implements CommandNode {
 	{
 		turtle.setPenShowing(true);
 		value = 1;
-		return 1;
+		return value;
 	}
 }
