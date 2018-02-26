@@ -27,7 +27,7 @@ public class Variable extends Node{
 		this.value = value;
 	}
 
-	public double evaluate(List<Double> args) {
+	public double evaluate(List<Node> args) {
 		return value;
 	}
 }
