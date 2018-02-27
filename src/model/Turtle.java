@@ -6,7 +6,7 @@ import java.util.List;
 import javafx.scene.shape.Line;
 
 
-public class Turtle 
+public class Turtle implements TurtleObservable
 {
 	private double XCoordinate;
 	private double YCoordinate;
@@ -28,7 +28,7 @@ public class Turtle
 		turtleShowing = true;
 		lines = new ArrayList<Line>();
 	}
-
+	
 
 	public double getXCoordinate() {
 		return XCoordinate;

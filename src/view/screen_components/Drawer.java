@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
+import model.TurtleObservable;
 import view.constants.CanvasConstants;
 import view.constants.ComboBoxConstants;
 
@@ -33,13 +34,13 @@ public class Drawer extends ScreenComponent{
 	private ComboBox<String> backgroundColorBox;
 	private ComboBox<String> penColorBox;
 	private ComboBox<String> turtleImageBox;
-	private Turtle turtle;
+	private TurtleObservable turtle;
 	private Color penColor;
 	public Drawer(ControllerInterface controller){
 		super(controller);
 	}
 
-	public void setTurtle(Turtle turtle){
+	public void setTurtle(TurtleObservable turtle){
 		this.turtle = turtle;
 	}
 

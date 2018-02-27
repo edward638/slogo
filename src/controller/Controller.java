@@ -1,10 +1,7 @@
 package controller;
 
 import javafx.stage.Stage;
-import model.CommandHistory;
-import model.ModelInterface;
-import model.Turtle;
-import model.VariableHistory;
+import model.*;
 import parsers.Parser;
 import view.GUI;
 import view.screen_components.CommandBox;
