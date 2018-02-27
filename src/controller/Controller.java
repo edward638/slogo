@@ -16,25 +16,42 @@ public class Controller implements ControllerInterface{
 	private Parser parser;
 	private CommandHistory commandHistory;
 	private VariableHistory variableHistory;
+	private Drawer drawer;
+	private CommandBox commandBox;
+	private CommandHistoryBox commandHistoryBox;
+	private VariableHistoryBox variableHistoryBox;
 	public Controller(Stage stage){
 //		this.model = model;
+		gui = new GUI();
+		gui.start(stage);
+		this.initializeScreenComponents();
+		this.initializeModelComponents();
+		this.setUpConnections();
+		this.addToGUI();
+	}
+
+	private void initializeModelComponents(){
 		turtle = new Turtle(Drawer.TURTLE_START_X, Drawer.TURTLE_START_Y);
 		parser = new Parser(turtle, "English");
 		commandHistory = new CommandHistory();
 		variableHistory = new VariableHistory();
-		gui = new GUI();
-		gui.start(stage);
-		this.initializeGUIComponents();
 	}
-	
-	private void initializeGUIComponents(){
-		CommandBox commandBox = new CommandBox(this);
-		CommandHistoryBox commandHistoryBox = new CommandHistoryBox(this);
-		commandHistoryBox.setCommandHistory(commandHistory);
-		Drawer drawer = new Drawer(this);
+
+	private void setUpConnections(){
+		turtle.addTurtleObserver(drawer);
 		drawer.setTurtle(turtle);
-		VariableHistoryBox variableHistoryBox = new VariableHistoryBox(this);
 		variableHistoryBox.setVariableHistory(variableHistory);
+		commandHistoryBox.setCommandHistory(commandHistory);
+	}
+
+	private void initializeScreenComponents(){
+		drawer = new Drawer(this);
+		commandBox = new CommandBox(this);
+		commandHistoryBox = new CommandHistoryBox(this);
+		variableHistoryBox = new VariableHistoryBox(this);
+	}
+
+	private void addToGUI(){
 		gui.addCommandBoxBorderPane(commandBox.getGUIComponent());
 		gui.addCommandHistoryBoxBorderPane(commandHistoryBox.getGUIComponent());
 		gui.addDrawerBorderPane(drawer.getGUIComponent());

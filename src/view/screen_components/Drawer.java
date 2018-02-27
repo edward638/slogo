@@ -14,13 +14,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
 import model.TurtleObservable;
+import view.TurtleObserver;
 import view.constants.CanvasConstants;
 import view.constants.ComboBoxConstants;
 
 import javafx.scene.shape.Line;
 import java.util.List;
 
-public class Drawer extends ScreenComponent{
+public class Drawer extends ScreenComponent implements TurtleObserver{
 	public static final double TURTLE_START_X = CanvasConstants.CANVAS_WIDTH/2;
 	public static final double TURTLE_START_Y = CanvasConstants.CANVAS_HEIGHT/2;
 	public static final int TURTLE_WIDTH = 50;
@@ -143,10 +144,12 @@ public class Drawer extends ScreenComponent{
 	}
 
 
-	public void moveTurtle(Turtle turtle){
+	public void moveTurtle(TurtleObservable turtle){
 		gc.save();
 		rotate(gc, turtle.getDirectionAngle()- ROTATE_OFFSET, turtle.getXCoordinate(), turtle.getYCoordinate());
-		gc.drawImage(turtleIcon, turtle.getXCoordinate() - TURTLE_WIDTH/2, turtle.getYCoordinate() - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
+		if(turtle.getTurtleShowing()){
+			gc.drawImage(turtleIcon, turtle.getXCoordinate() - TURTLE_WIDTH/2, turtle.getYCoordinate() - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
+		}
 		gc.restore();
 	}
 
@@ -154,5 +157,10 @@ public class Drawer extends ScreenComponent{
 	private void rotate(GraphicsContext gc, double angle, double px, double py) {
 		Rotate r = new Rotate(angle, px, py);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+	}
+
+	@Override
+	public void notifyTurtleObserver() {
+		update();
 	}
 }
