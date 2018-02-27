@@ -46,7 +46,7 @@ public class Parser
 	 * @param t the current turtle
 	 * @param language the current language
 	 */
-	public Parser(Turtle t, String language)
+	public Parser(Turtle t, String language, VariableHistory VH)
 	{
 		regex = new HashMap<>();
 		addResources(REGEX_FILE, regex);
@@ -64,7 +64,7 @@ public class Parser
 			children.put(key, Integer.parseInt(numChildren.getString(key)));	
 		}
 		turt = t;
-		history = new VariableHistory();
+		history = VH;
 	}
 	
 	/**
