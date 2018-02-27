@@ -20,6 +20,5 @@ public class TreeTester {
 		TreeEvaluator te = new TreeEvaluator(heads);
 		System.out.println(te.getValue());
 	}
-
 }
 

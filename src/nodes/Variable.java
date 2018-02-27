@@ -18,9 +18,11 @@ public class Variable extends Node{
 	public String getName() {
 		return name;
 	}
+
+	public double getNewValue() { return value; }
 	
 	public double getValue() {
-		return value;
+		return VH.getValue(name);
 	}
 	
 	public VariableHistory getVH() {
@@ -29,9 +31,5 @@ public class Variable extends Node{
 	
 	public void setValue (double value) {
 		this.value = value;
-	}
-
-	public double evaluate(List<Node> args) {
-		return VH.getValue(name);
 	}
 }

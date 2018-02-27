@@ -41,7 +41,7 @@ public class Parser
 	 * Creates the two hashmaps for the syntax recognition and command recognition
 	 * given the current language.
 	 * 
-	 * @param m the current model
+	 * @param t the current turtle
 	 * @param language the current language
 	 */
 	public Parser(Turtle t, String language)
@@ -127,15 +127,15 @@ public class Parser
 			{
 				if(regex.get(key).matcher(text).matches())
 				{
-					System.out.println("matched" + key);
+					//System.out.println("matched" + key);
 					match = true;
 					if (key.equals("Command"))
 					{
 						String commandType = checkLanguage(text);
 						try 
 						{
-							System.out.println("got to command");
-							System.out.println(commandType);
+							//System.out.println("got to command");
+							//System.out.println(commandType);
 							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
 							nodeList.add(n);
 						}
@@ -147,13 +147,13 @@ public class Parser
 					}
 					else if (key.equals("Constant"))
 					{
-						System.out.println("got to constant");
+						//System.out.println("got to constant");
 						Node n = new Constant(Integer.parseInt(text));
 						nodeList.add(n);
 					}
 					else if(key.equals("Variable"))
 					{
-						System.out.println("got to variable");
+						//System.out.println("got to variable");
 						Node n = new Variable(text.substring(1), history);
 						nodeList.add(n);
 					}
