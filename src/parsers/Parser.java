@@ -13,6 +13,7 @@ import Tree.TreeMaker;
 import model.Turtle;
 import model.VariableHistory;
 import nodes.Constant;
+import nodes.Liste;
 import nodes.Node;
 import nodes.NodeFactory;
 import nodes.Variable;
@@ -109,8 +110,8 @@ public class Parser
 		//check this
 		TreeMaker tm  = new TreeMaker(nodeList);
 		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
-		TreeEvaluator te = new TreeEvaluator(heads);
-		System.out.println(te.getValue());
+		TreeEvaluator te = new TreeEvaluator();
+		te.evaluate(heads);
 		
 		return nodeList;
 		
@@ -163,6 +164,18 @@ public class Parser
 					{
 						//System.out.println("got to variable");
 						Node n = new Variable(text.substring(1), history);
+						nodeList.add(n);
+					}
+					else if(key.equals("List"))
+					{
+						Node n = new Liste();
+						String noBrackets = text.substring(1,text.length()-1);
+						String trimmed = noBrackets.trim();
+						List<Node> listNodes = parseString(trimmed);
+						for(Node ln: listNodes)
+						{
+							n.addChild(ln);
+						}
 						nodeList.add(n);
 					}
 				}

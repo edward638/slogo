@@ -22,8 +22,6 @@ public class DoTimes extends Node implements CommandNode{
 	 */
 	public double evaluate(List<Node> args) {
 		
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }
