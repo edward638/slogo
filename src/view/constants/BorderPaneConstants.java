@@ -13,4 +13,7 @@ public final class BorderPaneConstants {
 
     public static final int COMMAND_BOX_X = 40;
     public static final int COMMAND_BOX_Y = 510;
+
+    public static final int HELP_BUTTON_X = 890;
+    public static final int HELP_BUTTON_Y = 620;
 }
