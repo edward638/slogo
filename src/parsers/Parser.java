@@ -94,7 +94,7 @@ public class Parser
 	 * @throws ClassNotFoundException 
 	 * @throws InvalidEntryException 
 	 */
-	public List<Node> parseString(String command) throws ClassNotFoundException, InvalidEntryException
+	public List<Node> parseString(String command)
 	{
 		
 		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
@@ -107,10 +107,10 @@ public class Parser
 		checkSyntax(commandList, nodeList);
 		
 		//check this
-//		TreeMaker tm  = new TreeMaker(nodeList);
-//		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
-//		TreeEvaluator te = new TreeEvaluator(heads);
-//		System.out.println(te.getValue());
+		TreeMaker tm  = new TreeMaker(nodeList);
+		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
+		TreeEvaluator te = new TreeEvaluator(heads);
+		System.out.println(te.getValue());
 		
 		return nodeList;
 		

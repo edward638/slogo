@@ -11,7 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
 import model.Turtle;
+import model.TurtleObservable;
 import view.constants.CanvasConstants;
 import view.constants.ComboBoxConstants;
 
@@ -23,6 +25,7 @@ public class Drawer extends ScreenComponent{
 	public static final double TURTLE_START_Y = CanvasConstants.CANVAS_HEIGHT/2;
 	public static final int TURTLE_WIDTH = 50;
 	public static final int TURTLE_HEIGHT = 50;
+	public static final int ROTATE_OFFSET = 270;
 
 
 	private Image turtleIcon;
@@ -31,10 +34,14 @@ public class Drawer extends ScreenComponent{
 	private ComboBox<String> backgroundColorBox;
 	private ComboBox<String> penColorBox;
 	private ComboBox<String> turtleImageBox;
-
+	private TurtleObservable turtle;
 	private Color penColor;
 	public Drawer(ControllerInterface controller){
 		super(controller);
+	}
+
+	public void setTurtle(TurtleObservable turtle){
+		this.turtle = turtle;
 	}
 
 	@Override
@@ -42,7 +49,7 @@ public class Drawer extends ScreenComponent{
 		backgroundColorBox.valueProperty().addListener(new ChangeListener<Object>() {
 			@Override
 			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				changeBackgroundColor();
+				update();
 			}
 		});
 		penColorBox.valueProperty().addListener(new ChangeListener<Object>() {
@@ -68,7 +75,7 @@ public class Drawer extends ScreenComponent{
 		gc.setStroke(CanvasConstants.DEFAULT_STROKE);
 		gc.strokeRect(0,0, canvas.getWidth(),canvas.getHeight());
 		turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream("turtleImage.PNG"));
-		gc.drawImage(turtleIcon, TURTLE_START_X, TURTLE_START_Y, TURTLE_WIDTH, TURTLE_HEIGHT);
+		gc.drawImage(turtleIcon, TURTLE_START_X - TURTLE_WIDTH/2, TURTLE_START_Y - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		penColor = Color.RED;
 		borderPane.setCenter(canvas);
 	}
@@ -128,17 +135,24 @@ public class Drawer extends ScreenComponent{
 		}
 	}
 
-	public void update(List<Line> lines, Turtle turtle){
+	public void update(){
 		gc.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
 		changeBackgroundColor();
-		drawLines(lines);
+		drawLines(turtle.getLines());
 		moveTurtle(turtle);
 	}
 
 
 	public void moveTurtle(Turtle turtle){
-			gc.drawImage(turtleIcon, turtle.getXCoordinate(), turtle.getYCoordinate(), TURTLE_WIDTH, TURTLE_HEIGHT);
+		gc.save();
+		rotate(gc, turtle.getDirectionAngle()- ROTATE_OFFSET, turtle.getXCoordinate(), turtle.getYCoordinate());
+		gc.drawImage(turtleIcon, turtle.getXCoordinate() - TURTLE_WIDTH/2, turtle.getYCoordinate() - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
+		gc.restore();
 	}
 
-
+// Method taken from https://stackoverflow.com/questions/18260421/how-to-draw-image-rotated-on-javafx-canvas
+	private void rotate(GraphicsContext gc, double angle, double px, double py) {
+		Rotate r = new Rotate(angle, px, py);
+		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+	}
 }
