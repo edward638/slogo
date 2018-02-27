@@ -17,11 +17,11 @@ public class SampleMain {
 
 		Parser newnew = new Parser(turt, "English");
 		//newnew.addResources("parsers/regex");
-		List<Node> nodes = newnew.parseString("[ fd 45 rt 90 ] fd 20");
+		List<Node> nodes = newnew.parseString("make :x 20 fd :x");
 		TreeMaker tm  = new TreeMaker(nodes);
 		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
-		TreeEvaluator te = new TreeEvaluator(heads);
-		System.out.println(te.getValue());
+		TreeEvaluator te = new TreeEvaluator();
+		System.out.println(te.evaluate(heads));
 	}
 
 }
