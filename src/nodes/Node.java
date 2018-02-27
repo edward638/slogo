@@ -50,6 +50,4 @@ public abstract class Node
 	{
 		return value;
 	}
-	
-	public abstract double evaluate (List<Node> args);
 }

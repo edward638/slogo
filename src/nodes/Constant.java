@@ -13,9 +13,4 @@ public class Constant extends Node{
 	public double getValue() {
 		return value;
 	}
-
-	public double evaluate(List<Node> args) {
-		System.out.println(value + " " + args.toString());
-		return value;
-	}
 }

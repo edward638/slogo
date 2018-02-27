@@ -17,8 +17,7 @@ public class SampleMain {
 
 		Parser newnew = new Parser(turt, "English");
 		//newnew.addResources("parsers/regex");
-		List<Node> nodes = newnew.parseString("make :x fd 50");
-		
+		List<Node> nodes = newnew.parseString("[ fd 45 rt 90 ] fd 20");
 		TreeMaker tm  = new TreeMaker(nodes);
 		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator(heads);

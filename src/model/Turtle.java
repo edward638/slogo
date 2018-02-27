@@ -23,7 +23,7 @@ public class Turtle
 		YCoordinate = yHome;
 		home[0] = xHome;
 		home[1] = yHome; 
-		directionAngle = 90;
+		directionAngle = 270;
 		penShowing = true;
 		turtleShowing = true;
 		lines = new ArrayList<Line>();
@@ -43,7 +43,7 @@ public class Turtle
 		Line l = new Line(XCoordinate, YCoordinate, xCoordinate, yCoordinate);
 		XCoordinate = xCoordinate;
 		YCoordinate = yCoordinate;
-		//System.out.println("new y" + YCoordinate);
+		System.out.println("new y" + YCoordinate);
 		addLine(l);
 	}
 	
