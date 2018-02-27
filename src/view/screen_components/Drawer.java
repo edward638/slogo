@@ -9,6 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import model.Turtle;
 import view.constants.CanvasConstants;
@@ -23,10 +24,15 @@ public class Drawer extends ScreenComponent{
 	public static final int TURTLE_WIDTH = 50;
 	public static final int TURTLE_HEIGHT = 50;
 
+
 	private Image turtleIcon;
 	private Canvas canvas;
 	private GraphicsContext gc;
 	private ComboBox<String> backgroundColorBox;
+	private ComboBox<String> penColorBox;
+	private ComboBox<String> turtleImageBox;
+
+	private Color penColor;
 	public Drawer(ControllerInterface controller){
 		super(controller);
 	}
@@ -36,7 +42,13 @@ public class Drawer extends ScreenComponent{
 		backgroundColorBox.valueProperty().addListener(new ChangeListener<Object>() {
 			@Override
 			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				changeColor();
+				changeBackgroundColor();
+			}
+		});
+		penColorBox.valueProperty().addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				changePenColor();
 			}
 		});
 	}
@@ -45,8 +57,7 @@ public class Drawer extends ScreenComponent{
 		BorderPane borderPane = super.getBorderPane();
 		borderPane.setPadding(new Insets(10,20,10,20));
 		generateCanvas(borderPane);
-		generateBackgroundColorBox(borderPane);
-		System.out.println("second");
+		generateBorderPaneBottom(borderPane);
 	}
 
 	private void generateCanvas(BorderPane borderPane){
@@ -58,20 +69,30 @@ public class Drawer extends ScreenComponent{
 		gc.strokeRect(0,0, canvas.getWidth(),canvas.getHeight());
 		turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream("turtleImage.PNG"));
 		gc.drawImage(turtleIcon, TURTLE_START_X, TURTLE_START_Y, TURTLE_WIDTH, TURTLE_HEIGHT);
+		penColor = Color.RED;
 		borderPane.setCenter(canvas);
 	}
 
-	private void generateBackgroundColorBox(BorderPane borderPane){
+	private void generateBorderPaneBottom(BorderPane borderPane){
+		HBox hbox = new HBox();
 		backgroundColorBox = new ComboBox<>();
-		String[] choices = ComboBoxConstants.COLOR_LIST;
-		for (int x = 0 ; x < choices.length; x++) {
-			backgroundColorBox.getItems().add(choices[x]);
-		}
-		backgroundColorBox.getSelectionModel().selectFirst();
-		borderPane.setBottom(backgroundColorBox);
+		penColorBox = new ComboBox<>();
+		turtleImageBox = new ComboBox<>();
+		addComboBoxOptions(hbox, backgroundColorBox, ComboBoxConstants.BACKGROUND_COLOR_LIST);
+		addComboBoxOptions(hbox, penColorBox, ComboBoxConstants.PEN_COLOR_LIST);
+		addComboBoxOptions(hbox, turtleImageBox, ComboBoxConstants.TURTLE_IMAGE_LIST);
+		borderPane.setBottom(hbox);
 	}
 
-	private void changeColor(){
+	private void addComboBoxOptions(HBox hbox, ComboBox<String> comboBox, String[] options){
+		for (int x = 0 ; x < options.length; x++) {
+			comboBox.getItems().add(options[x]);
+		}
+		comboBox.getSelectionModel().selectFirst();
+		hbox.getChildren().add(comboBox);
+	}
+
+	private void changeBackgroundColor(){
 		String color = (String) backgroundColorBox.getValue();
 		if (color.equals("White")){
 			gc.setFill(Color.WHITE);
@@ -87,14 +108,37 @@ public class Drawer extends ScreenComponent{
 		}
 	}
 
+	private void changePenColor(){
+		String color = (String) penColorBox.getValue();
+		if (color.equals("Red")) {
+			penColor = Color.RED;
+		}
+		if (color.equals("Green")){
+			penColor = Color.GREEN;
+		}
+	}
+
+
+
 	private void drawLines(List<Line> lines){
+		gc.setStroke(penColor);
 		for (int x = 0; x < lines.size(); x++){
 			Line lineToDraw = lines.get(x);
 			gc.strokeLine(lineToDraw.getStartX(),lineToDraw.getStartY(),lineToDraw.getEndX(), lineToDraw.getEndY());
 		}
 	}
 
-	public void moveTurtle(Turtle turtle){
-
+	public void update(List<Line> lines, Turtle turtle){
+		gc.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
+		changeBackgroundColor();
+		drawLines(lines);
+		moveTurtle(turtle);
 	}
+
+
+	public void moveTurtle(Turtle turtle){
+			gc.drawImage(turtleIcon, turtle.getXCoordinate(), turtle.getYCoordinate(), TURTLE_WIDTH, TURTLE_HEIGHT);
+	}
+
+
 }

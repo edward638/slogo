@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import Tree.TreeEvaluator;
+import Tree.TreeMaker;
 import model.Turtle;
 import model.VariableHistory;
 import nodes.Constant;
@@ -104,6 +106,12 @@ public class Parser
 		
 		checkSyntax(commandList, nodeList);
 		
+		//check this
+//		TreeMaker tm  = new TreeMaker(nodeList);
+//		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
+//		TreeEvaluator te = new TreeEvaluator(heads);
+//		System.out.println(te.getValue());
+		
 		return nodeList;
 		
 	}
@@ -117,7 +125,7 @@ public class Parser
 	 * @throws ClassNotFoundException can't find the node class
 	 * @throws InvalidEntryException didn't match any of entry types
 	 */
-	private void checkSyntax(String[] commandList, List<Node> nodeList) throws ClassNotFoundException, InvalidEntryException 
+	private void checkSyntax(String[] commandList, List<Node> nodeList)
 	{
 		for (int i = 0; i<commandList.length; i++)
 		{
@@ -141,7 +149,7 @@ public class Parser
 						}
 						catch(ClassNotFoundException e)
 						{
-							throw new ClassNotFoundException("Error: Could not access Node constructor");
+							throw new InvalidEntryException("Error: Could not access Node constructor");
 						}
 						
 					}
@@ -175,7 +183,7 @@ public class Parser
 	 * @return a string indicating the appropriate command type
 	 * @throws InvalidEntryException didnt match any of the commands in the given language
 	 */
-	private String checkLanguage(String command) throws InvalidEntryException 
+	private String checkLanguage(String command)
 	{
 		for (String key: myTranslation.keySet())
 		{

@@ -1,6 +1,6 @@
 package parsers;
 
-public class InvalidEntryException extends Exception{
+public class InvalidEntryException extends RuntimeException{
 	// Parameterless Constructor
     public InvalidEntryException() {}
 
