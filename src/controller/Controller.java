@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.*;
 import parsers.Parser;
@@ -60,8 +61,8 @@ public class Controller implements ControllerInterface{
 	}
 	
     @Override
-	public void passCommand(String s){
-        parser.parseString(s);
+	public void passCommand(String command, String language){
+        parser.parseString(command, language);
     }
 
     @Override
@@ -73,5 +74,10 @@ public class Controller implements ControllerInterface{
     public void clearCommandHistoryBox() {
 
     }
+
+	@Override
+	public void setPenColor(Color color) {
+		turtle.setPenColor(color);
+	}
 
 }

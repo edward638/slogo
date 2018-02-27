@@ -40,7 +40,6 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 	private ComboBox<String> penColorBox;
 	private ComboBox<String> turtleImageBox;
 	private TurtleObservable turtle;
-	private Color penColor;
 	public Drawer(ControllerInterface controller){
 		super(controller);
 	}
@@ -87,7 +86,6 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 		gc.strokeRect(0,0, canvas.getWidth(),canvas.getHeight());
 		turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream("black_and_white_turtle.PNG"));
 		gc.drawImage(turtleIcon, TURTLE_START_X - TURTLE_WIDTH/2, TURTLE_START_Y - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
-		penColor = Color.RED;
 		borderPane.setCenter(canvas);
 	}
 
@@ -118,8 +116,8 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 			gc.setStroke(CanvasConstants.DEFAULT_STROKE);
 			gc.strokeRect(0,0, canvas.getWidth(),canvas.getHeight());
 		}
-		if (color.equals("Black")){
-			gc.setFill(Color.BLACK);
+		if (color.equals("Blue")){
+			gc.setFill(Color.BLUE);
 			gc.fillRect(0,0,canvas.getWidth(), canvas.getHeight());
 			gc.setStroke(CanvasConstants.DEFAULT_STROKE);
 			gc.strokeRect(0,0, canvas.getWidth(),canvas.getHeight());
@@ -128,12 +126,14 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 
 	private void changePenColor(){
 		String color = (String) penColorBox.getValue();
+		Color penColor = null;
 		if (color.equals("Red")) {
 			penColor = Color.RED;
 		}
 		if (color.equals("Green")){
 			penColor = Color.GREEN;
 		}
+		super.getController().setPenColor(penColor);
 	}
 
 	private void changeTurtleImage(){
@@ -144,9 +144,9 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 	}
 
 	private void drawLines(List<Line> lines){
-		gc.setStroke(penColor);
 		for (int x = 0; x < lines.size(); x++){
 			Line lineToDraw = lines.get(x);
+			gc.setStroke(lines.get(x).getStroke());
 			gc.strokeLine(lineToDraw.getStartX(),lineToDraw.getStartY(),lineToDraw.getEndX(), lineToDraw.getEndY());
 		}
 	}
