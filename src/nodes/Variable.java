@@ -24,7 +24,12 @@ public class Variable extends Node{
 	public double getValue() {
 		return VH.getValue(name);
 	}
-	
+
+	@Override
+	public double evaluate(List<Node> args) {
+		return 0;
+	}
+
 	public VariableHistory getVH() {
 		return VH;
 	}

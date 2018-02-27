@@ -1,9 +1,6 @@
 package Tree;
 
 import java.util.ArrayList;
-
-
-
 import java.util.List;
 
 import nodes.CommandNode;
@@ -19,9 +16,9 @@ public class TreeMaker {
 		heads = new ArrayList<Node>();
 		index = 0;
 		while (index < this.nodes.size()) {
-			if (!(this.nodes.get(index) instanceof CommandNode)) {
+			/**if (!(this.nodes.get(index) instanceof CommandNode)) {
 				throw new HeadException();
-			}
+			}**/
 			heads.add(makeTree(this.nodes.get(index)));
 		}
 	}
