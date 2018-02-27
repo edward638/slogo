@@ -14,6 +14,7 @@ public abstract class HistoryBox extends ScreenComponent{
 	private int rows;
 	private int cols;
 	private Button button;
+	private TextArea textArea;
 	public HistoryBox(ControllerInterface controller) {
 		super(controller);
 	}
@@ -30,6 +31,9 @@ public abstract class HistoryBox extends ScreenComponent{
 	
 	protected Button getButton(){
 		return button;
+	}
+	protected TextArea getTextArea(){
+		return textArea;
 	}
 	
 	public void generateGUIComponent(){
@@ -49,7 +53,8 @@ public abstract class HistoryBox extends ScreenComponent{
 	}
 	
 	private void addTextArea(BorderPane borderPane){
-		TextArea textArea = new TextArea();
+		textArea = new TextArea();
+		textArea.setEditable(false);
 		textArea.setPrefRowCount(rows);
 		textArea.setPrefColumnCount(cols);
 		borderPane.setCenter(textArea);
