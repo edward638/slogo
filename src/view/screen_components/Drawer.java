@@ -4,13 +4,16 @@ import controller.ControllerInterface;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
 import model.Turtle;
 import view.constants.CanvasConstants;
 import view.constants.ComboBoxConstants;
@@ -23,6 +26,7 @@ public class Drawer extends ScreenComponent{
 	public static final double TURTLE_START_Y = CanvasConstants.CANVAS_HEIGHT/2;
 	public static final int TURTLE_WIDTH = 50;
 	public static final int TURTLE_HEIGHT = 50;
+	public static final int ROTATE_OFFSET = 270;
 
 
 	private Image turtleIcon;
@@ -141,12 +145,15 @@ public class Drawer extends ScreenComponent{
 
 
 	public void moveTurtle(Turtle turtle){
-		//gc.save();
-		//gc.translate(turtle.getXCoordinate(), turtle.getYCoordinate());
-		//gc.rotate(turtle.getDirectionAngle());
+		gc.save();
+		rotate(gc, turtle.getDirectionAngle()- ROTATE_OFFSET, turtle.getXCoordinate(), turtle.getYCoordinate());
 		gc.drawImage(turtleIcon, turtle.getXCoordinate() - TURTLE_WIDTH/2, turtle.getYCoordinate() - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
-		//gc.restore();
+		gc.restore();
 	}
 
-
+// Method taken from https://stackoverflow.com/questions/18260421/how-to-draw-image-rotated-on-javafx-canvas
+	private void rotate(GraphicsContext gc, double angle, double px, double py) {
+		Rotate r = new Rotate(angle, px, py);
+		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+	}
 }
