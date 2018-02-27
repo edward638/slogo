@@ -29,6 +29,10 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 	public static final int ROTATE_OFFSET = 270;
 
 
+	//other turtle images taken from:
+	// https://pixabay.com/en/turtle-animal-reptile-water-green-294522/
+	// https://pixabay.com/en/sea-turtle-floral-flowers-2952470/
+
 	private Image turtleIcon;
 	private Canvas canvas;
 	private GraphicsContext gc;
@@ -53,6 +57,12 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 				update();
 			}
 		});
+		turtleImageBox.valueProperty().addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				changeTurtleImage();
+			}
+		});
 		penColorBox.valueProperty().addListener(new ChangeListener<Object>() {
 			@Override
 			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
@@ -75,7 +85,7 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 		gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 		gc.setStroke(CanvasConstants.DEFAULT_STROKE);
 		gc.strokeRect(0,0, canvas.getWidth(),canvas.getHeight());
-		turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream("turtleImage.PNG"));
+		turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream("green_turtle.PNG"));
 		gc.drawImage(turtleIcon, TURTLE_START_X - TURTLE_WIDTH/2, TURTLE_START_Y - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		penColor = Color.RED;
 		borderPane.setCenter(canvas);
@@ -126,7 +136,12 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 		}
 	}
 
-
+	private void changeTurtleImage(){
+		String imageName = (String) turtleImageBox.getValue();
+		turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+		//TODO: make this more elegant
+		update();
+	}
 
 	private void drawLines(List<Line> lines){
 		gc.setStroke(penColor);
@@ -140,11 +155,11 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 		gc.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
 		changeBackgroundColor();
 		drawLines(turtle.getLines());
-		moveTurtle(turtle);
+		moveTurtle();
 	}
 
 
-	public void moveTurtle(TurtleObservable turtle){
+	public void moveTurtle(){
 		gc.save();
 		rotate(gc, turtle.getDirectionAngle()- ROTATE_OFFSET, turtle.getXCoordinate(), turtle.getYCoordinate());
 		if(turtle.getTurtleShowing()){
