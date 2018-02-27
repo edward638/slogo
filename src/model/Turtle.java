@@ -23,7 +23,7 @@ public class Turtle
 		YCoordinate = yHome;
 		home[0] = xHome;
 		home[1] = yHome; 
-		directionAngle = 90;
+		directionAngle = 270;
 		penShowing = true;
 		turtleShowing = true;
 		lines = new ArrayList<Line>();
