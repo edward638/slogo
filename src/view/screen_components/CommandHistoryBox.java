@@ -4,13 +4,19 @@ import java.util.List;
 
 import controller.ControllerInterface;
 import javafx.scene.control.TextArea;
+import model.CommandHistory;
 import view.constants.ButtonConstants;
 import view.constants.LabelConstants;
 import view.constants.TextAreaConstants;
 
 public class CommandHistoryBox extends HistoryBox{
+	private CommandHistory commandHistory;
 	public CommandHistoryBox(ControllerInterface controller){
 		super(controller);
+	}
+
+	public void setCommandHistory(CommandHistory commandHistory){
+		this.commandHistory = commandHistory;
 	}
 
 	@Override

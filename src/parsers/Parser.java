@@ -107,10 +107,10 @@ public class Parser
 		checkSyntax(commandList, nodeList);
 		
 		//check this
-//		TreeMaker tm  = new TreeMaker(nodeList);
-//		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
-//		TreeEvaluator te = new TreeEvaluator(heads);
-//		System.out.println(te.getValue());
+		TreeMaker tm  = new TreeMaker(nodeList);
+		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
+		TreeEvaluator te = new TreeEvaluator(heads);
+		System.out.println(te.getValue());
 		
 		return nodeList;
 		

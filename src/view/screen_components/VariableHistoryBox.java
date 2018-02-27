@@ -2,13 +2,20 @@ package view.screen_components;
 
 import controller.ControllerInterface;
 import javafx.scene.layout.BorderPane;
+import model.VariableHistory;
+import nodes.Variable;
 import view.constants.ButtonConstants;
 import view.constants.LabelConstants;
 import view.constants.TextAreaConstants;
 
 public class VariableHistoryBox extends HistoryBox{
+	private VariableHistory variableHistory;
 	public VariableHistoryBox(ControllerInterface controller){
 		super(controller);
+	}
+
+	public void setVariableHistory(VariableHistory variableHistory){
+		this.variableHistory = variableHistory;
 	}
 
 	@Override

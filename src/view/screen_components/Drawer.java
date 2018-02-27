@@ -31,10 +31,14 @@ public class Drawer extends ScreenComponent{
 	private ComboBox<String> backgroundColorBox;
 	private ComboBox<String> penColorBox;
 	private ComboBox<String> turtleImageBox;
-
+	private Turtle turtle;
 	private Color penColor;
 	public Drawer(ControllerInterface controller){
 		super(controller);
+	}
+
+	public void setTurtle(Turtle turtle){
+		this.turtle = turtle;
 	}
 
 	@Override
@@ -42,7 +46,7 @@ public class Drawer extends ScreenComponent{
 		backgroundColorBox.valueProperty().addListener(new ChangeListener<Object>() {
 			@Override
 			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				changeBackgroundColor();
+				update();
 			}
 		});
 		penColorBox.valueProperty().addListener(new ChangeListener<Object>() {
@@ -68,7 +72,7 @@ public class Drawer extends ScreenComponent{
 		gc.setStroke(CanvasConstants.DEFAULT_STROKE);
 		gc.strokeRect(0,0, canvas.getWidth(),canvas.getHeight());
 		turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream("turtleImage.PNG"));
-		gc.drawImage(turtleIcon, TURTLE_START_X, TURTLE_START_Y, TURTLE_WIDTH, TURTLE_HEIGHT);
+		gc.drawImage(turtleIcon, TURTLE_START_X - TURTLE_WIDTH/2, TURTLE_START_Y - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		penColor = Color.RED;
 		borderPane.setCenter(canvas);
 	}
@@ -128,16 +132,20 @@ public class Drawer extends ScreenComponent{
 		}
 	}
 
-	public void update(List<Line> lines, Turtle turtle){
+	public void update(){
 		gc.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
 		changeBackgroundColor();
-		drawLines(lines);
+		drawLines(turtle.getLines());
 		moveTurtle(turtle);
 	}
 
 
 	public void moveTurtle(Turtle turtle){
-			gc.drawImage(turtleIcon, turtle.getXCoordinate(), turtle.getYCoordinate(), TURTLE_WIDTH, TURTLE_HEIGHT);
+		//gc.save();
+		//gc.translate(turtle.getXCoordinate(), turtle.getYCoordinate());
+		//gc.rotate(turtle.getDirectionAngle());
+		gc.drawImage(turtleIcon, turtle.getXCoordinate() - TURTLE_WIDTH/2, turtle.getYCoordinate() - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
+		//gc.restore();
 	}
 
 
