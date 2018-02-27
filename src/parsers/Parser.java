@@ -12,6 +12,7 @@ import Tree.TreeEvaluator;
 import Tree.TreeMaker;
 import model.Turtle;
 import model.VariableHistory;
+import model.CommandHistory;
 import nodes.Constant;
 import nodes.Liste;
 import nodes.Node;
@@ -37,7 +38,9 @@ public class Parser
 	private static final String REGEX_FILE = "parsers/regex";
 	private static final String NODE_PACKAGE = "commandNode.";
 	private Turtle turt;
-	private VariableHistory history;
+	private VariableHistory varHistory;
+	private CommandHistory comHistory;
+	private String lang;
 	
 	/**
 	 * Class Constructor
@@ -47,7 +50,7 @@ public class Parser
 	 * @param t the current turtle
 	 * @param language the current language
 	 */
-	public Parser(Turtle t, VariableHistory VH)
+	public Parser(Turtle t, VariableHistory VH, CommandHistory CH)
 	{
 		myTranslation = new HashMap<>();
 
@@ -63,7 +66,8 @@ public class Parser
 			children.put(key, Integer.parseInt(numChildren.getString(key)));	
 		}
 		turt = t;
-		history = VH;
+		varHistory = VH;
+		comHistory = CH;
 	}
 	
 	/**
@@ -95,8 +99,11 @@ public class Parser
 	 */
 	public List<Node> parseString(String command, String language)
 	{
-		languageFilePath = "resources.languages/" + language;
+		lang = language;
+		languageFilePath = "resources.languages/" + lang;
 		addResources(languageFilePath, myTranslation);
+
+		comHistory.addCommand(command);
 
 		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
 		for(String s: commandList)
@@ -163,7 +170,7 @@ public class Parser
 					else if(key.equals("Variable"))
 					{
 						//System.out.println("got to variable");
-						Node n = new Variable(text.substring(1), history);
+						Node n = new Variable(text.substring(1), varHistory);
 						nodeList.add(n);
 					}
 					else if(key.equals("List"))
@@ -171,7 +178,7 @@ public class Parser
 						Node n = new Liste();
 						String noBrackets = text.substring(1,text.length()-1);
 						String trimmed = noBrackets.trim();
-						List<Node> listNodes = parseString(trimmed);
+						List<Node> listNodes = parseString(trimmed,lang);
 						for(Node ln: listNodes)
 						{
 							n.addChild(ln);
