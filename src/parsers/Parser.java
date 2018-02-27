@@ -13,6 +13,7 @@ import Tree.TreeMaker;
 import model.Turtle;
 import model.VariableHistory;
 import nodes.Constant;
+import nodes.Liste;
 import nodes.Node;
 import nodes.NodeFactory;
 import nodes.Variable;
@@ -46,14 +47,12 @@ public class Parser
 	 * @param t the current turtle
 	 * @param language the current language
 	 */
-	public Parser(Turtle t, String language)
+	public Parser(Turtle t, VariableHistory VH)
 	{
+		myTranslation = new HashMap<>();
+		
 		regex = new HashMap<>();
 		addResources(REGEX_FILE, regex);
-		
-		languageFilePath = "resources.languages/" + language;
-		myTranslation = new HashMap<>();
-		addResources(languageFilePath, myTranslation);
 		
 		children = new HashMap<>();
 		ResourceBundle numChildren = ResourceBundle.getBundle("parsers/numChildren");
@@ -64,7 +63,7 @@ public class Parser
 			children.put(key, Integer.parseInt(numChildren.getString(key)));	
 		}
 		turt = t;
-		history = new VariableHistory();
+		history = VH;
 	}
 	
 	/**
@@ -94,9 +93,11 @@ public class Parser
 	 * @throws ClassNotFoundException 
 	 * @throws InvalidEntryException 
 	 */
-	public List<Node> parseString(String command)
+	public List<Node> parseString(String command, String language)
 	{
-		
+		languageFilePath = "resources.languages/" + language;
+		addResources(languageFilePath, myTranslation);
+
 		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
 		for(String s: commandList)
 		{
@@ -163,6 +164,18 @@ public class Parser
 					{
 						//System.out.println("got to variable");
 						Node n = new Variable(text.substring(1), history);
+						nodeList.add(n);
+					}
+					else if(key.equals("List"))
+					{
+						Node n = new Liste();
+						String noBrackets = text.substring(1,text.length()-1);
+						String trimmed = noBrackets.trim();
+						List<Node> listNodes = parseString(trimmed);
+						for(Node ln: listNodes)
+						{
+							n.addChild(ln);
+						}
 						nodeList.add(n);
 					}
 				}
