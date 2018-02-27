@@ -1,8 +1,7 @@
 package controller;
 
 import javafx.stage.Stage;
-import model.ModelInterface;
-import model.Turtle;
+import model.*;
 import parsers.Parser;
 import view.GUI;
 import view.screen_components.CommandBox;
@@ -15,20 +14,44 @@ public class Controller implements ControllerInterface{
 	private GUI gui;
 	private Turtle turtle;
 	private Parser parser;
+	private CommandHistory commandHistory;
+	private VariableHistory variableHistory;
+	private Drawer drawer;
+	private CommandBox commandBox;
+	private CommandHistoryBox commandHistoryBox;
+	private VariableHistoryBox variableHistoryBox;
 	public Controller(Stage stage){
 //		this.model = model;
-		turtle = new Turtle(Drawer.TURTLE_START_X, Drawer.TURTLE_START_Y);
-		//parser = new Parser(turtle, "English");
 		gui = new GUI();
 		gui.start(stage);
-		this.initializeGUIComponents();
+		this.initializeScreenComponents();
+		this.initializeModelComponents();
+		this.setUpConnections();
+		this.addToGUI();
 	}
-	
-	private void initializeGUIComponents(){
-		CommandBox commandBox = new CommandBox(this);
-		CommandHistoryBox commandHistoryBox = new CommandHistoryBox(this);
-		Drawer drawer = new Drawer(this);
-		VariableHistoryBox variableHistoryBox = new VariableHistoryBox(this);
+
+	private void initializeModelComponents(){
+		turtle = new Turtle(Drawer.TURTLE_START_X, Drawer.TURTLE_START_Y);
+		parser = new Parser(turtle, "English");
+		commandHistory = new CommandHistory();
+		variableHistory = new VariableHistory();
+	}
+
+	private void setUpConnections(){
+		turtle.addTurtleObserver(drawer);
+		drawer.setTurtle(turtle);
+		variableHistoryBox.setVariableHistory(variableHistory);
+		commandHistoryBox.setCommandHistory(commandHistory);
+	}
+
+	private void initializeScreenComponents(){
+		drawer = new Drawer(this);
+		commandBox = new CommandBox(this);
+		commandHistoryBox = new CommandHistoryBox(this);
+		variableHistoryBox = new VariableHistoryBox(this);
+	}
+
+	private void addToGUI(){
 		gui.addCommandBoxBorderPane(commandBox.getGUIComponent());
 		gui.addCommandHistoryBoxBorderPane(commandHistoryBox.getGUIComponent());
 		gui.addDrawerBorderPane(drawer.getGUIComponent());
@@ -37,7 +60,7 @@ public class Controller implements ControllerInterface{
 	
     @Override
 	public void passCommand(String s){
-//        parser.parseString(s);
+        parser.parseString(s);
     }
 
     @Override

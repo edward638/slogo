@@ -9,13 +9,10 @@ public class Constant extends Node{
 		super(null, 0);
 		this.value = value;
 	}
-	
-	public double getValue() {
-		return value;
-	}
+
+	public double getValue() { return value; }
 
 	public double evaluate(List<Node> args) {
-		System.out.println(value + " " + args.toString());
 		return value;
 	}
 }

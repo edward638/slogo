@@ -3,26 +3,21 @@ package Tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import nodes.CommandNode;
 import nodes.Node;
 
 public class TreeEvaluator {
 	private Double returnValue;
-	private ArrayList<Node> heads;
 	
-	public TreeEvaluator (List<Node> heads) {
-		this.heads = (ArrayList<Node>) heads;
+	public TreeEvaluator () {
 		returnValue = 0.0;
-		evaluate();
-	}
-		
-	public Double getValue() {
-		return returnValue;
 	}
 	
-	private void evaluate() {
+	public double evaluate(ArrayList<Node> heads) {
 		for (int i = 0; i < heads.size(); i++) {
 			evaluateHead(heads.get(i));
 		}
+		return returnValue;
 	}
 	
 	private void evaluateHead(Node node) {
@@ -38,5 +33,6 @@ public class TreeEvaluator {
 			}
 		}
 		returnValue = node.evaluate(nArgs);
+		//else returnValue = node.getValue();
 	}
 }

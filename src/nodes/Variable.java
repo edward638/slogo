@@ -18,20 +18,23 @@ public class Variable extends Node{
 	public String getName() {
 		return name;
 	}
+
+	public double getNewValue() { return value; }
 	
 	public double getValue() {
-		return value;
+		return VH.getValue(name);
 	}
-	
+
+	@Override
+	public double evaluate(List<Node> args) {
+		return 0;
+	}
+
 	public VariableHistory getVH() {
 		return VH;
 	}
 	
 	public void setValue (double value) {
 		this.value = value;
-	}
-
-	public double evaluate(List<Node> args) {
-		return VH.getValue(name);
 	}
 }

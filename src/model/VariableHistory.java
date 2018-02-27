@@ -21,6 +21,6 @@ public class VariableHistory {
 	}
 	
 	public void add (Variable VN) {
-		variables.put(VN.getName(), VN.getValue());
+		variables.put(VN.getName(), VN.getNewValue());
 	}
 }

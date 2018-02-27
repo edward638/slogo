@@ -1,5 +1,9 @@
 package nodes;
 
-public interface CommandNode {
+import java.util.List;
+
+public interface CommandNode{
+
+    public double evaluate(List<Node> arguments);
 
 }
