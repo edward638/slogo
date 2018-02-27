@@ -3,6 +3,7 @@ package Tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import nodes.CommandNode;
 import nodes.Node;
 
 public class TreeEvaluator {
@@ -37,6 +38,10 @@ public class TreeEvaluator {
 				nArgs.add(curr);
 			}
 		}
-		returnValue = node.evaluate(nArgs);
+		if (node instanceof CommandNode)  {
+			CommandNode CN = (CommandNode) node;
+			returnValue = CN.evaluate(nArgs);
+		}
+		//else returnValue = node.getValue();
 	}
 }
