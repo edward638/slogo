@@ -14,19 +14,24 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
 import model.TurtleObservable;
+import view.TurtleObserver;
 import view.constants.CanvasConstants;
 import view.constants.ComboBoxConstants;
 
 import javafx.scene.shape.Line;
 import java.util.List;
 
-public class Drawer extends ScreenComponent{
+public class Drawer extends ScreenComponent implements TurtleObserver{
 	public static final double TURTLE_START_X = CanvasConstants.CANVAS_WIDTH/2;
 	public static final double TURTLE_START_Y = CanvasConstants.CANVAS_HEIGHT/2;
 	public static final int TURTLE_WIDTH = 50;
 	public static final int TURTLE_HEIGHT = 50;
 	public static final int ROTATE_OFFSET = 270;
 
+
+	//other turtle images taken from:
+	// https://pixabay.com/en/turtle-animal-reptile-water-green-294522/
+	// https://pixabay.com/en/sea-turtle-floral-flowers-2952470/
 
 	private Image turtleIcon;
 	private Canvas canvas;
@@ -52,6 +57,12 @@ public class Drawer extends ScreenComponent{
 				update();
 			}
 		});
+		turtleImageBox.valueProperty().addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				changeTurtleImage();
+			}
+		});
 		penColorBox.valueProperty().addListener(new ChangeListener<Object>() {
 			@Override
 			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
@@ -74,7 +85,7 @@ public class Drawer extends ScreenComponent{
 		gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 		gc.setStroke(CanvasConstants.DEFAULT_STROKE);
 		gc.strokeRect(0,0, canvas.getWidth(),canvas.getHeight());
-		turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream("turtleImage.PNG"));
+		turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream("green_turtle.PNG"));
 		gc.drawImage(turtleIcon, TURTLE_START_X - TURTLE_WIDTH/2, TURTLE_START_Y - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		penColor = Color.RED;
 		borderPane.setCenter(canvas);
@@ -125,7 +136,12 @@ public class Drawer extends ScreenComponent{
 		}
 	}
 
-
+	private void changeTurtleImage(){
+		String imageName = (String) turtleImageBox.getValue();
+		turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+		//TODO: make this more elegant
+		update();
+	}
 
 	private void drawLines(List<Line> lines){
 		gc.setStroke(penColor);
@@ -139,14 +155,16 @@ public class Drawer extends ScreenComponent{
 		gc.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
 		changeBackgroundColor();
 		drawLines(turtle.getLines());
-		moveTurtle(turtle);
+		moveTurtle();
 	}
 
 
-	public void moveTurtle(Turtle turtle){
+	public void moveTurtle(){
 		gc.save();
 		rotate(gc, turtle.getDirectionAngle()- ROTATE_OFFSET, turtle.getXCoordinate(), turtle.getYCoordinate());
-		gc.drawImage(turtleIcon, turtle.getXCoordinate() - TURTLE_WIDTH/2, turtle.getYCoordinate() - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
+		if(turtle.getTurtleShowing()){
+			gc.drawImage(turtleIcon, turtle.getXCoordinate() - TURTLE_WIDTH/2, turtle.getYCoordinate() - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
+		}
 		gc.restore();
 	}
 
@@ -154,5 +172,10 @@ public class Drawer extends ScreenComponent{
 	private void rotate(GraphicsContext gc, double angle, double px, double py) {
 		Rotate r = new Rotate(angle, px, py);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+	}
+
+	@Override
+	public void notifyTurtleObserver() {
+		update();
 	}
 }
