@@ -50,7 +50,7 @@ public class Parser
 	public Parser(Turtle t, VariableHistory VH)
 	{
 		myTranslation = new HashMap<>();
-		
+
 		regex = new HashMap<>();
 		addResources(REGEX_FILE, regex);
 		
