@@ -5,10 +5,7 @@ import javafx.stage.Stage;
 import model.*;
 import parsers.Parser;
 import view.GUI;
-import view.screen_components.CommandBox;
-import view.screen_components.CommandHistoryBox;
-import view.screen_components.Drawer;
-import view.screen_components.VariableHistoryBox;
+import view.screen_components.*;
 
 public class Controller implements ControllerInterface{
 	private ModelInterface model;
@@ -21,6 +18,7 @@ public class Controller implements ControllerInterface{
 	private CommandBox commandBox;
 	private CommandHistoryBox commandHistoryBox;
 	private VariableHistoryBox variableHistoryBox;
+	private HelpButton helpButton;
 	public Controller(Stage stage){
 //		this.model = model;
 		gui = new GUI();
@@ -50,6 +48,8 @@ public class Controller implements ControllerInterface{
 		commandBox = new CommandBox(this);
 		commandHistoryBox = new CommandHistoryBox(this);
 		variableHistoryBox = new VariableHistoryBox(this);
+		helpButton = new HelpButton(this);
+
 	}
 
 	private void addToGUI(){
@@ -57,6 +57,7 @@ public class Controller implements ControllerInterface{
 		gui.addCommandHistoryBoxBorderPane(commandHistoryBox.getGUIComponent());
 		gui.addDrawerBorderPane(drawer.getGUIComponent());
 		gui.addVariableHistoryBoxBorderPane(variableHistoryBox.getGUIComponent());
+		gui.addHelpButtonBorderPane(helpButton.getGUIComponent());
 	}
 	
     @Override

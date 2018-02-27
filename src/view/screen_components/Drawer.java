@@ -84,7 +84,7 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 		gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 		gc.setStroke(CanvasConstants.DEFAULT_STROKE);
 		gc.strokeRect(0,0, canvas.getWidth(),canvas.getHeight());
-		turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream("green_turtle.PNG"));
+		turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream("black_and_white_turtle.PNG"));
 		gc.drawImage(turtleIcon, TURTLE_START_X - TURTLE_WIDTH/2, TURTLE_START_Y - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		borderPane.setCenter(canvas);
 	}
