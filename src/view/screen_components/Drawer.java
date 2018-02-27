@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import model.Turtle;
+import model.TurtleObservable;
 import view.constants.CanvasConstants;
 import view.constants.ComboBoxConstants;
 
@@ -31,13 +32,13 @@ public class Drawer extends ScreenComponent{
 	private ComboBox<String> backgroundColorBox;
 	private ComboBox<String> penColorBox;
 	private ComboBox<String> turtleImageBox;
-	private Turtle turtle;
+	private TurtleObservable turtle;
 	private Color penColor;
 	public Drawer(ControllerInterface controller){
 		super(controller);
 	}
 
-	public void setTurtle(Turtle turtle){
+	public void setTurtle(TurtleObservable turtle){
 		this.turtle = turtle;
 	}
 
@@ -140,10 +141,11 @@ public class Drawer extends ScreenComponent{
 	}
 
 
-	public void moveTurtle(Turtle turtle){
+	public void moveTurtle(TurtleObservable turtle){
 		//gc.save();
 		//gc.translate(turtle.getXCoordinate(), turtle.getYCoordinate());
 		//gc.rotate(turtle.getDirectionAngle());
+
 		gc.drawImage(turtleIcon, turtle.getXCoordinate() - TURTLE_WIDTH/2, turtle.getYCoordinate() - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		//gc.restore();
 	}
