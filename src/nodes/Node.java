@@ -1,5 +1,6 @@
 package nodes;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,9 +46,11 @@ public abstract class Node
 	public void reset() {
 		current = 0;
 	}
-	
-	public double getValue() 
+
+	public double getValue()
 	{
 		return value;
 	}
+
+	public abstract double evaluate (List<Node> args);
 }
