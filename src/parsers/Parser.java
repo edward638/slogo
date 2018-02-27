@@ -47,14 +47,12 @@ public class Parser
 	 * @param t the current turtle
 	 * @param language the current language
 	 */
-	public Parser(Turtle t, String language, VariableHistory VH)
+	public Parser(Turtle t, VariableHistory VH)
 	{
+		myTranslation = new HashMap<>();
+		
 		regex = new HashMap<>();
 		addResources(REGEX_FILE, regex);
-		
-		languageFilePath = "resources.languages/" + language;
-		myTranslation = new HashMap<>();
-		addResources(languageFilePath, myTranslation);
 		
 		children = new HashMap<>();
 		ResourceBundle numChildren = ResourceBundle.getBundle("parsers/numChildren");
@@ -95,9 +93,11 @@ public class Parser
 	 * @throws ClassNotFoundException 
 	 * @throws InvalidEntryException 
 	 */
-	public List<Node> parseString(String command)
+	public List<Node> parseString(String command, String language)
 	{
-		
+		languageFilePath = "resources.languages/" + language;
+		addResources(languageFilePath, myTranslation);
+
 		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
 		for(String s: commandList)
 		{
