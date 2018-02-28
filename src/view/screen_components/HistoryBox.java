@@ -7,6 +7,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
+import java.util.List;
+
 public abstract class HistoryBox extends ScreenComponent{
 	//private static final int HBOX_SPACING = 50;
 	private String historyBoxLabel;
@@ -58,6 +60,15 @@ public abstract class HistoryBox extends ScreenComponent{
 		textArea.setPrefRowCount(rows);
 		textArea.setPrefColumnCount(cols);
 		borderPane.setCenter(textArea);
+	}
+
+	protected void fillBox(List<String> commands){
+		StringBuilder commandsToDisplay = new StringBuilder();
+		for(String s: commands){
+			commandsToDisplay.append(s);
+			commandsToDisplay.append("\n");
+		}
+		textArea.setText(commandsToDisplay.toString());
 	}
 	
 }

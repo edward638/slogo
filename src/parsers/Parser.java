@@ -48,7 +48,8 @@ public class Parser
 	 * given the current language.
 	 * 
 	 * @param t the current turtle
-	 * @param VH the current language
+	 * @param VH the variable history
+	 * @param CH the command history
 	 */
 	public Parser(Turtle t, VariableHistory VH, CommandHistory CH)
 	{
