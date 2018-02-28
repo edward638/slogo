@@ -15,7 +15,7 @@ public class SampleMain {
 	{
 		Turtle turt = new Turtle(0,0);
 
-//		Parser newnew = new Parser(turt, "English", null);
+		//Parser newnew = new Parser(turt, "English", null);
 		//newnew.addResources("parsers/regex");
 		//List<Node> nodes = newnew.parseString("make :x 20 fd :x");
 		//TreeMaker tm  = new TreeMaker(nodes);
