@@ -26,9 +26,10 @@ public class DoTimes extends Node implements CommandNode{
 		Variable v = (Variable) l.getElement(0);
 		Constant limit = (Constant) l.getElement(1);
 
-		Liste l2 = (Liste) args.get(0);
+		Liste l2 = (Liste) args.get(1);
 
 		while (v.getValue() <= limit.getValue()) {
+			System.out.println(v.getValue());
 			value = l2.evaluate(null);
 
 			double next = v.getValue();
