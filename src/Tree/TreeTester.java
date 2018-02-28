@@ -5,29 +5,31 @@ import java.util.ArrayList;
 import nodes.*;
 import commandNode.*;
 import model.Turtle;
+import model.VariableHistory;
 
 public class TreeTester {
 	private static ArrayList<Node> nodes;
 	
 	public static void main (String [] args) {
 		Turtle t = new Turtle(0, 0);
+		VariableHistory VH = new VariableHistory();
 		nodes = new ArrayList<Node>();
-		/**Repeat r = new Repeat(null, 2);
-		Backward b = new Backward(t, 1);
-		Constant c = new Constant(5);
-		nodes.add(r);
-		nodes.add(b);
+		MakeVariable mv = new MakeVariable(t, 2);
+		nodes.add(mv);
+		Variable v = new Variable (":x", VH);
+		nodes.add(v);
+		Constant c = new Constant(0);
 		nodes.add(c);
+		DoTimes dt = new DoTimes(t, 2);
+		nodes.add(dt);
 		Liste l = new Liste();
-		Forward f = new Forward(t, 1);
-		Constant c2 = new Constant(20);
-		Backward b2 = new Backward(t, 1);
-		Constant c3 = new Constant(5);
-		l.add(f);
-		l.add(c2);
-		l.add(b2);
-		l.add(c3);
-		nodes.add(l);**/
+		l.add(v);
+		l.add(new Constant(10));
+		nodes.add(l);
+		Liste l2 = new Liste();
+		l.add(new Forward(t, 1));
+		l.add(v);
+		nodes.add(l2);
 		TreeMaker tm  = new TreeMaker(nodes);
 		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator();
