@@ -107,10 +107,6 @@ public class Parser
 		comHistory.addCommand(command);
 
 		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
-		for(String s: commandList)
-		{
-			//System.out.println(s);
-		}
 		List<Node> nodeList = new ArrayList<>();
 		
 		checkSyntax(commandList, nodeList);
