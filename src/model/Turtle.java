@@ -100,12 +100,10 @@ public class Turtle implements TurtleObservable
 		turtleObserver.notifyTurtleObserver();
 	}
 
-
 	public boolean getTurtleShowing() {
 		return turtleShowing;
 	}
 
-	@Override
 	public void setPenColor(Color penColor) {
 		this.penColor = penColor;
 	}

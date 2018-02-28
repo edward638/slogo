@@ -12,5 +12,4 @@ public interface TurtleObservable {
     public boolean getPenShowing();
     public List<Line> getLines();
     public boolean getTurtleShowing();
-    public void setPenColor(Color color);
 }

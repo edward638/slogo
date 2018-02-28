@@ -20,8 +20,9 @@ public class DoTimes extends Node implements CommandNode{
 	 * 
 	 * @return value of the final command executed
 	 */
+
 	public double evaluate(List<Node> args) {
-		
+		return 0;
 	}
 
 }

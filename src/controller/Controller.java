@@ -31,9 +31,9 @@ public class Controller implements ControllerInterface{
 
 	private void initializeModelComponents(){
 		turtle = new Turtle(Drawer.TURTLE_START_X, Drawer.TURTLE_START_Y);
-		parser = new Parser(turtle, "English");
-		commandHistory = new CommandHistory();
-		variableHistory = new VariableHistory();
+        commandHistory = new CommandHistory();
+        variableHistory = new VariableHistory();
+		parser = new Parser(turtle, variableHistory, commandHistory);
 	}
 
 	private void setUpConnections(){
@@ -41,6 +41,7 @@ public class Controller implements ControllerInterface{
 		drawer.setTurtle(turtle);
 		variableHistoryBox.setVariableHistory(variableHistory);
 		commandHistoryBox.setCommandHistory(commandHistory);
+		commandHistory.setCommandHistoryObserver(commandHistoryBox);
 	}
 
 	private void initializeScreenComponents(){
