@@ -43,7 +43,7 @@ public class VariableHistory implements VariableHistoryObservable{
 		List<String> output = new ArrayList<>();
 		for (String key: variables.keySet())
 		{
-			output.add(key + " " + Double.toString(variables.get(key)));
+			output.add(key + " = " + Double.toString(variables.get(key)));
 		}
 
 		return output;

@@ -9,6 +9,7 @@ import nodes.Node;
 
 public class Backward extends Node implements CommandNode
 {
+	private static double radianConversion = Math.PI/180;
 
 	public Backward(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -22,10 +23,9 @@ public class Backward extends Node implements CommandNode
 	 */
 	public double evaluate(List<Node> arguments) 
 	{
-		double xCor = turtle.getXCoordinate() - arguments.get(0).getValue()*Math.sin(turtle.getDirectionAngle());
-		double yCor = turtle.getYCoordinate() - arguments.get(0).getValue()*Math.cos(turtle.getDirectionAngle());
+		double xCor = turtle.getXCoordinate() - arguments.get(0).getValue()*Math.cos(turtle.getDirectionAngle()*radianConversion);
+		double yCor = turtle.getYCoordinate() - arguments.get(0).getValue()*Math.sin(turtle.getDirectionAngle()*radianConversion);
 		turtle.setCoordinates(xCor,yCor);
-		//add a line
 		value = arguments.get(0).getValue();
 		return value;
 	}
