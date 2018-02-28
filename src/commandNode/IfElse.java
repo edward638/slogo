@@ -23,13 +23,13 @@ public class IfElse extends Node implements CommandNode {
 		value = 0;
 		if(args.get(0).getValue() != 0)
 		{
-			double val = args.get(1).evaluate("?");
-			value =  val;
+			//double val = args.get(1).evaluate("?");
+			//value =  val;
 		}
 		else
 		{
-			double val = args.get(2).evaluate("?");
-			value =  val;
+			//double val = args.get(2).evaluate("?");
+			//value =  val;
 		}
 		return value;
 	}

@@ -19,7 +19,9 @@ public class Variable extends Node{
 		return name;
 	}
 
-	public double getNewValue() { return value; }
+	public double getNewValue() {
+		return value;
+	}
 	
 	public double getValue() {
 		return VH.getValue(name);
@@ -27,7 +29,7 @@ public class Variable extends Node{
 
 	@Override
 	public double evaluate(List<Node> args) {
-		return 0;
+		return value;
 	}
 
 	public VariableHistory getVH() {
@@ -36,5 +38,10 @@ public class Variable extends Node{
 	
 	public void setValue (double value) {
 		this.value = value;
+	}
+
+	public void setNewValue (double value) {
+		this.value = value;
+		VH.add(this);
 	}
 }
