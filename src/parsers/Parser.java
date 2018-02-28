@@ -109,7 +109,7 @@ public class Parser
 		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
 		for(String s: commandList)
 		{
-			System.out.println(s);
+			//System.out.println(s);
 		}
 		List<Node> nodeList = new ArrayList<>();
 		
@@ -176,15 +176,17 @@ public class Parser
 					}
 					else if(key.equals("List"))
 					{
-						Node n = new Liste();
+						Liste l = new Liste();
 						String noBrackets = text.substring(1,text.length()-1);
+						//System.out.println(noBrackets);
 						String trimmed = noBrackets.trim();
+						//System.out.println(trimmed);
 						List<Node> listNodes = parseString(trimmed,lang);
 						for(Node ln: listNodes)
 						{
-							n.addChild(ln);
+							l.add(ln);
 						}
-						nodeList.add(n);
+						nodeList.add(l);
 					}
 				}
 			}
