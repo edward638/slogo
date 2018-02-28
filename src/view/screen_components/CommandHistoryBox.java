@@ -4,13 +4,16 @@ import java.util.List;
 
 import controller.ControllerInterface;
 import javafx.scene.control.TextArea;
+import javafx.scene.web.HTMLEditorSkin;
 import model.CommandHistory;
+import model.CommandHistoryObservable;
+import view.CommandHistoryObserver;
 import view.constants.ButtonConstants;
 import view.constants.LabelConstants;
 import view.constants.TextAreaConstants;
 
-public class CommandHistoryBox extends HistoryBox{
-	private CommandHistory commandHistory;
+public class CommandHistoryBox extends HistoryBox implements CommandHistoryObserver{
+	private CommandHistoryObservable commandHistory;
 	public CommandHistoryBox(ControllerInterface controller){
 		super(controller);
 	}
@@ -34,10 +37,16 @@ public class CommandHistoryBox extends HistoryBox{
 	
 	private void fillBoxWithCommands(List<String> commands){
 		TextArea textArea = super.getTextArea();
-		String commandsToDisplay = "";
+		StringBuilder commandsToDisplay = new StringBuilder();
 		for(String s: commands){
-			commandsToDisplay += s + "\n";
+			commandsToDisplay.append(s);
+			commandsToDisplay.append("\n");
 		}
-		textArea.setText(commandsToDisplay);
+		textArea.setText(commandsToDisplay.toString());
+	}
+
+	@Override
+	public void notifyCommandHistoryObserver() {
+		fillBoxWithCommands(commandHistory.getCommands());
 	}
 }
