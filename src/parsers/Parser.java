@@ -30,6 +30,7 @@ import nodes.Variable;
 public class Parser 
 {
 	private Map<String,Pattern> myTranslation;
+	private static boolean NEW_COMMAND = true;
 	
 	//possibly change to list because order of checking regex matters
 	private Map<String,Pattern> regex;
@@ -104,8 +105,19 @@ public class Parser
 		languageFilePath = "resources.languages/" + lang;
 		addResources(languageFilePath, myTranslation);
 
-		comHistory.addCommand(command);
+		if(NEW_COMMAND)
+		{
+			comHistory.addCommand(command);
+		}
+		
+		NEW_COMMAND = true;
 
+		int commentIndex = command.indexOf("#");
+		if (commentIndex >= 0)
+		{
+			command = command.substring(0, commentIndex);
+		}
+		
 		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
 		List<Node> nodeList = new ArrayList<>();
 		
@@ -154,6 +166,7 @@ public class Parser
 						}
 						catch(ClassNotFoundException e)
 						{
+							comHistory.addCommand("Error: Could not access constructor for command " + text );
 							throw new InvalidEntryException("Error: Could not access Node constructor");
 						}
 						
@@ -177,6 +190,7 @@ public class Parser
 						//System.out.println(noBrackets);
 						String trimmed = noBrackets.trim();
 						//System.out.println(trimmed);
+						NEW_COMMAND = false;
 						List<Node> listNodes = parseString(trimmed,lang);
 						for(Node ln: listNodes)
 						{
@@ -188,6 +202,7 @@ public class Parser
 			}
 			if(!match)
 			{
+				comHistory.addCommand("Error: Invalid entry, no command " + text );
 				throw new InvalidEntryException("Error: Invalid entry, no such command");
 			}
 		}
@@ -211,6 +226,7 @@ public class Parser
 				return key;
 			}
 		}
+		comHistory.addCommand("Error: Cannot recognize language");
 		throw new InvalidEntryException("Error: Cannot recognize language");
 	}
 }

@@ -161,7 +161,7 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 
 	public void moveTurtle(){
 		gc.save();
-		rotate(gc, turtle.getDirectionAngle()- ROTATE_OFFSET, turtle.getXCoordinate(), turtle.getYCoordinate());
+		rotate(gc, turtle.getDirectionAngle(), turtle.getXCoordinate(), turtle.getYCoordinate());
 		if(turtle.getTurtleShowing()){
 			gc.drawImage(turtleIcon, turtle.getXCoordinate() - TURTLE_WIDTH/2, turtle.getYCoordinate() - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		}
