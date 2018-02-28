@@ -34,19 +34,9 @@ public class CommandHistoryBox extends HistoryBox implements CommandHistoryObser
 		super.setUpLabels(LabelConstants.HISTORY_LABEL_TEXT, ButtonConstants.HISTORY_BUTTON_LABEL);
 		super.generateGUIComponent();
 	}
-	
-	private void fillBoxWithCommands(List<String> commands){
-		TextArea textArea = super.getTextArea();
-		StringBuilder commandsToDisplay = new StringBuilder();
-		for(String s: commands){
-			commandsToDisplay.append(s);
-			commandsToDisplay.append("\n");
-		}
-		textArea.setText(commandsToDisplay.toString());
-	}
 
 	@Override
 	public void notifyCommandHistoryObserver() {
-		fillBoxWithCommands(commandHistory.getCommands());
+		super.fillBox(commandHistory.getCommands());
 	}
 }

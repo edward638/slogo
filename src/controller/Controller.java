@@ -42,6 +42,8 @@ public class Controller implements ControllerInterface{
 		variableHistoryBox.setVariableHistory(variableHistory);
 		commandHistoryBox.setCommandHistory(commandHistory);
 		commandHistory.setCommandHistoryObserver(commandHistoryBox);
+		variableHistoryBox.setVariableHistory(variableHistory);
+		variableHistory.addVariableHistoryObserver(variableHistoryBox);
 	}
 
 	private void initializeScreenComponents(){
@@ -68,7 +70,7 @@ public class Controller implements ControllerInterface{
 
     @Override
     public void clearVariableBox(){
-
+		variableHistory.clearHistory();
     }
 
     @Override
