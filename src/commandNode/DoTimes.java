@@ -20,6 +20,7 @@ public class DoTimes extends Node implements CommandNode{
 	 * 
 	 * @return value of the final command executed
 	 */
+
 	public double evaluate(List<Node> args) {
 		Liste l = (Liste) args.get(0);
 		Variable v = (Variable) l.getElement(0);

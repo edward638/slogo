@@ -23,8 +23,7 @@ public class If extends Node implements CommandNode{
 		value = 0;
 		if(args.get(0).getValue() != 0)
 		{
-			//double val = args.get(1).evaluate("?");
-			//value =  val;
+			value = args.get(1).evaluate(null);
 		}
 		return value;
 	}

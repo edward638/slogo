@@ -1,5 +1,6 @@
 package model;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 import java.util.List;

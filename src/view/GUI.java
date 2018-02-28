@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import view.constants.BorderPaneConstants;
 import view.factories.TitleFactory;
@@ -34,7 +35,16 @@ public class GUI{
         stage.setScene(startScene);
         addTitle();
         stage.show();
+
     }
+
+//    private void displayHelpPopup(){
+//        Group root2 = new Group();
+//        Stage helpStage = new Stage();
+//        helpStage.setTitle("Help for SLogo");
+//        helpStage.setScene(new Scene(root2, 450, 450));
+//        helpStage.show();
+//    }
 
     private void addTitle() {
         Image titleImage = new Image(getClass().getClassLoader().getResourceAsStream(TitleFactory.SLOGO_IMAGE));
@@ -65,4 +75,9 @@ public class GUI{
         root.getChildren().add(borderPane);
     }
 
+    public void addHelpButtonBorderPane(BorderPane borderPane){
+        borderPane.setLayoutX(BorderPaneConstants.HELP_BUTTON_X);
+        borderPane.setLayoutY(BorderPaneConstants.HELP_BUTTON_Y);
+        root.getChildren().add(borderPane);
+    }
 }

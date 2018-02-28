@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import view.TurtleObserver;
 
@@ -16,10 +17,12 @@ public class Turtle implements TurtleObservable
 	private List<Line> lines;
 	private boolean penShowing;
 	private boolean turtleShowing;
+	private Color penColor;
 	
 	//THIS IS ANDY'S SUGGESTION
 	private TurtleObserver turtleObserver;
 
+	//Could pass pen color in parameter! Right now we call setPenColor in controller. TODO: Discuss this idea, Also screen size in constructor?
 	public Turtle(double xHome, double yHome)
 	{
 		XCoordinate = xHome;
@@ -46,6 +49,8 @@ public class Turtle implements TurtleObservable
 	
 	public void setCoordinates(double xCoordinate, double yCoordinate) {
 		Line l = new Line(XCoordinate, YCoordinate, xCoordinate, yCoordinate);
+		//This is Andy's change, feel free to discuss with him
+		l.setStroke(penColor);
 		XCoordinate = xCoordinate;
 		YCoordinate = yCoordinate;
 		//System.out.println(YCoordinate);
@@ -95,9 +100,12 @@ public class Turtle implements TurtleObservable
 		turtleObserver.notifyTurtleObserver();
 	}
 
-
 	public boolean getTurtleShowing() {
 		return turtleShowing;
+	}
+
+	public void setPenColor(Color penColor) {
+		this.penColor = penColor;
 	}
 
 

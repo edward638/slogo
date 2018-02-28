@@ -1,12 +1,15 @@
 package view.screen_components;
 
 import controller.ControllerInterface;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import view.constants.ButtonConstants;
 import view.constants.ComboBoxConstants;
 import view.constants.LabelConstants;
@@ -15,7 +18,6 @@ import view.constants.TextAreaConstants;
 public class CommandBox extends ScreenComponent{
 	private Button commandClearButton;
     private Button commandRunButton;
-    private Button commandHelpButton;
     private TextArea commandTextArea;
     private Label commandLabel;
     private ComboBox<String> languageBox;
@@ -29,7 +31,7 @@ public class CommandBox extends ScreenComponent{
 			commandTextArea.clear();
 		}));
 		commandRunButton.setOnAction((event -> {
-			super.getController().passCommand(commandTextArea.getText());
+			super.getController().passCommand(commandTextArea.getText(), languageBox.getValue());
 			commandTextArea.clear();
 		}));
 	}
@@ -53,11 +55,9 @@ public class CommandBox extends ScreenComponent{
 		VBox rightComponent = new VBox();
 		commandRunButton = new Button(ButtonConstants.COMMAND_RUN_BUTTON_LABEL);
 		commandClearButton = new Button(ButtonConstants.COMMAND_CLEAR_BUTTON_LABEL);
-		commandHelpButton = new Button(ButtonConstants.COMMAND_HELP_BUTTON_LABEL);
 		languageBox = this.getLanguageBox();
 		rightComponent.getChildren().add(commandRunButton);
 		rightComponent.getChildren().add(commandClearButton);
-		rightComponent.getChildren().add(commandHelpButton);
 		rightComponent.getChildren().add(languageBox);
 		borderPane.setRight(rightComponent);
 	}
@@ -71,4 +71,6 @@ public class CommandBox extends ScreenComponent{
         }
 		return languageBox;
 	}
+
+
 }
