@@ -30,6 +30,7 @@ import nodes.Variable;
 public class Parser 
 {
 	private Map<String,Pattern> myTranslation;
+	private static boolean NEW_COMMAND = true;
 	
 	//possibly change to list because order of checking regex matters
 	private Map<String,Pattern> regex;
@@ -104,7 +105,12 @@ public class Parser
 		languageFilePath = "resources.languages/" + lang;
 		addResources(languageFilePath, myTranslation);
 
-		comHistory.addCommand(command);
+		if(NEW_COMMAND)
+		{
+			comHistory.addCommand(command);
+		}
+		
+		NEW_COMMAND = true;
 
 		int commentIndex = command.indexOf("#");
 		if (commentIndex >= 0)
@@ -184,6 +190,7 @@ public class Parser
 						//System.out.println(noBrackets);
 						String trimmed = noBrackets.trim();
 						//System.out.println(trimmed);
+						NEW_COMMAND = false;
 						List<Node> listNodes = parseString(trimmed,lang);
 						for(Node ln: listNodes)
 						{
