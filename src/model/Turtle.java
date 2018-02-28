@@ -55,7 +55,7 @@ public class Turtle implements TurtleObservable
 		YCoordinate = yCoordinate;
 		//System.out.println(YCoordinate);
 		addLine(l);
-		//turtleObserver.notifyTurtleObserver();
+		turtleObserver.notifyTurtleObserver();
 	}
 	
 	public double[] getHome(){
@@ -69,7 +69,7 @@ public class Turtle implements TurtleObservable
 
 	public void setDirectionAngle(double directionAngle) {
 		this.directionAngle = directionAngle;
-		//turtleObserver.notifyTurtleObserver();
+		turtleObserver.notifyTurtleObserver();
 	}
 
 
@@ -79,8 +79,10 @@ public class Turtle implements TurtleObservable
 
 
 	public void addLine(Line line) {
-		lines.add(line);
-		//turtleObserver.notifyTurtleObserver();
+		if(penShowing){
+			lines.add(line);
+			turtleObserver.notifyTurtleObserver();
+		}
 	}
 	
 	public void clearLines()

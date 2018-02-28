@@ -68,12 +68,12 @@ public class Controller implements ControllerInterface{
 
     @Override
     public void clearVariableBox(){
-        
+
     }
 
     @Override
     public void clearCommandHistoryBox() {
-
+		commandHistory.clearHistory();
     }
 
 	@Override
