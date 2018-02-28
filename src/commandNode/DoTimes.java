@@ -3,8 +3,8 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.Node;
+import nodes.*;
+
 
 public class DoTimes extends Node implements CommandNode{
 
@@ -22,7 +22,22 @@ public class DoTimes extends Node implements CommandNode{
 	 */
 
 	public double evaluate(List<Node> args) {
-		return 0;
+		Liste l = (Liste) args.get(0);
+		Variable v = (Variable) l.getElement(0);
+		Constant limit = (Constant) l.getElement(1);
+
+		Liste l2 = (Liste) args.get(0);
+
+		while (v.getValue() <= limit.getValue()) {
+			value = l2.evaluate(null);
+
+			double next = v.getValue();
+			next++;
+
+			v.setNewValue(next);
+		}
+
+		return value;
 	}
 
 }
