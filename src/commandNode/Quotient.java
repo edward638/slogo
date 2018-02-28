@@ -5,6 +5,7 @@ import java.util.List;
 import model.Turtle;
 import nodes.CommandNode;
 import nodes.Node;
+import parsers.InvalidEntryException;
 
 public class Quotient extends Node implements CommandNode {
 
@@ -28,9 +29,8 @@ public class Quotient extends Node implements CommandNode {
 		}
 		else
 		{
-			//throw error
+			throw new InvalidEntryException("Error: Cannot divide by zero");
 		}
-		return 0;
 	}
 
 }
