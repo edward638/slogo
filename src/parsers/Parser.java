@@ -106,6 +106,12 @@ public class Parser
 
 		comHistory.addCommand(command);
 
+		int commentIndex = command.indexOf("#");
+		if (commentIndex >= 0)
+		{
+			command = command.substring(0, commentIndex);
+		}
+		
 		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
 		List<Node> nodeList = new ArrayList<>();
 		
