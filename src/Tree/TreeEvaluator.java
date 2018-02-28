@@ -32,6 +32,8 @@ public class TreeEvaluator {
 				nArgs.add(curr);
 			}
 		}
+		node.reset();
+		//System.out.println("calling evaluate");
 		returnValue = node.evaluate(nArgs);
 		//else returnValue = node.getValue();
 	}
