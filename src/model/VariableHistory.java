@@ -19,28 +19,20 @@ import view.Observer;
  */
 public class VariableHistory implements VariableHistoryObservable{
 	private HashMap<String, Double> variables;
-<<<<<<< HEAD
-	private VariableHistoryObserver variableHistoryObserver;
+	private Observer variableHistoryObserver;
 
 	/**
 	 * No parameter constructor, initializes the HashMap
 	 */
-=======
-	private Observer variableHistoryObserver;
->>>>>>> 1cc37e8807c1aa42bda45d0559c40d0cb24bc8f5
 	public VariableHistory () {
 		variables = new HashMap<String, Double>();
 	}
 
-<<<<<<< HEAD
 	/**
 	 * Adds an observer to the program
 	 * @param variableHistoryObserver the observer
 	 */
-	public void addVariableHistoryObserver(VariableHistoryObserver variableHistoryObserver){
-=======
 	public void addObserver(Observer variableHistoryObserver){
->>>>>>> 1cc37e8807c1aa42bda45d0559c40d0cb24bc8f5
 		this.variableHistoryObserver = variableHistoryObserver;
 	}
 
