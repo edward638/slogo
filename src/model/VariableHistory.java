@@ -6,7 +6,7 @@ import java.util.List;
 
 import java.util.NoSuchElementException;
 
-import nodes.Variable;
+import nodes.*;
 import view.Observer;
 
 /**
@@ -19,14 +19,13 @@ import view.Observer;
  */
 public class VariableHistory implements VariableHistoryObservable{
 	private HashMap<String, Double> variables;
+	private HashMap<String, Command> commands;
 	private Observer variableHistoryObserver;
-	private CommandHistory CH;
 
 	/**
 	 * No parameter constructor, initializes the HashMap
 	 */
-	public VariableHistory (CommandHistory CH) {
-		this.CH = CH;
+	public VariableHistory () {
 		variables = new HashMap<String, Double>();
 	}
 
@@ -46,7 +45,6 @@ public class VariableHistory implements VariableHistoryObservable{
 	public Double getValue (String name) {
 		if (variables.get(name)==null) {
 			//throws error that there is no variable with that name to be accessed
-			CH.addCommand("Error: No variable with that name");
 			throw new NoSuchElementException("Error: No variable with that name");
 		}
 		return variables.get(name);
@@ -62,6 +60,24 @@ public class VariableHistory implements VariableHistoryObservable{
 		//variableHistoryObserver.notifyOfChanges();
 	}
 
+	/**
+	 * Adds a new custom Command Node to the commands Map, mapping a name to the object
+	 * which then stores the lists values and can evaluate itself
+	 * @param CN the command
+	 */
+	public void add (Command CN) {
+		commands.put(CN.getName(), CN);
+	}
+
+	/**
+	 * Returns the value done by a custom command by getting the command
+	 * object associated with a name
+	 * @param name the name of the custom command
+	 * @return the value returned from evaluate
+	 */
+	public double getCommand (String name) {
+		return commands.get(name).evaluate(null);
+	}
 	/**
 	 * clears the variables in the map and on the screen
 	 */
