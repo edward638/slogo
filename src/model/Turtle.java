@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import java.awt.geom.Line2D;
 import view.Observer;
 
 
@@ -134,18 +135,26 @@ public class Turtle implements TurtleObservable
 	}
 
 	private Line handleWraparound(Line lineToDraw){
-		if (lineToDraw.getEndX() > screenWidth){
+		Line2D.Double topLine = new Line2D.Double(0,0,screenWidth,0);
+		Line2D.Double rightLine = new Line2D.Double(screenWidth,0,screenWidth,screenHeight);
+		Line2D.Double bottomLine = new Line2D.Double(screenWidth,screenHeight,0,screenHeight);
+		Line2D.Double leftLine = new Line2D.Double(0,screenHeight,0,0);
+		if (lineToDraw.getStartX() != screenWidth && linesIntersect(rightLine, lineToDraw)){
 			return handleRightHandWraparound(lineToDraw);
-		}else if (lineToDraw.getEndX() < 0){
+		}else if (lineToDraw.getStartX() != 0 && linesIntersect(leftLine, lineToDraw)){
 			return handleLeftHandWraparound(lineToDraw);
-		}else if (lineToDraw.getEndY() > screenHeight){
+		}else if (lineToDraw.getStartY() != screenHeight && linesIntersect(bottomLine, lineToDraw)){
 			return handleBottomWraparound(lineToDraw);
-		}else if (lineToDraw.getEndY() < 0){
+		}else if (lineToDraw.getStartY() != 0 && linesIntersect(topLine, lineToDraw)){
 			return handleTopWraparound(lineToDraw);
 		}else{
 			this.addLine(lineToDraw);
 			return lineToDraw;
 		}
+	}
+
+	private boolean linesIntersect(Line2D.Double borderLine, Line lineToDraw){
+		return borderLine.intersectsLine(lineToDraw.getStartX(), lineToDraw.getStartY(), lineToDraw.getEndX(), lineToDraw.getEndY());
 	}
 
 	/*
