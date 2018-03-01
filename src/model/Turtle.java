@@ -8,6 +8,7 @@ import javafx.scene.shape.Line;
 import view.Observer;
 
 
+
 public class Turtle implements TurtleObservable
 {
 	private double XCoordinate;
@@ -54,7 +55,7 @@ public class Turtle implements TurtleObservable
 	
 	public void setCoordinates(double xCoordinate, double yCoordinate) {
 		double slope = (yCoordinate - YCoordinate)/ (xCoordinate - XCoordinate);
-		while (xCoordinate > screenWidth || xCoordinate < 0 || yCoordinate > screenHeight || yCoordinate < 0)
+		/**while (xCoordinate > screenWidth || xCoordinate < 0 || yCoordinate > screenHeight || yCoordinate < 0)
 		{
 			if (xCoordinate > screenWidth)
 			{
@@ -73,18 +74,18 @@ public class Turtle implements TurtleObservable
 				
 			}
 			
-		}
+		}**/
 		
 		Line l = new Line(XCoordinate, YCoordinate, xCoordinate, yCoordinate);
-		System.out.println(YCoordinate);
+		//System.out.println(YCoordinate);
+		//System.out.println(YCoordinate);
 		//This is Andy's change, feel free to discuss with him
 		l.setStroke(penColor);
 		XCoordinate = xCoordinate;
 		YCoordinate = yCoordinate;
-		System.out.println(YCoordinate);
 		//System.out.println(YCoordinate);
-		addLine(l);
-		turtleObserver.notifyOfChanges();
+		//addLine(l);
+		//turtleObserver.notifyOfChanges();
 	}
 	
 	public double[] getHome(){
@@ -92,7 +93,7 @@ public class Turtle implements TurtleObservable
 	}
 
 	public double getDirectionAngle() {
-		System.out.println(directionAngle);
+		//System.out.println(directionAngle);
 		return directionAngle;
 	}
 

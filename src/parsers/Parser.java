@@ -124,7 +124,7 @@ public class Parser
 		checkSyntax(commandList, nodeList);
 		
 		//check this
-		TreeMaker tm  = new TreeMaker(nodeList);
+		TreeMaker tm  = new TreeMaker(nodeList, comHistory);
 		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator();
 		te.evaluate(heads);
