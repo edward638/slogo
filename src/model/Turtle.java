@@ -52,40 +52,26 @@ public class Turtle implements TurtleObservable
 	public double getYCoordinate() {
 		return YCoordinate;
 	}
-	
-	public void setCoordinates(double xCoordinate, double yCoordinate) {
-		double slope = (yCoordinate - YCoordinate)/ (xCoordinate - XCoordinate);
-		/**while (xCoordinate > screenWidth || xCoordinate < 0 || yCoordinate > screenHeight || yCoordinate < 0)
-		{
-			if (xCoordinate > screenWidth)
-			{
-				
-			}
-			else if (xCoordinate < 0)
-			{
-				
-			}
-			else if (yCoordinate > screenHeight)
-			{
-				
-			}
-			else if (yCoordinate < 0)
-			{
-				
-			}
-			
-		}**/
-		
-		Line l = new Line(XCoordinate, YCoordinate, xCoordinate, yCoordinate);
-		//System.out.println(YCoordinate);
-		//System.out.println(YCoordinate);
-		//This is Andy's change, feel free to discuss with him
-		l.setStroke(penColor);
-		XCoordinate = xCoordinate;
-		YCoordinate = yCoordinate;
-		//System.out.println(YCoordinate);
-		//addLine(l);
-		//turtleObserver.notifyOfChanges();
+
+	public void setCoordinates(double futureX, double futureY) {
+		double currentX = XCoordinate;
+		double currentY = YCoordinate;
+		Line remainingLineToDraw = new Line(currentX, currentY, futureX, futureY);
+		Line oldLine;
+		do{
+			oldLine = remainingLineToDraw;
+			remainingLineToDraw = handleWraparound(remainingLineToDraw);
+			XCoordinate = remainingLineToDraw.getEndX();
+			YCoordinate = remainingLineToDraw.getEndY();
+		}while(!linesAreEqual(oldLine, remainingLineToDraw));
+		turtleObserver.notifyOfChanges();
+	}
+
+	private boolean linesAreEqual(Line oldLine, Line newLine){
+		return oldLine.getStartX() == newLine.getStartX() &&
+				oldLine.getStartY() == newLine.getStartY() &&
+				oldLine.getEndY() == newLine.getEndY() &&
+				oldLine.getEndX() == newLine.getEndX();
 	}
 	
 	public double[] getHome(){
@@ -109,10 +95,10 @@ public class Turtle implements TurtleObservable
 	}
 
 
-	public void addLine(Line line) {
+	private void addLine(Line line) {
 		if(penShowing){
+			line.setStroke(penColor);
 			lines.add(line);
-			turtleObserver.notifyOfChanges();
 		}
 	}
 	
@@ -146,4 +132,69 @@ public class Turtle implements TurtleObservable
 		this.turtleShowing = turtleShowing;
 		turtleObserver.notifyOfChanges();
 	}
+
+	private Line handleWraparound(Line lineToDraw){
+		if (lineToDraw.getEndX() > screenWidth){
+			return handleRightHandWraparound(lineToDraw);
+		}else if (lineToDraw.getEndX() < 0){
+			return handleLeftHandWraparound(lineToDraw);
+		}else if (lineToDraw.getEndY() > screenHeight){
+			return handleBottomWraparound(lineToDraw);
+		}else if (lineToDraw.getEndY() < 0){
+			return handleTopWraparound(lineToDraw);
+		}else{
+			this.addLine(lineToDraw);
+			return lineToDraw;
+		}
+	}
+
+	/*
+	 * adds the appropriate line to lines and then returns the starting point and ending point of the next line
+	 */
+	private Line handleLeftHandWraparound(Line line){
+		double slope = (line.getEndY() - line.getStartY())/(line.getEndX() - line.getStartX());
+		double newX = 0;
+		double newY = -slope*line.getStartX() + line.getStartY(); // check this
+		Line toDraw = new Line(line.getStartX(), line.getStartY(), newX, newY);
+		addLine(toDraw);
+		return new Line(screenWidth,newY,line.getEndX() + screenWidth,line.getEndY());
+
+	}
+
+	/*
+	 * adds the appropriate line to lines and then returns the starting point and ending point of the next line
+	 */
+	private Line handleRightHandWraparound(Line line){
+		double slope = (line.getEndY() - line.getStartY())/(line.getEndX() - line.getStartX());
+		double newX = screenWidth;
+		double newY = slope*newX -slope*line.getStartX() + line.getStartY(); // check this
+		Line toDraw = new Line(line.getStartX(), line.getStartY(), newX, newY);
+		addLine(toDraw);
+		return new Line(0,newY,line.getEndX() - screenWidth,line.getEndY());
+	}
+
+	/*
+	 * adds the appropriate line to lines and then returns the starting point and ending point of the next line
+	 */
+	private Line handleTopWraparound(Line line){
+		double slope = (line.getEndY() - line.getStartY())/(line.getEndX() - line.getStartX());
+		double newY = 0;
+		double newX = line.getStartX() - (line.getStartY() - newY) / slope;
+		Line toDraw = new Line(line.getStartX(), line.getStartY(), newX, newY);
+		addLine(toDraw);
+		return new Line(newX,screenHeight,line.getEndX(),line.getEndY() + screenHeight);
+	}
+
+	/*
+	 * adds the appropriate line to lines and then returns the starting point and ending point of the next line
+	 */
+	private Line handleBottomWraparound(Line line){
+		double slope = (line.getEndY() - line.getStartY())/(line.getEndX() - line.getStartX());
+		double newY = screenHeight;
+		double newX = line.getStartX() - (line.getStartY() - newY) / slope;
+		Line toDraw = new Line(line.getStartX(), line.getStartY(), newX, newY);
+		addLine(toDraw);
+		return new Line(newX,0,line.getEndX(),line.getEndY() - screenHeight);
+	}
+
 }

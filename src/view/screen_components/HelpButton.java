@@ -38,6 +38,5 @@ public class HelpButton extends ScreenComponent{
 
     private void displayHelpPopup(){
         HelpPopup helpPopup = new HelpPopup();
-        helpPopup.show();
     }
 }
