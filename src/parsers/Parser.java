@@ -119,7 +119,7 @@ public class Parser
 		
 		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
 		List<Node> nodeList = new ArrayList<>();
-		
+	
 		checkSyntax(commandList, nodeList);
 		
 		//check this
@@ -151,7 +151,7 @@ public class Parser
 				if(regex.get(key).matcher(text).matches())
 				{
 					match = true;
-					if (key.equals("Command"))
+					if (key.equals("Command") && !previous.equals("MakeUserInstruction"))
 					{
 						String commandType = checkLanguage(text);
 						previous = commandType;
