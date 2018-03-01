@@ -6,7 +6,7 @@ import java.util.List;
 import model.CommandHistory;
 
 import nodes.CommandNode;
-import nodes.Node;;
+import nodes.Node;
 
 /**
  * This is the class that makes the tree of nodes. The tree uses the fact that each node
@@ -16,21 +16,18 @@ import nodes.Node;;
 public class TreeMaker {
 	private ArrayList<Node> nodes;
 	private ArrayList<Node> heads;
-	private CommandHistory CH;
 	private int index;
 
 	/**
 	 * Constructor which initializes its values and begins the tree-making process
 	 * @param nodes the nodes to be made into trees
 	 */
-	public TreeMaker (List<Node> nodes, CommandHistory CH) {
+	public TreeMaker (List<Node> nodes) {
 		this.nodes = (ArrayList<Node>) nodes;
 		heads = new ArrayList<Node>();
-		this.CH = CH;
 		index = 0;
 		while (index < this.nodes.size()) {
 			if (!(this.nodes.get(index) instanceof CommandNode)) {
-				this.CH.addCommand("Error: The head node is not a command");
 				throw new HeadException(); //cannot have a non-command head of tree
 			}
 			heads.add(makeTree(this.nodes.get(index))); //add this head node to the head nodes which represent trees
@@ -53,8 +50,7 @@ public class TreeMaker {
 			try {
 				node.addChild(nodes.get(index)); //add the next node in the list index
 			}
-			catch (IndexOutOfBoundsException e){
-				CH.addCommand("Error: There are an improper amount of arguments");
+			catch (IndexOutOfBoundsException e) {
 				throw new NodeArgumentException(); //if a child is expected but nothing there throws error
 			}
 			Node curr = node.getChild(); //recursive step on the child

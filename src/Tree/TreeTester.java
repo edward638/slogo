@@ -16,7 +16,7 @@ public class TreeTester {
 	public static void main (String [] args) {
 		Turtle t = new Turtle(0.0, 0.0, Color.WHITE);
 		CommandHistory CH = new CommandHistory();
-		VariableHistory VH = new VariableHistory(CH);
+		VariableHistory VH = new VariableHistory();
 		nodes = new ArrayList<Node>();
 		MakeVariable  mv = new MakeVariable(t, 2);
 		nodes.add(mv);
@@ -40,7 +40,7 @@ public class TreeTester {
 		l2.add(fw);
 		l2.add(v);
 		nodes.add(l2);
-		TreeMaker tm  = new TreeMaker(nodes, CH);
+		TreeMaker tm  = new TreeMaker(nodes);
 		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator();
 		System.out.println(te.evaluate(heads));
