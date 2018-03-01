@@ -39,6 +39,7 @@ public class Controller implements ControllerInterface{
 	private void setUpConnections(){
 		turtle.addObserver(drawer);
 		drawer.setTurtle(turtle);
+		drawer.update();
 		variableHistoryBox.setVariableHistory(variableHistory);
 		commandHistoryBox.setCommandHistory(commandHistory);
 		commandHistory.addObserver(commandHistoryBox);
