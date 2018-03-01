@@ -13,6 +13,7 @@ import Tree.TreeMaker;
 import model.Turtle;
 import model.VariableHistory;
 import model.CommandHistory;
+import nodes.Command;
 import nodes.Constant;
 import nodes.Liste;
 import nodes.Node;
@@ -140,6 +141,7 @@ public class Parser
 	 */
 	private void checkSyntax(String[] commandList, List<Node> nodeList)
 	{
+		String previous = "";
 		for (int i = 0; i<commandList.length; i++)
 		{
 			String text = commandList[i];
@@ -152,6 +154,7 @@ public class Parser
 					if (key.equals("Command"))
 					{
 						String commandType = checkLanguage(text);
+						previous = commandType;
 						try 
 						{
 							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
@@ -187,7 +190,14 @@ public class Parser
 						}
 						nodeList.add(l);
 					}
+					else if(nodeList.size() > 0 && previous.equals("MakeUserInstruction"))
+					{
+						previous  = "";
+						Node n = new Command(text,varHistory);
+						nodeList.add(n);
+					}
 				}
+				
 			}
 			if(!match)
 			{
