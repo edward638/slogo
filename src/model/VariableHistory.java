@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import java.util.NoSuchElementException;
 
@@ -76,8 +77,12 @@ public class VariableHistory implements VariableHistoryObservable{
 	 * @param name the name of the custom command
 	 * @return the value returned from evaluate
 	 */
-	public double getCommand (String name) {
-		return commands.get(name).evaluate(null);
+	public Command getCommand (String name) {
+		return commands.get(name);
+	}
+
+	public Set<String> getCommandKeys () {
+		return commands.keySet();
 	}
 	/**
 	 * clears the variables in the map and on the screen
