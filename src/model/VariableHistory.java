@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import nodes.Variable;
-import view.VariableHistoryObserver;
+import view.Observer;
 
 /**
  * This stores the variables. Each variable is put into a HashMap mapping its string
@@ -19,20 +19,28 @@ import view.VariableHistoryObserver;
  */
 public class VariableHistory implements VariableHistoryObservable{
 	private HashMap<String, Double> variables;
+<<<<<<< HEAD
 	private VariableHistoryObserver variableHistoryObserver;
 
 	/**
 	 * No parameter constructor, initializes the HashMap
 	 */
+=======
+	private Observer variableHistoryObserver;
+>>>>>>> 1cc37e8807c1aa42bda45d0559c40d0cb24bc8f5
 	public VariableHistory () {
 		variables = new HashMap<String, Double>();
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Adds an observer to the program
 	 * @param variableHistoryObserver the observer
 	 */
 	public void addVariableHistoryObserver(VariableHistoryObserver variableHistoryObserver){
+=======
+	public void addObserver(Observer variableHistoryObserver){
+>>>>>>> 1cc37e8807c1aa42bda45d0559c40d0cb24bc8f5
 		this.variableHistoryObserver = variableHistoryObserver;
 	}
 
@@ -56,7 +64,7 @@ public class VariableHistory implements VariableHistoryObservable{
 	 */
 	public void add (Variable VN) {
 		variables.put(VN.getName(), VN.getNewValue());
-		variableHistoryObserver.notifyVariableHistoryObserver();
+		variableHistoryObserver.notifyOfChanges();
 	}
 
 	/**
@@ -64,7 +72,7 @@ public class VariableHistory implements VariableHistoryObservable{
 	 */
 	public void clearHistory(){
 		variables.clear();
-		variableHistoryObserver.notifyVariableHistoryObserver();
+		variableHistoryObserver.notifyOfChanges();
 	}
 
 	/**

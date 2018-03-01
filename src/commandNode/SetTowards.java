@@ -8,7 +8,8 @@ import nodes.Node;
 
 public class SetTowards extends Node implements CommandNode
 {
-
+	private double degreeConversion = 180/Math.PI;
+			
 	public SetTowards(Turtle turt, int numChildren) {
 		super(turt, numChildren);
 	}
@@ -20,7 +21,12 @@ public class SetTowards extends Node implements CommandNode
 	 * @return the number of degrees turtle turned
 	 */
 	public double evaluate(List<Node> arguments) {
-		double deg = Math.atan(arguments.get(0).getValue() + turtle.getHome()[0]/arguments.get(1).getValue() + turtle.getHome()[1]);
+		double rad = Math.atan(arguments.get(1).getValue()/arguments.get(0).getValue());
+		double deg = rad * degreeConversion; 
+		if(arguments.get(0).getValue() < 0)
+		{
+			deg = 180 + deg;
+		}
 		double change = Math.abs(turtle.getDirectionAngle() - deg);
 		turtle.setDirectionAngle(deg);
 		value = change;

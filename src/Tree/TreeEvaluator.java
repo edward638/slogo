@@ -6,35 +6,57 @@ import java.util.List;
 import nodes.CommandNode;
 import nodes.Node;
 
+/**
+ * This is the class that evaluates the tree of commands after created by the TreeMaker. It uses
+ * recursion to evaluate the bottom nodes first, using their values for later use by higher
+ * command nodes, accessing the children and adding them as arguments for their parents.
+ * It returns a return value for the most recently done operation, to be used by the program.
+ *
+ * author: Charles Dracos
+ */
 public class TreeEvaluator {
 	private Double returnValue;
-	
+
+	/**
+	 * Empty constructor for TreeEvaluator, initializing the return value to zero
+	 */
 	public TreeEvaluator () {
 		returnValue = 0.0;
 	}
-	
+
+	/**
+	 * Evaluates the series of head nodes, calling evaluateHead for each head of a tree
+	 * which is represented in the List passed to it
+	 * @param heads List of head nodes of trees
+	 * @return the most recently evaluated command node's value
+	 */
 	public double evaluate(ArrayList<Node> heads) {
 		for (int i = 0; i < heads.size(); i++) {
-			evaluateHead(heads.get(i));
+			evaluateHead(heads.get(i)); //evaluates a new tree head
 		}
 		return returnValue;
 	}
-	
+
+	/**
+	 * Recursively evaluates a tree, going bottom up evaluating and adding children as
+	 * arguments for their parent nodes to use to evaluate
+	 * @param node Node being evaluated
+	 */
 	private void evaluateHead(Node node) {
-		ArrayList<Node> nArgs = new ArrayList<Node>();
-		while (node.hasNext()) {	
-			Node curr = node.getChild();
+		ArrayList<Node> nArgs = new ArrayList<Node>(); //arguments to be passed to a commandNode
+		while (node.hasNext()) {	 //if there is a child node
+			Node curr = node.getChild(); //curr is set to the child
 			if (!curr.hasNext()) {
+				//if the child has no children, add it to nArgs
 				nArgs.add(curr);
 			}
 			else {
+				//if it has a child, evaluate curr as a parent node
 				evaluateHead(curr);
-				nArgs.add(curr);
+				nArgs.add(curr); // then add to nArgs
 			}
 		}
-		node.reset();
-		//System.out.println("calling evaluate");
-		returnValue = node.evaluate(nArgs);
-		//else returnValue = node.getValue();
+		node.reset(); //sets the node's pointer to its first child for later use
+		returnValue = node.evaluate(nArgs); //returnValue set to the return of evaluate of a node
 	}
 }

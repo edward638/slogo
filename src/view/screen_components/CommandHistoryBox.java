@@ -1,18 +1,14 @@
 package view.screen_components;
 
-import java.util.List;
-
 import controller.ControllerInterface;
-import javafx.scene.control.TextArea;
-import javafx.scene.web.HTMLEditorSkin;
 import model.CommandHistory;
 import model.CommandHistoryObservable;
-import view.CommandHistoryObserver;
+import view.Observer;
 import view.constants.ButtonConstants;
 import view.constants.LabelConstants;
 import view.constants.TextAreaConstants;
 
-public class CommandHistoryBox extends HistoryBox implements CommandHistoryObserver{
+public class CommandHistoryBox extends HistoryBox implements Observer {
 	private CommandHistoryObservable commandHistory;
 	public CommandHistoryBox(ControllerInterface controller){
 		super(controller);
@@ -36,7 +32,7 @@ public class CommandHistoryBox extends HistoryBox implements CommandHistoryObser
 	}
 
 	@Override
-	public void notifyCommandHistoryObserver() {
+	public void notifyOfChanges() {
 		super.fillBox(commandHistory.getCommands());
 	}
 }
