@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import nodes.Variable;
-import view.VariableHistoryObserver;
+import view.Observer;
 
 /**
  * This stores the variables. Each variable is put into a HashMap mapping its string
@@ -56,7 +56,7 @@ public class VariableHistory implements VariableHistoryObservable{
 	 */
 	public void add (Variable VN) {
 		variables.put(VN.getName(), VN.getNewValue());
-		variableHistoryObserver.notifyVariableHistoryObserver();
+		variableHistoryObserver.notifyOfChanges();
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class VariableHistory implements VariableHistoryObservable{
 	 */
 	public void clearHistory(){
 		variables.clear();
-		variableHistoryObserver.notifyVariableHistoryObserver();
+		variableHistoryObserver.notifyOfChanges();
 	}
 
 	/**

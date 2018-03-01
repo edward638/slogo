@@ -5,7 +5,7 @@ import java.util.List;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import view.TurtleObserver;
+import view.Observer;
 
 
 public class Turtle implements TurtleObservable
@@ -18,24 +18,29 @@ public class Turtle implements TurtleObservable
 	private boolean penShowing;
 	private boolean turtleShowing;
 	private Color penColor;
+	private double screenWidth;
+	private double screenHeight;
 	
 	//THIS IS ANDY'S SUGGESTION
-	private TurtleObserver turtleObserver;
+	private Observer turtleObserver;
 
 	//Could pass pen color in parameter! Right now we call setPenColor in controller. TODO: Discuss this idea, Also screen size in constructor?
-	public Turtle(double xHome, double yHome)
+	public Turtle(double width, double height, Color color)
 	{
-		XCoordinate = xHome;
-		YCoordinate = yHome;
-		home[0] = xHome;
-		home[1] = yHome; 
+		screenWidth = width;
+		screenHeight = height;
+		XCoordinate = width/2;
+		YCoordinate = height/2;
+		home[0] = width/2;
+		home[1] = height/2; 
 		directionAngle = 90;
 		penShowing = true;
 		turtleShowing = true;
 		lines = new ArrayList<Line>();
+		penColor = color;
 	}
 
-	public void addTurtleObserver(TurtleObserver turtleObserver){
+	public void addObserver(Observer turtleObserver){
 		this.turtleObserver = turtleObserver;
 	}
 
@@ -48,6 +53,28 @@ public class Turtle implements TurtleObservable
 	}
 	
 	public void setCoordinates(double xCoordinate, double yCoordinate) {
+		double slope = (yCoordinate - YCoordinate)/ (xCoordinate - XCoordinate);
+		while (xCoordinate > screenWidth || xCoordinate < 0 || yCoordinate > screenHeight || yCoordinate < 0)
+		{
+			if (xCoordinate > screenWidth)
+			{
+				
+			}
+			else if (xCoordinate < 0)
+			{
+				
+			}
+			else if (yCoordinate > screenHeight)
+			{
+				
+			}
+			else if (yCoordinate < 0)
+			{
+				
+			}
+			
+		}
+		
 		Line l = new Line(XCoordinate, YCoordinate, xCoordinate, yCoordinate);
 		System.out.println(YCoordinate);
 		//This is Andy's change, feel free to discuss with him
@@ -57,7 +84,7 @@ public class Turtle implements TurtleObservable
 		System.out.println(YCoordinate);
 		//System.out.println(YCoordinate);
 		addLine(l);
-		turtleObserver.notifyTurtleObserver();
+		turtleObserver.notifyOfChanges();
 	}
 	
 	public double[] getHome(){
@@ -65,13 +92,14 @@ public class Turtle implements TurtleObservable
 	}
 
 	public double getDirectionAngle() {
+		System.out.println(directionAngle);
 		return directionAngle;
 	}
 
 
 	public void setDirectionAngle(double directionAngle) {
 		this.directionAngle = directionAngle;
-		turtleObserver.notifyTurtleObserver();
+		turtleObserver.notifyOfChanges();
 	}
 
 
@@ -83,14 +111,14 @@ public class Turtle implements TurtleObservable
 	public void addLine(Line line) {
 		if(penShowing){
 			lines.add(line);
-			turtleObserver.notifyTurtleObserver();
+			turtleObserver.notifyOfChanges();
 		}
 	}
 	
 	public void clearLines()
 	{
 		lines = new ArrayList<Line>();
-		turtleObserver.notifyTurtleObserver();
+		turtleObserver.notifyOfChanges();
 	}
 
 
@@ -101,7 +129,7 @@ public class Turtle implements TurtleObservable
 
 	public void setPenShowing(boolean penShowing) {
 		this.penShowing = penShowing;
-		turtleObserver.notifyTurtleObserver();
+		turtleObserver.notifyOfChanges();
 	}
 
 	public boolean getTurtleShowing() {
@@ -115,6 +143,6 @@ public class Turtle implements TurtleObservable
 
 	public void setTurtleShowing(boolean turtleShowing) {
 		this.turtleShowing = turtleShowing;
-		turtleObserver.notifyTurtleObserver();
+		turtleObserver.notifyOfChanges();
 	}
 }
