@@ -1,13 +1,13 @@
 package model;
 
-import view.CommandHistoryObserver;
+import view.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommandHistory implements CommandHistoryObservable{
     //Andy's change
-    private CommandHistoryObserver commandHistoryObserver;
+    private Observer commandHistoryObserver;
 
 	private List<String> commands;
 	private int index;
@@ -18,7 +18,7 @@ public class CommandHistory implements CommandHistoryObservable{
 	}
 
 	//Andy's change
-    public void setCommandHistoryObserver(CommandHistoryObserver commandHistoryObserver){
+    public void addObserver(Observer commandHistoryObserver){
 	    this.commandHistoryObserver = commandHistoryObserver;
     }
 
@@ -29,7 +29,7 @@ public class CommandHistory implements CommandHistoryObservable{
 	public void addCommand (String command) {
 		commands.add(command);
 		index++;
-        commandHistoryObserver.notifyCommandHistoryObserver();
+        commandHistoryObserver.notifyOfChanges();
 	}
 	
 	public List<String> getCommands(){
@@ -38,6 +38,6 @@ public class CommandHistory implements CommandHistoryObservable{
 	
 	public void clearHistory(){
 		commands.clear();
-        commandHistoryObserver.notifyCommandHistoryObserver();
+        commandHistoryObserver.notifyOfChanges();
 	}
 }

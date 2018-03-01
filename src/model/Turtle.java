@@ -5,7 +5,7 @@ import java.util.List;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import view.TurtleObserver;
+import view.Observer;
 
 
 public class Turtle implements TurtleObservable
@@ -22,7 +22,7 @@ public class Turtle implements TurtleObservable
 	private double screenHeight;
 	
 	//THIS IS ANDY'S SUGGESTION
-	private TurtleObserver turtleObserver;
+	private Observer turtleObserver;
 
 	//Could pass pen color in parameter! Right now we call setPenColor in controller. TODO: Discuss this idea, Also screen size in constructor?
 	public Turtle(double width, double height, Color color)
@@ -40,7 +40,7 @@ public class Turtle implements TurtleObservable
 		penColor = color;
 	}
 
-	public void addTurtleObserver(TurtleObserver turtleObserver){
+	public void addObserver(Observer turtleObserver){
 		this.turtleObserver = turtleObserver;
 	}
 
@@ -84,7 +84,7 @@ public class Turtle implements TurtleObservable
 		System.out.println(YCoordinate);
 		//System.out.println(YCoordinate);
 		addLine(l);
-		turtleObserver.notifyTurtleObserver();
+		turtleObserver.notifyOfChanges();
 	}
 	
 	public double[] getHome(){
@@ -92,13 +92,14 @@ public class Turtle implements TurtleObservable
 	}
 
 	public double getDirectionAngle() {
+		System.out.println(directionAngle);
 		return directionAngle;
 	}
 
 
 	public void setDirectionAngle(double directionAngle) {
 		this.directionAngle = directionAngle;
-		turtleObserver.notifyTurtleObserver();
+		turtleObserver.notifyOfChanges();
 	}
 
 
@@ -110,14 +111,14 @@ public class Turtle implements TurtleObservable
 	public void addLine(Line line) {
 		if(penShowing){
 			lines.add(line);
-			turtleObserver.notifyTurtleObserver();
+			turtleObserver.notifyOfChanges();
 		}
 	}
 	
 	public void clearLines()
 	{
 		lines = new ArrayList<Line>();
-		turtleObserver.notifyTurtleObserver();
+		turtleObserver.notifyOfChanges();
 	}
 
 
@@ -128,7 +129,7 @@ public class Turtle implements TurtleObservable
 
 	public void setPenShowing(boolean penShowing) {
 		this.penShowing = penShowing;
-		turtleObserver.notifyTurtleObserver();
+		turtleObserver.notifyOfChanges();
 	}
 
 	public boolean getTurtleShowing() {
@@ -142,6 +143,6 @@ public class Turtle implements TurtleObservable
 
 	public void setTurtleShowing(boolean turtleShowing) {
 		this.turtleShowing = turtleShowing;
-		turtleObserver.notifyTurtleObserver();
+		turtleObserver.notifyOfChanges();
 	}
 }

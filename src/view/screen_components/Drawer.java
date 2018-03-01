@@ -12,22 +12,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
-import model.Turtle;
 import model.TurtleObservable;
-import view.TurtleObserver;
+import view.Observer;
 import view.constants.CanvasConstants;
 import view.constants.ComboBoxConstants;
 
 import javafx.scene.shape.Line;
 import java.util.List;
 
-public class Drawer extends ScreenComponent implements TurtleObserver{
+public class Drawer extends ScreenComponent implements Observer{
 	public static final double TURTLE_START_X = CanvasConstants.CANVAS_WIDTH/2;
 	public static final double TURTLE_START_Y = CanvasConstants.CANVAS_HEIGHT/2;
 	public static final int TURTLE_WIDTH = 50;
 	public static final int TURTLE_HEIGHT = 50;
-	public static final int ROTATE_OFFSET = 270;
-
 
 	//other turtle images taken from:
 	// https://pixabay.com/en/turtle-animal-reptile-water-green-294522/
@@ -133,6 +130,9 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 		if (color.equals("Green")){
 			penColor = Color.GREEN;
 		}
+		if(color.equals("Black")){
+			penColor = Color.BLACK;
+		}
 		super.getController().setPenColor(penColor);
 	}
 
@@ -161,7 +161,7 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 
 	public void moveTurtle(){
 		gc.save();
-		rotate(gc, turtle.getDirectionAngle()- ROTATE_OFFSET, turtle.getXCoordinate(), turtle.getYCoordinate());
+		rotate(gc, turtle.getDirectionAngle(), turtle.getXCoordinate(), turtle.getYCoordinate());
 		if(turtle.getTurtleShowing()){
 			gc.drawImage(turtleIcon, turtle.getXCoordinate() - TURTLE_WIDTH/2, turtle.getYCoordinate() - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		}
@@ -170,12 +170,12 @@ public class Drawer extends ScreenComponent implements TurtleObserver{
 
 // Method taken from https://stackoverflow.com/questions/18260421/how-to-draw-image-rotated-on-javafx-canvas
 	private void rotate(GraphicsContext gc, double angle, double px, double py) {
-		Rotate r = new Rotate(angle, px, py);
+		Rotate r = new Rotate(-angle, px, py);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 	}
 
 	@Override
-	public void notifyTurtleObserver() {
+	public void notifyOfChanges() {
 		update();
 	}
 }
