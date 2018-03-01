@@ -69,6 +69,7 @@ public class VariableHistory implements VariableHistoryObservable{
 	 */
 	public void add (Command CN) {
 		commands.put(CN.getName(), CN);
+		variableHistoryObserver.notifyOfChanges();
 	}
 
 	/**
