@@ -13,6 +13,7 @@ import Tree.TreeMaker;
 import model.Turtle;
 import model.VariableHistory;
 import model.CommandHistory;
+import nodes.Command;
 import nodes.Constant;
 import nodes.Liste;
 import nodes.Node;
@@ -31,8 +32,6 @@ public class Parser
 {
 	private Map<String,Pattern> myTranslation;
 	private static boolean NEW_COMMAND = true;
-	
-	//possibly change to list because order of checking regex matters
 	private Map<String,Pattern> regex;
 	private Map<String,Integer> children;
 	private String languageFilePath;
@@ -139,11 +138,10 @@ public class Parser
 	 * 
 	 * @param commandList the list of strings given by the user
 	 * @param nodeList the empty nodeList that will be filled
-	 * @throws ClassNotFoundException can't find the node class
-	 * @throws InvalidEntryException didn't match any of entry types
 	 */
 	private void checkSyntax(String[] commandList, List<Node> nodeList)
 	{
+		String previous = "";
 		for (int i = 0; i<commandList.length; i++)
 		{
 			String text = commandList[i];
@@ -152,15 +150,13 @@ public class Parser
 			{
 				if(regex.get(key).matcher(text).matches())
 				{
-					//System.out.println("matched" + key);
 					match = true;
 					if (key.equals("Command"))
 					{
 						String commandType = checkLanguage(text);
+						previous = commandType;
 						try 
 						{
-							//System.out.println("got to command");
-							//System.out.println(commandType);
 							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
 							nodeList.add(n);
 						}
@@ -173,13 +169,11 @@ public class Parser
 					}
 					else if (key.equals("Constant"))
 					{
-						//System.out.println("got to constant");
 						Node n = new Constant(Integer.parseInt(text));
 						nodeList.add(n);
 					}
 					else if(key.equals("Variable"))
 					{
-						//System.out.println("got to variable");
 						Node n = new Variable(text.substring(1), varHistory);
 						nodeList.add(n);
 					}
@@ -187,9 +181,7 @@ public class Parser
 					{
 						Liste l = new Liste();
 						String noBrackets = text.substring(1,text.length()-1);
-						//System.out.println(noBrackets);
 						String trimmed = noBrackets.trim();
-						//System.out.println(trimmed);
 						NEW_COMMAND = false;
 						List<Node> listNodes = parseString(trimmed,lang);
 						for(Node ln: listNodes)
@@ -197,6 +189,12 @@ public class Parser
 							l.add(ln);
 						}
 						nodeList.add(l);
+					}
+					else if(nodeList.size() > 0 && previous.equals("MakeUserInstruction"))
+					{
+						previous  = "";
+						Node n = new Command(text,varHistory);
+						nodeList.add(n);
 					}
 				}
 			}
