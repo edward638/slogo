@@ -1,16 +1,13 @@
 package view.screen_components;
 
 import controller.ControllerInterface;
-import javafx.scene.layout.BorderPane;
-import model.VariableHistory;
 import model.VariableHistoryObservable;
-import nodes.Variable;
-import view.VariableHistoryObserver;
+import view.Observer;
 import view.constants.ButtonConstants;
 import view.constants.LabelConstants;
 import view.constants.TextAreaConstants;
 
-public class VariableHistoryBox extends HistoryBox implements VariableHistoryObserver{
+public class VariableHistoryBox extends HistoryBox implements Observer {
 	private VariableHistoryObservable variableHistory;
 	public VariableHistoryBox(ControllerInterface controller){
 		super(controller);
@@ -35,7 +32,7 @@ public class VariableHistoryBox extends HistoryBox implements VariableHistoryObs
 
 
 	@Override
-	public void notifyVariableHistoryObserver() {
+	public void notifyOfChanges() {
 		super.fillBox(variableHistory.getVariables());
 	}
 }
