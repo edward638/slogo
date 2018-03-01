@@ -78,7 +78,6 @@ public class Turtle implements TurtleObservable
 		
 		Line l = new Line(XCoordinate, YCoordinate, xCoordinate, yCoordinate);
 		//System.out.println(YCoordinate);
-		//System.out.println(YCoordinate);
 		//This is Andy's change, feel free to discuss with him
 		l.setStroke(penColor);
 		XCoordinate = xCoordinate;

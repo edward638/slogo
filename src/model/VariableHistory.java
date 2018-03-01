@@ -27,6 +27,7 @@ public class VariableHistory implements VariableHistoryObservable{
 	 */
 	public VariableHistory () {
 		variables = new HashMap<String, Double>();
+		commands = new HashMap<String, Command>();
 	}
 
 	/**
