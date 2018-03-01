@@ -122,15 +122,18 @@ public class Parser
 	
 		checkSyntax(commandList, nodeList);
 		
-		//check this
-		TreeMaker tm  = new TreeMaker(nodeList);
-		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
-		TreeEvaluator te = new TreeEvaluator();
-		te.evaluate(heads);
-		
 		return nodeList;
 		
 	}
+	
+	public void makeTree(List<Node> nodeList)
+	{
+		TreeMaker tm  = new TreeMaker(nodeList);
+		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
+		TreeEvaluator te = new TreeEvaluator();
+		te.evaluate(heads);	
+	}
+
 	
 	/**
 	 * fill the nodeList with the appropriate nodes based on matching string input to node types

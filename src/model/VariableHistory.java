@@ -58,7 +58,7 @@ public class VariableHistory implements VariableHistoryObservable{
 	 */
 	public void add (Variable VN) {
 		variables.put(VN.getName(), VN.getNewValue());
-		//variableHistoryObserver.notifyOfChanges();
+		variableHistoryObserver.notifyOfChanges();
 	}
 
 	/**
