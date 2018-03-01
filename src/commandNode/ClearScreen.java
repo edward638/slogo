@@ -7,8 +7,21 @@ import model.Turtle;
 import nodes.CommandNode;
 import nodes.Node;
 
+/**
+ * @author Belanie Nagiel
+ * 
+ * ClearScreen class that creates a new extension of Node and sets the functionality for the evaluate method implemented from
+ * the CommandNode interface.
+ *
+ */
 public class ClearScreen extends Node implements CommandNode {
 
+	/**
+	 * Class Constructor
+	 * 
+	 * @param turt
+	 * @param numChildren
+	 */
 	public ClearScreen(Turtle turt, int numChildren) {
 		super(turt, numChildren);
 	}
