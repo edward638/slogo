@@ -156,19 +156,27 @@ public class Parser
 					match = true;
 					if (key.equals("Command") && !previous.equals("MakeUserInstruction"))
 					{
-						String commandType = checkLanguage(text);
-						previous = commandType;
-						try 
+						if (varHistory.getCommandKeys().contains(text))
 						{
-							Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
+							Node n = varHistory.getCommand(text);
 							nodeList.add(n);
 						}
-						catch(ClassNotFoundException e)
+						else
 						{
-							comHistory.addCommand("Error: Could not access constructor for command " + text );
-							throw new InvalidEntryException("Error: Could not access Node constructor");
+							String commandType = checkLanguage(text);
+							previous = commandType;
+							try 
+							{
+								Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
+								nodeList.add(n);
+							}
+							catch(ClassNotFoundException e)
+							{
+								comHistory.addCommand("Error: Could not access constructor for command " + text );
+								throw new InvalidEntryException("Error: Could not access Node constructor");
+							}
 						}
-						
+							
 					}
 					else if (key.equals("Constant"))
 					{
