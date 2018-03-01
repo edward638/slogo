@@ -20,11 +20,13 @@ import view.Observer;
 public class VariableHistory implements VariableHistoryObservable{
 	private HashMap<String, Double> variables;
 	private Observer variableHistoryObserver;
+	private CommandHistory CH;
 
 	/**
 	 * No parameter constructor, initializes the HashMap
 	 */
-	public VariableHistory () {
+	public VariableHistory (CommandHistory CH) {
+		this.CH = CH;
 		variables = new HashMap<String, Double>();
 	}
 
@@ -44,6 +46,7 @@ public class VariableHistory implements VariableHistoryObservable{
 	public Double getValue (String name) {
 		if (variables.get(name)==null) {
 			//throws error that there is no variable with that name to be accessed
+			CH.addCommand("Error: No variable with that name");
 			throw new NoSuchElementException("Error: No variable with that name");
 		}
 		return variables.get(name);
@@ -56,7 +59,7 @@ public class VariableHistory implements VariableHistoryObservable{
 	 */
 	public void add (Variable VN) {
 		variables.put(VN.getName(), VN.getNewValue());
-		variableHistoryObserver.notifyOfChanges();
+		//variableHistoryObserver.notifyOfChanges();
 	}
 
 	/**
