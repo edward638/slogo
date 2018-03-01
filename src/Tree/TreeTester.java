@@ -44,7 +44,7 @@ public class TreeTester {
 		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator();
 		System.out.println(te.evaluate(heads));
-		*/
+
 	}
 }
 

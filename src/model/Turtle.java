@@ -53,43 +53,6 @@ public class Turtle implements TurtleObservable
 		return YCoordinate;
 	}
 
-	/*
-	public void setCoordinates(double xCoordinate, double yCoordinate) {
-		double slope = (yCoordinate - YCoordinate)/ (xCoordinate - XCoordinate);
-		/**while (xCoordinate > screenWidth || xCoordinate < 0 || yCoordinate > screenHeight || yCoordinate < 0)
-		{
-			if (xCoordinate > screenWidth)
-			{
-				
-			}
-			else if (xCoordinate < 0)
-			{
-				
-			}
-			else if (yCoordinate > screenHeight)
-			{
-				
-			}
-			else if (yCoordinate < 0)
-			{
-				
-			}
-			
-		}**/
-		
-		Line l = new Line(XCoordinate, YCoordinate, xCoordinate, yCoordinate);
-		//System.out.println(YCoordinate);
-		//System.out.println(YCoordinate);
-		//This is Andy's change, feel free to discuss with him
-		l.setStroke(penColor);
-		XCoordinate = xCoordinate;
-		YCoordinate = yCoordinate;
-		//System.out.println(YCoordinate);
-		//addLine(l);
-		//turtleObserver.notifyOfChanges();
-	}
-	*/
-
 	public void setCoordinates(double futureX, double futureY) {
 		double currentX = XCoordinate;
 		double currentY = YCoordinate;
@@ -168,15 +131,6 @@ public class Turtle implements TurtleObservable
 	public void setTurtleShowing(boolean turtleShowing) {
 		this.turtleShowing = turtleShowing;
 		turtleObserver.notifyOfChanges();
-	}
-
-
-	/*
-	* TESTING
-	 */
-
-	private double distanceOfLine(Line line){
-		return Math.sqrt(Math.pow(line.getStartX() - line.getEndX(),2) + Math.pow(line.getStartY() - line.getEndY(),2));
 	}
 
 	private Line handleWraparound(Line lineToDraw){
