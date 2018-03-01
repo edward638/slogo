@@ -30,7 +30,7 @@ public class Controller implements ControllerInterface{
 	}
 
 	private void initializeModelComponents(){
-		turtle = new Turtle(Drawer.TURTLE_START_X, Drawer.TURTLE_START_Y);
+		turtle = new Turtle(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT, Drawer.INITIAL_PEN_COLOR);
         commandHistory = new CommandHistory();
         variableHistory = new VariableHistory();
 		parser = new Parser(turtle, variableHistory, commandHistory);
