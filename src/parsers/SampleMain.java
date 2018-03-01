@@ -13,7 +13,7 @@ public class SampleMain {
 	
 	public static void main(String[] args) throws ClassNotFoundException, InvalidEntryException
 	{
-		Turtle turt = new Turtle(0,0);
+		//Turtle turt = new Turtle(0,0);
 
 		//Parser newnew = new Parser(turt, "English", null);
 		//newnew.addResources("parsers/regex");

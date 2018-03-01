@@ -9,8 +9,9 @@ import model.VariableHistory;
 
 public class TreeTester {
 	private static ArrayList<Node> nodes;
-	
+
 	public static void main (String [] args) {
+		/*
 		Turtle t = new Turtle(0, 0);
 		VariableHistory VH = new VariableHistory();
 		nodes = new ArrayList<Node>();
@@ -34,6 +35,7 @@ public class TreeTester {
 		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator();
 		System.out.println(te.evaluate(heads));
+		*/
 	}
 }
 
