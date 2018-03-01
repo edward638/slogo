@@ -197,7 +197,6 @@ public class Parser
 						nodeList.add(n);
 					}
 				}
-				
 			}
 			if(!match)
 			{
