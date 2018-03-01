@@ -6,6 +6,10 @@ import nodes.CommandNode;
 
 import java.util.List;
 
+/**
+ * Implements REPEAT as describe on the course website
+ */
+
 public class Repeat extends Node implements CommandNode {
 
     public Repeat (Turtle turt, int numChildren) {
