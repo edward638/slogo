@@ -7,10 +7,23 @@ import model.Turtle;
 import nodes.CommandNode;
 import nodes.Node;
 
+/**
+ * @author Belanie Nagiel
+ * 
+ * Backward class that creates a new extension of Node and sets the functionality for the evaluate method implemented from
+ * the CommandNode interface.
+ *
+ */
 public class Backward extends Node implements CommandNode
 {
 	private static double radianConversion = Math.PI/180;
 
+	/**
+	 * Class Constructor
+	 * 
+	 * @param turt
+	 * @param numChildren
+	 */
 	public Backward(Turtle turt, int numChildren) {
 		super(turt, numChildren);
 	}

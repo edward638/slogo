@@ -24,7 +24,7 @@ public class MakeVariable extends Node implements CommandNode{
 		Variable v = (Variable) args.get(0);
 		v.setValue(args.get(1).getValue()); //sets the value of the variable
 		VariableHistory VH = v.getVH();
-		VH.add((Variable) v); //adds to its vh
+		VH.add(v); //adds to its vh
 		value = args.get(1).getValue();
 		return value;
 	}

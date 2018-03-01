@@ -6,8 +6,21 @@ import model.Turtle;
 import nodes.CommandNode;
 import nodes.Node;
 
+/**
+ * @author Belanie Nagiel
+ * 
+ * Left class that creates a new extension of Node and sets the functionality for the evaluate method implemented from
+ * the CommandNode interface.
+ *
+ */
 public class Left extends Node implements CommandNode {
 
+	/**
+	 * Class Constructor
+	 * 
+	 * @param turt
+	 * @param numChildren
+	 */
 	public Left(Turtle turt, int numChildren) {
 		super(turt, numChildren);
 	}

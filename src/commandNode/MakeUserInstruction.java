@@ -3,8 +3,7 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.Node;
+import nodes.*;
 
 public class MakeUserInstruction extends Node implements CommandNode {
 
@@ -14,8 +13,11 @@ public class MakeUserInstruction extends Node implements CommandNode {
 
 	@Override
 	public double evaluate(List<Node> args) {
-		// TODO Auto-generated method stub
-		return 0;
+		Command c = (Command) args.get(0);
+		c.addList((Liste) args.get(1));
+		c.addList((Liste) args.get(2));
+		c.getVH().add(c);
+		return 1;
 	}
 
 }
