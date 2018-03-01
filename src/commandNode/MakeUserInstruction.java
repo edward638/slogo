@@ -17,7 +17,7 @@ public class MakeUserInstruction extends Node implements CommandNode {
 		c.addList((Liste) args.get(1));
 		c.addList((Liste) args.get(2));
 		c.getVH().add(c);
-		return c.evaluate(null);
+		return 1;
 	}
 
 }

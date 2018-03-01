@@ -53,14 +53,10 @@ public class Liste extends Node {
      * @return the value given by the last command executed
      */
     public double evaluate(List<Node> args) {
-        //TODO: FIX THIS!!!!!!
-        /*
         TreeMaker tm = new TreeMaker(elements);
         ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
         TreeEvaluator te = new TreeEvaluator();
         value = te.evaluate(heads);
         return value;
-        */
-        return 0;
     }
 }
