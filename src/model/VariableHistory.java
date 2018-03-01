@@ -104,6 +104,10 @@ public class VariableHistory implements VariableHistoryObservable{
 		{
 			output.add(key + " = " + Double.toString(variables.get(key)));
 		}
+		for (String key: commands.keySet())
+		{
+			output.add(key);
+		}
 
 		return output;
 	}
