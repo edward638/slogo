@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import view.constants.HelpPopupConstants;
 
 public class HelpPopup {
-    public static final int HBOX_SPACING = 25;
     public static final int STAGE_WIDTH = 450;
     public static final int STAGE_HEIGHT = 250;
     public static final int HBOX_OFFSET = 10;
@@ -29,33 +28,27 @@ public class HelpPopup {
     private Button variablesButton;
     private HBox hBox1;
     private HBox hBox2;
-    private TextArea infoTextArea;
-    private static int MIN_WIDTH = 125;
 
     public HelpPopup(){
         helpRoot = new Group();
         helpStage = new Stage();
         helpStage.setTitle("Help for SLogo");
-        helpStage.setScene(new Scene(helpRoot, STAGE_WIDTH, STAGE_HEIGHT));
+        Scene startScene = new Scene(helpRoot, STAGE_WIDTH, STAGE_HEIGHT);
+        startScene.getStylesheets().add(getClass().getResource("popupStyle.css").toExternalForm());
+        helpStage.setScene(startScene);
         addFirstButtonRow();
         addSecondButtonRow();
         addTitle();
         setButtonActions();
-    }
-
-    public void show(){
         helpStage.show();
     }
 
+
     private void addFirstButtonRow(){
         hBox1 = new HBox();
-        hBox1.setSpacing(HBOX_SPACING);
         basicSyntaxButton = new Button(HelpPopupConstants.BASIC_SYNTAX);
-        basicSyntaxButton.setMinWidth(MIN_WIDTH);
         turtleCommandsButton = new Button(HelpPopupConstants.TURTLE_COMMANDS);
-        turtleCommandsButton.setMinWidth(MIN_WIDTH);
         turtleQueriesButton = new Button(HelpPopupConstants.TURTLE_QUERIES);
-        turtleQueriesButton.setMinWidth(MIN_WIDTH);
         hBox1.getChildren().add(basicSyntaxButton);
         hBox1.getChildren().add(turtleCommandsButton);
         hBox1.getChildren().add(turtleQueriesButton);
@@ -65,13 +58,9 @@ public class HelpPopup {
     }
     private void addSecondButtonRow(){
         hBox2 = new HBox();
-        hBox2.setSpacing(HBOX_SPACING);
         mathOperationsButton = new Button(HelpPopupConstants.MATH_OPERATIONS);
-        mathOperationsButton.setMinWidth(MIN_WIDTH);
         booleanOperationsButton = new Button(HelpPopupConstants.BOOLEAN_OPERATIONS);
-        booleanOperationsButton.setMinWidth(MIN_WIDTH);
         variablesButton = new Button(HelpPopupConstants.VARIABLES);
-        variablesButton.setMinWidth(MIN_WIDTH);
         hBox2.getChildren().add(mathOperationsButton);
         hBox2.getChildren().add(booleanOperationsButton);
         hBox2.getChildren().add(variablesButton);
@@ -83,27 +72,27 @@ public class HelpPopup {
     private void setButtonActions(){
         basicSyntaxButton.setOnAction((event -> {
             Image image = new Image(getClass().getClassLoader().getResourceAsStream(HelpPopupConstants.syntaxImage));
-            generatePopup((int)image.getWidth(),(int)image.getHeight(), image, HelpPopupConstants.BASIC_SYNTAX);
+            generatePopup(image, HelpPopupConstants.BASIC_SYNTAX);
         }));
         turtleCommandsButton.setOnAction((event -> {
             Image image = new Image(getClass().getClassLoader().getResourceAsStream(HelpPopupConstants.commandsImage));
-            generatePopup((int)image.getWidth(),(int)image.getHeight(), image, HelpPopupConstants.TURTLE_COMMANDS);
+            generatePopup(image, HelpPopupConstants.TURTLE_COMMANDS);
         }));
         turtleQueriesButton.setOnAction((event -> {
             Image image = new Image(getClass().getClassLoader().getResourceAsStream(HelpPopupConstants.queriesImage));
-            generatePopup((int)image.getWidth(),(int)image.getHeight(), image, HelpPopupConstants.TURTLE_QUERIES);
+            generatePopup(image, HelpPopupConstants.TURTLE_QUERIES);
         }));
         mathOperationsButton.setOnAction((event -> {
             Image image = new Image(getClass().getClassLoader().getResourceAsStream(HelpPopupConstants.mathImage));
-            generatePopup((int)image.getWidth(),(int)image.getHeight(), image, HelpPopupConstants.MATH_OPERATIONS);
+            generatePopup(image, HelpPopupConstants.MATH_OPERATIONS);
         }));
         booleanOperationsButton.setOnAction((event -> {
             Image image = new Image(getClass().getClassLoader().getResourceAsStream(HelpPopupConstants.booleanImage));
-            generatePopup((int)image.getWidth(),(int)image.getHeight(), image, HelpPopupConstants.BOOLEAN_OPERATIONS);
+            generatePopup(image, HelpPopupConstants.BOOLEAN_OPERATIONS);
         }));
         variablesButton.setOnAction((event -> {
             Image image = new Image(getClass().getClassLoader().getResourceAsStream(HelpPopupConstants.variablesImage));
-            generatePopup((int)image.getWidth(),(int)image.getHeight(), image, HelpPopupConstants.VARIABLES);
+            generatePopup(image, HelpPopupConstants.VARIABLES);
         }));
     }
     private void addTitle(){
@@ -113,15 +102,8 @@ public class HelpPopup {
         helpRoot.getChildren().add(imageView);
     }
 
-    private void generatePopup(int xSize, int ySize, Image image, String string){
-        Group popupRoot = new Group();
-        Stage popupStage = new Stage();
-        popupStage.setTitle(string);
-        popupStage.setScene(new Scene(popupRoot, xSize, ySize));
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
-        popupRoot.getChildren().add(imageView);
-        popupStage.show();
+    private void generatePopup(Image image, String string){
+        HelpSubPopup subPopup = new HelpSubPopup(image, string);
     }
 
 }
