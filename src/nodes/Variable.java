@@ -60,4 +60,8 @@ public class Variable extends Node{
 		this.value = value;
 		VH.add(this);
 	}
+
+	public String toString() {
+		return name;
+	}
 }
