@@ -170,7 +170,7 @@ public class Drawer extends ScreenComponent implements Observer{
 
 // Method taken from https://stackoverflow.com/questions/18260421/how-to-draw-image-rotated-on-javafx-canvas
 	private void rotate(GraphicsContext gc, double angle, double px, double py) {
-		Rotate r = new Rotate(angle, px, py);
+		Rotate r = new Rotate(-angle, px, py);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 	}
 
