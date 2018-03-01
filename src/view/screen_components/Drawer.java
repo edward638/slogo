@@ -21,6 +21,9 @@ import javafx.scene.shape.Line;
 import java.util.List;
 
 public class Drawer extends ScreenComponent implements Observer{
+    public static final double CANVAS_WIDTH = CanvasConstants.CANVAS_WIDTH;
+    public static final double CANVAS_HEIGHT = CanvasConstants.CANVAS_HEIGHT;
+    public static final Color INITIAL_PEN_COLOR = Color.BLACK;
 	public static final double TURTLE_START_X = CanvasConstants.CANVAS_WIDTH/2;
 	public static final double TURTLE_START_Y = CanvasConstants.CANVAS_HEIGHT/2;
 	public static final int TURTLE_WIDTH = 50;
