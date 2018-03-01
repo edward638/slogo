@@ -65,6 +65,7 @@ public class Turtle implements TurtleObservable
 	}
 
 	public double getDirectionAngle() {
+		System.out.println(directionAngle);
 		return directionAngle;
 	}
 
