@@ -12,7 +12,7 @@ import java.util.List;
  *
  * author: Charles Dracos
  */
-public class Command extends Node {
+public class Command extends Node implements CommandNode {
     private String name;
     private VariableHistory VH;
     private ArrayList<Liste> lists;
