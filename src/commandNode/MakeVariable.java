@@ -8,6 +8,10 @@ import nodes.CommandNode;
 import nodes.Node;
 import nodes.Variable;
 
+/**
+ * Makes a new variable as described on the course site
+ */
+
 public class MakeVariable extends Node implements CommandNode{
 	
 
@@ -18,9 +22,9 @@ public class MakeVariable extends Node implements CommandNode{
 	@Override
 	public double evaluate(List<Node> args) {
 		Variable v = (Variable) args.get(0);
-		v.setValue(args.get(1).getValue());
+		v.setValue(args.get(1).getValue()); //sets the value of the variable
 		VariableHistory VH = v.getVH();
-		VH.add((Variable) v);
+		VH.add((Variable) v); //adds to its vh
 		value = args.get(1).getValue();
 		return value;
 	}
