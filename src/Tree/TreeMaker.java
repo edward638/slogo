@@ -6,6 +6,7 @@ import java.util.List;
 import nodes.CommandNode;
 import nodes.Node;;
 
+
 public class TreeMaker {
 	private ArrayList<Node> nodes;
 	private ArrayList<Node> heads;
