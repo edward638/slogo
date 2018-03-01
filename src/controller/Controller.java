@@ -1,8 +1,11 @@
 package controller;
 
+import java.util.List;
+
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.*;
+import nodes.Node;
 import parsers.Parser;
 import view.GUI;
 import view.screen_components.*;
@@ -66,7 +69,8 @@ public class Controller implements ControllerInterface{
 	
     @Override
 	public void passCommand(String command, String language){
-        parser.parseString(command, language);
+        List<Node> newTree = parser.parseString(command, language);
+        parser.makeTree(newTree);
     }
 
     @Override
