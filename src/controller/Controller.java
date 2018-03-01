@@ -37,13 +37,13 @@ public class Controller implements ControllerInterface{
 	}
 
 	private void setUpConnections(){
-		turtle.addTurtleObserver(drawer);
+		turtle.addObserver(drawer);
 		drawer.setTurtle(turtle);
 		variableHistoryBox.setVariableHistory(variableHistory);
 		commandHistoryBox.setCommandHistory(commandHistory);
-		commandHistory.setCommandHistoryObserver(commandHistoryBox);
+		commandHistory.addObserver(commandHistoryBox);
 		variableHistoryBox.setVariableHistory(variableHistory);
-		variableHistory.addVariableHistoryObserver(variableHistoryBox);
+		variableHistory.addObserver(variableHistoryBox);
 	}
 
 	private void initializeScreenComponents(){
