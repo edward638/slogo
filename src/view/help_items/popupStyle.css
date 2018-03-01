@@ -1,0 +1,22 @@
+
+.button{
+    -fx-border-color:black;
+    -fx-background-color:#E57373;
+    -fx-min-width:125px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+HBox{
+    -fx-spacing: 25;
+}
+.button:hover{
+    -fx-background-color:#F48FB1;
+}
+
+.button:pressed{
+    -fx-font-weight: bold;
+}
+
+.text-area{
+    -fx-background-color:#666666;
+}

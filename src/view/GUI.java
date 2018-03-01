@@ -38,14 +38,6 @@ public class GUI{
 
     }
 
-//    private void displayHelpPopup(){
-//        Group root2 = new Group();
-//        Stage helpStage = new Stage();
-//        helpStage.setTitle("Help for SLogo");
-//        helpStage.setScene(new Scene(root2, 450, 450));
-//        helpStage.show();
-//    }
-
     private void addTitle() {
         Image titleImage = new Image(getClass().getClassLoader().getResourceAsStream(TitleFactory.SLOGO_IMAGE));
         ImageView title = TitleFactory.generateTitle(titleImage);

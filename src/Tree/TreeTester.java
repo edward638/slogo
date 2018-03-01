@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 
 public class TreeTester {
 	private static ArrayList<Node> nodes;
-	
+
 	public static void main (String [] args) {
 		Turtle t = new Turtle(0.0, 0.0, Color.WHITE);
 		CommandHistory CH = new CommandHistory();
@@ -41,6 +41,7 @@ public class TreeTester {
 		ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator();
 		System.out.println(te.evaluate(heads));
+
 	}
 }
 
