@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
+import model.TurtleObservable;
 import view.constants.CanvasConstants;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -28,9 +29,11 @@ public class DrawerCanvas {
     public static final int TURTLE_HEIGHT = 50;
     private String storedColor = "White";
     private StackPane stackPane;
+    private TurtleObservable turtle;
 
-    public DrawerCanvas(BorderPane borderPane){
+    public DrawerCanvas(BorderPane borderPane, TurtleObservable turtle){
         stackPane = new StackPane();
+        this.turtle = turtle;
         canvas = new Canvas(CanvasConstants.CANVAS_WIDTH, CanvasConstants.CANVAS_HEIGHT);
         gc = canvas.getGraphicsContext2D();
         stackPane.getChildren().add(canvas);
@@ -39,6 +42,9 @@ public class DrawerCanvas {
         setupTurtleImageView();
     }
 
+    public void setTurtle(TurtleObservable turtle){
+        this.turtle = turtle;
+    }
     public void setupTurtleImageView(){
         Image turtleIconImage = new Image(getClass().getClassLoader().getResourceAsStream("black_and_white_turtle.PNG"));
         turtleIcon = new ImageView(turtleIconImage);
@@ -53,14 +59,14 @@ public class DrawerCanvas {
         gc.strokeRect(0,0, canvas.getWidth(),canvas.getHeight());
     }
 
-    public void update(Turtle turtle){
+    public void update(){
         gc.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
         changeBackgroundColor(storedColor);
         drawLines(turtle.getLines());
-        moveTurtle(turtle);
+        moveTurtle();
     }
 
-    public void moveTurtle(Turtle turtle){
+    public void moveTurtle(){
 
         stackPane.getChildren().remove(turtleIcon);
         turtleIcon.setTranslateX(turtle.getXCoordinate() - CanvasConstants.CANVAS_WIDTH/2);
@@ -97,7 +103,7 @@ public class DrawerCanvas {
     EventHandler<MouseEvent> imageOnMousePressedEventHandler = new EventHandler<MouseEvent>(){
         @Override
         public void handle(MouseEvent t){
-            TurtleInformation info = new TurtleInformation();
+            TurtleInformation info = new TurtleInformation(turtle);
         }
     };
 
