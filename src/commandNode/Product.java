@@ -4,9 +4,10 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
 
-public class Product extends Node implements CommandNode {
+public class Product extends GenCommand implements CommandNode {
 
 	public Product(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -19,7 +20,7 @@ public class Product extends Node implements CommandNode {
 	 * 
 	 * @return expr1 * expr2
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeI> arguments) {
 		double prod = arguments.get(0).getValue()*arguments.get(1).getValue();
 		value = prod;
 		return value;

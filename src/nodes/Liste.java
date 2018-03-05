@@ -14,49 +14,37 @@ import Tree.TreeMaker;
  *
  *  author: Charles Dracos
  */
-public class Liste extends Node {
-    private ArrayList<Node> elements;
+public class Liste implements NodeI {
+    private ArrayList<NodeI> elements;
+    private double value;
 
     /**
      * Liste has no parameters in its constructor as it has no children to be reached by
      * the treeMaker/evaluator and does not need to directly call the turtle.
      */
     public Liste () {
-        super(null, 0);
-        elements = new ArrayList<Node>();
+        elements = new ArrayList<NodeI>();
+        value = 0.0;
     }
 
-    /**
-     * Add a node to the array of elements in the list
-     * @param n node being added
-     */
-    public void add (Node n) {
+    public NodeI getElement (int index) {
+        return elements.get(index);
+    }
+
+    public void add(NodeI n) {
         elements.add(n);
     }
 
-    public Node getElement (int index) {
-        return elements.get(index); //returns element at a specific index
-    }
-
-    /**
-     * Overrides the Node getChild to give a do nothing node
-     * @return constant node of value zero
-     */
-    @Override
-    public Node getChild() {
-        return new Constant(0);
-    }
-
-    /**
-     * Evaluates commands in the list
-     * @param args mandatory parameter from superclass that is null
-     * @return the value given by the last command executed
-     */
-    public double evaluate(List<Node> args) {
+    public double evaluate() {
         TreeMaker tm = new TreeMaker(elements);
-        ArrayList<Node> heads = (ArrayList<Node>) tm.getHeads();
+        ArrayList<HeadI> heads = (ArrayList<HeadI>) tm.getHeads();
         TreeEvaluator te = new TreeEvaluator();
         value = te.evaluate(heads);
+        return value;
+    }
+
+    @Override
+    public double getValue() {
         return value;
     }
 }

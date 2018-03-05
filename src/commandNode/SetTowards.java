@@ -4,9 +4,10 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
 
-public class SetTowards extends Node implements CommandNode
+public class SetTowards extends GenCommand implements CommandNode
 {
 	private double degreeConversion = 180/Math.PI;
 			
@@ -20,7 +21,7 @@ public class SetTowards extends Node implements CommandNode
 	 * 
 	 * @return the number of degrees turtle turned
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeI> arguments) {
 		double rad = Math.atan(arguments.get(1).getValue()/arguments.get(0).getValue());
 		double deg = rad * degreeConversion; 
 		if(arguments.get(0).getValue() < 0)

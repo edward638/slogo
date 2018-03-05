@@ -4,7 +4,8 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
 
 /**
  * @author Belanie Nagiel
@@ -13,7 +14,7 @@ import nodes.Node;
  * the CommandNode interface.
  *
  */
-public class NaturalLog extends Node implements CommandNode {
+public class NaturalLog extends GenCommand implements CommandNode {
 
 	/**
 	 * Class Constructor
@@ -32,7 +33,7 @@ public class NaturalLog extends Node implements CommandNode {
 	 * 
 	 * @return ln(expr)
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeI> arguments) {
 		value = Math.log(arguments.get(0).getValue());
 		return value;
 	}

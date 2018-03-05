@@ -4,9 +4,10 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
 
-public class Right extends Node implements CommandNode {
+public class Right extends GenCommand implements CommandNode {
 
 	public Right(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +19,7 @@ public class Right extends Node implements CommandNode {
 	 * 
 	 * @return the value of degrees
 	 */
-	public double evaluate(List<Node> arguments) 
+	public double evaluate(List<NodeI> arguments)
 	{
 		double deg = turtle.getDirectionAngle() - arguments.get(0).getValue();
 		if (deg < 0)

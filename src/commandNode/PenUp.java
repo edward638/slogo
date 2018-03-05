@@ -4,9 +4,10 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
 
-public class PenUp extends Node implements CommandNode{
+public class PenUp extends GenCommand implements CommandNode{
 
 	public PenUp(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +19,7 @@ public class PenUp extends Node implements CommandNode{
 	 * 
 	 * @return 0
 	 */
-	public double evaluate(List<Node> arguments) 
+	public double evaluate(List<NodeI> arguments)
 	{
 		turtle.setPenShowing(false);
 		value = 0;

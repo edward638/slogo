@@ -11,10 +11,8 @@ import model.VariableHistory;
  *
  * author: Charles Dracos
  */
-public class Variable extends Node{
-	private String name;
+public class Variable extends VariableI implements NodeI {
 	private double value;
-	private VariableHistory VH;
 
 	/**
 	 * Creates a new Variable with a name and acces to VH
@@ -22,13 +20,8 @@ public class Variable extends Node{
 	 * @param VH VariableHistory of the program
 	 */
 	public Variable (String name, VariableHistory VH) {
-		super(null, 0);
-		this.name = name;
-		this.VH = VH;
-	}
-
-	public String getName() {
-		return name; //returns name of the string
+		super(name, VH);
+		value = 0.0;
 	}
 
 	public double getNewValue() {
@@ -37,15 +30,6 @@ public class Variable extends Node{
 	
 	public double getValue() {
 		return VH.getValue(name); //gets value from VH associated with name
-	}
-
-	@Override
-	public double evaluate(List<Node> args) {
-		return value; //returns its value when evaluated
-	}
-
-	public VariableHistory getVH() {
-		return VH; //returns it VH
 	}
 	
 	public void setValue (double value) {

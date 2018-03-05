@@ -7,7 +7,7 @@ import java.util.List;
  *
  * author: Charles Dracos
  */
-public class Constant extends Node{
+public class Constant implements NodeI{
 	private double value;
 
 	/**
@@ -15,7 +15,6 @@ public class Constant extends Node{
 	 * @param value the value of the node
 	 */
 	public Constant (double value) {
-		super(null, 0);
 		this.value = value;
 	}
 
@@ -23,7 +22,7 @@ public class Constant extends Node{
 		return value; //returns value
 	}
 
-	public double evaluate(List<Node> args) {
-		return value; //evaluates the nodes, returns value
+	public boolean hasNext() {
+		return false; //never has a child
 	}
 }

@@ -4,9 +4,10 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
 
-public class ShowTurtle extends Node implements CommandNode {
+public class ShowTurtle extends GenCommand implements CommandNode {
 
 	public ShowTurtle(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +19,7 @@ public class ShowTurtle extends Node implements CommandNode {
 	 * 
 	 * @return 1
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeI> arguments) {
 		turtle.setTurtleShowing(true);
 		value = 1;
 		return value;
