@@ -8,8 +8,6 @@ import javafx.scene.shape.Line;
 import java.awt.geom.Line2D;
 import view.Observer;
 
-
-
 public class Turtle implements TurtleObservable
 {
 	private double XCoordinate;
