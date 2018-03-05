@@ -3,7 +3,8 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
 
 /**
  * @author Belanie Nagiel
@@ -12,7 +13,7 @@ import nodes.Node;
  * the CommandNode interface.
  *
  */
-public class IsPenDown extends Node implements CommandNode {
+public class IsPenDown extends GenCommand implements CommandNode {
 
 	/**
 	 * Class Constructor
@@ -30,7 +31,7 @@ public class IsPenDown extends Node implements CommandNode {
 	 * 
 	 * @return turtle's pen status
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeI> arguments) {
 		if(turtle.getPenShowing())
 		{
 			value = 1;

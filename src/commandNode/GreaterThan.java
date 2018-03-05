@@ -4,9 +4,10 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
 
-public class GreaterThan extends Node implements CommandNode {
+public class GreaterThan extends GenCommand implements CommandNode {
 
 	public GreaterThan(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +19,7 @@ public class GreaterThan extends Node implements CommandNode {
 	 * 
 	 * @return is expr1 > expr2
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeI> arguments) {
 		if(arguments.get(0).getValue() > arguments.get(1).getValue())
 		{
 			value = 1;

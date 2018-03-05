@@ -4,7 +4,8 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
 
 /**
  * @author Belanie Nagiel
@@ -13,7 +14,7 @@ import nodes.Node;
  * the CommandNode interface.
  *
  */
-public class Forward extends Node implements CommandNode {
+public class Forward extends GenCommand implements CommandNode {
 	private static double radianConversion = Math.PI/180;
 	
 	/**
@@ -32,7 +33,7 @@ public class Forward extends Node implements CommandNode {
 	 * 
 	 * @return the value of pixels
 	 */
-	public double evaluate(List<Node> arguments) 
+	public double evaluate(List<NodeI> arguments)
 	{
 		double xCor = turtle.getXCoordinate() + arguments.get(0).getValue()*Math.cos(turtle.getDirectionAngle()*radianConversion);
 		double yCor = turtle.getYCoordinate() - arguments.get(0).getValue()*Math.sin(turtle.getDirectionAngle()*radianConversion);
