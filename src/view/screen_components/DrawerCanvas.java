@@ -16,6 +16,7 @@ import view.constants.CanvasConstants;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import view.help_items.HelpPopup;
+import view.turtle_info.TurtleInformation;
 
 import java.util.List;
 
@@ -96,7 +97,7 @@ public class DrawerCanvas {
     EventHandler<MouseEvent> imageOnMousePressedEventHandler = new EventHandler<MouseEvent>(){
         @Override
         public void handle(MouseEvent t){
-            HelpPopup helpPopup = new HelpPopup();
+            TurtleInformation info = new TurtleInformation();
         }
     };
 
