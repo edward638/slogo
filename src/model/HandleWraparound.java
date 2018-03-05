@@ -16,11 +16,12 @@ public class HandleWraparound {
 	{
 		screenWidth = width;
 		screenHeight = height;
-		lines = new ArrayList<Line>();
 	}
 
 	public List<Line> drawLine(double currentX, double currentY, double futureX, double futureY) 
 	{
+		lines = new ArrayList<Line>();
+		
 		Line remainingLineToDraw = new Line(currentX, currentY, futureX, futureY);
 		Line oldLine;
 		do{
