@@ -161,7 +161,7 @@ public class Parser
 						}
 						else if(nodeList.size() > 0 && nodeList.get(i-1) instanceof MakeUserInstruction)
 						{
-							Node n = new Command(text,varHistory);
+							Command n = new Command(text,varHistory);
 							nodeList.add(n);
 						}
 						else
