@@ -71,7 +71,7 @@ public class Drawer extends ScreenComponent implements Observer{
 	public void generateGUIComponent(){
 		BorderPane borderPane = super.getBorderPane();
 		borderPane.setPadding(new Insets(10,20,10,20));
-		drawerCanvas = new DrawerCanvas(borderPane);
+		drawerCanvas = new DrawerCanvas(borderPane, turtle);
 		generateBorderPaneBottom(borderPane);
 	}
 
@@ -124,7 +124,8 @@ public class Drawer extends ScreenComponent implements Observer{
 
 
 	public void update(){
-		drawerCanvas.update((Turtle) turtle);
+		drawerCanvas.setTurtle(turtle);
+		drawerCanvas.update();
 	}
 
 
