@@ -5,7 +5,7 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.*;
-import nodes.NodeI;
+import nodes.NodeInterface;
 import parsers.Parser;
 import view.GUI;
 import view.screen_components.*;
@@ -16,7 +16,7 @@ public class Controller implements ControllerInterface{
 	private Turtle turtle;
 	private Parser parser;
 	private CommandHistory commandHistory;
-	private VariableHistory variableHistory;
+	private VariablesHistory variableHistory;
 	private Drawer drawer;
 	private CommandBox commandBox;
 	private CommandHistoryBox commandHistoryBox;
@@ -35,7 +35,7 @@ public class Controller implements ControllerInterface{
 	private void initializeModelComponents(){
 		turtle = new Turtle(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT, Drawer.INITIAL_PEN_COLOR);
         commandHistory = new CommandHistory();
-        variableHistory = new VariableHistory();
+        variableHistory = new VariablesHistory();
 		parser = new Parser(turtle, variableHistory, commandHistory);
 	}
 
@@ -69,7 +69,7 @@ public class Controller implements ControllerInterface{
 	
     @Override
 	public void passCommand(String command, String language){
-        List<NodeI> newTree = parser.parseString(command, language);
+        List<NodeInterface> newTree = parser.parseString(command, language);
         parser.makeTree(newTree);
     }
 
@@ -88,4 +88,7 @@ public class Controller implements ControllerInterface{
 		turtle.setPenColor(color);
 	}
 
+	public void toggleActive(int ID) {
+		//TODO: find a turtle with specific ID in backend, make it active/inactive
+	}
 }

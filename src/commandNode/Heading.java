@@ -3,18 +3,18 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.GenCommand;
-import nodes.NodeI;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
 /**
  * @author Belanie Nagiel
  * 
  * Heading class that creates a new extension of Node and sets the functionality for the evaluate method implemented from
- * the CommandNode interface.
+ * the CommandInterface interface.
  *
  */
-public class Heading extends GenCommand implements CommandNode {
+public class Heading extends GeneralCommand implements CommandInterface {
 
 	/**
 	 * Class Constructor
@@ -32,7 +32,7 @@ public class Heading extends GenCommand implements CommandNode {
 	 * 
 	 * @return turtle's direction angle
 	 */
-	public double evaluate(List<NodeI> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		value = turtle.getDirectionAngle();
 		return value;
 	}
