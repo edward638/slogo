@@ -18,17 +18,17 @@ import view.Observer;
  *
  * authors: Charles Dracos, Andy Nguyen
  */
-public class VariableHistory implements VariableHistoryObservable{
+public class VariablesHistory implements VariableHistoryObservable{
 	private HashMap<String, Double> variables;
-	private HashMap<String, Command> commands;
+	private HashMap<String, CustomCommand> commands;
 	private Observer variableHistoryObserver;
 
 	/**
-	 * No parameter constructor, initializes the HashMap
+	 * No parameter constructor, initializes the HashMaps
 	 */
-	public VariableHistory () {
+	public VariablesHistory() {
 		variables = new HashMap<String, Double>();
-		commands = new HashMap<String, Command>();
+		commands = new HashMap<String, CustomCommand>();
 	}
 
 	/**
@@ -63,11 +63,11 @@ public class VariableHistory implements VariableHistoryObservable{
 	}
 
 	/**
-	 * Adds a new custom Command Node to the commands Map, mapping a name to the object
+	 * Adds a new custom CustomCommand Node to the commands Map, mapping a name to the object
 	 * which then stores the lists values and can evaluate itself
 	 * @param CN the command
 	 */
-	public void add (Command CN) {
+	public void add (CustomCommand CN) {
 		commands.put(CN.getName(), CN);
 		variableHistoryObserver.notifyOfChanges();
 	}
@@ -78,12 +78,16 @@ public class VariableHistory implements VariableHistoryObservable{
 	 * @param name the name of the custom command
 	 * @return the value returned from evaluate
 	 */
-	public Command getCommand (String name) {
+	public CustomCommand getCommand (String name) {
+		if (commands.get(name)==null) {
+			//throws error that there is no variable with that name to be accessed
+			throw new NoSuchElementException("Error: No command with that name");
+		}
 		return commands.get(name);
 	}
 
 	public Set<String> getCommandKeys () {
-		return commands.keySet();
+		return commands.keySet(); //returns all commands
 	}
 
 	/**

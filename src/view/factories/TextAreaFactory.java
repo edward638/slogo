@@ -6,13 +6,13 @@ import view.view_exceptions.BadResourceNameException;
 
 public class TextAreaFactory {
 	/*
-	public static final String COMMAND = "Command";
+	public static final String COMMAND = "CustomCommand";
 	public static final String HISTORY = "History";
 	public static final String VARIABLE = "Variable";
 
 	public static TextArea generateTextAreaOfType(String textAreaType){
 		switch(textAreaType){
-			case "Command":
+			case "CustomCommand":
 				return getSpecifiedTextArea(TextAreaConstants.COMMAND_TEXT_X, TextAreaConstants.COMMAND_TEXT_Y, TextAreaConstants.COMMAND_ROWS, TextAreaConstants.COMMAND_COLUMNS);
 			case "History":
 				return getSpecifiedTextArea(TextAreaConstants.HISTORY_TEXT_X, TextAreaConstants.HISTORY_TEXT_Y, TextAreaConstants.HISTORY_ROWS, TextAreaConstants.HISTORY_COLUMNS);

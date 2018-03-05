@@ -4,18 +4,18 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.GenCommand;
-import nodes.NodeI;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
 /**
  * @author Belanie Nagiel
  * 
  * ClearScreen class that creates a new extension of Node and sets the functionality for the evaluate method implemented from
- * the CommandNode interface.
+ * the CommandInterface interface.
  *
  */
-public class ClearScreen extends GenCommand implements CommandNode {
+public class ClearScreen extends GeneralCommand implements CommandInterface {
 
 	/**
 	 * Class Constructor
@@ -33,7 +33,7 @@ public class ClearScreen extends GenCommand implements CommandNode {
 	 * 
 	 * @return the distance the turtle moved
 	 */
-	public double evaluate(List<NodeI> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		double distance = Math.sqrt(Math.pow(turtle.getHome()[0] - turtle.getXCoordinate(), 2) + Math.pow(turtle.getHome()[1] - turtle.getYCoordinate(), 2) );
 		turtle.setCoordinates(turtle.getHome()[0], turtle.getHome()[1]);
 		turtle.setDirectionAngle(90);

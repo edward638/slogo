@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import model.Turtle;
-import model.VariableHistory;
-import nodes.Node;
 
 public class NodeFactory 
 {	

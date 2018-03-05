@@ -3,11 +3,11 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.GenCommand;
-import nodes.NodeI;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
-public class YCoordinate extends GenCommand implements CommandNode {
+public class YCoordinate extends GeneralCommand implements CommandInterface {
 
 	public YCoordinate(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -19,7 +19,7 @@ public class YCoordinate extends GenCommand implements CommandNode {
 	 * 
 	 * @return turtle's Y
 	 */
-	public double evaluate(List<NodeI> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		value = turtle.getYCoordinate();
 		return value;
 	}

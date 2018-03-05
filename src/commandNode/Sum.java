@@ -3,11 +3,11 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.GenCommand;
-import nodes.NodeI;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
-public class Sum extends GenCommand implements CommandNode
+public class Sum extends GeneralCommand implements CommandInterface
 {
 
 	public Sum(Turtle turt, int numChildren) {
@@ -21,7 +21,7 @@ public class Sum extends GenCommand implements CommandNode
 	 * 
 	 * @return expr1 + expr2
 	 */
-	public double evaluate(List<NodeI> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		double sum = arguments.get(0).getValue() + arguments.get(1).getValue();
 		value = sum;
 		return value;

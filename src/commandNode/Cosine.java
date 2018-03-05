@@ -3,18 +3,18 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.GenCommand;
-import nodes.NodeI;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
 /**
  * @author Belanie Nagiel
  * 
  * Cosine class that creates a new extension of Node and sets the functionality for the evaluate method implemented from
- * the CommandNode interface.
+ * the CommandInterface interface.
  *
  */
-public class Cosine extends GenCommand implements CommandNode {
+public class Cosine extends GeneralCommand implements CommandInterface {
 
 	/**
 	 * Class Constructor
@@ -33,7 +33,7 @@ public class Cosine extends GenCommand implements CommandNode {
 	 * 
 	 * @return cos(degrees)
 	 */
-	public double evaluate(List<NodeI> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		double cos = Math.cos(arguments.get(0).getValue());
 		value = cos;
 		return value;

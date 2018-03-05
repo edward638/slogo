@@ -12,30 +12,30 @@ import nodes.*;
  * recursively, building the tree from the bottom up.
  */
 public class TreeMaker {
-	private ArrayList<NodeI> nodes;
-	private ArrayList<HeadI> heads;
+	private ArrayList<NodeInterface> nodes;
+	private ArrayList<HeadInterface> heads;
 	private int index;
 
 	/**
 	 * Constructor which initializes its values and begins the tree-making process
 	 * @param nodes the nodes to be made into trees
 	 */
-	public TreeMaker (List<NodeI> nodes) {
-		this.nodes = (ArrayList<NodeI>) nodes;
-		heads = new ArrayList<HeadI>();
+	public TreeMaker (List<NodeInterface> nodes) {
+		this.nodes = (ArrayList<NodeInterface>) nodes;
+		heads = new ArrayList<HeadInterface>();
 		index = 0;
 		while (index < this.nodes.size()) {
 			try {
-				HeadI head = (HeadI) this.nodes.get(index);
+				HeadInterface head = (HeadInterface) this.nodes.get(index);
 				heads.add(makeTree(head)); //add this head node to the head nodes which represent trees
 			}
-			catch (Exception e) {
-				throw new HeadException();
+			catch (ClassCastException e) {
+				throw new HeadException(); //cannot have a head of tree that is node a head node
 			}
 		}
 	}
 	
-	public List<HeadI> getHeads() {
+	public List<HeadInterface> getHeads() {
 		return heads; //returns the heads of the trees made
 	}
 
@@ -45,17 +45,18 @@ public class TreeMaker {
 	 * @param node the node to be added to the tree
 	 * @return the head node of the tree
 	 */
-	private HeadI makeTree(HeadI node) {
-		index+=1;
+	private HeadInterface makeTree(HeadInterface node) {
+		index+=1; //moves to next index when a hea is called
 		while (node!=null && node.hasNext()) { //while there are nodes in the list
 			try {
-				NodeI curr = nodes.get(index);
+				NodeInterface curr = nodes.get(index);
 				node.add(curr);
-				if (curr instanceof HeadI) {
-					HeadI head = (HeadI) curr;
+				if (curr instanceof CommandInterface) {
+					HeadInterface head = (HeadInterface) curr;
 					makeTree(head); //add the next node in the list index
 				}
 				else {
+					//moves to next node in the list while in the loop for non-heads
 					index++;
 				}
 			}

@@ -12,7 +12,7 @@ import Tree.TreeEvaluator;
 import Tree.TreeMaker;
 import commandNode.MakeUserInstruction;
 import model.Turtle;
-import model.VariableHistory;
+import model.VariablesHistory;
 import model.CommandHistory;
 import nodes.*;
 
@@ -34,7 +34,7 @@ public class Parser
 	private static final String REGEX_FILE = "parsers/regex";
 	private static final String NODE_PACKAGE = "commandNode.";
 	private Turtle turt;
-	private VariableHistory varHistory;
+	private VariablesHistory varHistory;
 	private CommandHistory comHistory;
 	private String lang;
 	private NodeFactory nodeMaker;
@@ -48,7 +48,7 @@ public class Parser
 	 * @param VH the variable history
 	 * @param CH the command history
 	 */
-	public Parser(Turtle t, VariableHistory VH, CommandHistory CH)
+	public Parser(Turtle t, VariablesHistory VH, CommandHistory CH)
 	{
 		myTranslation = new HashMap<>();
 
@@ -97,7 +97,7 @@ public class Parser
 	 * @throws ClassNotFoundException 
 	 * @throws InvalidEntryException 
 	 */
-	public List<NodeI> parseString(String command, String language)
+	public List<NodeInterface> parseString(String command, String language)
 	{
 		lang = language;
 		languageFilePath = "resources.languages/" + lang;
@@ -117,7 +117,7 @@ public class Parser
 		}
 		
 		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
-		List<NodeI> nodeList = new ArrayList<>();
+		List<NodeInterface> nodeList = new ArrayList<>();
 	
 		checkSyntax(commandList, nodeList);
 		
@@ -125,10 +125,10 @@ public class Parser
 		
 	}
 	
-	public void makeTree(List<NodeI> nodeList)
+	public void makeTree(List<NodeInterface> nodeList)
 	{
 		TreeMaker tm  = new TreeMaker(nodeList);
-		ArrayList<HeadI> heads = (ArrayList<HeadI>) tm.getHeads();
+		ArrayList<HeadInterface> heads = (ArrayList<HeadInterface>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator();
 		te.evaluate(heads);	
 	}
@@ -140,7 +140,7 @@ public class Parser
 	 * @param commandList the list of strings given by the user
 	 * @param nodeList the empty nodeList that will be filled
 	 */
-	private void checkSyntax(String[] commandList, List<NodeI> nodeList)
+	private void checkSyntax(String[] commandList, List<NodeInterface> nodeList)
 	{
 		for (int i = 0; i<commandList.length; i++)
 		{
@@ -156,7 +156,7 @@ public class Parser
 					{
 						if (varHistory.getCommandKeys().contains(text))
 						{
-							Command n = varHistory.getCommand(text);
+							CustomCommand n = varHistory.getCommand(text);
 							nodeList.add(n);
 						}
 						else if(nodeList.size() > 0 && nodeList.get(i-1) instanceof MakeUserInstruction)
@@ -169,7 +169,7 @@ public class Parser
 							String commandType = checkLanguage(text);
 							try 
 							{
-								GenCommand n = (GenCommand) NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
+								GeneralCommand n = (GeneralCommand) NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
 								nodeList.add(n);
 							}
 							catch(ClassNotFoundException e)
@@ -196,16 +196,22 @@ public class Parser
 					}
 					else if(key.equals("List"))
 					{
-						Liste l = new Liste();
+						ListNode l = new ListNode();
 						String noBrackets = text.substring(1,text.length()-1);
 						String trimmed = noBrackets.trim();
 						NEW_COMMAND = false;
-						List<NodeI> listNodes = parseString(trimmed,lang);
-						for(NodeI ln: listNodes)
+						List<NodeInterface> listNodes = parseString(trimmed,lang);
+						for(NodeInterface ln: listNodes)
 						{
 							l.add(ln);
 						}
 						nodeList.add(l);
+					}
+					else if(nodeList.size() > 0 && previous.equals("MakeUserInstruction"))
+					{
+						previous  = "";
+						CustomCommand n = new CustomCommand(text,varHistory);
+						nodeList.add(n);
 					}
 				}
 			}
