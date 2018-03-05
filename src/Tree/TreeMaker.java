@@ -22,7 +22,7 @@ public class TreeMaker {
 	 */
 	public TreeMaker (List<NodeInterface> nodes) {
 		this.nodes = (ArrayList<NodeInterface>) nodes;
-		heads = new ArrayList<HeadInterface>();
+		heads = new ArrayList<>();
 		index = 0;
 		while (index < this.nodes.size()) {
 			try {

@@ -27,8 +27,8 @@ public class VariablesHistory implements VariableHistoryObservable{
 	 * No parameter constructor, initializes the HashMaps
 	 */
 	public VariablesHistory() {
-		variables = new HashMap<String, Double>();
-		commands = new HashMap<String, CustomCommand>();
+		variables = new HashMap<>();
+		commands = new HashMap<>();
 	}
 
 	/**

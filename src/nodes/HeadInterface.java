@@ -12,9 +12,13 @@ import java.util.List;
  */
 public interface HeadInterface {
 
-    public NodeInterface getNext();
-    public boolean hasNext();
-    public double evaluate(List<NodeInterface> args);
-    public void add(NodeInterface n);
-    public void reset();
+    NodeInterface getNext();
+
+    boolean hasNext();
+
+    double evaluate(List<NodeInterface> args);
+
+    void add(NodeInterface n);
+
+    void reset();
 }

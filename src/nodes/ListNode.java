@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Tree.TreeEvaluator;
 import Tree.TreeMaker;
+import jdk.nashorn.api.tree.Tree;
 
 /**
  *  This is the List class. A list stores an array of other types of
@@ -16,14 +17,17 @@ import Tree.TreeMaker;
 public class ListNode implements NodeInterface {
     private ArrayList<NodeInterface> elements;
     private double value;
+    private TreeEvaluator te;
+    private ArrayList<HeadInterface> heads;
 
     /**
      * ListNode has no parameters in its constructor as it has no children to be reached by
      * the treeMaker/evaluator and does not need to directly call the turtle.
      */
     public ListNode() {
-        elements = new ArrayList<NodeInterface>();
-        value = 0.0;
+        elements = new ArrayList<>();
+        value = -1.0;
+        te = new TreeEvaluator();
     }
 
     /**
@@ -48,9 +52,10 @@ public class ListNode implements NodeInterface {
      * @return value done by last command
      */
     public double evaluate() {
-        TreeMaker tm = new TreeMaker(elements);
-        ArrayList<HeadInterface> heads = (ArrayList<HeadInterface>) tm.getHeads();
-        TreeEvaluator te = new TreeEvaluator();
+        if (value < 0) {
+            TreeMaker tm = new TreeMaker(elements);
+            heads = (ArrayList<HeadInterface>) tm.getHeads();
+        }
         value = te.evaluate(heads);
         return value;
     }
