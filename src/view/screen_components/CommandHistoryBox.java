@@ -1,6 +1,6 @@
 package view.screen_components;
 
-import controller.ControllerInterface;
+import controller.CommandHistoryController;
 import model.CommandHistory;
 import model.CommandHistoryObservable;
 import view.Observer;
@@ -10,8 +10,14 @@ import view.constants.TextAreaConstants;
 
 public class CommandHistoryBox extends HistoryBox implements Observer {
 	private CommandHistoryObservable commandHistory;
-	public CommandHistoryBox(ControllerInterface controller){
-		super(controller);
+	public CommandHistoryBox(){
+		super();
+	}
+
+	private CommandHistoryController controller;
+
+	public void setController(CommandHistoryController controller){
+		this.controller = controller;
 	}
 
 	public void setCommandHistory(CommandHistory commandHistory){
@@ -21,7 +27,7 @@ public class CommandHistoryBox extends HistoryBox implements Observer {
 	@Override
 	protected void mapUserActions() {
 		super.getButton().setOnAction((event -> {
-			super.getController().clearCommandHistoryBox();
+			controller.clearCommandHistoryBox();
 		}));
 	}
 

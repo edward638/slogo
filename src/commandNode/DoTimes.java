@@ -6,7 +6,7 @@ import model.Turtle;
 import nodes.*;
 
 
-public class DoTimes extends Node implements CommandNode{
+public class DoTimes extends GeneralCommand implements CommandInterface {
 
 	public DoTimes(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -21,24 +21,29 @@ public class DoTimes extends Node implements CommandNode{
 	 * @return value of the final command executed
 	 */
 
-	public double evaluate(List<Node> args) {
-		Liste l = (Liste) args.get(0);
-		Variable v = (Variable) l.getElement(0);
-		Constant limit = (Constant) l.getElement(1);
+	public double evaluate(List<NodeInterface> args) {
+		try {
+			ListNode l = (ListNode) args.get(0);
+			Variable v = (Variable) l.getElement(0);
+			Constant limit = (Constant) l.getElement(1);
 
-		Liste l2 = (Liste) args.get(1);
+			ListNode l2 = (ListNode) args.get(1);
 
-		while (v.getValue() <= limit.getValue()) {
-			System.out.println(v.getValue());
-			value = l2.evaluate(null);
+			while (v.getValue() <= limit.getValue()) {
+				System.out.println(v.getValue());
+				value = l2.evaluate();
 
-			double next = v.getValue();
-			next++;
+				double next = v.getValue();
+				next++;
 
-			v.setNewValue(next);
+				v.setNewValue(next);
+			}
+
+			return value;
 		}
-
-		return value;
+		catch (ClassCastException e) {
+			throw new ImproperNodeException();
+		}
 	}
 
 }

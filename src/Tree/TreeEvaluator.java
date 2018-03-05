@@ -1,10 +1,10 @@
 package Tree;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import nodes.CommandNode;
-import nodes.Node;
+import nodes.HeadInterface;
+import nodes.NodeInterface;
+import nodes.CommandInterface;
 
 /**
  * This is the class that evaluates the tree of commands after created by the TreeMaker. It uses
@@ -30,7 +30,7 @@ public class TreeEvaluator {
 	 * @param heads List of head nodes of trees
 	 * @return the most recently evaluated command node's value
 	 */
-	public double evaluate(ArrayList<Node> heads) {
+	public double evaluate(ArrayList<HeadInterface> heads) {
 		for (int i = 0; i < heads.size(); i++) {
 			evaluateHead(heads.get(i)); //evaluates a new tree head
 		}
@@ -42,18 +42,19 @@ public class TreeEvaluator {
 	 * arguments for their parent nodes to use to evaluate
 	 * @param node Node being evaluated
 	 */
-	private void evaluateHead(Node node) {
-		ArrayList<Node> nArgs = new ArrayList<Node>(); //arguments to be passed to a commandNode
+	private void evaluateHead(HeadInterface node) {
+		ArrayList<NodeInterface> nArgs = new ArrayList<NodeInterface>(); //arguments to be passed to a commandNode
 		while (node.hasNext()) {	 //if there is a child node
-			Node curr = node.getChild(); //curr is set to the child
-			if (!curr.hasNext()) {
-				//if the child has no children, add it to nArgs
+			NodeInterface curr = node.getNext(); //curr is set to the child
+			if (curr instanceof CommandInterface) {
+				//if the child is another command, cast and enter recursion
+				HeadInterface head = (HeadInterface) curr;
+				evaluateHead(head);
 				nArgs.add(curr);
 			}
 			else {
-				//if it has a child, evaluate curr as a parent node
-				evaluateHead(curr);
-				nArgs.add(curr); // then add to nArgs
+				//if not another command add to the args
+				nArgs.add(curr);
 			}
 		}
 		node.reset(); //sets the node's pointer to its first child for later use

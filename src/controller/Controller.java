@@ -5,18 +5,18 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.*;
-import nodes.Node;
+import nodes.NodeInterface;
 import parsers.Parser;
 import view.GUI;
 import view.screen_components.*;
 
-public class Controller implements ControllerInterface{
+public class Controller implements CommandController, DrawerController, CommandHistoryController, VariableHistoryController{
 	private ModelInterface model;
 	private GUI gui;
 	private Turtle turtle;
 	private Parser parser;
 	private CommandHistory commandHistory;
-	private VariableHistory variableHistory;
+	private VariablesHistory variableHistory;
 	private Drawer drawer;
 	private CommandBox commandBox;
 	private CommandHistoryBox commandHistoryBox;
@@ -35,7 +35,7 @@ public class Controller implements ControllerInterface{
 	private void initializeModelComponents(){
 		turtle = new Turtle(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT, Drawer.INITIAL_PEN_COLOR);
         commandHistory = new CommandHistory();
-        variableHistory = new VariableHistory();
+        variableHistory = new VariablesHistory();
 		parser = new Parser(turtle, variableHistory, commandHistory);
 	}
 
@@ -51,11 +51,15 @@ public class Controller implements ControllerInterface{
 	}
 
 	private void initializeScreenComponents(){
-		drawer = new Drawer(this);
-		commandBox = new CommandBox(this);
-		commandHistoryBox = new CommandHistoryBox(this);
-		variableHistoryBox = new VariableHistoryBox(this);
-		helpButton = new HelpButton(this);
+		drawer = new Drawer();
+		drawer.setController(this);
+		commandBox = new CommandBox();
+		commandBox.setController(this);
+		commandHistoryBox = new CommandHistoryBox();
+		commandHistoryBox.setController(this);
+		variableHistoryBox = new VariableHistoryBox();
+		variableHistoryBox.setController(this);
+		helpButton = new HelpButton();
 
 	}
 
@@ -69,7 +73,7 @@ public class Controller implements ControllerInterface{
 	
     @Override
 	public void passCommand(String command, String language){
-        List<Node> newTree = parser.parseString(command, language);
+        List<NodeInterface> newTree = parser.parseString(command, language);
         parser.makeTree(newTree);
     }
 
@@ -78,14 +82,19 @@ public class Controller implements ControllerInterface{
 		variableHistory.clearHistory();
     }
 
-    @Override
+	@Override
+	public void changeVariableValue(String variableName, double value) {
+
+	}
+
+	@Override
     public void clearCommandHistoryBox() {
 		commandHistory.clearHistory();
     }
 
 	@Override
 	public void setPenColor(Color color) {
-		turtle.setPenColor(color);
+		//turtle.setPenColor(color);
 	}
 
 	public void toggleActive(int ID) {

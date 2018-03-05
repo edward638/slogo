@@ -2,17 +2,18 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.Node;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
 /**
  * @author Belanie Nagiel
  * 
  * IsPenDown class that creates a new extension of Node and sets the functionality for the evaluate method implemented from
- * the CommandNode interface.
+ * the CommandInterface interface.
  *
  */
-public class IsPenDown extends Node implements CommandNode {
+public class IsPenDown extends GeneralCommand implements CommandInterface {
 
 	/**
 	 * Class Constructor
@@ -30,7 +31,7 @@ public class IsPenDown extends Node implements CommandNode {
 	 * 
 	 * @return turtle's pen status
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		if(turtle.getPenShowing())
 		{
 			value = 1;

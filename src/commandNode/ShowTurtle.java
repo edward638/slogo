@@ -3,10 +3,11 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.Node;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
-public class ShowTurtle extends Node implements CommandNode {
+public class ShowTurtle extends GeneralCommand implements CommandInterface {
 
 	public ShowTurtle(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +19,7 @@ public class ShowTurtle extends Node implements CommandNode {
 	 * 
 	 * @return 1
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		turtle.setTurtleShowing(true);
 		value = 1;
 		return value;

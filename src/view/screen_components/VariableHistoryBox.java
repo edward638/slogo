@@ -1,6 +1,6 @@
 package view.screen_components;
 
-import controller.ControllerInterface;
+import controller.VariableHistoryController;
 import model.VariableHistoryObservable;
 import view.Observer;
 import view.constants.ButtonConstants;
@@ -9,8 +9,13 @@ import view.constants.TextAreaConstants;
 
 public class VariableHistoryBox extends HistoryBox implements Observer {
 	private VariableHistoryObservable variableHistory;
-	public VariableHistoryBox(ControllerInterface controller){
-		super(controller);
+	private VariableHistoryController controller;
+	public VariableHistoryBox(){
+		super();
+	}
+
+	public void setController(VariableHistoryController controller){
+		this.controller = controller;
 	}
 
 	public void setVariableHistory(VariableHistoryObservable variableHistory){
@@ -20,7 +25,7 @@ public class VariableHistoryBox extends HistoryBox implements Observer {
 	@Override
 	protected void mapUserActions() {
 		super.getButton().setOnAction((event -> {
-			super.getController().clearVariableBox();
+			controller.clearVariableBox();
 		}));
 	}
 

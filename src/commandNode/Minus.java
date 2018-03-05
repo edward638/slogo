@@ -3,17 +3,18 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.Node;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
 /**
  * @author Belanie Nagiel
  * 
  * Minus class that creates a new extension of Node and sets the functionality for the evaluate method implemented from
- * the CommandNode interface.
+ * the CommandInterface interface.
  *
  */
-public class Minus extends Node implements CommandNode {
+public class Minus extends GeneralCommand implements CommandInterface {
 
 	/**
 	 * Class Constructor
@@ -32,7 +33,7 @@ public class Minus extends Node implements CommandNode {
 	 * 
 	 * @return -expr
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		value = -1*arguments.get(0).getValue();
 		return value;
 	}
