@@ -20,6 +20,7 @@ public class Turtle implements TurtleObservable
 	private Color penColor;
 	private double screenWidth;
 	private double screenHeight;
+	private HandleWraparound toroidal;
 	
 	//THIS IS ANDY'S SUGGESTION
 	private Observer turtleObserver;
@@ -38,6 +39,7 @@ public class Turtle implements TurtleObservable
 		turtleShowing = true;
 		lines = new ArrayList<Line>();
 		penColor = color;
+		toroidal = new HandleWraparound(width, height);
 	}
 
 	public void addObserver(Observer turtleObserver){
@@ -55,24 +57,33 @@ public class Turtle implements TurtleObservable
 	public void setCoordinates(double futureX, double futureY) {
 		double currentX = XCoordinate;
 		double currentY = YCoordinate;
-		Line remainingLineToDraw = new Line(currentX, currentY, futureX, futureY);
-		Line oldLine;
-		do{
-			oldLine = remainingLineToDraw;
-			remainingLineToDraw = handleWraparound(remainingLineToDraw);
-			XCoordinate = remainingLineToDraw.getEndX();
-			YCoordinate = remainingLineToDraw.getEndY();
-		}while(!linesAreEqual(oldLine, remainingLineToDraw));
-		turtleObserver.notifyOfChanges();
+		List<Line> addedLines = toroidal.drawLine(currentX, currentY, futureX, futureY);
+//		Line remainingLineToDraw = new Line(currentX, currentY, futureX, futureY);
+//		Line oldLine;
+//		do{
+//			oldLine = remainingLineToDraw;
+//			remainingLineToDraw = handleWraparound(remainingLineToDraw);
+//			XCoordinate = remainingLineToDraw.getEndX();
+//			YCoordinate = remainingLineToDraw.getEndY();
+//		}while(!linesAreEqual(oldLine, remainingLineToDraw));
+//		turtleObserver.notifyOfChanges();
+		XCoordinate = addedLines.get(addedLines.size() - 1).getEndX();
+		YCoordinate = addedLines.get(addedLines.size() - 1).getEndY();
+		for (Line l: addedLines)
+		{
+			addLine(l);
+		}
+		
+		turtleObserver.notifyOfChanges();	
 	}
 
-	private boolean linesAreEqual(Line oldLine, Line newLine){
-		return oldLine.getStartX() == newLine.getStartX() &&
-				oldLine.getStartY() == newLine.getStartY() &&
-				oldLine.getEndY() == newLine.getEndY() &&
-				oldLine.getEndX() == newLine.getEndX();
-	}
-	
+//	private boolean linesAreEqual(Line oldLine, Line newLine){
+//		return oldLine.getStartX() == newLine.getStartX() &&
+//				oldLine.getStartY() == newLine.getStartY() &&
+//				oldLine.getEndY() == newLine.getEndY() &&
+//				oldLine.getEndX() == newLine.getEndX();
+//	}
+//	
 	public double[] getHome(){
 		return home;
 	}
@@ -132,76 +143,76 @@ public class Turtle implements TurtleObservable
 		turtleObserver.notifyOfChanges();
 	}
 
-	private Line handleWraparound(Line lineToDraw){
-		Line2D.Double topLine = new Line2D.Double(0,0,screenWidth,0);
-		Line2D.Double rightLine = new Line2D.Double(screenWidth,0,screenWidth,screenHeight);
-		Line2D.Double bottomLine = new Line2D.Double(screenWidth,screenHeight,0,screenHeight);
-		Line2D.Double leftLine = new Line2D.Double(0,screenHeight,0,0);
-		if (lineToDraw.getStartX() != screenWidth && linesIntersect(rightLine, lineToDraw)){
-			return handleRightHandWraparound(lineToDraw);
-		}else if (lineToDraw.getStartX() != 0 && linesIntersect(leftLine, lineToDraw)){
-			return handleLeftHandWraparound(lineToDraw);
-		}else if (lineToDraw.getStartY() != screenHeight && linesIntersect(bottomLine, lineToDraw)){
-			return handleBottomWraparound(lineToDraw);
-		}else if (lineToDraw.getStartY() != 0 && linesIntersect(topLine, lineToDraw)){
-			return handleTopWraparound(lineToDraw);
-		}else{
-			this.addLine(lineToDraw);
-			return lineToDraw;
-		}
-	}
-
-	private boolean linesIntersect(Line2D.Double borderLine, Line lineToDraw){
-		return borderLine.intersectsLine(lineToDraw.getStartX(), lineToDraw.getStartY(), lineToDraw.getEndX(), lineToDraw.getEndY());
-	}
-
-	/*
-	 * adds the appropriate line to lines and then returns the starting point and ending point of the next line
-	 */
-	private Line handleLeftHandWraparound(Line line){
-		double slope = (line.getEndY() - line.getStartY())/(line.getEndX() - line.getStartX());
-		double newX = 0;
-		double newY = -slope*line.getStartX() + line.getStartY(); // check this
-		Line toDraw = new Line(line.getStartX(), line.getStartY(), newX, newY);
-		addLine(toDraw);
-		return new Line(screenWidth,newY,line.getEndX() + screenWidth,line.getEndY());
-
-	}
-
-	/*
-	 * adds the appropriate line to lines and then returns the starting point and ending point of the next line
-	 */
-	private Line handleRightHandWraparound(Line line){
-		double slope = (line.getEndY() - line.getStartY())/(line.getEndX() - line.getStartX());
-		double newX = screenWidth;
-		double newY = slope*newX -slope*line.getStartX() + line.getStartY(); // check this
-		Line toDraw = new Line(line.getStartX(), line.getStartY(), newX, newY);
-		addLine(toDraw);
-		return new Line(0,newY,line.getEndX() - screenWidth,line.getEndY());
-	}
-
-	/*
-	 * adds the appropriate line to lines and then returns the starting point and ending point of the next line
-	 */
-	private Line handleTopWraparound(Line line){
-		double slope = (line.getEndY() - line.getStartY())/(line.getEndX() - line.getStartX());
-		double newY = 0;
-		double newX = line.getStartX() - (line.getStartY() - newY) / slope;
-		Line toDraw = new Line(line.getStartX(), line.getStartY(), newX, newY);
-		addLine(toDraw);
-		return new Line(newX,screenHeight,line.getEndX(),line.getEndY() + screenHeight);
-	}
-
-	/*
-	 * adds the appropriate line to lines and then returns the starting point and ending point of the next line
-	 */
-	private Line handleBottomWraparound(Line line){
-		double slope = (line.getEndY() - line.getStartY())/(line.getEndX() - line.getStartX());
-		double newY = screenHeight;
-		double newX = line.getStartX() - (line.getStartY() - newY) / slope;
-		Line toDraw = new Line(line.getStartX(), line.getStartY(), newX, newY);
-		addLine(toDraw);
-		return new Line(newX,0,line.getEndX(),line.getEndY() - screenHeight);
-	}
+//	private Line handleWraparound(Line lineToDraw){
+//		Line2D.Double topLine = new Line2D.Double(0,0,screenWidth,0);
+//		Line2D.Double rightLine = new Line2D.Double(screenWidth,0,screenWidth,screenHeight);
+//		Line2D.Double bottomLine = new Line2D.Double(screenWidth,screenHeight,0,screenHeight);
+//		Line2D.Double leftLine = new Line2D.Double(0,screenHeight,0,0);
+//		if (lineToDraw.getStartX() != screenWidth && linesIntersect(rightLine, lineToDraw)){
+//			return handleRightHandWraparound(lineToDraw);
+//		}else if (lineToDraw.getStartX() != 0 && linesIntersect(leftLine, lineToDraw)){
+//			return handleLeftHandWraparound(lineToDraw);
+//		}else if (lineToDraw.getStartY() != screenHeight && linesIntersect(bottomLine, lineToDraw)){
+//			return handleBottomWraparound(lineToDraw);
+//		}else if (lineToDraw.getStartY() != 0 && linesIntersect(topLine, lineToDraw)){
+//			return handleTopWraparound(lineToDraw);
+//		}else{
+//			this.addLine(lineToDraw);
+//			return lineToDraw;
+//		}
+//	}
+//
+//	private boolean linesIntersect(Line2D.Double borderLine, Line lineToDraw){
+//		return borderLine.intersectsLine(lineToDraw.getStartX(), lineToDraw.getStartY(), lineToDraw.getEndX(), lineToDraw.getEndY());
+//	}
+//
+//	/*
+//	 * adds the appropriate line to lines and then returns the starting point and ending point of the next line
+//	 */
+//	private Line handleLeftHandWraparound(Line line){
+//		double slope = (line.getEndY() - line.getStartY())/(line.getEndX() - line.getStartX());
+//		double newX = 0;
+//		double newY = -slope*line.getStartX() + line.getStartY(); // check this
+//		Line toDraw = new Line(line.getStartX(), line.getStartY(), newX, newY);
+//		addLine(toDraw);
+//		return new Line(screenWidth,newY,line.getEndX() + screenWidth,line.getEndY());
+//
+//	}
+//
+//	/*
+//	 * adds the appropriate line to lines and then returns the starting point and ending point of the next line
+//	 */
+//	private Line handleRightHandWraparound(Line line){
+//		double slope = (line.getEndY() - line.getStartY())/(line.getEndX() - line.getStartX());
+//		double newX = screenWidth;
+//		double newY = slope*newX -slope*line.getStartX() + line.getStartY(); // check this
+//		Line toDraw = new Line(line.getStartX(), line.getStartY(), newX, newY);
+//		addLine(toDraw);
+//		return new Line(0,newY,line.getEndX() - screenWidth,line.getEndY());
+//	}
+//
+//	/*
+//	 * adds the appropriate line to lines and then returns the starting point and ending point of the next line
+//	 */
+//	private Line handleTopWraparound(Line line){
+//		double slope = (line.getEndY() - line.getStartY())/(line.getEndX() - line.getStartX());
+//		double newY = 0;
+//		double newX = line.getStartX() - (line.getStartY() - newY) / slope;
+//		Line toDraw = new Line(line.getStartX(), line.getStartY(), newX, newY);
+//		addLine(toDraw);
+//		return new Line(newX,screenHeight,line.getEndX(),line.getEndY() + screenHeight);
+//	}
+//
+//	/*
+//	 * adds the appropriate line to lines and then returns the starting point and ending point of the next line
+//	 */
+//	private Line handleBottomWraparound(Line line){
+//		double slope = (line.getEndY() - line.getStartY())/(line.getEndX() - line.getStartX());
+//		double newY = screenHeight;
+//		double newX = line.getStartX() - (line.getStartY() - newY) / slope;
+//		Line toDraw = new Line(line.getStartX(), line.getStartY(), newX, newY);
+//		addLine(toDraw);
+//		return new Line(newX,0,line.getEndX(),line.getEndY() - screenHeight);
+//	}
 
 }
