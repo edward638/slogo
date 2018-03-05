@@ -28,7 +28,7 @@ public abstract class GeneralCommand implements HeadInterface, NodeInterface {
      */
     public GeneralCommand(Turtle turtle, int numChildren) {
         this.turtle = turtle;
-        children = new ArrayList<NodeInterface>();
+        children = new ArrayList<>();
         this.numChildren = numChildren;
         value = 0.0;
     }
@@ -38,9 +38,9 @@ public abstract class GeneralCommand implements HeadInterface, NodeInterface {
      * @return next child node
      */
     public NodeInterface getNext() {
-        NodeInterface ret = children.get(current);
+        NodeInterface nextChild = children.get(current);
         current++; //updates the current node to be accessed to the next child
-        return ret;
+        return nextChild;
     }
 
     /**

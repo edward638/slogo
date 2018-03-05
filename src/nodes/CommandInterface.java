@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface CommandInterface {
 
-    public double evaluate(List<NodeInterface> arguments);
+    double evaluate(List<NodeInterface> arguments);
 
 }
