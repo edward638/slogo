@@ -8,7 +8,7 @@ public class Main extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		ControllerInterface controller = new Controller(primaryStage);
+		Controller controller = new Controller(primaryStage);
 	}
 
 	public static void main(String[] args){

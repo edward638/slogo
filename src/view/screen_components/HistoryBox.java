@@ -1,6 +1,5 @@
 package view.screen_components;
 
-import controller.ControllerInterface;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -10,15 +9,14 @@ import javafx.scene.layout.HBox;
 import java.util.List;
 
 public abstract class HistoryBox extends ScreenComponent{
-	//private static final int HBOX_SPACING = 50;
 	private String historyBoxLabel;
 	private String buttonLabel;
 	private int rows;
 	private int cols;
 	private Button button;
 	private TextArea textArea;
-	public HistoryBox(ControllerInterface controller) {
-		super(controller);
+	public HistoryBox() {
+		super();
 	}
 	
 	protected void setUpLabels(String historyBoxLabel, String buttonLabel){

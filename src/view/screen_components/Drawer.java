@@ -1,25 +1,19 @@
 package view.screen_components;
 
-import controller.ControllerInterface;
+import controller.DrawerController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ComboBox;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.transform.Rotate;
 import model.Turtle;
 import model.TurtleObservable;
 import view.Observer;
 import view.constants.CanvasConstants;
 import view.constants.ComboBoxConstants;
-
-import javafx.scene.shape.Line;
-import java.util.List;
 
 public class Drawer extends ScreenComponent implements Observer{
     public static final double CANVAS_WIDTH = CanvasConstants.CANVAS_WIDTH;
@@ -39,9 +33,13 @@ public class Drawer extends ScreenComponent implements Observer{
 	private ComboBox<String> turtleImageBox;
 	private TurtleObservable turtle;
 	private HBox hbox;
+	private DrawerController controller;
+	public Drawer(){
+		super();
+	}
 
-	public Drawer(ControllerInterface controller){
-		super(controller);
+	public void setController(DrawerController controller){
+		this.controller = controller;
 	}
 
 	public void setTurtle(TurtleObservable turtle){
@@ -115,7 +113,7 @@ public class Drawer extends ScreenComponent implements Observer{
 		if(color.equals("Black")){
 			penColor = Color.BLACK;
 		}
-		super.getController().setPenColor(penColor);
+		controller.setPenColor(penColor);
 	}
 
 	private void changeTurtleImage(){
