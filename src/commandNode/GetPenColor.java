@@ -15,9 +15,14 @@ public class GetPenColor extends GeneralCommand implements CommandInterface  {
 
 
 	@Override
+	/**
+	 * returns turtle's current color index
+	 * 
+	 * @return turtle's current color index
+	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		// TODO Auto-generated method stub
-		return 0;
+		value = turtle.getPenColorIndex();
+		return value;
 	}
 
 }

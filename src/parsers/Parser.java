@@ -116,7 +116,7 @@ public class Parser
 			command = command.substring(0, commentIndex);
 		}
 		
-		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
+		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])(?![^\\(]*\\))");
 		List<NodeInterface> nodeList = new ArrayList<>();
 	
 		checkSyntax(commandList, nodeList);
