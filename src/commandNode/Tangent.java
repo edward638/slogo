@@ -3,10 +3,11 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.Node;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
-public class Tangent extends Node implements CommandNode {
+public class Tangent extends GeneralCommand implements CommandInterface {
 
 	public Tangent(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -19,7 +20,7 @@ public class Tangent extends Node implements CommandNode {
 	 * 
 	 * @return tan(degrees)
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		double tan = Math.tan(arguments.get(0).getValue());
 		value = tan;
 		return value;

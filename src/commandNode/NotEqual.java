@@ -3,17 +3,18 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.Node;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
 /**
  * @author Belanie Nagiel
  * 
  * NotEqual class that creates a new extension of Node and sets the functionality for the evaluate method implemented from
- * the CommandNode interface.
+ * the CommandInterface interface.
  *
  */
-public class NotEqual extends Node implements CommandNode { 
+public class NotEqual extends GeneralCommand implements CommandInterface {
 
 	/**
 	 * Class Constructor
@@ -31,7 +32,7 @@ public class NotEqual extends Node implements CommandNode {
 	 * 
 	 * @returns expr1 != expr2
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		if(arguments.get(0).getValue() != arguments.get(1).getValue())
 		{
 			value = 1;

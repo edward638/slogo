@@ -3,10 +3,11 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.Node;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
-public class PenUp extends Node implements CommandNode{
+public class PenUp extends GeneralCommand implements CommandInterface {
 
 	public PenUp(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -18,7 +19,7 @@ public class PenUp extends Node implements CommandNode{
 	 * 
 	 * @return 0
 	 */
-	public double evaluate(List<Node> arguments) 
+	public double evaluate(List<NodeInterface> arguments)
 	{
 		turtle.setPenShowing(false);
 		value = 0;

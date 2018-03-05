@@ -3,11 +3,12 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.Node;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 import parsers.InvalidEntryException;
 
-public class Quotient extends Node implements CommandNode {
+public class Quotient extends GeneralCommand implements CommandInterface {
 
 	public Quotient(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -20,7 +21,7 @@ public class Quotient extends Node implements CommandNode {
 	 * 
 	 * @return expr1/expr2
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		if(arguments.get(1).getValue() != 0)
 		{
 			double quot = arguments.get(0).getValue()/arguments.get(1).getValue();
