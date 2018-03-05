@@ -56,7 +56,8 @@ public class Controller implements CommandController, DrawerController, CommandH
 		commandBox = new CommandBox();
 		commandBox.setController(this);
 		commandHistoryBox = new CommandHistoryBox();
-		commandHistoryBox.setController(this);
+		commandHistoryBox.setCommandHistoryController(this);
+		commandHistoryBox.setCommandController(this);
 		variableHistoryBox = new VariableHistoryBox();
 		variableHistoryBox.setController(this);
 		helpButton = new HelpButton();
