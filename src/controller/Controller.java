@@ -60,7 +60,6 @@ public class Controller implements CommandController, DrawerController, CommandH
 		variableHistoryBox = new VariableHistoryBox();
 		variableHistoryBox.setController(this);
 		helpButton = new HelpButton();
-
 	}
 
 	private void addToGUI(){
@@ -83,8 +82,9 @@ public class Controller implements CommandController, DrawerController, CommandH
     }
 
 	@Override
-	public void changeVariableValue(String variableName, double value) {
-
+	public void changeVariableValue(String variableName, String value) {
+		System.out.println(variableName);
+		variableHistory.changeValue(variableName, value);
 	}
 
 	@Override

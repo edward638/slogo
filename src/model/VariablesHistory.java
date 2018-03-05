@@ -1,11 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import nodes.*;
 import view.Observer;
@@ -119,5 +114,22 @@ public class VariablesHistory implements VariableHistoryObservable{
 		}
 
 		return output;
+	}
+
+	/**
+	 * ANDY WANTS THESE PLZ TODO: discuss with group
+	 */
+	public Map<String,Double> getVariablesAndy() {
+		Map<String, Double> shallowCopy = new HashMap<String,Double>();
+		shallowCopy.putAll(variables);
+		return shallowCopy;
+	}
+	public void changeValue(String variableName, String value){
+		try{
+			variables.put(variableName,Double.parseDouble(value));
+			variableHistoryObserver.notifyOfChanges();
+		}catch(Exception e){
+			System.out.println("woops");
+		}
 	}
 }
