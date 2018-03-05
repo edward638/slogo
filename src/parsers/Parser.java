@@ -161,7 +161,7 @@ public class Parser
 						}
 						else if(nodeList.size() > 0 && nodeList.get(i-1) instanceof MakeUserInstruction)
 						{
-							Command n = new Command(text,varHistory);
+							CustomCommand n = new CustomCommand(text,varHistory);
 							nodeList.add(n);
 						}
 						else
@@ -206,12 +206,6 @@ public class Parser
 							l.add(ln);
 						}
 						nodeList.add(l);
-					}
-					else if(nodeList.size() > 0 && previous.equals("MakeUserInstruction"))
-					{
-						previous  = "";
-						CustomCommand n = new CustomCommand(text,varHistory);
-						nodeList.add(n);
 					}
 				}
 			}

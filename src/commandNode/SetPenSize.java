@@ -3,11 +3,11 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.GenCommand;
-import nodes.NodeI;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
-public class SetPenSize extends GenCommand implements CommandNode {
+public class SetPenSize extends GeneralCommand implements CommandInterface {
 
 	public SetPenSize(Turtle turtle, int numChildren) {
 		super(turtle, numChildren);
@@ -19,10 +19,11 @@ public class SetPenSize extends GenCommand implements CommandNode {
 	 * 
 	 * @return given pixels
 	 */
-	public double evaluate(List<NodeI> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		turtle.setPenSize(arguments.get(0).getValue());
 		value = arguments.get(0).getValue();
 		return value;
 	}
+
 
 }

@@ -3,11 +3,12 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.GenCommand;
-import nodes.NodeI;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
-public class SetPenColor extends GenCommand implements CommandNode{
+
+public class SetPenColor extends GeneralCommand implements CommandInterface{
 
 	public SetPenColor(Turtle turtle, int numChildren) {
 		super(turtle, numChildren);
@@ -19,7 +20,7 @@ public class SetPenColor extends GenCommand implements CommandNode{
 	 * 
 	 * @return given index
 	 */
-	public double evaluate(List<NodeI> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		turtle.setPenColor(arguments.get(0).getValue());
 		value = arguments.get(0).getValue();
 		return value;
