@@ -4,7 +4,8 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
 
 /**
  * @author Belanie Nagiel
@@ -13,7 +14,7 @@ import nodes.Node;
  * the CommandNode interface.
  *
  */
-public class HideTurtle extends Node implements CommandNode {
+public class HideTurtle extends GenCommand implements CommandNode {
 
 	/**
 	 * Class Constructor
@@ -31,7 +32,7 @@ public class HideTurtle extends Node implements CommandNode {
 	 * 
 	 * @return 0
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeI> arguments) {
 		turtle.setTurtleShowing(false);
 		value = 0;
 		return value;

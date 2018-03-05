@@ -4,9 +4,10 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
 
-public class Pi extends Node implements CommandNode {
+public class Pi extends GenCommand implements CommandNode {
 
 	public Pi(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -19,7 +20,7 @@ public class Pi extends Node implements CommandNode {
 	 * 
 	 * @return Pi
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeI> arguments) {
 		value = Math.PI;
 		return value;
 	}

@@ -6,7 +6,7 @@ import model.Turtle;
 import nodes.*;
 
 
-public class DoTimes extends Node implements CommandNode{
+public class DoTimes extends GenCommand implements CommandNode{
 
 	public DoTimes(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -21,7 +21,7 @@ public class DoTimes extends Node implements CommandNode{
 	 * @return value of the final command executed
 	 */
 
-	public double evaluate(List<Node> args) {
+	public double evaluate(List<NodeI> args) {
 		Liste l = (Liste) args.get(0);
 		Variable v = (Variable) l.getElement(0);
 		Constant limit = (Constant) l.getElement(1);
@@ -30,7 +30,7 @@ public class DoTimes extends Node implements CommandNode{
 
 		while (v.getValue() <= limit.getValue()) {
 			System.out.println(v.getValue());
-			value = l2.evaluate(null);
+			value = l2.evaluate();
 
 			double next = v.getValue();
 			next++;

@@ -12,10 +12,12 @@ import java.util.List;
  *
  * author: Charles Dracos
  */
-public class Command extends Node implements CommandNode {
-    private String name;
-    private VariableHistory VH;
+public class Command extends VariableI implements HeadI, CommandNode, NodeI {
+    private static final int MAX_CHILDREN = 2;
+
     private ArrayList<Liste> lists;
+    private double value;
+    private int current = 0;
     /**
      * Creates a new Command node
      *
@@ -23,31 +25,49 @@ public class Command extends Node implements CommandNode {
      * @param VH the variable history to track all custom commands
      */
     public Command(String name, VariableHistory VH) {
-        super(null, 0);
-        this.name = name;
-        this.VH = VH;
-        lists = new ArrayList<Liste>();
-    }
-
-    public String getName() {
-        return name; //returns name of the commands
-    }
-
-    public VariableHistory getVH() {
-        return VH; //returns the VH
-    }
-
-    public void addList(Liste l) {
-        lists.add(l); //adds a new Liste to the command
+        super(name, VH);
+        lists = new ArrayList<>();
+        value = 0.0;
     }
 
     public double getValue() {
-        return lists.get(1).evaluate(null); //returns the value of evaluate the commands
+        return value; //returns the value of evaluate the commands
     }
 
+    @Override
+    public boolean hasNext() {
+        return current<MAX_CHILDREN; //should say if it has another list
+    }
 
     @Override
-    public double evaluate(List<Node> args) {
-        return lists.get(1).evaluate(null); //returns same as getValue
+    public NodeI getNext() {
+        Liste ret = lists.get(current);
+        current++;
+        return ret;
+    }
+
+    @Override
+    public void add(NodeI n) {
+        try {
+            Liste l = (Liste) n;
+            lists.add(l);
+            current++;
+        }
+        catch (Exception e) {
+            throw new ImproperNodeException();
+        }
+    }
+
+    @Override
+    public double evaluate(List<NodeI> args) {
+        Liste commands = lists.get(1);
+        commands.evaluate();
+        value = commands.getValue();
+        return value;
+    }
+
+    @Override
+    public void reset() {
+        current = 0;
     }
 }

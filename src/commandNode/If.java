@@ -4,7 +4,9 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
+import nodes.Liste;
 
 /**
  * @author Belanie Nagiel
@@ -13,7 +15,7 @@ import nodes.Node;
  * the CommandNode interface.
  *
  */
-public class If extends Node implements CommandNode{
+public class If extends GenCommand implements CommandNode{
 
 	/**
 	 * Class Constructor
@@ -32,11 +34,12 @@ public class If extends Node implements CommandNode{
 	 * 
 	 * @return value of final command executed
 	 */
-	public double evaluate(List<Node> args) {
+	public double evaluate(List<NodeI> args) {
 		value = 0;
 		if(args.get(0).getValue() != 0)
 		{
-			value = args.get(1).evaluate(null);
+			Liste l = (Liste) args.get(1);
+			value = l.evaluate();
 		}
 		return value;
 	}

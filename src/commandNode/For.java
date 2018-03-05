@@ -9,14 +9,14 @@ import nodes.*;
  * Implements FOR as described on the course site
  */
 
-public class For extends Node implements CommandNode {
+public class For extends GenCommand implements CommandNode {
 
 	public For(Turtle turt, int numChildren) {
 		super(turt, numChildren);
 	}
 
 	@Override
-	public double evaluate(List<Node> args) {
+	public double evaluate(List<NodeI> args) {
 		Liste l = (Liste) args.get(0);
 
 		Variable v = (Variable) l.getElement(0);
@@ -28,7 +28,7 @@ public class For extends Node implements CommandNode {
 
 		for (double i = start.getValue(); i <= end.getValue(); i+=increment.getValue()) {
 			v.setNewValue(i); //update the variable
-			value = commands.evaluate(null);
+			value = commands.evaluate();
 		}
 
 		return value;

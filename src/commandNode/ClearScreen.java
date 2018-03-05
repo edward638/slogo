@@ -5,7 +5,8 @@ import java.util.List;
 
 import model.Turtle;
 import nodes.CommandNode;
-import nodes.Node;
+import nodes.GenCommand;
+import nodes.NodeI;
 
 /**
  * @author Belanie Nagiel
@@ -14,7 +15,7 @@ import nodes.Node;
  * the CommandNode interface.
  *
  */
-public class ClearScreen extends Node implements CommandNode {
+public class ClearScreen extends GenCommand implements CommandNode {
 
 	/**
 	 * Class Constructor
@@ -32,7 +33,7 @@ public class ClearScreen extends Node implements CommandNode {
 	 * 
 	 * @return the distance the turtle moved
 	 */
-	public double evaluate(List<Node> arguments) {
+	public double evaluate(List<NodeI> arguments) {
 		double distance = Math.sqrt(Math.pow(turtle.getHome()[0] - turtle.getXCoordinate(), 2) + Math.pow(turtle.getHome()[1] - turtle.getYCoordinate(), 2) );
 		turtle.setCoordinates(turtle.getHome()[0], turtle.getHome()[1]);
 		turtle.setDirectionAngle(90);

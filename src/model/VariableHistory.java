@@ -69,6 +69,7 @@ public class VariableHistory implements VariableHistoryObservable{
 	 */
 	public void add (Command CN) {
 		commands.put(CN.getName(), CN);
+		variableHistoryObserver.notifyOfChanges();
 	}
 
 	/**
@@ -84,11 +85,13 @@ public class VariableHistory implements VariableHistoryObservable{
 	public Set<String> getCommandKeys () {
 		return commands.keySet();
 	}
+
 	/**
 	 * clears the variables in the map and on the screen
 	 */
 	public void clearHistory(){
 		variables.clear();
+		commands.clear();
 		variableHistoryObserver.notifyOfChanges();
 	}
 
@@ -100,9 +103,15 @@ public class VariableHistory implements VariableHistoryObservable{
 	public List<String> getVariables()
 	{
 		List<String> output = new ArrayList<>();
+		output.add("Variables: ");
 		for (String key: variables.keySet())
 		{
 			output.add(key + " = " + Double.toString(variables.get(key)));
+		}
+		output.add("Commands: ");
+		for (String key: commands.keySet())
+		{
+			output.add(key);
 		}
 
 		return output;
