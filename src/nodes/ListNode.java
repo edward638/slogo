@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import Tree.TreeEvaluator;
 import Tree.TreeMaker;
-import jdk.nashorn.api.tree.Tree;
 
 /**
  *  This is the List class. A list stores an array of other types of
