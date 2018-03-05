@@ -10,7 +10,7 @@ import parsers.Parser;
 import view.GUI;
 import view.screen_components.*;
 
-public class Controller implements ControllerInterface{
+public class Controller implements CommandController, DrawerController, CommandHistoryController, VariableHistoryController{
 	private ModelInterface model;
 	private GUI gui;
 	private Turtle turtle;
@@ -51,11 +51,15 @@ public class Controller implements ControllerInterface{
 	}
 
 	private void initializeScreenComponents(){
-		drawer = new Drawer(this);
-		commandBox = new CommandBox(this);
-		commandHistoryBox = new CommandHistoryBox(this);
-		variableHistoryBox = new VariableHistoryBox(this);
-		helpButton = new HelpButton(this);
+		drawer = new Drawer();
+		drawer.setController(this);
+		commandBox = new CommandBox();
+		commandBox.setController(this);
+		commandHistoryBox = new CommandHistoryBox();
+		commandHistoryBox.setController(this);
+		variableHistoryBox = new VariableHistoryBox();
+		variableHistoryBox.setController(this);
+		helpButton = new HelpButton();
 
 	}
 
@@ -78,14 +82,19 @@ public class Controller implements ControllerInterface{
 		variableHistory.clearHistory();
     }
 
-    @Override
+	@Override
+	public void changeVariableValue(String variableName, double value) {
+
+	}
+
+	@Override
     public void clearCommandHistoryBox() {
 		commandHistory.clearHistory();
     }
 
 	@Override
 	public void setPenColor(Color color) {
-		turtle.setPenColor(color);
+		//turtle.setPenColor(color);
 	}
 
 	public void toggleActive(int ID) {
