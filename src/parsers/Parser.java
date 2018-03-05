@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import Tree.TreeEvaluator;
 import Tree.TreeMaker;
+import commandNode.MakeUserInstruction;
 import model.Turtle;
 import model.VariableHistory;
 import model.CommandHistory;
@@ -41,6 +42,7 @@ public class Parser
 	private VariableHistory varHistory;
 	private CommandHistory comHistory;
 	private String lang;
+	private NodeFactory nodeMaker;
 	
 	/**
 	 * Class Constructor
@@ -66,6 +68,8 @@ public class Parser
 			String key = keys.nextElement();
 			children.put(key, Integer.parseInt(numChildren.getString(key)));	
 		}
+		
+//		nodeMaker = new NodeFactory(t, VH);
 		turt = t;
 		varHistory = VH;
 		comHistory = CH;
@@ -133,7 +137,6 @@ public class Parser
 		TreeEvaluator te = new TreeEvaluator();
 		te.evaluate(heads);	
 	}
-
 	
 	/**
 	 * fill the nodeList with the appropriate nodes based on matching string input to node types
@@ -144,7 +147,6 @@ public class Parser
 	 */
 	private void checkSyntax(String[] commandList, List<Node> nodeList)
 	{
-		String previous = "";
 		for (int i = 0; i<commandList.length; i++)
 		{
 			String text = commandList[i];
@@ -154,17 +156,22 @@ public class Parser
 				if(regex.get(key).matcher(text).matches())
 				{
 					match = true;
-					if (key.equals("Command") && !previous.equals("MakeUserInstruction"))
+					
+					if (key.equals("Command"))
 					{
 						if (varHistory.getCommandKeys().contains(text))
 						{
 							Node n = varHistory.getCommand(text);
 							nodeList.add(n);
 						}
+						else if(nodeList.size() > 0 && nodeList.get(i-1) instanceof MakeUserInstruction)
+						{
+							Node n = new Command(text,varHistory);
+							nodeList.add(n);
+						}
 						else
 						{
 							String commandType = checkLanguage(text);
-							previous = commandType;
 							try 
 							{
 								Node n = (Node)NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
@@ -178,6 +185,10 @@ public class Parser
 						}
 							
 					}
+					
+//					nodeList.add(NodeFactory.makeNode(text, key, varHistory));
+					//add these to node factory
+					//parser isnt necesarily making nodes
 					else if (key.equals("Constant"))
 					{
 						Node n = new Constant(Integer.parseInt(text));
@@ -200,12 +211,6 @@ public class Parser
 							l.add(ln);
 						}
 						nodeList.add(l);
-					}
-					else if(nodeList.size() > 0 && previous.equals("MakeUserInstruction"))
-					{
-						previous  = "";
-						Node n = new Command(text,varHistory);
-						nodeList.add(n);
 					}
 				}
 			}

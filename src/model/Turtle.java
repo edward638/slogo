@@ -7,8 +7,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import view.Observer;
 
-
-
 public class Turtle implements TurtleObservable
 {
 	private double XCoordinate;
