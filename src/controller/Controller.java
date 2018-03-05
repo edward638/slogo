@@ -88,4 +88,7 @@ public class Controller implements ControllerInterface{
 		turtle.setPenColor(color);
 	}
 
+	public void toggleActive(int ID) {
+		//TODO: find a turtle with specific ID in backend, make it active/inactive
+	}
 }

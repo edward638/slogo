@@ -1,33 +1,50 @@
 package view.screen_components;
 
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
 import view.constants.CanvasConstants;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import view.help_items.HelpPopup;
 
 import java.util.List;
 
 public class DrawerCanvas {
     private Canvas canvas;
     private GraphicsContext gc;
-    private Image turtleIcon;
+    private ImageView turtleIcon;
     public static final int TURTLE_WIDTH = 50;
     public static final int TURTLE_HEIGHT = 50;
     private String storedColor = "White";
+    private StackPane stackPane;
 
     public DrawerCanvas(BorderPane borderPane){
+        stackPane = new StackPane();
         canvas = new Canvas(CanvasConstants.CANVAS_WIDTH, CanvasConstants.CANVAS_HEIGHT);
         gc = canvas.getGraphicsContext2D();
-        borderPane.setCenter(canvas);
-        turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream("black_and_white_turtle.PNG"));
+        stackPane.getChildren().add(canvas);
+        borderPane.setCenter(stackPane);
         setupRectangle(CanvasConstants.DEFAULT_FILL);
+        setupTurtleImageView();
     }
 
+    public void setupTurtleImageView(){
+        Image turtleIconImage = new Image(getClass().getClassLoader().getResourceAsStream("black_and_white_turtle.PNG"));
+        turtleIcon = new ImageView(turtleIconImage);
+        turtleIcon.setFitWidth(TURTLE_HEIGHT);
+        turtleIcon.setFitHeight(TURTLE_WIDTH);
+        turtleIcon.setOnMouseClicked(imageOnMousePressedEventHandler);
+    }
     public void setupRectangle(Color color){
         gc.setFill(color);
         gc.fillRect(0,0,canvas.getWidth(), canvas.getHeight());
@@ -43,12 +60,13 @@ public class DrawerCanvas {
     }
 
     public void moveTurtle(Turtle turtle){
-        gc.save();
-        rotate(gc, turtle.getDirectionAngle(), turtle.getXCoordinate(), turtle.getYCoordinate());
-        if(turtle.getTurtleShowing()){
-            gc.drawImage(turtleIcon, turtle.getXCoordinate() - TURTLE_WIDTH/2, turtle.getYCoordinate() - TURTLE_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
-        }
-        gc.restore();
+
+        stackPane.getChildren().remove(turtleIcon);
+        turtleIcon.setTranslateX(turtle.getXCoordinate() - CanvasConstants.CANVAS_WIDTH/2);
+        turtleIcon.setTranslateY(turtle.getYCoordinate() - CanvasConstants.CANVAS_HEIGHT/2);
+        turtleIcon.setRotate(-turtle.getDirectionAngle());
+        stackPane.getChildren().add(turtleIcon);
+
     }
 
     private void drawLines(List<Line> lines){
@@ -60,7 +78,8 @@ public class DrawerCanvas {
     }
 
     public void changeTurtleImage(String imageName){
-        turtleIcon = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+        Image turtleIconImage = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+        turtleIcon.setImage(turtleIconImage);
     }
 
     public void changeBackgroundColor(String color){
@@ -73,10 +92,12 @@ public class DrawerCanvas {
         }
     }
 
-    // Method taken from https://stackoverflow.com/questions/18260421/how-to-draw-image-rotated-on-javafx-canvas
-    private void rotate(GraphicsContext gc, double angle, double px, double py) {
-        Rotate r = new Rotate(-angle, px, py);
-        gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-    }
+
+    EventHandler<MouseEvent> imageOnMousePressedEventHandler = new EventHandler<MouseEvent>(){
+        @Override
+        public void handle(MouseEvent t){
+            HelpPopup helpPopup = new HelpPopup();
+        }
+    };
 
 }
