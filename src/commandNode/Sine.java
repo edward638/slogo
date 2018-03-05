@@ -3,11 +3,11 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.GenCommand;
-import nodes.NodeI;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
-public class Sine extends GenCommand implements CommandNode {
+public class Sine extends GeneralCommand implements CommandInterface {
 
 	public Sine(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -20,7 +20,7 @@ public class Sine extends GenCommand implements CommandNode {
 	 * 
 	 * @return sin(degrees)
 	 */
-	public double evaluate(List<NodeI> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		double sin = Math.sin(arguments.get(0).getValue());
 		value = sin;
 		return value;

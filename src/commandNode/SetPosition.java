@@ -3,11 +3,11 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.GenCommand;
-import nodes.NodeI;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
-public class SetPosition extends GenCommand implements CommandNode {
+public class SetPosition extends GeneralCommand implements CommandInterface {
 
 	public SetPosition(Turtle turt, int numChildren) {
 		super(turt, numChildren);
@@ -19,7 +19,7 @@ public class SetPosition extends GenCommand implements CommandNode {
 	 * 
 	 * @return the distance the turtle moved
 	 */
-	public double evaluate(List<NodeI> arguments)
+	public double evaluate(List<NodeInterface> arguments)
 	{
 		double distance = Math.sqrt(Math.pow(arguments.get(0).getValue() + turtle.getHome()[0] - 
 				turtle.getXCoordinate(), 2) + Math.pow(arguments.get(1).getValue() + turtle.getHome()[1] - 

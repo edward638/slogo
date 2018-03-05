@@ -3,19 +3,16 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.GenCommand;
-import nodes.NodeI;
-import nodes.Liste;
+import nodes.*;
 
 /**
  * @author Belanie Nagiel
  * 
  * IfElse class that creates a new extension of Node and sets the functionality for the evaluate method implemented from
- * the CommandNode interface.
+ * the CommandInterface interface.
  *
  */
-public class IfElse extends GenCommand implements CommandNode {
+public class IfElse extends GeneralCommand implements CommandInterface {
 
 	/**
 	 * Class Constructor
@@ -34,19 +31,24 @@ public class IfElse extends GenCommand implements CommandNode {
 	 * 
 	 * @return value of the final command executed
 	 */
-	public double evaluate(List<NodeI> args) {
-		value = 0;
-		if(args.get(0).getValue() != 0)
-		{
-			Liste l1 = (Liste) args.get(1);
-			value = l1.evaluate();
+	public double evaluate(List<NodeInterface> args) {
+		try {
+			value = 0;
+			if(args.get(0).getValue() != 0)
+			{
+				ListNode l1 = (ListNode) args.get(1);
+				value = l1.evaluate();
+			}
+			else
+			{
+				ListNode l2 = (ListNode) args.get(1);
+				value = l2.evaluate();
+			}
+			return value;
 		}
-		else
-		{
-			Liste l2 = (Liste) args.get(1);
-			value = l2.evaluate();
+		catch (ClassCastException e) {
+			throw new ImproperNodeException();
 		}
-		return value;
 	}
 	
 

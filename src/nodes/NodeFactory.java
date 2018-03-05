@@ -3,7 +3,6 @@ package nodes;
 import java.lang.reflect.*;
 
 import model.Turtle;
-import nodes.Node;
 
 public class NodeFactory 
 {

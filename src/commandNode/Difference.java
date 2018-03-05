@@ -3,18 +3,18 @@ package commandNode;
 import java.util.List;
 
 import model.Turtle;
-import nodes.CommandNode;
-import nodes.GenCommand;
-import nodes.NodeI;
+import nodes.CommandInterface;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
 
 /**
  * @author Belanie Nagiel
  * 
  * Difference class that creates a new extension of Node and sets the functionality for the evaluate method implemented from
- * the CommandNode interface.
+ * the CommandInterface interface.
  *
  */
-public class Difference extends GenCommand implements CommandNode{
+public class Difference extends GeneralCommand implements CommandInterface {
 
 	/**
 	 * Class Constructor
@@ -33,7 +33,7 @@ public class Difference extends GenCommand implements CommandNode{
 	 * 
 	 * @return expr1 - expr2
 	 */
-	public double evaluate(List<NodeI> arguments) {
+	public double evaluate(List<NodeInterface> arguments) {
 		double diff = arguments.get(0).getValue() - arguments.get(1).getValue();
 		value = diff;
 		return value;

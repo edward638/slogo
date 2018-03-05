@@ -1,25 +1,23 @@
 package nodes;
 
-import java.util.List;
-
-import model.VariableHistory;
+import model.VariablesHistory;
 
 /**
  * Is the variable node. A variable has a string and value associated with it.
- * A variable needs to access a VariableHistory to stores its value when made
+ * A variable needs to access a VariablesHistory to stores its value when made
  * and access its value when a variable with a stored name is created.
  *
  * author: Charles Dracos
  */
-public class Variable extends VariableI implements NodeI {
+public class Variable extends Variables implements NodeInterface {
 	private double value;
 
 	/**
-	 * Creates a new Variable with a name and acces to VH
+	 * Creates a new Variable with a name and access to VH
 	 * @param name the name of the variable
-	 * @param VH VariableHistory of the program
+	 * @param VH VariablesHistory of the program
 	 */
-	public Variable (String name, VariableHistory VH) {
+	public Variable (String name, VariablesHistory VH) {
 		super(name, VH);
 		value = 0.0;
 	}

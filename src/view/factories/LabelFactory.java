@@ -13,7 +13,7 @@ public class LabelFactory {
 	/*
 	public static Label getLabelOfType(String labelType){
 		switch(labelType){
-		case "Command":
+		case "CustomCommand":
 			return getSpecifiedLabel(LabelConstants.COMMAND_LABEL_X, LabelConstants.COMMAND_LABEL_Y, LabelConstants.COMMAND_LABEL_TEXT);
 		case "History":
 			return getSpecifiedLabel(LabelConstants.HISTORY_LABEL_X, LabelConstants.HISTORY_LABEL_Y, LabelConstants.HISTORY_LABEL_TEXT);
