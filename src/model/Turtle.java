@@ -5,10 +5,11 @@ import java.util.List;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+
 import javafx.scene.shape.Shape;
 import nodes.NodeInterface;
 
-import java.awt.geom.Line2D;
+
 import view.Observer;
 
 public class Turtle implements TurtleObservable, NodeInterface
@@ -22,10 +23,12 @@ public class Turtle implements TurtleObservable, NodeInterface
 	private boolean turtleShowing;
 	private Color penColor;
 	private double penSize;
+
+	
+	private WraparoundHandler toroidal;
+
 	private Shape turtleShape;
 	private double ID;
-
-	private HandleWraparound toroidal;
 	
 	//THIS IS ANDY'S SUGGESTION
 	private Observer turtleObserver;
@@ -43,7 +46,7 @@ public class Turtle implements TurtleObservable, NodeInterface
 		lines = new ArrayList<Line>();
 		penColor = color;
 		penSize = 1.0;
-		toroidal = new HandleWraparound(width, height);
+		toroidal = new WraparoundHandler(width, height);
 	}
 
 	public void addObserver(Observer turtleObserver){
@@ -69,7 +72,7 @@ public class Turtle implements TurtleObservable, NodeInterface
 			addLine(l);
 		}
 		
-		turtleObserver.notifyOfChanges();	
+		turtleObserver.notifyOfChanges();
 	}
 
 	public double[] getHome(){
