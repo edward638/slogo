@@ -5,7 +5,6 @@ import java.util.List;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import java.awt.geom.Line2D;
 import view.Observer;
 
 public class Turtle implements TurtleObservable
@@ -21,7 +20,7 @@ public class Turtle implements TurtleObservable
 	private double penColorIndex;
 	private double penSize;
 	
-	private HandleWraparound toroidal;
+	private WraparoundHandler toroidal;
 	
 	//THIS IS ANDY'S SUGGESTION
 	private Observer turtleObserver;
@@ -40,7 +39,7 @@ public class Turtle implements TurtleObservable
 		penColor = color;
 		penColorIndex = 
 		penSize = 1.0;
-		toroidal = new HandleWraparound(width, height);
+		toroidal = new WraparoundHandler(width, height);
 	}
 
 	public void addObserver(Observer turtleObserver){
@@ -66,7 +65,7 @@ public class Turtle implements TurtleObservable
 			addLine(l);
 		}
 		
-		turtleObserver.notifyOfChanges();	
+		turtleObserver.notifyOfChanges();
 	}
 
 	public double[] getHome(){
