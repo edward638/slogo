@@ -22,6 +22,7 @@ public class Controller implements CommandController, DrawerController, CommandH
 	private CommandHistoryBox commandHistoryBox;
 	private VariableHistoryBox variableHistoryBox;
 	private HelpButton helpButton;
+	private Palette palette;
 	public Controller(Stage stage){
 //		this.model = model;
 		gui = new GUI();
@@ -51,6 +52,7 @@ public class Controller implements CommandController, DrawerController, CommandH
 	}
 
 	private void initializeScreenComponents(){
+		palette = new Palette();
 		drawer = new Drawer();
 		drawer.setController(this);
 		commandBox = new CommandBox();
@@ -68,6 +70,7 @@ public class Controller implements CommandController, DrawerController, CommandH
 		gui.addDrawerBorderPane(drawer.getGUIComponent());
 		gui.addVariableHistoryBoxBorderPane(variableHistoryBox.getGUIComponent());
 		gui.addHelpButtonBorderPane(helpButton.getGUIComponent());
+		gui.addPalette(palette.getGUIComponent());
 	}
 	
     @Override
