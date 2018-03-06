@@ -14,6 +14,7 @@ import commandNode.MakeUserInstruction;
 import model.Turtle;
 import model.VariablesHistory;
 import model.CommandHistory;
+import model.Model;
 import nodes.*;
 
 /**
@@ -33,7 +34,7 @@ public class Parser
 	private String languageFilePath;
 	private static final String REGEX_FILE = "parsers/regex";
 	private static final String NODE_PACKAGE = "commandNode.";
-	private Turtle turt;
+	private Model model;
 	private VariablesHistory varHistory;
 	private CommandHistory comHistory;
 	private String lang;
@@ -48,7 +49,7 @@ public class Parser
 	 * @param VH the variable history
 	 * @param CH the command history
 	 */
-	public Parser(Turtle t, VariablesHistory VH, CommandHistory CH)
+	public Parser(Model m, VariablesHistory VH, CommandHistory CH)
 	{
 		myTranslation = new HashMap<>();
 
@@ -65,9 +66,10 @@ public class Parser
 		}
 		
 //		nodeMaker = new NodeFactory(t, VH);
-		turt = t;
+		model = m;
 		varHistory = VH;
 		comHistory = CH;
+		lang = "English";
 	}
 	
 	/**
@@ -97,9 +99,13 @@ public class Parser
 	 * @throws ClassNotFoundException 
 	 * @throws InvalidEntryException 
 	 */
-	public List<NodeInterface> parseString(String command, String language)
+	public void setLanguage(String language)
 	{
 		lang = language;
+	}
+	
+	public List<NodeInterface> parseString(String command)
+	{
 		languageFilePath = "resources.languages/" + lang;
 		addResources(languageFilePath, myTranslation);
 
@@ -116,7 +122,7 @@ public class Parser
 			command = command.substring(0, commentIndex);
 		}
 		
-		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
+		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])(?![^\\(]*\\))");
 		List<NodeInterface> nodeList = new ArrayList<>();
 	
 		checkSyntax(commandList, nodeList);
@@ -169,7 +175,7 @@ public class Parser
 							String commandType = checkLanguage(text);
 							try 
 							{
-								GeneralCommand n = (GeneralCommand) NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), turt, children.get(commandType));
+								GeneralCommand n = (GeneralCommand) NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), model, children.get(commandType));
 								nodeList.add(n);
 							}
 							catch(ClassNotFoundException e)
@@ -200,7 +206,7 @@ public class Parser
 						String noBrackets = text.substring(1,text.length()-1);
 						String trimmed = noBrackets.trim();
 						NEW_COMMAND = false;
-						List<NodeInterface> listNodes = parseString(trimmed,lang);
+						List<NodeInterface> listNodes = parseString(trimmed);
 						for(NodeInterface ln: listNodes)
 						{
 							l.add(ln);

@@ -10,8 +10,7 @@ import parsers.Parser;
 import view.GUI;
 import view.screen_components.*;
 
-public class Controller implements ControllerInterface{
-	private ModelInterface model;
+public class Controller implements CommandController, DrawerController, CommandHistoryController, VariableHistoryController{
 	private GUI gui;
 	private Turtle turtle;
 	private Parser parser;
@@ -22,6 +21,8 @@ public class Controller implements ControllerInterface{
 	private CommandHistoryBox commandHistoryBox;
 	private VariableHistoryBox variableHistoryBox;
 	private HelpButton helpButton;
+	private Model model;
+	
 	public Controller(Stage stage){
 //		this.model = model;
 		gui = new GUI();
@@ -33,16 +34,20 @@ public class Controller implements ControllerInterface{
 	}
 
 	private void initializeModelComponents(){
-		turtle = new Turtle(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT, Drawer.INITIAL_PEN_COLOR);
+		//turtle = new Turtle(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT, Drawer.INITIAL_PEN_COLOR);
+		model = new Model(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT);
         commandHistory = new CommandHistory();
         variableHistory = new VariablesHistory();
-		parser = new Parser(turtle, variableHistory, commandHistory);
+		parser = new Parser(model, variableHistory, commandHistory);
 	}
 
 	private void setUpConnections(){
-		turtle.addObserver(drawer);
-		drawer.setTurtle(turtle);
-		drawer.update();
+		for (Turtle turtle: model.getActiveTurtles())
+		{
+			turtle.addObserver(drawer);
+			drawer.setTurtle(turtle);
+			drawer.update();
+		}
 		variableHistoryBox.setVariableHistory(variableHistory);
 		commandHistoryBox.setCommandHistory(commandHistory);
 		commandHistory.addObserver(commandHistoryBox);
@@ -51,12 +56,16 @@ public class Controller implements ControllerInterface{
 	}
 
 	private void initializeScreenComponents(){
-		drawer = new Drawer(this);
-		commandBox = new CommandBox(this);
-		commandHistoryBox = new CommandHistoryBox(this);
-		variableHistoryBox = new VariableHistoryBox(this);
-		helpButton = new HelpButton(this);
-
+		drawer = new Drawer();
+		drawer.setController(this);
+		commandBox = new CommandBox();
+		commandBox.setController(this);
+		commandHistoryBox = new CommandHistoryBox();
+		commandHistoryBox.setCommandHistoryController(this);
+		commandHistoryBox.setCommandController(this);
+		variableHistoryBox = new VariableHistoryBox();
+		variableHistoryBox.setController(this);
+		helpButton = new HelpButton();
 	}
 
 	private void addToGUI(){
@@ -68,8 +77,8 @@ public class Controller implements ControllerInterface{
 	}
 	
     @Override
-	public void passCommand(String command, String language){
-        List<NodeInterface> newTree = parser.parseString(command, language);
+	public void passCommand(String command){
+        List<NodeInterface> newTree = parser.parseString(command);
         parser.makeTree(newTree);
     }
 
@@ -78,14 +87,20 @@ public class Controller implements ControllerInterface{
 		variableHistory.clearHistory();
     }
 
-    @Override
+	@Override
+	public void changeVariableValue(String variableName, String value) {
+		System.out.println(variableName);
+		variableHistory.changeValue(variableName, value);
+	}
+
+	@Override
     public void clearCommandHistoryBox() {
 		commandHistory.clearHistory();
     }
 
 	@Override
 	public void setPenColor(Color color) {
-		turtle.setPenColor(color);
+		//turtle.setPenColor(color);
 	}
 
 	public void toggleActive(int ID) {

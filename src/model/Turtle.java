@@ -5,9 +5,14 @@ import java.util.List;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+
+import javafx.scene.shape.Shape;
+import nodes.NodeInterface;
+
+
 import view.Observer;
 
-public class Turtle implements TurtleObservable
+public class Turtle implements TurtleObservable, NodeInterface
 {
 	private double XCoordinate;
 	private double YCoordinate;
@@ -17,16 +22,19 @@ public class Turtle implements TurtleObservable
 	private boolean penShowing;
 	private boolean turtleShowing;
 	private Color penColor;
-	private double penColorIndex;
 	private double penSize;
+
 	
 	private WraparoundHandler toroidal;
+
+	private Shape turtleShape;
+	private double ID;
 	
 	//THIS IS ANDY'S SUGGESTION
 	private Observer turtleObserver;
 
 	//Could pass pen color in parameter! Right now we call setPenColor in controller. TODO: Discuss this idea, Also screen size in constructor?
-	public Turtle(double width, double height, Color color)
+	public Turtle(double width, double height, Color color, double ID)
 	{
 		XCoordinate = width/2;
 		YCoordinate = height/2;
@@ -37,7 +45,6 @@ public class Turtle implements TurtleObservable
 		turtleShowing = true;
 		lines = new ArrayList<Line>();
 		penColor = color;
-		penColorIndex = 
 		penSize = 1.0;
 		toroidal = new WraparoundHandler(width, height);
 	}
@@ -117,17 +124,14 @@ public class Turtle implements TurtleObservable
 		return turtleShowing;
 	}
 
-	public void setPenColor(double index) 
-	{
-		//where would we initialize this?
-		ColorPalette cp = new ColorPalette();
-		
-		this.penColor = cp.getColorAtIndex(index);
+	public void setPenColor(Color color) 
+	{		
+		this.penColor = color;
 	}
 	
-	public double getPenColorIndex()
-	{				
-		return penColorIndex;
+	public Color getPenColor()
+	{
+		return penColor;
 	}
 
 	public void setTurtleShowing(boolean turtleShowing) {
@@ -137,5 +141,19 @@ public class Turtle implements TurtleObservable
 
 	public void setPenSize(double pixels) {
 		this.penSize = pixels;
+	}
+	
+	public Shape getTurtleShape() {
+		return turtleShape;
+	}
+
+	public void setTurtleShape(Shape turtleShape) 
+	{
+		this.turtleShape = turtleShape;
+	}
+
+	@Override
+	public double getValue() {
+		return ID;
 	}
 }

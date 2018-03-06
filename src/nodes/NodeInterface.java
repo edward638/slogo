@@ -7,5 +7,6 @@ package nodes;
  */
 public interface NodeInterface {
 
+
     double getValue();
 }

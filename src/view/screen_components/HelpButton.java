@@ -1,22 +1,16 @@
 package view.screen_components;
 
-import controller.ControllerInterface;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import view.constants.ButtonConstants;
 import view.help_items.HelpPopup;
-
-import javax.swing.border.Border;
 
 public class HelpButton extends ScreenComponent{
     private Button commandHelpButton;
 
 
-    public HelpButton(ControllerInterface controller) {
-        super(controller);
+    public HelpButton() {
+        super();
     }
 
     @Override

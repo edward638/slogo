@@ -8,24 +8,24 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class ShowTurtle extends GeneralCommand implements CommandInterface {
+public class ID extends GeneralCommand implements CommandInterface{
 
-	public ShowTurtle(Model model, int numChildren) {
+	public ID(Model model, int numChildren) {
 		super(model, numChildren);
 	}
 
 	@Override
 	/**
-	 * makes turtle visible
+	 * returns current active turtle's ID number
+	 * ID values typically start at 1 and increase by 1 with each new turtle created
 	 * 
-	 * @return 1
+	 * @return ID number of active turtle
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
 		for (Turtle turtle: model.getActiveTurtles())
 		{
-			turtle.setTurtleShowing(true);
+			value = turtle.getValue();
 		}
-		value = 1;
 		return value;
 	}
 

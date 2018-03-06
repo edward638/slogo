@@ -2,6 +2,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
@@ -22,8 +23,8 @@ public class PenDown extends GeneralCommand implements CommandInterface {
 	 * @param turt
 	 * @param numChildren
 	 */
-	public PenDown(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public PenDown(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override
@@ -34,7 +35,10 @@ public class PenDown extends GeneralCommand implements CommandInterface {
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		turtle.setPenShowing(true);
+		for (Turtle turtle: model.getActiveTurtles())
+		{
+			turtle.setPenShowing(true);
+		}
 		value = 1;
 		return value;
 	}

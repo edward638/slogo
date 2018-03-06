@@ -3,6 +3,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
@@ -23,8 +24,8 @@ public class ClearScreen extends GeneralCommand implements CommandInterface {
 	 * @param turt
 	 * @param numChildren
 	 */
-	public ClearScreen(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public ClearScreen(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override
@@ -34,10 +35,14 @@ public class ClearScreen extends GeneralCommand implements CommandInterface {
 	 * @return the distance the turtle moved
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		double distance = Math.sqrt(Math.pow(turtle.getHome()[0] - turtle.getXCoordinate(), 2) + Math.pow(turtle.getHome()[1] - turtle.getYCoordinate(), 2) );
-		turtle.setCoordinates(turtle.getHome()[0], turtle.getHome()[1]);
-		turtle.setDirectionAngle(90);
-		turtle.clearLines();
+		double distance = 0;
+		for (Turtle turtle: model.getActiveTurtles())
+		{
+			distance = Math.sqrt(Math.pow(turtle.getHome()[0] - turtle.getXCoordinate(), 2) + Math.pow(turtle.getHome()[1] - turtle.getYCoordinate(), 2) );
+			turtle.setCoordinates(turtle.getHome()[0], turtle.getHome()[1]);
+			turtle.setDirectionAngle(90);
+			turtle.clearLines();	
+		}
 		value = distance;
 		return value;
 	}

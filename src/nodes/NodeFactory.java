@@ -6,17 +6,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import model.Model;
 import model.Turtle;
 
 public class NodeFactory 
 {	
-	public static Object makeNode(Class<?> clazz,Turtle t, int numChildren)
+	public static Object makeNode(Class<?> clazz,Model model, int numChildren)
 	{
 		try
 		{
-			Constructor<?> c = clazz.getConstructor(new Class[] {Turtle.class,Integer.TYPE});
+			Constructor<?> c = clazz.getConstructor(new Class[] {Model.class,Integer.TYPE});
 			c.setAccessible(true);
-			Object o = c.newInstance(t, numChildren);
+			Object o = c.newInstance(model, numChildren);
 			return o;
 		}
 		catch(Exception e) 

@@ -1,15 +1,12 @@
 package view.screen_components;
 
-import controller.ControllerInterface;
-import javafx.scene.Group;
-import javafx.scene.Scene;
+import controller.CommandController;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import view.constants.ButtonConstants;
 import view.constants.ComboBoxConstants;
 import view.constants.LabelConstants;
@@ -21,8 +18,14 @@ public class CommandBox extends ScreenComponent{
     private TextArea commandTextArea;
     private Label commandLabel;
     private ComboBox<String> languageBox;
-	public CommandBox(ControllerInterface controller) {
-		super(controller);
+    private CommandController controller;
+
+	public CommandBox() {
+		super();
+	}
+
+	public void setController(CommandController controller){
+		this.controller = controller;
 	}
 
 	@Override
@@ -31,7 +34,7 @@ public class CommandBox extends ScreenComponent{
 			commandTextArea.clear();
 		}));
 		commandRunButton.setOnAction((event -> {
-			super.getController().passCommand(commandTextArea.getText().trim(), languageBox.getValue());
+			controller.passCommand(commandTextArea.getText().trim());
 			commandTextArea.clear();
 		}));
 	}
