@@ -26,7 +26,7 @@ public class Model {
 		activeTurtles = new ArrayList<>();
 		allTurtles = new HashMap<>();
 		
-		Turtle initial = new Turtle(width, height, Color.BLUE);
+		Turtle initial = new Turtle(width, height, Color.BLUE, 1.0);
 		
 		allTurtles.put(1.0, initial);
 		activeTurtles.add(initial);
@@ -44,7 +44,7 @@ public class Model {
 	}
 
 	public void addTurtle(Turtle turt) {
-		allTurtles.put((double) allTurtles.size(), turt);
+		allTurtles.put((double) turt.getValue(), turt);
 	}
 	
 	public void addActiveTurtle(Turtle turt) {
