@@ -6,11 +6,12 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
+import nodes.NodeInterface;
 
 import java.awt.geom.Line2D;
 import view.Observer;
 
-public class Turtle implements TurtleObservable
+public class Turtle implements TurtleObservable, NodeInterface
 {
 	private double XCoordinate;
 	private double YCoordinate;
@@ -22,6 +23,7 @@ public class Turtle implements TurtleObservable
 	private Color penColor;
 	private double penSize;
 	private Shape turtleShape;
+	private double ID;
 
 	private HandleWraparound toroidal;
 	
@@ -29,7 +31,7 @@ public class Turtle implements TurtleObservable
 	private Observer turtleObserver;
 
 	//Could pass pen color in parameter! Right now we call setPenColor in controller. TODO: Discuss this idea, Also screen size in constructor?
-	public Turtle(double width, double height, Color color)
+	public Turtle(double width, double height, Color color, double ID)
 	{
 		XCoordinate = width/2;
 		YCoordinate = height/2;
@@ -145,5 +147,10 @@ public class Turtle implements TurtleObservable
 	public void setTurtleShape(Shape turtleShape) 
 	{
 		this.turtleShape = turtleShape;
+	}
+
+	@Override
+	public double getValue() {
+		return ID;
 	}
 }
