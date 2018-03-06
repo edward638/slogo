@@ -2,14 +2,15 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.*;
 
 
 public class DoTimes extends GeneralCommand implements CommandInterface {
 
-	public DoTimes(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public DoTimes(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override

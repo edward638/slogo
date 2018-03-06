@@ -2,6 +2,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
@@ -22,8 +23,8 @@ public class Heading extends GeneralCommand implements CommandInterface {
 	 * @param turt
 	 * @param numChildren
 	 */
-	public Heading(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public Heading(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override
@@ -33,7 +34,10 @@ public class Heading extends GeneralCommand implements CommandInterface {
 	 * @return turtle's direction angle
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		value = turtle.getDirectionAngle();
+		for (Turtle turtle: model.getActiveTurtles())
+		{
+			value = turtle.getDirectionAngle();
+		}
 		return value;
 	}
 
