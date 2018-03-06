@@ -76,7 +76,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 			Button commandButton = new Button(command);
 			commandButton.setOnAction((event -> {
 				//TODO: discuss with Belanie
-				commandController.passCommand(commandButton.getText(),"English");
+				commandController.passCommand(commandButton.getText());
 			}));
 			commandList.getChildren().add(commandButton);
 		}
