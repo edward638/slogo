@@ -2,6 +2,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
@@ -9,8 +10,8 @@ import nodes.NodeInterface;
 
 public class YCoordinate extends GeneralCommand implements CommandInterface {
 
-	public YCoordinate(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public YCoordinate(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override
@@ -20,7 +21,10 @@ public class YCoordinate extends GeneralCommand implements CommandInterface {
 	 * @return turtle's Y
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		value = turtle.getYCoordinate();
+		for (Turtle turtle: model.getActiveTurtles())
+		{
+			value = turtle.getYCoordinate();
+		}
 		return value;
 	}
 

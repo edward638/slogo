@@ -2,13 +2,14 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.*;
 
 public class MakeUserInstruction extends GeneralCommand implements CommandInterface {
 
-	public MakeUserInstruction(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public MakeUserInstruction(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override

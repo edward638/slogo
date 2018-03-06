@@ -11,7 +11,6 @@ import view.GUI;
 import view.screen_components.*;
 
 public class Controller implements ControllerInterface{
-	private ModelInterface model;
 	private GUI gui;
 	private Turtle turtle;
 	private Parser parser;
@@ -22,6 +21,8 @@ public class Controller implements ControllerInterface{
 	private CommandHistoryBox commandHistoryBox;
 	private VariableHistoryBox variableHistoryBox;
 	private HelpButton helpButton;
+	private Model model;
+	
 	public Controller(Stage stage){
 //		this.model = model;
 		gui = new GUI();
@@ -33,16 +34,20 @@ public class Controller implements ControllerInterface{
 	}
 
 	private void initializeModelComponents(){
-		turtle = new Turtle(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT, Drawer.INITIAL_PEN_COLOR);
+		//turtle = new Turtle(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT, Drawer.INITIAL_PEN_COLOR);
+		model = new Model(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT);
         commandHistory = new CommandHistory();
         variableHistory = new VariablesHistory();
-		parser = new Parser(turtle, variableHistory, commandHistory);
+		parser = new Parser(model, variableHistory, commandHistory);
 	}
 
 	private void setUpConnections(){
-		turtle.addObserver(drawer);
-		drawer.setTurtle(turtle);
-		drawer.update();
+		for (Turtle turtle: model.getActiveTurtles())
+		{
+			turtle.addObserver(drawer);
+			drawer.setTurtle(turtle);
+			drawer.update();
+		}
 		variableHistoryBox.setVariableHistory(variableHistory);
 		commandHistoryBox.setCommandHistory(commandHistory);
 		commandHistory.addObserver(commandHistoryBox);
@@ -69,7 +74,7 @@ public class Controller implements ControllerInterface{
 	
     @Override
 	public void passCommand(String command, String language){
-        List<NodeInterface> newTree = parser.parseString(command, language);
+        List<NodeInterface> newTree = parser.parseString(command);
         parser.makeTree(newTree);
     }
 
