@@ -14,6 +14,7 @@ public class TreeTester {
 	private static ArrayList<NodeInterface> nodes;
 
 	public static void main (String [] args) {
+		/*
 		Turtle t = new Turtle(0.0, 0.0, Color.WHITE);
 		CommandHistory CH = new CommandHistory();
 		VariablesHistory VH = new VariablesHistory();
@@ -32,7 +33,7 @@ public class TreeTester {
 		ArrayList<HeadInterface> heads = (ArrayList<HeadInterface>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator();
 		System.out.println(te.evaluate(heads));
-
+*/
 	}
 }
 

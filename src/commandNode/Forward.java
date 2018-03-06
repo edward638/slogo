@@ -42,7 +42,6 @@ public class Forward extends GeneralCommand implements CommandInterface {
 			double yCor = turtle.getYCoordinate() - arguments.get(0).getValue()*Math.sin(turtle.getDirectionAngle()*radianConversion);
 			turtle.setCoordinates(xCor,yCor);
 		}
-		
 		value = arguments.get(0).getValue();
 		return value;
 	}

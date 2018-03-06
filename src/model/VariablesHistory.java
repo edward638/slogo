@@ -94,32 +94,8 @@ public class VariablesHistory implements VariableHistoryObservable{
 		variableHistoryObserver.notifyOfChanges();
 	}
 
-	/**
-	 * Returns the variables' values stores
-	 * @return List of doubles of the values stored
-	 */
 	@Override
-	public List<String> getVariables()
-	{
-		List<String> output = new ArrayList<>();
-		output.add("Variables: ");
-		for (String key: variables.keySet())
-		{
-			output.add(key + " = " + Double.toString(variables.get(key)));
-		}
-		output.add("Commands: ");
-		for (String key: commands.keySet())
-		{
-			output.add(key);
-		}
-
-		return output;
-	}
-
-	/**
-	 * ANDY WANTS THESE PLZ TODO: discuss with group
-	 */
-	public Map<String,Double> getVariablesAndy() {
+	public Map<String,Double> getVariableMapCopy() {
 		Map<String, Double> shallowCopy = new HashMap<String,Double>();
 		shallowCopy.putAll(variables);
 		return shallowCopy;
@@ -129,6 +105,7 @@ public class VariablesHistory implements VariableHistoryObservable{
 			variables.put(variableName,Double.parseDouble(value));
 			variableHistoryObserver.notifyOfChanges();
 		}catch(Exception e){
+			//TODO: check error for cases where variable doesn't exist in map and invalid value
 			System.out.println("woops");
 		}
 	}

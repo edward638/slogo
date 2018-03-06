@@ -1,20 +1,18 @@
 package view.screen_components;
 
-import controller.CommandController;
-import controller.CommandHistoryController;
+import controller.CommandBoxController;
+import controller.CommandHistoryBoxController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.HTMLEditorSkin;
 import model.CommandHistory;
 import model.CommandHistoryObservable;
 import view.Observer;
 import view.constants.ButtonConstants;
 import view.constants.LabelConstants;
-import view.constants.TextAreaConstants;
 
 import java.util.List;
 
@@ -26,15 +24,10 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 		super();
 	}
 
-	private CommandHistoryController commandHistoryController;
-	private CommandController commandController;
+	private CommandHistoryBoxController controller;
 
-	public void setCommandHistoryController(CommandHistoryController controller){
-		this.commandHistoryController = controller;
-	}
-
-	public void setCommandController(CommandController controller){
-		this.commandController = controller;
+	public void setController(CommandHistoryBoxController controller){
+		this.controller = controller;
 	}
 
 	public void setCommandHistory(CommandHistory commandHistory){
@@ -44,7 +37,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 	@Override
 	protected void mapUserActions() {
 		clearButton.setOnAction((event -> {
-			commandHistoryController.clearCommandHistoryBox();
+			controller.clearCommandHistoryBox();
 		}));
 	}
 
@@ -75,8 +68,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 		for(String command: commands){
 			Button commandButton = new Button(command);
 			commandButton.setOnAction((event -> {
-				//TODO: discuss with Belanie
-				commandController.passCommand(commandButton.getText());
+				controller.passCommand(commandButton.getText());
 			}));
 			commandList.getChildren().add(commandButton);
 		}
