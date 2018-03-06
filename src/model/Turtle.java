@@ -5,6 +5,8 @@ import java.util.List;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
+
 import java.awt.geom.Line2D;
 import view.Observer;
 
@@ -18,9 +20,9 @@ public class Turtle implements TurtleObservable
 	private boolean penShowing;
 	private boolean turtleShowing;
 	private Color penColor;
-	private double penColorIndex;
 	private double penSize;
-	
+	private Shape turtleShape;
+
 	private HandleWraparound toroidal;
 	
 	//THIS IS ANDY'S SUGGESTION
@@ -38,7 +40,6 @@ public class Turtle implements TurtleObservable
 		turtleShowing = true;
 		lines = new ArrayList<Line>();
 		penColor = color;
-		penColorIndex = 
 		penSize = 1.0;
 		toroidal = new HandleWraparound(width, height);
 	}
@@ -118,17 +119,14 @@ public class Turtle implements TurtleObservable
 		return turtleShowing;
 	}
 
-	public void setPenColor(double index) 
-	{
-		//where would we initialize this?
-		ColorPalette cp = new ColorPalette();
-		
-		this.penColor = cp.getColorAtIndex(index);
+	public void setPenColor(Color color) 
+	{		
+		this.penColor = color;
 	}
 	
-	public double getPenColorIndex()
-	{				
-		return penColorIndex;
+	public Color getPenColor()
+	{
+		return penColor;
 	}
 
 	public void setTurtleShowing(boolean turtleShowing) {
@@ -138,5 +136,14 @@ public class Turtle implements TurtleObservable
 
 	public void setPenSize(double pixels) {
 		this.penSize = pixels;
+	}
+	
+	public Shape getTurtleShape() {
+		return turtleShape;
+	}
+
+	public void setTurtleShape(Shape turtleShape) 
+	{
+		this.turtleShape = turtleShape;
 	}
 }

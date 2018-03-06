@@ -2,6 +2,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
@@ -22,8 +23,8 @@ public class HideTurtle extends GeneralCommand implements CommandInterface {
 	 * @param turt
 	 * @param numChildren
 	 */
-	public HideTurtle(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public HideTurtle(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override
@@ -33,7 +34,10 @@ public class HideTurtle extends GeneralCommand implements CommandInterface {
 	 * @return 0
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		turtle.setTurtleShowing(false);
+		for (Turtle turtle: model.getActiveTurtles())
+		{
+			turtle.setTurtleShowing(false);
+		}
 		value = 0;
 		return value;
 	}

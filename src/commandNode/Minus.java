@@ -2,6 +2,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
@@ -22,8 +23,8 @@ public class Minus extends GeneralCommand implements CommandInterface {
 	 * @param turt
 	 * @param numChildren
 	 */
-	public Minus(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public Minus(Model model, int numChildren) {
+		super(model, numChildren);
 		// TODO Auto-generated constructor stub
 	}
 

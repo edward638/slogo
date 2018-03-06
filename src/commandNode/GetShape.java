@@ -8,24 +8,26 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class Sine extends GeneralCommand implements CommandInterface {
+public class GetShape extends GeneralCommand implements CommandInterface{
 
-	public Sine(Model model, int numChildren) {
+	public GetShape(Model model, int numChildren) {
 		super(model, numChildren);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	/**
-	 * returns sine of degrees
+	 * returns turtle's current shape index
 	 * 
-	 * @return sin(degrees)
+	 * @return index of shape
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		double sin = Math.sin(arguments.get(0).getValue());
-		value = sin;
+		// TODO Auto-generated method stub
+		for (Turtle turtle: model.getActiveTurtles())
+		{
+			value = model.getShapeOptions().indexOf(turtle.getTurtleShape());
+		}
 		return value;
 	}
-
 
 }

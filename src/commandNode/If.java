@@ -2,6 +2,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.*;
 
@@ -20,8 +21,8 @@ public class If extends GeneralCommand implements CommandInterface {
 	 * @param turt
 	 * @param numChildren
 	 */
-	public If(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public If(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override
