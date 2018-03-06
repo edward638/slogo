@@ -11,7 +11,6 @@ import view.GUI;
 import view.screen_components.*;
 
 public class Controller implements CommandController, DrawerController, CommandHistoryController, VariableHistoryController{
-	private ModelInterface model;
 	private GUI gui;
 	private Turtle turtle;
 	private Parser parser;
@@ -78,7 +77,7 @@ public class Controller implements CommandController, DrawerController, CommandH
 	}
 	
     @Override
-	public void passCommand(String command, String language){
+	public void passCommand(String command){
         List<NodeInterface> newTree = parser.parseString(command);
         parser.makeTree(newTree);
     }

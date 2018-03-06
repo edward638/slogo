@@ -34,7 +34,7 @@ public class CommandBox extends ScreenComponent{
 			commandTextArea.clear();
 		}));
 		commandRunButton.setOnAction((event -> {
-			controller.passCommand(commandTextArea.getText().trim(), languageBox.getValue());
+			controller.passCommand(commandTextArea.getText().trim());
 			commandTextArea.clear();
 		}));
 	}
