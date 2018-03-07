@@ -19,4 +19,7 @@ public final class BorderPaneConstants {
 
     public static final int TURTLE_CONTROL_PANEL_X = 480;
     public static final int TURTLE_CONTROL_PANEL_Y = 300;
+
+    public static final int CUSTOM_COMMANDS_X = 740;
+    public static final int CUSTOM_COMMANDS_Y = 450;
 }

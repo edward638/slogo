@@ -13,10 +13,11 @@ import view.Observer;
  *
  * authors: Charles Dracos, Andy Nguyen
  */
-public class VariablesHistory implements VariableHistoryObservable{
+public class VariablesHistory implements VariableHistoryObservable, CustomCommandObservable{
 	private HashMap<String, Double> variables;
 	private HashMap<String, CustomCommand> commands;
 	private Observer variableHistoryObserver;
+	private Observer customCommandObserver;
 
 	/**
 	 * No parameter constructor, initializes the HashMaps
@@ -32,6 +33,10 @@ public class VariablesHistory implements VariableHistoryObservable{
 	 */
 	public void addObserver(Observer variableHistoryObserver){
 		this.variableHistoryObserver = variableHistoryObserver;
+	}
+
+	public void addCustomCommandObserver(Observer customCommandObserver){
+		this.customCommandObserver = customCommandObserver;
 	}
 
 	/**
@@ -64,7 +69,7 @@ public class VariablesHistory implements VariableHistoryObservable{
 	 */
 	public void add (CustomCommand CN) {
 		commands.put(CN.getName(), CN);
-		variableHistoryObserver.notifyOfChanges();
+		customCommandObserver.notifyOfChanges();
 	}
 
 	/**
@@ -94,12 +99,6 @@ public class VariablesHistory implements VariableHistoryObservable{
 		variableHistoryObserver.notifyOfChanges();
 	}
 
-	@Override
-	public Map<String,Double> getVariableMapCopy() {
-		Map<String, Double> shallowCopy = new HashMap<String,Double>();
-		shallowCopy.putAll(variables);
-		return shallowCopy;
-	}
 	public void changeValue(String variableName, String value){
 		try{
 			variables.put(variableName,Double.parseDouble(value));
@@ -108,5 +107,17 @@ public class VariablesHistory implements VariableHistoryObservable{
 			//TODO: check error for cases where variable doesn't exist in map and invalid value
 			System.out.println("woops");
 		}
+	}
+
+	@Override
+	public Map<String,Double> getVariableMapCopy() {
+		Map<String, Double> shallowCopy = new HashMap<String,Double>();
+		shallowCopy.putAll(variables);
+		return shallowCopy;
+	}
+
+	@Override
+	public List<String> getCommands(){
+		return new ArrayList<>(commands.keySet());
 	}
 }

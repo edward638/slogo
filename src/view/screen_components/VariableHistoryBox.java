@@ -88,7 +88,7 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 	private void addTextArea(BorderPane borderPane){
 		textArea = new TextArea();
 		textArea.setEditable(false);
-		textArea.setPrefRowCount(TextAreaConstants.VARIABLE_ROWS);
+		textArea.setPrefRowCount(10);
 		textArea.setPrefColumnCount(TextAreaConstants.VARIABLE_COLUMNS);
 		borderPane.setCenter(textArea);
 	}

@@ -78,4 +78,10 @@ public class GUI{
         borderPane.setLayoutY(BorderPaneConstants.TURTLE_CONTROL_PANEL_Y);
         root.getChildren().add(borderPane);
     }
+
+    public void addCustomCommandsBorderPane(BorderPane borderPane){
+        borderPane.setLayoutX(BorderPaneConstants.CUSTOM_COMMANDS_X);
+        borderPane.setLayoutY(BorderPaneConstants.CUSTOM_COMMANDS_Y);
+        root.getChildren().add(borderPane);
+    }
 }
