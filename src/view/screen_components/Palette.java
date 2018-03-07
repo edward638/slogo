@@ -1,5 +1,6 @@
 package view.screen_components;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -11,6 +12,8 @@ import org.w3c.dom.css.Rect;
 
 public class Palette extends ScreenComponent {
 
+    public static final int RECT_WIDTH = 60;
+    public static final int RECT_HEIGHT = 20;
     private Color[] colorList;
     private VBox vBox;
     public Palette(){
@@ -30,6 +33,7 @@ public class Palette extends ScreenComponent {
 
     private void generateVBox(BorderPane borderPane){
         vBox = new VBox();
+        vBox.setPadding(new Insets(10,10,10,10));
         vBox.setSpacing(10);
         Label title = new Label("Color Palette");
         vBox.getChildren().add(title);
@@ -38,13 +42,14 @@ public class Palette extends ScreenComponent {
     }
 
     public void updatePalette(){
-        colorList = new Color[]{Color.RED, Color.ORANGE, Color.YELLOW};
+        colorList = new Color[]{Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN,
+                                Color.BLUE, Color.INDIGO, Color.VIOLET};
         for (int x = 0; x< colorList.length; x++){
             HBox temp = new HBox();
             Label number = new Label(Integer.toString(x));
             Rectangle r = new Rectangle();
-            r.setWidth(60);
-            r.setHeight(20);
+            r.setWidth(RECT_WIDTH);
+            r.setHeight(RECT_HEIGHT);
             r.setFill(colorList[x]);
             temp.getChildren().addAll(number, r);
             vBox.getChildren().add(temp);

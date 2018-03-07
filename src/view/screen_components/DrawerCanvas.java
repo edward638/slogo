@@ -1,5 +1,6 @@
 package view.screen_components;
 
+import controller.DrawerController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -21,6 +22,7 @@ import view.turtle_info.TurtleInformation;
 
 import java.util.List;
 
+
 public class DrawerCanvas {
     private Canvas canvas;
     private GraphicsContext gc;
@@ -30,6 +32,8 @@ public class DrawerCanvas {
     private String storedColor = "White";
     private StackPane stackPane;
     private TurtleObservable turtle;
+    private DrawerController controller;
+
 
     public DrawerCanvas(BorderPane borderPane, TurtleObservable turtle){
         stackPane = new StackPane();
@@ -51,7 +55,20 @@ public class DrawerCanvas {
         turtleIcon.setFitWidth(TURTLE_HEIGHT);
         turtleIcon.setFitHeight(TURTLE_WIDTH);
         turtleIcon.setOnMouseClicked(imageOnMousePressedEventHandler);
+        turtleIcon.setOnMouseDragged((MouseEvent mouseEvent) -> {
+            StringBuilder temp = new StringBuilder();
+            temp.append("setxy ");
+            temp.append(Integer.toString((int) mouseEvent.getSceneX() - 410));
+            temp.append(" ");
+            temp.append(Integer.toString(250 - (int) mouseEvent.getSceneY()));
+            turtleIcon.setOnMouseReleased((MouseEvent mouseEvent2) -> {
+                controller.passCommand(temp.toString(), "English");
+            });
+
+        });
+
     }
+
     public void setupRectangle(Color color){
         gc.setFill(color);
         gc.fillRect(0,0,canvas.getWidth(), canvas.getHeight());
@@ -100,11 +117,15 @@ public class DrawerCanvas {
     }
 
 
-    EventHandler<MouseEvent> imageOnMousePressedEventHandler = new EventHandler<MouseEvent>(){
+    private EventHandler<MouseEvent> imageOnMousePressedEventHandler = new EventHandler<>(){
         @Override
         public void handle(MouseEvent t){
             TurtleInformation info = new TurtleInformation(turtle);
         }
     };
 
+
+    public void setController(DrawerController controller) {
+        this.controller = controller;
+    }
 }
