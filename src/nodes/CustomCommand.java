@@ -33,16 +33,6 @@ public class CustomCommand extends Variables implements HeadInterface, NodeInter
         return value; //returns the value of evaluate the commands
     }
 
-    @Override
-    public boolean hasNext() {
-        return false; //does not have any children
-    }
-
-    @Override
-    public NodeInterface getNext() {
-        return null; //returns null as there are no children for a custom command
-    }
-
     /**
      * Adds a list to the array of list nodes a custom command stores, to be used
      * later in the program. A custom command uses lists to define what it does, as can
@@ -73,10 +63,5 @@ public class CustomCommand extends Variables implements HeadInterface, NodeInter
         commands.evaluate();
         value = commands.getValue();
         return value;
-    }
-
-    @Override
-    public void reset() {
-        //do nothing as there is not tracker of which child
     }
 }

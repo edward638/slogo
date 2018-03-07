@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class SetPenSize extends GeneralCommand implements CommandInterface {
+public class SetPenSize extends GeneralCommand {
 
 	public SetPenSize(Model model, int numChildren) {
 		super(model, numChildren);

@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class YCoordinate extends GeneralCommand implements CommandInterface {
+public class YCoordinate extends GeneralCommand {
 
 	public YCoordinate(Model model, int numChildren) {
 		super(model, numChildren);

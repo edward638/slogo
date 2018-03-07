@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class Pi extends GeneralCommand implements CommandInterface {
+public class Pi extends GeneralCommand {
 
 	public Pi(Model model, int numChildren) {
 		super(model, numChildren);

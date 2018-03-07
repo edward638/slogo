@@ -10,7 +10,7 @@ import java.util.List;
  * Implements REPEAT as describe on the course website
  */
 
-public class Repeat extends GeneralCommand implements CommandInterface {
+public class Repeat extends GeneralCommand {
 
     public Repeat (Model model, int numChildren) {
         super(model, numChildren);

@@ -13,12 +13,12 @@ import nodes.*;
  * the CommandInterface interface.
  *
  */
-public class If extends GeneralCommand implements CommandInterface {
+public class If extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public If(Model model, int numChildren) {

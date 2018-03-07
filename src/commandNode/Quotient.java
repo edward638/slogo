@@ -9,7 +9,7 @@ import nodes.GeneralCommand;
 import nodes.NodeInterface;
 import parsers.InvalidEntryException;
 
-public class Quotient extends GeneralCommand implements CommandInterface {
+public class Quotient extends GeneralCommand  {
 
 	public Quotient(Model model, int numChildren) {
 		super(model, numChildren);

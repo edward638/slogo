@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class Remainder extends GeneralCommand implements CommandInterface {
+public class Remainder extends GeneralCommand  {
 
 	public Remainder(Model model, int numChildren) {
 		super(model, numChildren);

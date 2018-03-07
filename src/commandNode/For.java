@@ -10,7 +10,7 @@ import nodes.*;
  * Implements FOR as described on the course site
  */
 
-public class For extends GeneralCommand implements CommandInterface {
+public class For extends GeneralCommand  {
 
 	public For(Model model, int numChildren) {
 		super(model, numChildren);

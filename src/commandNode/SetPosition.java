@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class SetPosition extends GeneralCommand implements CommandInterface {
+public class SetPosition extends GeneralCommand {
 
 	public SetPosition(Model model, int numChildren) {
 		super(model, numChildren);
