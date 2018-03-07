@@ -1,6 +1,6 @@
 package view.screen_components;
 
-import controller.VariableHistoryController;
+import controller.VariableHistoryBoxController;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class VariableHistoryBox extends ScreenComponent implements Observer {
 	private VariableHistoryObservable variableHistory;
-	private VariableHistoryController controller;
+	private VariableHistoryBoxController controller;
 	private TextArea textArea;
 	private Button clearButton;
 	private Button submitButton;
@@ -24,7 +24,7 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 		super();
 	}
 
-	public void setController(VariableHistoryController controller){
+	public void setController(VariableHistoryBoxController controller){
 		this.controller = controller;
 	}
 
@@ -95,6 +95,6 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 
 	@Override
 	public void notifyOfChanges() {
-		this.fillBox(variableHistory.getVariablesAndy());
+		this.fillBox(variableHistory.getVariableMapCopy());
 	}
 }

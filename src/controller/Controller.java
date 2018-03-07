@@ -1,16 +1,23 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import commandNode.Backward;
+import commandNode.Forward;
+import commandNode.Left;
+import commandNode.Right;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.*;
+import nodes.Constant;
 import nodes.NodeInterface;
 import parsers.Parser;
 import view.GUI;
 import view.screen_components.*;
 
-public class Controller implements CommandController, DrawerController, CommandHistoryController, VariableHistoryController{
+public class Controller implements CommandBoxController, DrawerController, CommandHistoryBoxController,
+						VariableHistoryBoxController, TurtleControlPanelController {
 	private GUI gui;
 	private Turtle turtle;
 	private Parser parser;
@@ -21,6 +28,7 @@ public class Controller implements CommandController, DrawerController, CommandH
 	private CommandHistoryBox commandHistoryBox;
 	private VariableHistoryBox variableHistoryBox;
 	private HelpButton helpButton;
+	private TurtleControlPanel turtleControlPanel;
 	private Model model;
 	
 	public Controller(Stage stage){
@@ -61,11 +69,12 @@ public class Controller implements CommandController, DrawerController, CommandH
 		commandBox = new CommandBox();
 		commandBox.setController(this);
 		commandHistoryBox = new CommandHistoryBox();
-		commandHistoryBox.setCommandHistoryController(this);
-		commandHistoryBox.setCommandController(this);
+		commandHistoryBox.setController(this);
 		variableHistoryBox = new VariableHistoryBox();
 		variableHistoryBox.setController(this);
 		helpButton = new HelpButton();
+		turtleControlPanel = new TurtleControlPanel();
+		turtleControlPanel.setController(this);
 	}
 
 	private void addToGUI(){
@@ -74,6 +83,7 @@ public class Controller implements CommandController, DrawerController, CommandH
 		gui.addDrawerBorderPane(drawer.getGUIComponent());
 		gui.addVariableHistoryBoxBorderPane(variableHistoryBox.getGUIComponent());
 		gui.addHelpButtonBorderPane(helpButton.getGUIComponent());
+		gui.addTurtleControlPanelBorderPane(turtleControlPanel.getGUIComponent());
 	}
 	
     @Override
@@ -82,7 +92,12 @@ public class Controller implements CommandController, DrawerController, CommandH
         parser.makeTree(newTree);
     }
 
-    @Override
+	@Override
+	public void changeLanguage(String language) {
+		parser.setLanguage(language);
+	}
+
+	@Override
     public void clearVariableBox(){
 		variableHistory.clearHistory();
     }
@@ -101,6 +116,38 @@ public class Controller implements CommandController, DrawerController, CommandH
 	@Override
 	public void setPenColor(Color color) {
 		//turtle.setPenColor(color);
+	}
+
+	@Override
+	public void forward(double value){
+		List<NodeInterface> nodeList = new ArrayList<>();
+		nodeList.add(new Forward(model, 1));
+		nodeList.add(new Constant(value));
+		parser.makeTree(nodeList);
+	}
+
+	@Override
+	public void backward(double value){
+		List<NodeInterface> nodeList = new ArrayList<>();
+		nodeList.add(new Backward(model, 1));
+		nodeList.add(new Constant(value));
+		parser.makeTree(nodeList);
+	}
+
+	@Override
+	public void rightTurn(double value){
+		List<NodeInterface> nodeList = new ArrayList<>();
+		nodeList.add(new Right(model, 1));
+		nodeList.add(new Constant(value));
+		parser.makeTree(nodeList);
+	}
+
+	@Override
+	public void leftTurn(double value){
+		List<NodeInterface> nodeList = new ArrayList<>();
+		nodeList.add(new Left(model, 1));
+		nodeList.add(new Constant(value));
+		parser.makeTree(nodeList);
 	}
 
 	public void toggleActive(int ID) {
