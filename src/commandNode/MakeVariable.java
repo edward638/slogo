@@ -11,7 +11,7 @@ import nodes.*;
  * Makes a new variable as described on the course site
  */
 
-public class MakeVariable extends GeneralCommand implements CommandInterface {
+public class MakeVariable extends GeneralCommand {
 	
 
 	public MakeVariable(Model model, int numChildren) {

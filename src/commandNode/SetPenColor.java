@@ -9,7 +9,7 @@ import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
 
-public class SetPenColor extends GeneralCommand implements CommandInterface{
+public class SetPenColor extends GeneralCommand {
 
 	public SetPenColor(Model model, int numChildren) {
 		super(model, numChildren);

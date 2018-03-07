@@ -20,7 +20,7 @@ public class Difference extends GeneralCommand implements CommandInterface {
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public Difference(Model model, int numChildren) {

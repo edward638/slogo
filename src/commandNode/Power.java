@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class Power extends GeneralCommand implements CommandInterface {
+public class Power extends GeneralCommand {
 
 	public Power(Model model, int numChildren) {
 		super(model, numChildren);

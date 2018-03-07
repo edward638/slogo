@@ -16,14 +16,14 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class Backward extends GeneralCommand implements CommandInterface
+public class Backward extends GeneralCommand
 {
 	private static double radianConversion = Math.PI/180;
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public Backward(Model model, int numChildren) {

@@ -15,12 +15,12 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class Home extends GeneralCommand implements CommandInterface {
+public class Home extends GeneralCommand  {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public Home(Model model, int numChildren) {

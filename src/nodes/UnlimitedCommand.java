@@ -23,16 +23,6 @@ public class UnlimitedCommand implements HeadInterface, NodeInterface {
     }
 
     @Override
-    public NodeInterface getNext() {
-        return null;
-    }
-
-    @Override
-    public boolean hasNext() {
-        return false;
-    }
-
-    @Override
     public double evaluate(List<NodeInterface> args) {
         int childrenTracker = 0;
         while (!children.empty()) {
@@ -54,11 +44,6 @@ public class UnlimitedCommand implements HeadInterface, NodeInterface {
     @Override
     public void add(NodeInterface n) {
         children.add(n);
-    }
-
-    @Override
-    public void reset() {
-        //do nothing
     }
 
     @Override

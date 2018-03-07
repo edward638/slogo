@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class GreaterThan extends GeneralCommand implements CommandInterface {
+public class GreaterThan extends GeneralCommand {
 
 	public GreaterThan(Model model, int numChildren) {
 		super(model, numChildren);

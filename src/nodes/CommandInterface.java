@@ -12,5 +12,9 @@ import java.util.List;
 public interface CommandInterface {
 
     double evaluate(List<NodeInterface> arguments);
+    void reset();
+    void add(NodeInterface n);
+    NodeInterface getNext();
+    boolean hasNext();
 
 }

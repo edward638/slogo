@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class Random extends GeneralCommand implements CommandInterface {
+public class Random extends GeneralCommand {
 
 	public Random(Model model, int numChildren) {
 		super(model, numChildren);

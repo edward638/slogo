@@ -32,7 +32,11 @@ public class TreeEvaluator {
 	 */
 	public double evaluate(ArrayList<HeadInterface> heads) {
 		for (int i = 0; i < heads.size(); i++) {
-			evaluateHead(heads.get(i)); //evaluates a new tree head
+			if (heads.get(i) instanceof CommandInterface) {
+				CommandInterface head = (CommandInterface) heads.get(i);
+				evaluateHead(head); //evaluates a new tree head
+			}
+			else returnValue = heads.get(i).evaluate(null);
 		}
 		return returnValue;
 	}
@@ -42,13 +46,13 @@ public class TreeEvaluator {
 	 * arguments for their parent nodes to use to evaluate
 	 * @param node Node being evaluated
 	 */
-	private void evaluateHead(HeadInterface node) {
+	private void evaluateHead(CommandInterface node) {
 		ArrayList<NodeInterface> nArgs = new ArrayList<NodeInterface>(); //arguments to be passed to a commandNode
 		while (node.hasNext()) {	 //if there is a child node
 			NodeInterface curr = node.getNext(); //curr is set to the child
 			if (curr instanceof CommandInterface) {
 				//if the child is another command, cast and enter recursion
-				HeadInterface head = (HeadInterface) curr;
+				CommandInterface head = (CommandInterface) curr;
 				evaluateHead(head);
 				nArgs.add(curr);
 			}
