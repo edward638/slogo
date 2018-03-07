@@ -12,7 +12,7 @@ import view.factories.TitleFactory;
 
 public class GUI{
 	private static final String NAME = "Slogo Programming Environment";
-	private static final int WIDTH = 950;
+	private static final int WIDTH = 1100;
 	private static final int HEIGHT = 650;
     private Group root = new Group();
     public GUI(){
@@ -41,6 +41,7 @@ public class GUI{
     private void addTitle() {
         Image titleImage = new Image(getClass().getClassLoader().getResourceAsStream(TitleFactory.SLOGO_IMAGE));
         ImageView title = TitleFactory.generateTitle(titleImage);
+        title.setX(BorderPaneConstants.COMMAND_HISTORY_BOX_X);
         root.getChildren().add(title);
     }
 
@@ -73,9 +74,13 @@ public class GUI{
         root.getChildren().add(borderPane);
     }
 
+<<<<<<< src/view/GUI.java
     public void addTurtleControlPanelBorderPane(BorderPane borderPane){
         borderPane.setLayoutX(BorderPaneConstants.TURTLE_CONTROL_PANEL_X);
         borderPane.setLayoutY(BorderPaneConstants.TURTLE_CONTROL_PANEL_Y);
+    }
+    
+    public void addPalette(BorderPane borderPane) {
         root.getChildren().add(borderPane);
     }
 }

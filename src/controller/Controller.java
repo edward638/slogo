@@ -30,7 +30,8 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 	private HelpButton helpButton;
 	private TurtleControlPanel turtleControlPanel;
 	private Model model;
-	
+	private Palette palette;
+
 	public Controller(Stage stage){
 //		this.model = model;
 		gui = new GUI();
@@ -64,6 +65,7 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 	}
 
 	private void initializeScreenComponents(){
+		palette = new Palette();
 		drawer = new Drawer();
 		drawer.setController(this);
 		commandBox = new CommandBox();
@@ -83,7 +85,11 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 		gui.addDrawerBorderPane(drawer.getGUIComponent());
 		gui.addVariableHistoryBoxBorderPane(variableHistoryBox.getGUIComponent());
 		gui.addHelpButtonBorderPane(helpButton.getGUIComponent());
+<<<<<<< src/controller/Controller.java
 		gui.addTurtleControlPanelBorderPane(turtleControlPanel.getGUIComponent());
+=======
+		gui.addPalette(palette.getGUIComponent());
+>>>>>>> src/controller/Controller.java
 	}
 	
     @Override
