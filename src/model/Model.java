@@ -28,7 +28,11 @@ public class Model implements ColorIndexObservable{
 	private List<String> shapeOptions;
 	private List<Turtle> activeTurtles;
 	private Map<Double,Turtle> allTurtles;
-	private Observer colorIndexObserver;
+
+	private static double XHome;
+	private static double YHome;
+
+	private int currentTurtle = 0;
 	
 	public Model(double width, double height)
 	{
@@ -37,8 +41,9 @@ public class Model implements ColorIndexObservable{
 		initializeShapes();
 		activeTurtles = new ArrayList<>();
 		allTurtles = new HashMap<>();
-		
-		Turtle initial = new Turtle(width, height, colorOptions.get(0), 1.0, TURTLE_0);
+		XHome = width;
+		YHome = height;
+		Turtle initial = new Turtle(XHome, YHome, Color.BLUE, 1.0);
 		
 		allTurtles.put(1.0, initial);
 		activeTurtles.add(initial);
@@ -77,8 +82,10 @@ public class Model implements ColorIndexObservable{
 		return allTurtles;
 	}
 
-	public void addTurtle(Turtle turt) {
-		allTurtles.put((double) turt.getValue(), turt);
+	public void addTurtle(double ID) {
+		Turtle t = new Turtle (XHome, YHome, Color.BLUE, ID);
+		allTurtles.put((double) t.getValue(), t);
+		activeTurtles.add(t);
 	}
 	
 	public void addActiveTurtle(Turtle turt) {
@@ -112,16 +119,24 @@ public class Model implements ColorIndexObservable{
 		colorIndexObserver.notifyOfChanges();
 		return colorOptions.get((int)index);
 	}
+
+	public Turtle getActiveTurtle() { return activeTurtles.get(currentTurtle); }
 	
 	public List<Turtle> getActiveTurtles()
 	{
 		return activeTurtles;
 	}
 
+	public void setActiveTurtles(List<Turtle> newActives) {
+		activeTurtles = newActives;
+	}
+
 	public void update (Consumer<Turtle> T) {
 		for (Turtle t: getActiveTurtles()) {
 			T.accept(t);
+			currentTurtle++;
 		}
+		currentTurtle = 0;
 	}
 
 
