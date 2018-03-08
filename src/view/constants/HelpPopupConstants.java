@@ -21,9 +21,4 @@ public class HelpPopupConstants {
     public static final String booleanImage = "boolean_operations.png";
     public static final String variablesImage = "variables_structures.png";
     public static final String helpTitle = "help_title.png";
-
-
-
-
-    public static final int FONT_SIZE = 13;
 }
