@@ -62,7 +62,7 @@ public class DrawerCanvas {
             temp.append(" ");
             temp.append(Integer.toString(250 - (int) mouseEvent.getSceneY()));
             turtleIcon.setOnMouseReleased((MouseEvent mouseEvent2) -> {
-                controller.passCommand(temp.toString(), "English");
+                controller.passCommand(temp.toString());
             });
 
         });
