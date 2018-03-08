@@ -17,7 +17,8 @@ import view.GUI;
 import view.screen_components.*;
 
 public class Controller implements CommandBoxController, DrawerController, CommandHistoryBoxController,
-						VariableHistoryBoxController, TurtleControlPanelController, CustomCommandController {
+						VariableHistoryBoxController, TurtleControlPanelController, CustomCommandController,
+						PenPanelController{
 	private GUI gui;
 	private Turtle turtle;
 	private Parser parser;

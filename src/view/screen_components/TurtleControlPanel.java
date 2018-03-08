@@ -15,6 +15,10 @@ public class TurtleControlPanel extends ScreenComponent {
     private Button leftTurnButton;
     private Button rightTurnButton;
 
+    public TurtleControlPanel(){
+        super();
+    }
+
     @Override
     protected void mapUserActions() {
         forwardButton.setOnAction((event -> {
