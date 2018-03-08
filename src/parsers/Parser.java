@@ -64,8 +64,6 @@ public class Parser
 			String key = keys.nextElement();
 			children.put(key, Integer.parseInt(numChildren.getString(key)));	
 		}
-		
-//		nodeMaker = new NodeFactory(t, VH);
 		model = m;
 		varHistory = VH;
 		comHistory = CH;
@@ -157,6 +155,7 @@ public class Parser
 				if(regex.get(key).matcher(text).matches())
 				{
 					match = true;
+					//nf.makeToken(key, text, varHistory, model, children.get(commandType));
 					
 					if (key.equals("Command"))
 					{
@@ -186,21 +185,15 @@ public class Parser
 						}
 							
 					}
-					
-//					nodeList.add(NodeFactory.makeNode(text, key, varHistory));
-					//add these to node factory
-					//parser isnt necesarily making nodes
 					else if (key.equals("Constant"))
 					{
-						//Constant n = new Constant(Integer.parseInt(text));
-						NodeFactory nf = new NodeFactory();
-						nodeList.add(nf.makeConstant(key,text));
+						Constant n = new Constant(Integer.parseInt(text));
+						nodeList.add(n);
 					}
 					else if(key.equals("Variable"))
 					{
-						NodeFactory nf = new NodeFactory();
-						//Variable n = new Variable(text.substring(1), varHistory);
-						nodeList.add(nf.makeVariable(key,text.substring(1), varHistory));
+						Variable n = new Variable(text.substring(1), varHistory);
+						nodeList.add(n);
 					}
 					else if(key.equals("List"))
 					{
