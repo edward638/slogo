@@ -21,11 +21,12 @@ public class YCoordinate extends GeneralCommand {
 	 * @return turtle's Y
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			value = turtle.getYCoordinate();
-		}
+		model.update((t) -> yCoordinate(t));
 		return value;
+	}
+
+	public void yCoordinate (Turtle t) {
+		value = t.getYCoordinate();
 	}
 
 }

@@ -21,15 +21,14 @@ public class SetHeading extends GeneralCommand {
 	 * @return number of degrees moved
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		double deg = 0;
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			deg = Math.abs(turtle.getDirectionAngle() - arguments.get(0).getValue());
-			turtle.setDirectionAngle(arguments.get(0).getValue());
-		}
-		value = deg;
+		double x = arguments.get(0).getValue();
+		model.update((y) -> setHeading(y, x));
 		return value;
 	}
 
-
+	public void setHeading (Turtle t, double x) {
+		double deg = Math.abs(t.getDirectionAngle() - x);
+		t.setDirectionAngle(x);
+		value = deg;
+	}
 }

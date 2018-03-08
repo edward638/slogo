@@ -40,6 +40,7 @@ public class Drawer extends ScreenComponent implements Observer{
 
 	public void setController(DrawerController controller){
 		this.controller = controller;
+		drawerCanvas.setController(controller);
 	}
 
 	public void setTurtle(TurtleObservable turtle){
@@ -125,6 +126,7 @@ public class Drawer extends ScreenComponent implements Observer{
 
 	public void update(){
 		drawerCanvas.setTurtle(turtle);
+		drawerCanvas.changeTurtleImage(turtle.getTurtleShape());
 		drawerCanvas.update();
 	}
 

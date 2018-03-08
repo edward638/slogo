@@ -17,9 +17,9 @@ import view.GUI;
 import view.screen_components.*;
 
 public class Controller implements CommandBoxController, DrawerController, CommandHistoryBoxController,
-						VariableHistoryBoxController, TurtleControlPanelController {
+						VariableHistoryBoxController, TurtleControlPanelController, CustomCommandController,
+						PenPanelController{
 	private GUI gui;
-	private Turtle turtle;
 	private Parser parser;
 	private CommandHistory commandHistory;
 	private VariablesHistory variableHistory;
@@ -29,10 +29,12 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 	private VariableHistoryBox variableHistoryBox;
 	private HelpButton helpButton;
 	private TurtleControlPanel turtleControlPanel;
+	private CustomCommandsBox customCommandsBox;
 	private Model model;
-	
+	private Palette palette;
+	private PenControlPanel penControlPanel;
+
 	public Controller(Stage stage){
-//		this.model = model;
 		gui = new GUI();
 		gui.start(stage);
 		this.initializeScreenComponents();
@@ -42,7 +44,6 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 	}
 
 	private void initializeModelComponents(){
-		//turtle = new Turtle(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT, Drawer.INITIAL_PEN_COLOR);
 		model = new Model(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT);
         commandHistory = new CommandHistory();
         variableHistory = new VariablesHistory();
@@ -56,14 +57,20 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 			drawer.setTurtle(turtle);
 			drawer.update();
 		}
+		model.addObserver(palette);
+		palette.setColorIndex(model);
+		model.initializePalette();
 		variableHistoryBox.setVariableHistory(variableHistory);
 		commandHistoryBox.setCommandHistory(commandHistory);
 		commandHistory.addObserver(commandHistoryBox);
 		variableHistoryBox.setVariableHistory(variableHistory);
 		variableHistory.addObserver(variableHistoryBox);
+		variableHistory.addCustomCommandObserver(customCommandsBox);
+		customCommandsBox.setCustomCommandHolder(variableHistory);
 	}
 
 	private void initializeScreenComponents(){
+		palette = new Palette();
 		drawer = new Drawer();
 		drawer.setController(this);
 		commandBox = new CommandBox();
@@ -75,15 +82,22 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 		helpButton = new HelpButton();
 		turtleControlPanel = new TurtleControlPanel();
 		turtleControlPanel.setController(this);
+		customCommandsBox = new CustomCommandsBox();
+		customCommandsBox.setController(this);
+		penControlPanel = new PenControlPanel();
+		penControlPanel.setController(this);
 	}
 
 	private void addToGUI(){
-		gui.addCommandBoxBorderPane(commandBox.getGUIComponent());
-		gui.addCommandHistoryBoxBorderPane(commandHistoryBox.getGUIComponent());
-		gui.addDrawerBorderPane(drawer.getGUIComponent());
-		gui.addVariableHistoryBoxBorderPane(variableHistoryBox.getGUIComponent());
-		gui.addHelpButtonBorderPane(helpButton.getGUIComponent());
-		gui.addTurtleControlPanelBorderPane(turtleControlPanel.getGUIComponent());
+		gui.addToScreen(commandBox);
+		gui.addToScreen(commandHistoryBox);
+		gui.addToScreen(drawer);
+		gui.addToScreen(variableHistoryBox);
+		gui.addToScreen(helpButton);
+		gui.addToScreen(turtleControlPanel);
+		gui.addToScreen(customCommandsBox);
+		gui.addToScreen(palette);
+		gui.addToScreen(penControlPanel);
 	}
 	
     @Override
@@ -91,6 +105,11 @@ public class Controller implements CommandBoxController, DrawerController, Comma
         List<NodeInterface> newTree = parser.parseString(command);
         parser.makeTree(newTree);
     }
+
+	@Override
+	public void clearCustomCommands() {
+
+	}
 
 	@Override
 	public void changeLanguage(String language) {
@@ -152,5 +171,26 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 
 	public void toggleActive(int ID) {
 		//TODO: find a turtle with specific ID in backend, make it active/inactive
+	}
+
+	@Override
+	public void setPenSize(double size) {
+		for(Turtle turt : model.getActiveTurtles()){
+			turt.setPenSize(size);
+		}
+	}
+
+	@Override
+	public void penUp() {
+		for(Turtle turt : model.getActiveTurtles()){
+			turt.setPenShowing(false);
+		}
+	}
+
+	@Override
+	public void penDown() {
+		for(Turtle turt : model.getActiveTurtles()){
+			turt.setPenShowing(true);
+		}
 	}
 }

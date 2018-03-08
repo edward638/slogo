@@ -15,8 +15,49 @@ HBox{
     -fx-background-color:red;
 }
 
+.runnableCommandButton{
+    -fx-min-width: 185;
+    -fx-pref-width: 185;
+    -fx-max-width: 185;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.scroll-pane{
+    -fx-hbar-policy:never;
+    -fx-fit-to-width:true;
+}
+
+.fdButton{
+    -fx-background-image: url("/fd_arrow.png");
+    -fx-background-size:stretch;
+}
+
+.bkButton{
+    -fx-background-image: url("/bk_arrow.png");
+    -fx-background-size:stretch;
+}
+
+.ltButton{
+    -fx-background-image: url("/lt_arrow.png");
+    -fx-background-size:stretch;
+}
+
+.rtButton{
+    -fx-background-image: url("/rt_arrow.png");
+    -fx-background-size:stretch;
+}
+
 .button:pressed{
     -fx-font-weight: bold;
+}
+
+.titlePane{
+    -fx-background-image: url("/SLogo.PNG");
+    -fx-background-size:stretch;
+    -fx-min-width: 400px;
+    -fx-pref-width: 400px;
+    -fx-min-height: 150px;
 }
 
 .text-area{

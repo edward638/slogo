@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.CommandHistory;
 import model.CommandHistoryObservable;
+import propertiesFiles.ResourceBundleManager;
 import view.Observer;
 import view.constants.ButtonConstants;
 import view.constants.LabelConstants;
@@ -48,15 +49,15 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 
 	private void addButtonAndLabels(BorderPane borderPane){
 		HBox topComponent = new HBox();
-		clearButton = new Button(ButtonConstants.HISTORY_BUTTON_LABEL);
-		Label label = new Label(LabelConstants.HISTORY_LABEL_TEXT);
+		clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("HISTORY_BUTTON_LABEL"));
+		Label label = new Label(ResourceBundleManager.retrieveLabel("HISTORY_LABEL_TEXT"));
 		topComponent.getChildren().add(label);
 		topComponent.getChildren().add(clearButton);
 		borderPane.setTop(topComponent);
 		commandList = new VBox();
 		ScrollPane scrollPane = new ScrollPane();
-		scrollPane.setMaxWidth(100);
-		scrollPane.setPrefHeight(100);
+		scrollPane.setMaxWidth(200);
+		scrollPane.setPrefHeight(300);
 		scrollPane.setContent(commandList);
 		borderPane.setCenter(scrollPane);
 	}
@@ -67,6 +68,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 		commandList.getChildren().clear();
 		for(String command: commands){
 			Button commandButton = new Button(command);
+			commandButton.getStyleClass().add("runnableCommandButton");
 			commandButton.setOnAction((event -> {
 				controller.passCommand(commandButton.getText());
 			}));
