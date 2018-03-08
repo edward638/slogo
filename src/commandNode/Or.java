@@ -15,12 +15,12 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class Or extends GeneralCommand implements CommandInterface {
+public class Or extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public Or(Model model, int numChildren) {

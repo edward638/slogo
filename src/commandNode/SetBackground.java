@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class SetBackground extends GeneralCommand implements CommandInterface{
+public class SetBackground extends GeneralCommand {
 
 	public SetBackground(Model model, int numChildren) {
 		super(model, numChildren);

@@ -7,7 +7,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class Turtles extends GeneralCommand implements CommandInterface{
+public class Turtles extends GeneralCommand {
 
 	public Turtles(Model model, int numChildren) {
 		super(model, numChildren);

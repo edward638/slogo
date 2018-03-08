@@ -15,12 +15,12 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class Minus extends GeneralCommand implements CommandInterface {
+public class Minus extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public Minus(Model model, int numChildren) {

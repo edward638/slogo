@@ -14,12 +14,12 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class And extends GeneralCommand implements CommandInterface {
+public class And extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public And(Model model, int numChildren) {

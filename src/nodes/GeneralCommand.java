@@ -13,7 +13,7 @@ import model.Model;
  *
  * author: Charlie Dracos
  */
-public abstract class GeneralCommand implements HeadInterface, NodeInterface {
+public abstract class GeneralCommand implements HeadInterface, NodeInterface, CommandInterface {
     protected Model model;
     private ArrayList<NodeInterface> children;
     private int numChildren;

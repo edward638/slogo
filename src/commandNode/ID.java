@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class ID extends GeneralCommand implements CommandInterface{
+public class ID extends GeneralCommand {
 
 	public ID(Model model, int numChildren) {
 		super(model, numChildren);

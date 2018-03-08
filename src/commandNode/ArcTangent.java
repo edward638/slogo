@@ -16,12 +16,12 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class ArcTangent extends GeneralCommand implements CommandInterface {
+public class ArcTangent extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public ArcTangent(Model model, int numChildren) {

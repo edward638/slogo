@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class GetShape extends GeneralCommand implements CommandInterface{
+public class GetShape extends GeneralCommand {
 
 	public GetShape(Model model, int numChildren) {
 		super(model, numChildren);

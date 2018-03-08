@@ -14,12 +14,12 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class IsPenDown extends GeneralCommand implements CommandInterface {
+public class IsPenDown extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public IsPenDown(Model model, int numChildren) {

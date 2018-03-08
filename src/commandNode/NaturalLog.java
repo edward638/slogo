@@ -15,12 +15,12 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class NaturalLog extends GeneralCommand implements CommandInterface {
+public class NaturalLog extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public NaturalLog(Model model, int numChildren) {

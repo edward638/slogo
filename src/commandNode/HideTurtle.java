@@ -15,12 +15,12 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class HideTurtle extends GeneralCommand implements CommandInterface {
+public class HideTurtle extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public HideTurtle(Model model, int numChildren) {

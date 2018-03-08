@@ -15,12 +15,12 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class Not extends GeneralCommand implements CommandInterface {
+public class Not extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public Not(Model model, int numChildren) {

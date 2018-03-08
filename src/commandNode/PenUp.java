@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class PenUp extends GeneralCommand implements CommandInterface {
+public class PenUp extends GeneralCommand {
 
 	public PenUp(Model model, int numChildren) {
 		super(model, numChildren);

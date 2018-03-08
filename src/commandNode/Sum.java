@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class Sum extends GeneralCommand implements CommandInterface
+public class Sum extends GeneralCommand
 {
 
 	public Sum(Model model, int numChildren) {

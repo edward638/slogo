@@ -6,7 +6,7 @@ import model.Model;
 import model.Turtle;
 import nodes.*;
 
-public class MakeUserInstruction extends GeneralCommand implements CommandInterface {
+public class MakeUserInstruction extends GeneralCommand  {
 
 	public MakeUserInstruction(Model model, int numChildren) {
 		super(model, numChildren);

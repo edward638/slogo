@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class SetHeading extends GeneralCommand implements CommandInterface {
+public class SetHeading extends GeneralCommand {
 
 	public SetHeading(Model model, int numChildren) {
 		super(model, numChildren);

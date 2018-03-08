@@ -16,12 +16,12 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class ClearScreen extends GeneralCommand implements CommandInterface {
+public class ClearScreen extends GeneralCommand  {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public ClearScreen(Model model, int numChildren) {

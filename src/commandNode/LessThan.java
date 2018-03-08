@@ -15,12 +15,12 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class LessThan extends GeneralCommand implements CommandInterface {
+public class LessThan extends GeneralCommand  {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
 	public LessThan(Model model, int numChildren) {

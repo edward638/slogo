@@ -8,7 +8,7 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class Tangent extends GeneralCommand implements CommandInterface {
+public class Tangent extends GeneralCommand {
 
 	public Tangent(Model model, int numChildren) {
 		super(model, numChildren);
