@@ -2,6 +2,8 @@ package view.screen_components;
 
 import controller.TurtleControlPanelController;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
@@ -38,7 +40,8 @@ public class TurtleControlPanel extends ScreenComponent {
     @Override
     protected void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();
-        forwardButton = new Button("FD");
+        forwardButton = new Button();
+        forwardButton.getStyleClass().add("fdButton");
         backwardButton = new Button("BK");
         leftTurnButton = new Button("LT");
         rightTurnButton = new Button("RT");

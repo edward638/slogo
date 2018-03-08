@@ -19,6 +19,11 @@ HBox{
     -fx-min-width:200px;
 }
 
+.fdButton{
+    -fx-background-image: url("/fd_arrow.png");
+    -fx-background-size:sm;
+}
+
 .button:pressed{
     -fx-font-weight: bold;
 }
