@@ -17,7 +17,8 @@ import view.GUI;
 import view.screen_components.*;
 
 public class Controller implements CommandBoxController, DrawerController, CommandHistoryBoxController,
-						VariableHistoryBoxController, TurtleControlPanelController {
+						VariableHistoryBoxController, TurtleControlPanelController, CustomCommandController,
+						PenPanelController{
 	private GUI gui;
 	private Turtle turtle;
 	private Parser parser;
@@ -29,8 +30,10 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 	private VariableHistoryBox variableHistoryBox;
 	private HelpButton helpButton;
 	private TurtleControlPanel turtleControlPanel;
+	private CustomCommandsBox customCommandsBox;
 	private Model model;
-	
+	private Palette palette;
+
 	public Controller(Stage stage){
 //		this.model = model;
 		gui = new GUI();
@@ -61,9 +64,12 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 		commandHistory.addObserver(commandHistoryBox);
 		variableHistoryBox.setVariableHistory(variableHistory);
 		variableHistory.addObserver(variableHistoryBox);
+		variableHistory.addCustomCommandObserver(customCommandsBox);
+		customCommandsBox.setCustomCommandHolder(variableHistory);
 	}
 
 	private void initializeScreenComponents(){
+		palette = new Palette();
 		drawer = new Drawer();
 		drawer.setController(this);
 		commandBox = new CommandBox();
@@ -75,6 +81,8 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 		helpButton = new HelpButton();
 		turtleControlPanel = new TurtleControlPanel();
 		turtleControlPanel.setController(this);
+		customCommandsBox = new CustomCommandsBox();
+		customCommandsBox.setController(this);
 	}
 
 	private void addToGUI(){
@@ -84,6 +92,8 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 		gui.addVariableHistoryBoxBorderPane(variableHistoryBox.getGUIComponent());
 		gui.addHelpButtonBorderPane(helpButton.getGUIComponent());
 		gui.addTurtleControlPanelBorderPane(turtleControlPanel.getGUIComponent());
+		gui.addCustomCommandsBorderPane(customCommandsBox.getGUIComponent());
+		gui.addPalette(palette.getGUIComponent());
 	}
 	
     @Override
@@ -91,6 +101,11 @@ public class Controller implements CommandBoxController, DrawerController, Comma
         List<NodeInterface> newTree = parser.parseString(command);
         parser.makeTree(newTree);
     }
+
+	@Override
+	public void clearCustomCommands() {
+
+	}
 
 	@Override
 	public void changeLanguage(String language) {
