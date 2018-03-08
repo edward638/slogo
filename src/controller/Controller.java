@@ -20,7 +20,6 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 						VariableHistoryBoxController, TurtleControlPanelController, CustomCommandController,
 						PenPanelController{
 	private GUI gui;
-	private Turtle turtle;
 	private Parser parser;
 	private CommandHistory commandHistory;
 	private VariablesHistory variableHistory;
@@ -33,9 +32,9 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 	private CustomCommandsBox customCommandsBox;
 	private Model model;
 	private Palette palette;
+	private PenControlPanel penControlPanel;
 
 	public Controller(Stage stage){
-//		this.model = model;
 		gui = new GUI();
 		gui.start(stage);
 		this.initializeScreenComponents();
@@ -45,7 +44,6 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 	}
 
 	private void initializeModelComponents(){
-		//turtle = new Turtle(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT, Drawer.INITIAL_PEN_COLOR);
 		model = new Model(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT);
         commandHistory = new CommandHistory();
         variableHistory = new VariablesHistory();
@@ -83,17 +81,20 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 		turtleControlPanel.setController(this);
 		customCommandsBox = new CustomCommandsBox();
 		customCommandsBox.setController(this);
+		penControlPanel = new PenControlPanel();
+		penControlPanel.setController(this);
 	}
 
 	private void addToGUI(){
-		gui.addCommandBoxBorderPane(commandBox.getGUIComponent());
-		gui.addCommandHistoryBoxBorderPane(commandHistoryBox.getGUIComponent());
-		gui.addDrawerBorderPane(drawer.getGUIComponent());
-		gui.addVariableHistoryBoxBorderPane(variableHistoryBox.getGUIComponent());
-		gui.addHelpButtonBorderPane(helpButton.getGUIComponent());
-		gui.addTurtleControlPanelBorderPane(turtleControlPanel.getGUIComponent());
-		gui.addCustomCommandsBorderPane(customCommandsBox.getGUIComponent());
-		gui.addPalette(palette.getGUIComponent());
+		gui.addToScreen(commandBox);
+		gui.addToScreen(commandHistoryBox);
+		gui.addToScreen(drawer);
+		gui.addToScreen(variableHistoryBox);
+		gui.addToScreen(helpButton);
+		gui.addToScreen(turtleControlPanel);
+		gui.addToScreen(customCommandsBox);
+		gui.addToScreen(palette);
+		gui.addToScreen(penControlPanel);
 	}
 	
     @Override
@@ -167,5 +168,26 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 
 	public void toggleActive(int ID) {
 		//TODO: find a turtle with specific ID in backend, make it active/inactive
+	}
+
+	@Override
+	public void setPenSize(double size) {
+		for(Turtle turt : model.getActiveTurtles()){
+			turt.setPenSize(size);
+		}
+	}
+
+	@Override
+	public void penUp() {
+		for(Turtle turt : model.getActiveTurtles()){
+			turt.setPenShowing(false);
+		}
+	}
+
+	@Override
+	public void penDown() {
+		for(Turtle turt : model.getActiveTurtles()){
+			turt.setPenShowing(true);
+		}
 	}
 }
