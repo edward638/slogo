@@ -34,15 +34,15 @@ public class Home extends GeneralCommand  {
 	 * @return the distance turtle moved
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		double distance = 0;
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			distance = Math.sqrt(Math.pow(turtle.getHome()[0] - turtle.getXCoordinate(), 2) + Math.pow(turtle.getHome()[1] - turtle.getYCoordinate(), 2) );
-			turtle.setCoordinates(turtle.getHome()[0], turtle.getHome()[1]);	
-		}
-		value = distance;
-		return distance;
+		model.update((t) -> home(t));
+		return value;
 	}
 
+	public void home (Turtle t) {
+		double distance = Math.sqrt(Math.pow(t.getHome()[0] - t.getXCoordinate(), 2)
+				+ Math.pow(t.getHome()[1] - t.getYCoordinate(), 2) );
+		t.setCoordinates(t.getHome()[0], t.getHome()[1]);
+		value = distance;
+	}
 
 }
