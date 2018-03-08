@@ -193,12 +193,14 @@ public class Parser
 					else if (key.equals("Constant"))
 					{
 						//Constant n = new Constant(Integer.parseInt(text));
-						nodeList.add(NodeFactory.retrieveNode(key, text));
+						NodeFactory nf = new NodeFactory();
+						nodeList.add(nf.makeConstant(key,text));
 					}
 					else if(key.equals("Variable"))
 					{
-						Variable n = new Variable(text.substring(1), varHistory);
-						nodeList.add(n);
+						NodeFactory nf = new NodeFactory();
+						//Variable n = new Variable(text.substring(1), varHistory);
+						nodeList.add(nf.makeVariable(key,text.substring(1), varHistory));
 					}
 					else if(key.equals("List"))
 					{

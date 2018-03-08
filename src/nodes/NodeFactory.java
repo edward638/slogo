@@ -9,9 +9,59 @@ import java.util.ResourceBundle;
 
 import model.Model;
 import model.Turtle;
+import model.VariablesHistory;
 
 public class NodeFactory 
 {	
+	private Map<String,Class[]> commandToParams;
+	private static String PARAMETER_FILE = "parsers/commandToConstructorParameters";
+	
+	public NodeFactory()
+	{
+		buildParameterMap();
+	}
+	
+	private void buildParameterMap() 
+	{
+		commandToParams = new HashMap<>();
+		ResourceBundle params = ResourceBundle.getBundle(PARAMETER_FILE);
+		Enumeration<String> keys = params.getKeys();
+		while(keys.hasMoreElements())
+		{
+			String key = keys.nextElement();
+			String[] classStrings = params.getString(key).split(",");
+			Class[] classes = new Class[classStrings.length];
+			for (int i = 0; i < classStrings.length; i++)
+			{
+				System.out.println(classStrings[i]);
+				try
+				{
+					if(classStrings[i].contains("Double") || classStrings[i].contains("Integer"))
+					{
+						Class primitive = Class.forName(classStrings[i]);
+						Field fieldPrimitive = primitive.getDeclaredField("TYPE");
+						if(fieldPrimitive != null)
+						{
+							classes[i] = (Class)fieldPrimitive.get(primitive);
+						}
+					}
+					else
+					{
+						Class nonPrimitive = Class.forName(classStrings[i]);
+						classes[i] = nonPrimitive;
+						System.out.println(classes[i].toString());
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+			commandToParams.put(key, classes);
+		}
+	}
+	
+	
 	public static NodeInterface retrieveNode(String commandType, String text)
 	{
 		Map<String, Class[]> commandToParams = new HashMap<>();
@@ -26,12 +76,18 @@ public class NodeFactory
 			{
 				try
 				{
-					//System.out.println(Class.forName("java.lang.Double"));
-					Class primitive = Class.forName(classStrings[i]);
-					Field fieldPrimitive = primitive.getDeclaredField("TYPE");
-					if(fieldPrimitive != null)
+					if(classStrings[i].contains("java.lang"))
 					{
-						classes[0] = (Class)fieldPrimitive.get(primitive);
+						Class primitive = Class.forName(classStrings[i]);
+						Field fieldPrimitive = primitive.getDeclaredField("TYPE");
+						if(fieldPrimitive != null)
+						{
+							classes[0] = (Class)fieldPrimitive.get(primitive);
+						}
+					}
+					else
+					{
+						
 					}
 				}
 				catch(Exception e)
@@ -42,9 +98,10 @@ public class NodeFactory
 			commandToParams.put(key, classes);
 		}
 		
-		Object o = makeConstant(text, commandToParams);
+		//Object o = makeConstant(text, commandToParams);
 		
-		return (NodeInterface) o;
+		//return (NodeInterface) o;
+		return null;
 	}
 	
 	public static Object makeNode(Class<?> clazz,Model model, int numChildren)
@@ -64,15 +121,15 @@ public class NodeFactory
 		return null;
 	}
 	
-	public static Object makeConstant(String text, Map<String, Class[]> commandToParams)
+	public NodeInterface makeConstant(String type, String text)
 	{
 		try
 		{
-			Class<?> clazz = Class.forName("nodes.Constant");
+			Class<?> clazz = Class.forName("nodes." + type);
 			Constructor<?> c = clazz.getConstructor(commandToParams.get("Constant"));
 			c.setAccessible(true);
 			Object o = c.newInstance(Integer.parseInt(text));
-			return o;
+			return (NodeInterface) o;
 		}
 		catch(Exception e)
 		{
@@ -81,6 +138,23 @@ public class NodeFactory
 		return null;
 	}
 	
+	public NodeInterface makeVariable(String type, String text, VariablesHistory vh)
+	{
+		try
+		{
+			Class<?> clazz = Class.forName("nodes." + type);
+			Constructor<?> c = clazz.getConstructor(commandToParams.get("Variable"));
+			c.setAccessible(true);
+			Object o = c.newInstance(text, vh);
+			return (NodeInterface) o;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+		
 	public static Object makeX(String text)
 	{
 		Map<String, Class[]> commandToParams = new HashMap<>();

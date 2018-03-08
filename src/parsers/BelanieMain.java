@@ -6,6 +6,6 @@ public class BelanieMain {
 	
 	public static void main (String[] args)
 	{
-		NodeFactory.makeConstant("1");
+		NodeFactory nf = new NodeFactory();
 	}
 }
