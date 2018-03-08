@@ -33,6 +33,8 @@ public class Model implements ColorIndexObservable{
 	private static double YHome;
 
 	private int currentTurtle = 0;
+
+	private Observer colorIndexObserver;
 	
 	public Model(double width, double height)
 	{
@@ -43,8 +45,8 @@ public class Model implements ColorIndexObservable{
 		allTurtles = new HashMap<>();
 		XHome = width;
 		YHome = height;
-		Turtle initial = new Turtle(XHome, YHome, Color.BLUE, 1.0);
-		
+		Turtle initial = new Turtle(XHome, YHome, colorOptions.get(0), 1.0, TURTLE_0);
+
 		allTurtles.put(1.0, initial);
 		activeTurtles.add(initial);
 
@@ -83,7 +85,7 @@ public class Model implements ColorIndexObservable{
 	}
 
 	public void addTurtle(double ID) {
-		Turtle t = new Turtle (XHome, YHome, Color.BLUE, ID);
+		Turtle t = new Turtle (XHome, YHome, Color.BLUE, ID, TURTLE_0);
 		allTurtles.put((double) t.getValue(), t);
 		activeTurtles.add(t);
 	}
