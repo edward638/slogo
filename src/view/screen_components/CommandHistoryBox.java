@@ -55,8 +55,8 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 		borderPane.setTop(topComponent);
 		commandList = new VBox();
 		ScrollPane scrollPane = new ScrollPane();
-		scrollPane.setMaxWidth(100);
-		scrollPane.setPrefHeight(100);
+		scrollPane.setMaxWidth(200);
+		scrollPane.setPrefHeight(300);
 		scrollPane.setContent(commandList);
 		borderPane.setCenter(scrollPane);
 	}
@@ -67,6 +67,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 		commandList.getChildren().clear();
 		for(String command: commands){
 			Button commandButton = new Button(command);
+			commandButton.getStyleClass().add("commandHistoryBoxButton");
 			commandButton.setOnAction((event -> {
 				controller.passCommand(commandButton.getText());
 			}));
