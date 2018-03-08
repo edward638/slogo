@@ -53,7 +53,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
         commandList.getChildren().clear();
         for(String command: commands){
             Button commandButton = new Button(command);
-            commandButton.getStyleClass().add("commandHistoryBoxButton");
+            commandButton.getStyleClass().add("runnableCommandButton");
             commandButton.setOnAction((event -> {
                 controller.passCommand(commandButton.getText());
             }));
