@@ -2,6 +2,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.*;
 
@@ -9,10 +10,10 @@ import nodes.*;
  * Implements FOR as described on the course site
  */
 
-public class For extends GeneralCommand implements CommandInterface {
+public class For extends GeneralCommand  {
 
-	public For(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public For(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override

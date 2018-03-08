@@ -2,17 +2,18 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class SetTowards extends GeneralCommand implements CommandInterface
+public class SetTowards extends GeneralCommand
 {
 	private double degreeConversion = 180/Math.PI;
 			
-	public SetTowards(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public SetTowards(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override
@@ -28,8 +29,13 @@ public class SetTowards extends GeneralCommand implements CommandInterface
 		{
 			deg = 180 + deg;
 		}
-		double change = Math.abs(turtle.getDirectionAngle() - deg);
-		turtle.setDirectionAngle(deg);
+		
+		double change = 0;
+		for (Turtle turtle: model.getActiveTurtles())
+		{
+			change = Math.abs(turtle.getDirectionAngle() - deg);
+			turtle.setDirectionAngle(deg);
+		}
 		value = change;
 		return value;
 	}

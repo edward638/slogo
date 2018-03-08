@@ -2,15 +2,16 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class XCoordinate extends GeneralCommand implements CommandInterface {
+public class XCoordinate extends GeneralCommand {
 
-	public XCoordinate(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public XCoordinate(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override
@@ -20,7 +21,10 @@ public class XCoordinate extends GeneralCommand implements CommandInterface {
 	 * @return turtle's x
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		value = turtle.getXCoordinate();
+		for (Turtle turtle: model.getActiveTurtles())
+		{
+			value = turtle.getXCoordinate();
+		}
 		return value;
 	}
 

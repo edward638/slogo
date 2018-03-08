@@ -2,6 +2,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
@@ -14,16 +15,16 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class IsShowing extends GeneralCommand implements CommandInterface {
+public class IsShowing extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
-	public IsShowing(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public IsShowing(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override
@@ -33,16 +34,19 @@ public class IsShowing extends GeneralCommand implements CommandInterface {
 	 * @return turtle's visibility status
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		if(turtle.getTurtleShowing())
+		for (Turtle turtle: model.getActiveTurtles())
 		{
-			value = 1;
-			return value;
+			if(turtle.getTurtleShowing())
+			{
+				value = 1;
+			}
+			else
+			{
+				value = 0;
+			}
+			
 		}
-		else
-		{
-			value = 0;
-			return value;
-		}
+		return value;
 	}
 
 }

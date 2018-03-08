@@ -8,25 +8,25 @@ import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class SetShape extends GeneralCommand {
+public class GetShape extends GeneralCommand {
 
-	public SetShape(Model model, int numChildren) {
+	public GetShape(Model model, int numChildren) {
 		super(model, numChildren);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	/**
-	 * sets shape of turtle to that represented by index
+	 * returns turtle's current shape index
 	 * 
-	 * @return given index
+	 * @return index of shape
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
+		// TODO Auto-generated method stub
 		for (Turtle turtle: model.getActiveTurtles())
 		{
-			turtle.setTurtleShape(model.getShapeOptions().get((int) arguments.get(0).getValue()));
+			value = model.getShapeOptions().indexOf(turtle.getTurtleShape());
 		}
-		value = arguments.get(0).getValue();
 		return value;
 	}
 

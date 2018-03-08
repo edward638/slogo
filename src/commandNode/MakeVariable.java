@@ -2,6 +2,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import model.VariablesHistory;
 import nodes.*;
@@ -10,11 +11,11 @@ import nodes.*;
  * Makes a new variable as described on the course site
  */
 
-public class MakeVariable extends GeneralCommand implements CommandInterface {
+public class MakeVariable extends GeneralCommand {
 	
 
-	public MakeVariable(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public MakeVariable(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override

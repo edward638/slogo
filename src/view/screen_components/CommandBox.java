@@ -1,6 +1,8 @@
 package view.screen_components;
 
-import controller.CommandController;
+import controller.CommandBoxController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -18,13 +20,13 @@ public class CommandBox extends ScreenComponent{
     private TextArea commandTextArea;
     private Label commandLabel;
     private ComboBox<String> languageBox;
-    private CommandController controller;
+    private CommandBoxController controller;
 
 	public CommandBox() {
 		super();
 	}
 
-	public void setController(CommandController controller){
+	public void setController(CommandBoxController controller){
 		this.controller = controller;
 	}
 
@@ -34,9 +36,15 @@ public class CommandBox extends ScreenComponent{
 			commandTextArea.clear();
 		}));
 		commandRunButton.setOnAction((event -> {
-			controller.passCommand(commandTextArea.getText().trim(), languageBox.getValue());
+			controller.passCommand(commandTextArea.getText().trim());
 			commandTextArea.clear();
 		}));
+		languageBox.valueProperty().addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				changeLanguage();
+			}
+		});
 	}
 
 	public void generateGUIComponent(){
@@ -75,5 +83,8 @@ public class CommandBox extends ScreenComponent{
 		return languageBox;
 	}
 
+	private void changeLanguage(){
+		controller.changeLanguage(languageBox.getValue());
+	}
 
 }

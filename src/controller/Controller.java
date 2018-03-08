@@ -1,17 +1,23 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import commandNode.Backward;
+import commandNode.Forward;
+import commandNode.Left;
+import commandNode.Right;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.*;
+import nodes.Constant;
 import nodes.NodeInterface;
 import parsers.Parser;
 import view.GUI;
 import view.screen_components.*;
 
-public class Controller implements CommandController, DrawerController, CommandHistoryController, VariableHistoryController{
-	private ModelInterface model;
+public class Controller implements CommandBoxController, DrawerController, CommandHistoryBoxController,
+						VariableHistoryBoxController, TurtleControlPanelController {
 	private GUI gui;
 	private Turtle turtle;
 	private Parser parser;
@@ -22,7 +28,10 @@ public class Controller implements CommandController, DrawerController, CommandH
 	private CommandHistoryBox commandHistoryBox;
 	private VariableHistoryBox variableHistoryBox;
 	private HelpButton helpButton;
+	private TurtleControlPanel turtleControlPanel;
+	private Model model;
 	private Palette palette;
+
 	public Controller(Stage stage){
 //		this.model = model;
 		gui = new GUI();
@@ -34,16 +43,20 @@ public class Controller implements CommandController, DrawerController, CommandH
 	}
 
 	private void initializeModelComponents(){
-		turtle = new Turtle(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT, Drawer.INITIAL_PEN_COLOR);
+		//turtle = new Turtle(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT, Drawer.INITIAL_PEN_COLOR);
+		model = new Model(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT);
         commandHistory = new CommandHistory();
         variableHistory = new VariablesHistory();
-		parser = new Parser(turtle, variableHistory, commandHistory);
+		parser = new Parser(model, variableHistory, commandHistory);
 	}
 
 	private void setUpConnections(){
-		turtle.addObserver(drawer);
-		drawer.setTurtle(turtle);
-		drawer.update();
+		for (Turtle turtle: model.getActiveTurtles())
+		{
+			turtle.addObserver(drawer);
+			drawer.setTurtle(turtle);
+			drawer.update();
+		}
 		variableHistoryBox.setVariableHistory(variableHistory);
 		commandHistoryBox.setCommandHistory(commandHistory);
 		commandHistory.addObserver(commandHistoryBox);
@@ -62,6 +75,8 @@ public class Controller implements CommandController, DrawerController, CommandH
 		variableHistoryBox = new VariableHistoryBox();
 		variableHistoryBox.setController(this);
 		helpButton = new HelpButton();
+		turtleControlPanel = new TurtleControlPanel();
+		turtleControlPanel.setController(this);
 	}
 
 	private void addToGUI(){
@@ -70,16 +85,25 @@ public class Controller implements CommandController, DrawerController, CommandH
 		gui.addDrawerBorderPane(drawer.getGUIComponent());
 		gui.addVariableHistoryBoxBorderPane(variableHistoryBox.getGUIComponent());
 		gui.addHelpButtonBorderPane(helpButton.getGUIComponent());
+<<<<<<< src/controller/Controller.java
+		gui.addTurtleControlPanelBorderPane(turtleControlPanel.getGUIComponent());
+=======
 		gui.addPalette(palette.getGUIComponent());
+>>>>>>> src/controller/Controller.java
 	}
 	
     @Override
-	public void passCommand(String command, String language){
-        List<NodeInterface> newTree = parser.parseString(command, language);
+	public void passCommand(String command){
+        List<NodeInterface> newTree = parser.parseString(command);
         parser.makeTree(newTree);
     }
 
-    @Override
+	@Override
+	public void changeLanguage(String language) {
+		parser.setLanguage(language);
+	}
+
+	@Override
     public void clearVariableBox(){
 		variableHistory.clearHistory();
     }
@@ -98,6 +122,38 @@ public class Controller implements CommandController, DrawerController, CommandH
 	@Override
 	public void setPenColor(Color color) {
 		//turtle.setPenColor(color);
+	}
+
+	@Override
+	public void forward(double value){
+		List<NodeInterface> nodeList = new ArrayList<>();
+		nodeList.add(new Forward(model, 1));
+		nodeList.add(new Constant(value));
+		parser.makeTree(nodeList);
+	}
+
+	@Override
+	public void backward(double value){
+		List<NodeInterface> nodeList = new ArrayList<>();
+		nodeList.add(new Backward(model, 1));
+		nodeList.add(new Constant(value));
+		parser.makeTree(nodeList);
+	}
+
+	@Override
+	public void rightTurn(double value){
+		List<NodeInterface> nodeList = new ArrayList<>();
+		nodeList.add(new Right(model, 1));
+		nodeList.add(new Constant(value));
+		parser.makeTree(nodeList);
+	}
+
+	@Override
+	public void leftTurn(double value){
+		List<NodeInterface> nodeList = new ArrayList<>();
+		nodeList.add(new Left(model, 1));
+		nodeList.add(new Constant(value));
+		parser.makeTree(nodeList);
 	}
 
 	public void toggleActive(int ID) {

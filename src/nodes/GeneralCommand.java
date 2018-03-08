@@ -3,6 +3,7 @@ package nodes;
 import java.util.ArrayList;
 
 import model.Turtle;
+import model.Model;
 
 /**
  * This is the abstract class which defines a general command (non-custom command). A command node
@@ -12,8 +13,8 @@ import model.Turtle;
  *
  * author: Charlie Dracos
  */
-public abstract class GeneralCommand implements HeadInterface, NodeInterface {
-    protected Turtle turtle;
+public abstract class GeneralCommand implements HeadInterface, NodeInterface, CommandInterface {
+    protected Model model;
     private ArrayList<NodeInterface> children;
     private int numChildren;
     private int current = 0;
@@ -23,11 +24,11 @@ public abstract class GeneralCommand implements HeadInterface, NodeInterface {
      * Constructor for a general command. Passes in the turtle it will act upon and
      * how many children the command should have.
      *
-     * @param turtle the turtle called when doing operations
+     * @param model the turtle called when doing operations
      * @param numChildren amount of children the command has
      */
-    public GeneralCommand(Turtle turtle, int numChildren) {
-        this.turtle = turtle;
+    public GeneralCommand(Model model, int numChildren) {
+        this.model = model;
         children = new ArrayList<>();
         this.numChildren = numChildren;
         value = 0.0;

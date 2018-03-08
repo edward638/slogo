@@ -2,15 +2,16 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class Random extends GeneralCommand implements CommandInterface {
+public class Random extends GeneralCommand {
 
-	public Random(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public Random(Model model, int numChildren) {
+		super(model, numChildren);
 		// TODO Auto-generated constructor stub
 	}
 

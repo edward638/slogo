@@ -2,6 +2,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
@@ -14,16 +15,16 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class Home extends GeneralCommand implements CommandInterface {
+public class Home extends GeneralCommand  {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
-	public Home(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public Home(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override
@@ -33,8 +34,12 @@ public class Home extends GeneralCommand implements CommandInterface {
 	 * @return the distance turtle moved
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		double distance = Math.sqrt(Math.pow(turtle.getHome()[0] - turtle.getXCoordinate(), 2) + Math.pow(turtle.getHome()[1] - turtle.getYCoordinate(), 2) );
-		turtle.setCoordinates(turtle.getHome()[0], turtle.getHome()[1]);
+		double distance = 0;
+		for (Turtle turtle: model.getActiveTurtles())
+		{
+			distance = Math.sqrt(Math.pow(turtle.getHome()[0] - turtle.getXCoordinate(), 2) + Math.pow(turtle.getHome()[1] - turtle.getYCoordinate(), 2) );
+			turtle.setCoordinates(turtle.getHome()[0], turtle.getHome()[1]);	
+		}
 		value = distance;
 		return distance;
 	}

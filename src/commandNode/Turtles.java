@@ -3,29 +3,24 @@ package commandNode;
 import java.util.List;
 
 import model.Model;
-import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class ShowTurtle extends GeneralCommand  {
+public class Turtles extends GeneralCommand {
 
-	public ShowTurtle(Model model, int numChildren) {
+	public Turtles(Model model, int numChildren) {
 		super(model, numChildren);
 	}
 
 	@Override
 	/**
-	 * makes turtle visible
+	 * returns number of turtles created so far
 	 * 
-	 * @return 1
+	 * @return num turtles
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			turtle.setTurtleShowing(true);
-		}
-		value = 1;
+		value = model.getAllTurtles().size();
 		return value;
 	}
 

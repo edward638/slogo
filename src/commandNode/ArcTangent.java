@@ -3,6 +3,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
@@ -15,16 +16,16 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class ArcTangent extends GeneralCommand implements CommandInterface {
+public class ArcTangent extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
-	public ArcTangent(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public ArcTangent(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override

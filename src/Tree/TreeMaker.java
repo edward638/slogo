@@ -26,8 +26,15 @@ public class TreeMaker {
 		index = 0;
 		while (index < this.nodes.size()) {
 			try {
-				HeadInterface head = (HeadInterface) this.nodes.get(index);
-				heads.add(makeTree(head)); //add this head node to the head nodes which represent trees
+				if (this.nodes.get(index) instanceof HeadInterface &&
+						!(this.nodes.get(index) instanceof CommandInterface)) {
+					HeadInterface head = (HeadInterface) this.nodes.get(index);
+					heads.add(head); //add this head node to the head nodes which represent trees
+				}
+				else {
+					CommandInterface head = (CommandInterface) this.nodes.get(index);
+					heads.add(makeTree(head));
+				}
 			}
 			catch (ClassCastException e) {
 				throw new HeadException(); //cannot have a head of tree that is node a head node
@@ -45,14 +52,14 @@ public class TreeMaker {
 	 * @param node the node to be added to the tree
 	 * @return the head node of the tree
 	 */
-	private HeadInterface makeTree(HeadInterface node) {
-		index+=1; //moves to next index when a hea is called
+	private HeadInterface makeTree(CommandInterface node) {
+		index+=1; //moves to next index when a head is called
 		while (node!=null && node.hasNext()) { //while there are nodes in the list
 			try {
 				NodeInterface curr = nodes.get(index);
 				node.add(curr);
 				if (curr instanceof CommandInterface) {
-					HeadInterface head = (HeadInterface) curr;
+					CommandInterface head = (CommandInterface) curr;
 					makeTree(head); //add the next node in the list index
 				}
 				else {
@@ -65,6 +72,6 @@ public class TreeMaker {
 			}
 		}
 		node.reset(); //resets so can be sorted through later
-		return node;
+		return (HeadInterface) node;
 	}
 }

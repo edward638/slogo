@@ -2,6 +2,7 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
@@ -14,16 +15,16 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class Equal extends GeneralCommand implements CommandInterface {
+public class Equal extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
-	public Equal(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public Equal(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override

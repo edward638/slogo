@@ -2,15 +2,16 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class Right extends GeneralCommand implements CommandInterface {
+public class Right extends GeneralCommand {
 
-	public Right(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public Right(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override
@@ -21,12 +22,15 @@ public class Right extends GeneralCommand implements CommandInterface {
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		double deg = turtle.getDirectionAngle() - arguments.get(0).getValue();
-		if (deg < 0)
+		for (Turtle turtle: model.getActiveTurtles())
 		{
-			deg = 360 + deg;
+			double deg = turtle.getDirectionAngle() - arguments.get(0).getValue();
+			if (deg < 0)
+			{
+				deg = 360 + deg;
+			}
+			turtle.setDirectionAngle(deg);
 		}
-		turtle.setDirectionAngle(deg);
 		value = arguments.get(0).getValue();
 		return value;
 	}

@@ -1,5 +1,6 @@
 package commandNode;
 
+import model.Model;
 import model.Turtle;
 import java.util.List;
 
@@ -13,16 +14,16 @@ import nodes.NodeInterface;
  * the CommandInterface interface.
  *
  */
-public class And extends GeneralCommand implements CommandInterface {
+public class And extends GeneralCommand {
 
 	/**
 	 * Class Constructor
 	 * 
-	 * @param turt
+	 * @param model
 	 * @param numChildren
 	 */
-	public And(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public And(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override

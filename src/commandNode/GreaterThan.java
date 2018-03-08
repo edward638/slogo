@@ -2,15 +2,16 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
-public class GreaterThan extends GeneralCommand implements CommandInterface {
+public class GreaterThan extends GeneralCommand {
 
-	public GreaterThan(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public GreaterThan(Model model, int numChildren) {
+		super(model, numChildren);
 	}
 
 	@Override

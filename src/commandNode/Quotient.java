@@ -2,16 +2,17 @@ package commandNode;
 
 import java.util.List;
 
+import model.Model;
 import model.Turtle;
 import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 import parsers.InvalidEntryException;
 
-public class Quotient extends GeneralCommand implements CommandInterface {
+public class Quotient extends GeneralCommand  {
 
-	public Quotient(Turtle turt, int numChildren) {
-		super(turt, numChildren);
+	public Quotient(Model model, int numChildren) {
+		super(model, numChildren);
 		// TODO Auto-generated constructor stub
 	}
 

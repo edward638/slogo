@@ -6,13 +6,13 @@ import java.util.List;
 
 import javafx.scene.shape.Line;
 
-public class HandleWraparound {
+public class WraparoundHandler {
 	
 	private double screenWidth;
 	private double screenHeight;
 	private List<Line> lines;
 	
-	public HandleWraparound (double width, double height)
+	public WraparoundHandler(double width, double height)
 	{
 		screenWidth = width;
 		screenHeight = height;

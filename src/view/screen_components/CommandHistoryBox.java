@@ -1,22 +1,32 @@
 package view.screen_components;
 
-import controller.CommandHistoryController;
+import controller.CommandBoxController;
+import controller.CommandHistoryBoxController;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import model.CommandHistory;
 import model.CommandHistoryObservable;
 import view.Observer;
 import view.constants.ButtonConstants;
 import view.constants.LabelConstants;
-import view.constants.TextAreaConstants;
 
-public class CommandHistoryBox extends HistoryBox implements Observer {
+import java.util.List;
+
+public class CommandHistoryBox extends ScreenComponent implements Observer {
 	private CommandHistoryObservable commandHistory;
+	private Button clearButton;
+	private VBox commandList;
 	public CommandHistoryBox(){
 		super();
 	}
 
-	private CommandHistoryController controller;
+	private CommandHistoryBoxController controller;
 
-	public void setController(CommandHistoryController controller){
+	public void setController(CommandHistoryBoxController controller){
 		this.controller = controller;
 	}
 
@@ -26,19 +36,41 @@ public class CommandHistoryBox extends HistoryBox implements Observer {
 
 	@Override
 	protected void mapUserActions() {
-		super.getButton().setOnAction((event -> {
+		clearButton.setOnAction((event -> {
 			controller.clearCommandHistoryBox();
 		}));
 	}
 
 	public void generateGUIComponent(){
-		super.setDimensions(TextAreaConstants.HISTORY_ROWS, TextAreaConstants.HISTORY_COLUMNS);
-		super.setUpLabels(LabelConstants.HISTORY_LABEL_TEXT, ButtonConstants.HISTORY_BUTTON_LABEL);
-		super.generateGUIComponent();
+		BorderPane borderPane = super.getBorderPane();
+		this.addButtonAndLabels(borderPane);
+	}
+
+	private void addButtonAndLabels(BorderPane borderPane){
+		HBox topComponent = new HBox();
+		clearButton = new Button(ButtonConstants.HISTORY_BUTTON_LABEL);
+		Label label = new Label(LabelConstants.HISTORY_LABEL_TEXT);
+		topComponent.getChildren().add(label);
+		topComponent.getChildren().add(clearButton);
+		borderPane.setTop(topComponent);
+		commandList = new VBox();
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setMaxWidth(100);
+		scrollPane.setPrefHeight(100);
+		scrollPane.setContent(commandList);
+		borderPane.setCenter(scrollPane);
 	}
 
 	@Override
 	public void notifyOfChanges() {
-		super.fillBox(commandHistory.getCommands());
+		List<String> commands = commandHistory.getCommands();
+		commandList.getChildren().clear();
+		for(String command: commands){
+			Button commandButton = new Button(command);
+			commandButton.setOnAction((event -> {
+				controller.passCommand(commandButton.getText());
+			}));
+			commandList.getChildren().add(commandButton);
+		}
 	}
 }
