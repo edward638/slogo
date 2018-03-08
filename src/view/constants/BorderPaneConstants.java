@@ -19,6 +19,6 @@ public final class BorderPaneConstants {
     public static final int HELP_BUTTON_X = 890 + OFFSET;
     public static final int HELP_BUTTON_Y = 620;
 
-    public static final int TURTLE_CONTROL_PANEL_X = 480;
+    public static final int TURTLE_CONTROL_PANEL_X = 480 + OFFSET;
     public static final int TURTLE_CONTROL_PANEL_Y = 300;
 }

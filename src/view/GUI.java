@@ -74,10 +74,11 @@ public class GUI{
         root.getChildren().add(borderPane);
     }
 
-<<<<<<< src/view/GUI.java
+
     public void addTurtleControlPanelBorderPane(BorderPane borderPane){
         borderPane.setLayoutX(BorderPaneConstants.TURTLE_CONTROL_PANEL_X);
         borderPane.setLayoutY(BorderPaneConstants.TURTLE_CONTROL_PANEL_Y);
+        root.getChildren().add(borderPane);
     }
     
     public void addPalette(BorderPane borderPane) {

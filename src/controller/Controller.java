@@ -85,11 +85,9 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 		gui.addDrawerBorderPane(drawer.getGUIComponent());
 		gui.addVariableHistoryBoxBorderPane(variableHistoryBox.getGUIComponent());
 		gui.addHelpButtonBorderPane(helpButton.getGUIComponent());
-<<<<<<< src/controller/Controller.java
 		gui.addTurtleControlPanelBorderPane(turtleControlPanel.getGUIComponent());
-=======
 		gui.addPalette(palette.getGUIComponent());
->>>>>>> src/controller/Controller.java
+
 	}
 	
     @Override
