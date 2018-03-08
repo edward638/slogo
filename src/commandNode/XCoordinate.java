@@ -21,11 +21,12 @@ public class XCoordinate extends GeneralCommand {
 	 * @return turtle's x
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			value = turtle.getXCoordinate();
-		}
+		model.update((t) -> xCoordinate(t));
 		return value;
+	}
+
+	public void xCoordinate (Turtle t) {
+		value = t.getXCoordinate();
 	}
 
 }

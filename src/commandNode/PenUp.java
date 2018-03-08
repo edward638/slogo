@@ -22,11 +22,13 @@ public class PenUp extends GeneralCommand {
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			turtle.setPenShowing(false);
-		}
+		model.update((t) -> penUp(t));
 		value = 0;
 		return value;
 	}
+
+	public void penUp (Turtle t) {
+		t.setPenShowing(false);
+	}
+
 }

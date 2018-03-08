@@ -35,11 +35,12 @@ public class PenDown extends GeneralCommand {
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			turtle.setPenShowing(true);
-		}
+		model.update((t) -> penDown(t));
 		value = 1;
 		return value;
+	}
+
+	public void penDown (Turtle t) {
+		t.setPenShowing(true);
 	}
 }

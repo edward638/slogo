@@ -213,6 +213,23 @@ public class Parser
 						}
 						nodeList.add(l);
 					}
+					else if(key.equals("InfiniteCommand"))
+					{
+						String noParentheses = text.substring(1,text.length()-1);
+						String trimmed = noParentheses.trim();
+						NEW_COMMAND = false;
+						List<NodeInterface> listNodes = parseString(trimmed);
+						NodeInterface com = listNodes.get(0);
+						String firstCommand =  com.getClass().toString().substring(com.getClass().toString().indexOf(".") + 1).trim();
+						int numChildren = children.get(firstCommand);
+						System.out.println(numChildren);
+						UnlimitedCommand l = new UnlimitedCommand(com, numChildren);
+						for(int j = 1; j < listNodes.size(); j++)
+						{
+							l.add(listNodes.get(j));
+						}
+						nodeList.add(l);
+					}
 				}
 			}
 			if(!match)

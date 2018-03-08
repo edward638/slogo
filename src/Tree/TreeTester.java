@@ -33,7 +33,6 @@ public class TreeTester {
 		ArrayList<HeadInterface> heads = (ArrayList<HeadInterface>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator();
 		System.out.println(te.evaluate(heads));
-//*/
-//	}
-//}**/
+	}
+}**/
 

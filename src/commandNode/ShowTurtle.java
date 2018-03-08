@@ -21,12 +21,13 @@ public class ShowTurtle extends GeneralCommand  {
 	 * @return 1
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			turtle.setTurtleShowing(true);
-		}
+		model.update((t) -> showTurtle(t));
 		value = 1;
 		return value;
+	}
+
+	public void showTurtle (Turtle t) {
+		t.setTurtleShowing(true);
 	}
 
 }
