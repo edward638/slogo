@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.function.Consumer;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
@@ -82,6 +84,12 @@ public class Model {
 	public List<Turtle> getActiveTurtles()
 	{
 		return activeTurtles;
+	}
+
+	public void update (Consumer<Turtle> T) {
+		for (Turtle t: getActiveTurtles()) {
+			T.accept(t);
+		}
 	}
 	
 

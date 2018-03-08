@@ -34,11 +34,12 @@ public class HideTurtle extends GeneralCommand {
 	 * @return 0
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			turtle.setTurtleShowing(false);
-		}
+		model.update((t) -> hideTurtle(t));
 		value = 0;
 		return value;
+	}
+
+	public void hideTurtle (Turtle t) {
+		t.setTurtleShowing(false);
 	}
 }

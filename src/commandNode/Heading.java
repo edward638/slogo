@@ -34,11 +34,12 @@ public class Heading extends GeneralCommand {
 	 * @return turtle's direction angle
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			value = turtle.getDirectionAngle();
-		}
+		model.update((t) -> heading(t));
 		return value;
+	}
+
+	public void heading (Turtle t) {
+		value = t.getDirectionAngle();
 	}
 
 }

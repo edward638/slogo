@@ -36,15 +36,15 @@ public class Forward extends GeneralCommand {
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			double xCor = turtle.getXCoordinate() + arguments.get(0).getValue()*Math.cos(turtle.getDirectionAngle()*radianConversion);
-			double yCor = turtle.getYCoordinate() - arguments.get(0).getValue()*Math.sin(turtle.getDirectionAngle()*radianConversion);
-			turtle.setCoordinates(xCor,yCor);
-		}
-		value = arguments.get(0).getValue();
+		double x = arguments.get(0).getValue();
+		model.update((y) -> forward(y, x));
+		value = x;
 		return value;
 	}
 
-
+	public void forward (Turtle t, double x) {
+		double xCor = t.getXCoordinate() + x*Math.cos(t.getDirectionAngle()*radianConversion);
+		double yCor = t.getYCoordinate() - x*Math.sin(t.getDirectionAngle()*radianConversion);
+		t.setCoordinates(xCor,yCor);
+	}
 }
