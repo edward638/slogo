@@ -9,21 +9,29 @@ import java.util.function.Consumer;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import view.Observer;
+import view.screen_components.Palette;
 
-public class Model {
+public class Model implements ColorIndexObservable{
 	
 	private Color backgroundColor;
 	private List<Color> colorOptions;
 	private List<Shape> shapeOptions;
 	private List<Turtle> activeTurtles;
 	private Map<Double,Turtle> allTurtles;
+	private Observer colorIndexObserver;
 	
 	public Model(double width, double height)
 	{
 		//needs actual colors
 		colorOptions = new ArrayList<>();
-		colorOptions.add(Color.BLUE);
 		colorOptions.add(Color.RED);
+		colorOptions.add(Color.ORANGE);
+		colorOptions.add(Color.YELLOW);
+		colorOptions.add(Color.GREEN);
+		colorOptions.add(Color.BLUE);
+		colorOptions.add(Color.INDIGO);
+		colorOptions.add(Color.VIOLET);
 		shapeOptions = new ArrayList<>();
 		activeTurtles = new ArrayList<>();
 		allTurtles = new HashMap<>();
@@ -32,7 +40,7 @@ public class Model {
 		
 		allTurtles.put(1.0, initial);
 		activeTurtles.add(initial);
-		
+
 	}
 	
 	public List<Shape> getShapeOptions() 
@@ -70,14 +78,14 @@ public class Model {
 	
 	public void setColorOptions(double index, double R, double G, double B) {
 		//EXCEPTION FOR IF R,G,B ARE OUT OF BOUNDS
-		
-		this.colorOptions = colorOptions;
+		colorOptions.set((int) index, Color.rgb((int) R, (int) G, (int) B));
+		colorIndexObserver.notifyOfChanges();
 	}
 	
 	public Color getColorAtIndex(double index)
 	{
 		//EXCEPTION FOR IF AN INDEX IS OUT OF BOUNDS
-		
+		colorIndexObserver.notifyOfChanges();
 		return colorOptions.get((int)index);
 	}
 	
@@ -91,6 +99,20 @@ public class Model {
 			T.accept(t);
 		}
 	}
-	
+
+
+	public void addObserver(Observer colorListObserver) {
+		this.colorIndexObserver = colorListObserver;
+	}
+
+	@Override
+	public List<Color> getColorList() {
+		return colorOptions;
+	}
+
+	public void initializePalette(){
+		colorIndexObserver.notifyOfChanges();
+	}
+
 
 }
