@@ -168,4 +168,19 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 	public void toggleActive(int ID) {
 		//TODO: find a turtle with specific ID in backend, make it active/inactive
 	}
+
+	@Override
+	public void setPenSize(double size) {
+
+	}
+
+	@Override
+	public void penUp() {
+
+	}
+
+	@Override
+	public void penDown() {
+
+	}
 }
