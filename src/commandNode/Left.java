@@ -35,20 +35,16 @@ public class Left extends GeneralCommand {
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		for(Turtle turtle: model.getActiveTurtles())
-		{
-			double deg = turtle.getDirectionAngle() + arguments.get(0).getValue();
-
-			if (deg > 360)
-			{
-				deg = deg - 360;
-			}
-
-			turtle.setDirectionAngle(deg);
-		}
-		
-		value = arguments.get(0).getValue();
+		double x = arguments.get(0).getValue();
+		model.update((y) -> left(y, x));
+		value = x;
 		return value;
+	}
+
+	public void left (Turtle t, double x) {
+		double deg = t.getDirectionAngle() + x;
+		if (deg > 360) deg = deg - 360;
+		t.setDirectionAngle(deg);
 	}
 
 

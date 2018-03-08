@@ -33,20 +33,13 @@ public class IsPenDown extends GeneralCommand {
 	 * @return turtle's pen status
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		for(Turtle turtle: model.getActiveTurtles())
-		{
-			if(turtle.getPenShowing())
-			{
-				value = 1;
-			}
-			else
-			{
-				value = 0;
-			}
-			
-		}
+		model.update((t) -> isPenDown(t));
 		return value;
-		
+	}
+
+	public void isPenDown (Turtle t) {
+		if(t.getPenShowing()) value = 1;
+		else value = 0;
 	}
 
 }

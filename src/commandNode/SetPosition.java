@@ -22,17 +22,18 @@ public class SetPosition extends GeneralCommand {
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		double distance = 0;
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			distance = Math.sqrt(Math.pow(arguments.get(0).getValue() + turtle.getHome()[0] - 
-					turtle.getXCoordinate(), 2) + Math.pow(arguments.get(1).getValue() + turtle.getHome()[1] - 
-							turtle.getYCoordinate(), 2) );
-			turtle.setCoordinates(arguments.get(0).getValue() + turtle.getHome()[0], (-1 * arguments.get(1).getValue()) + turtle.getHome()[1]);
-		}
-		value = distance;
+		double x = arguments.get(0).getValue();
+		double y = arguments.get(1).getValue();
+		model.update((t) -> setPosition(t, x, y));
 		return value;
 	}
 
+	public void setPosition(Turtle t, double x, double y) {
+		double distance = Math.sqrt(Math.pow(x + t.getHome()[0] -
+				t.getXCoordinate(), 2) + Math.pow(y + t.getHome()[1] -
+				t.getYCoordinate(), 2) );
+		t.setCoordinates(x + t.getHome()[0], (-1 * y + t.getHome()[1]));
+		value = distance;
+	}
 
 }

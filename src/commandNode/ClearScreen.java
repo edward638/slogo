@@ -35,17 +35,20 @@ public class ClearScreen extends GeneralCommand  {
 	 * @return the distance the turtle moved
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		double distance = 0;
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			distance = Math.sqrt(Math.pow(turtle.getHome()[0] - turtle.getXCoordinate(), 2) + Math.pow(turtle.getHome()[1] - turtle.getYCoordinate(), 2) );
-			turtle.setCoordinates(turtle.getHome()[0], turtle.getHome()[1]);
-			turtle.setDirectionAngle(90);
-			turtle.clearLines();	
-		}
-		value = distance;
+		model.update((t) -> clearScreen(t));
 		return value;
 	}
+
+	public void clearScreen (Turtle t) {
+		double distance = Math.sqrt(Math.pow(t.getHome()[0] - t.getXCoordinate(), 2)
+				+ Math.pow(t.getHome()[1] - t.getYCoordinate(), 2) );
+		t.setCoordinates(t.getHome()[0], t.getHome()[1]);
+		t.setDirectionAngle(90);
+		t.clearLines();
+		value = distance;
+	}
+
+
 
 
 }
