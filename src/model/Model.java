@@ -1,12 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+
 
 public class Model {
 	
@@ -19,9 +21,7 @@ public class Model {
 	public Model(double width, double height)
 	{
 		//needs actual colors
-		colorOptions = new ArrayList<>();
-		colorOptions.add(Color.BLUE);
-		colorOptions.add(Color.RED);
+		colorOptions = new ArrayList<>(Arrays.asList(Color.RED,Color.ORANGE,Color.YELLOW,Color.GREEN, Color.BLUE, Color.PURPLE));
 		shapeOptions = new ArrayList<>();
 		activeTurtles = new ArrayList<>();
 		allTurtles = new HashMap<>();
@@ -30,7 +30,6 @@ public class Model {
 		
 		allTurtles.put(1.0, initial);
 		activeTurtles.add(initial);
-		
 	}
 	
 	public List<Shape> getShapeOptions() 
@@ -68,8 +67,7 @@ public class Model {
 	
 	public void setColorOptions(double index, double R, double G, double B) {
 		//EXCEPTION FOR IF R,G,B ARE OUT OF BOUNDS
-		
-		this.colorOptions = colorOptions;
+		colorOptions.set((int)index, Color.rgb((int)R, (int)G, (int)B));
 	}
 	
 	public Color getColorAtIndex(double index)

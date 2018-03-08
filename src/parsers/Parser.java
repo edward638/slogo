@@ -192,8 +192,8 @@ public class Parser
 					//parser isnt necesarily making nodes
 					else if (key.equals("Constant"))
 					{
-						Constant n = new Constant(Integer.parseInt(text));
-						nodeList.add(n);
+						//Constant n = new Constant(Integer.parseInt(text));
+						nodeList.add(NodeFactory.retrieveNode(key, text));
 					}
 					else if(key.equals("Variable"))
 					{
