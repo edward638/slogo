@@ -2,9 +2,8 @@ package view.screen_components;
 
 import controller.TurtleControlPanelController;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
@@ -42,14 +41,21 @@ public class TurtleControlPanel extends ScreenComponent {
         BorderPane borderPane = super.getBorderPane();
         forwardButton = new Button();
         forwardButton.getStyleClass().add("fdButton");
-        backwardButton = new Button("BK");
-        leftTurnButton = new Button("LT");
-        rightTurnButton = new Button("RT");
+        backwardButton = new Button();
+        backwardButton.getStyleClass().add("bkButton");
+        leftTurnButton = new Button();
+        leftTurnButton.getStyleClass().add("ltButton");
+        rightTurnButton = new Button();
+        rightTurnButton.getStyleClass().add("rtButton");
         VBox vbox = new VBox();
-        vbox.getChildren().add(forwardButton);
-        vbox.getChildren().add(backwardButton);
-        vbox.getChildren().add(leftTurnButton);
-        vbox.getChildren().add(rightTurnButton);
+        HBox topPanel = new HBox();
+        topPanel.getChildren().add(backwardButton);
+        topPanel.getChildren().add(forwardButton);
+        HBox bottomPanel = new HBox();
+        bottomPanel.getChildren().add(leftTurnButton);
+        bottomPanel.getChildren().add(rightTurnButton);
+        vbox.getChildren().add(topPanel);
+        vbox.getChildren().add(bottomPanel);
         borderPane.setCenter(vbox);
     }
 
