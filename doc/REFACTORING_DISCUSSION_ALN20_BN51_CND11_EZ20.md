@@ -17,3 +17,4 @@ For the Controllers, we created an abstract Controller class which contained uni
 Overall, this refactoring session was very beneficial in removing bottlenecks from our code design.
 
 
+Belanie worked on refactoring the parser class and made some commits to her current branch, bn51.2.0, however was not successful in refactoring her code in a way that still allowed it to be functional. She tried to move the node making out of the parser class, but had too many dependencies to completely remove it. She hopes to refactor the parser class as part of her masterpiece. 
