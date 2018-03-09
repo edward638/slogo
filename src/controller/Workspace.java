@@ -1,4 +1,4 @@
-package Experiment;
+package controller;
 
 import javafx.stage.Stage;
 import model.CommandHistory;
@@ -11,7 +11,7 @@ import view.screen_components.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TheWorkspace {
+public class Workspace {
     private GUI gui;
     private Parser parser;
     private CommandHistory commandHistory;
@@ -19,9 +19,9 @@ public class TheWorkspace {
     private Model model;
     private Stage stage;
 
-    private List<TheController> controllerList;
+    private List<Controller> controllerList;
 
-    public TheWorkspace(Stage stage){
+    public Workspace(Stage stage){
         gui = new GUI();
         this.initializeModelElements();
         this.createControllers();
@@ -38,17 +38,17 @@ public class TheWorkspace {
 
     private void createControllers(){
         controllerList = new ArrayList<>();
-        controllerList.add(new TheButtonCommandPanelController(gui, parser));
-        controllerList.add(new TheVariableHistoryBoxController(gui, variableHistory));
-        controllerList.add(new ThePaletteController(gui, model));
-        controllerList.add(new TheDrawerController(gui, model,parser));
-        controllerList.add(new TheCustomCommandBoxController(gui, variableHistory, parser));
-        controllerList.add(new TheCommandHistoryBoxController(gui, commandHistory, parser));
-        controllerList.add(new TheCommandBoxController(gui, parser));
+        controllerList.add(new ButtonCommandPanelController(gui, parser));
+        controllerList.add(new VariableHistoryBoxController(gui, variableHistory));
+        controllerList.add(new PaletteController(gui, model));
+        controllerList.add(new DrawerController(gui, model,parser));
+        controllerList.add(new CustomCommandBoxController(gui, variableHistory, parser));
+        controllerList.add(new CommandHistoryBoxController(gui, commandHistory, parser));
+        controllerList.add(new CommandBoxController(gui, parser));
     }
 
     private void initializeControllers(){
-        for(TheController controller : controllerList){
+        for(Controller controller : controllerList){
             controller.initializeScreenComponents();
             controller.setUpConnections();
             controller.addToGUI();

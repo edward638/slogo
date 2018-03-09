@@ -20,7 +20,7 @@ public class WraparoundHandler {
 
 	public List<Line> drawLine(double currentX, double currentY, double futureX, double futureY) 
 	{
-		lines = new ArrayList<Line>();
+		lines = new ArrayList<>();
 		
 		Line remainingLineToDraw = new Line(currentX, currentY, futureX, futureY);
 		Line oldLine;

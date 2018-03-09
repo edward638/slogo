@@ -29,9 +29,7 @@ public class Turtle implements TurtleObservable, NodeInterface
 
 	private String turtleShape;
 	private double ID;
-	
-	//THIS IS ANDY'S SUGGESTION
-	private Observer turtleObserver;
+
 
 	//Could pass pen color in parameter! Right now we call setPenColor in controller. TODO: Discuss this idea, Also screen size in constructor?
 	public Turtle(double width, double height, Color color, double ID, String startShape)
@@ -50,11 +48,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 		this.ID = ID;
 		turtleShape = startShape;
 		toroidal = new WraparoundHandler(width, height);
-	}
-
-	public void addObserver(Observer turtleObserver){
-		System.out.println("hi");
-		this.turtleObserver = turtleObserver;
 	}
 
 	public double getXCoordinate() {

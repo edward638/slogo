@@ -13,7 +13,7 @@ public class CommandHistory implements CommandHistoryObservable{
 	private int index;
 	
 	public CommandHistory() {
-		commands = new ArrayList<String>();
+		commands = new ArrayList<>();
 		index = 0;
 	}
 
