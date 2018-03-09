@@ -1,6 +1,7 @@
 package Tree;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import nodes.HeadInterface;
 import nodes.NodeInterface;
@@ -30,13 +31,13 @@ public class TreeEvaluator {
 	 * @param heads List of head nodes of trees
 	 * @return the most recently evaluated command node's value
 	 */
-	public double evaluate(ArrayList<HeadInterface> heads) {
+	public double evaluate(List<HeadInterface> heads) {
 		for (int i = 0; i < heads.size(); i++) {
 			if (heads.get(i) instanceof CommandInterface) {
 				CommandInterface head = (CommandInterface) heads.get(i);
 				evaluateHead(head); //evaluates a new tree head
 			}
-			else returnValue = heads.get(i).evaluate(null);
+			else { returnValue = heads.get(i).evaluate(null); }
 		}
 		return returnValue;
 	}
@@ -47,19 +48,14 @@ public class TreeEvaluator {
 	 * @param node Node being evaluated
 	 */
 	private void evaluateHead(CommandInterface node) {
-		ArrayList<NodeInterface> nArgs = new ArrayList<NodeInterface>(); //arguments to be passed to a commandNode
+		ArrayList<NodeInterface> nArgs = new ArrayList<>(); //arguments to be passed to a commandNode
 		while (node.hasNext()) {	 //if there is a child node
 			NodeInterface curr = node.getNext(); //curr is set to the child
 			if (curr instanceof CommandInterface) {
-				//if the child is another command, cast and enter recursion
 				CommandInterface head = (CommandInterface) curr;
-				evaluateHead(head);
-				nArgs.add(curr);
+				evaluateHead(head); //if the child is another command, cast and enter recursion
 			}
-			else {
-				//if not another command add to the args
-				nArgs.add(curr);
-			}
+			nArgs.add(curr);
 		}
 		node.reset(); //sets the node's pointer to its first child for later use
 		returnValue = node.evaluate(nArgs); //returnValue set to the return of evaluate of a node

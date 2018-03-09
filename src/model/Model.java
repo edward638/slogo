@@ -13,7 +13,7 @@ import javafx.scene.shape.Shape;
 import view.Observer;
 import view.screen_components.Palette;
 
-public class Model implements ColorIndexObservable{
+public class Model implements ColorIndexObservable, TurtlesFetcher {
 
 	private static final String TURTLE_0 = "black_and_white_turtle.PNG";
 	private static final String TURTLE_1 = "colorful_turtle.png";
@@ -37,6 +37,7 @@ public class Model implements ColorIndexObservable{
 	private Observer drawerObserver;
 
 	private Observer colorIndexObserver;
+	private Observer drawerObserver;
 	
 	public Model(double width, double height)
 	{
@@ -88,8 +89,9 @@ public class Model implements ColorIndexObservable{
 
 	public void addTurtle(double ID) {
 		Turtle t = new Turtle (XHome, YHome, Color.BLUE, ID, TURTLE_0);
-		allTurtles.put((double) t.getValue(), t);
+		allTurtles.put( t.getValue(), t);
 		activeTurtles.add(t);
+		drawerObserver.notifyOfChanges();
 	}
 	
 	public void addActiveTurtle(Turtle turt) {
@@ -150,6 +152,7 @@ public class Model implements ColorIndexObservable{
 			currentTurtle++;
 		}
 		currentTurtle = 0;
+		drawerObserver.notifyOfChanges();
 	}
 
 	public void addDrawerObserver(Observer observer){
@@ -169,5 +172,16 @@ public class Model implements ColorIndexObservable{
 		colorIndexObserver.notifyOfChanges();
 	}
 
+	public void setDrawerObserver(Observer observer){
+		drawerObserver = observer;
+	}
 
+	@Override
+	public List<TurtleObservable> getTurtleObservables() {
+		List<TurtleObservable> turtleList = new ArrayList<>();
+		for(double key: this.getAllTurtles().keySet()){
+			turtleList.add(this.getAllTurtles().get(key));
+		}
+		return turtleList;
+	}
 }

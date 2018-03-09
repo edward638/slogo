@@ -14,8 +14,6 @@ import model.CommandHistory;
 import model.CommandHistoryObservable;
 import propertiesFiles.ResourceBundleManager;
 import view.Observer;
-import view.constants.ButtonConstants;
-import view.constants.LabelConstants;
 
 import java.util.List;
 
