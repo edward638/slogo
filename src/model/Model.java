@@ -34,6 +34,8 @@ public class Model implements ColorIndexObservable{
 
 	private int currentTurtle = 0;
 
+	private Observer drawerObserver;
+
 	private Observer colorIndexObserver;
 	
 	public Model(double width, double height)
@@ -150,6 +152,9 @@ public class Model implements ColorIndexObservable{
 		currentTurtle = 0;
 	}
 
+	public void addDrawerObserver(Observer observer){
+		drawerObserver = observer;
+	}
 
 	public void addObserver(Observer colorListObserver) {
 		this.colorIndexObserver = colorListObserver;

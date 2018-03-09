@@ -1,5 +1,7 @@
 package view.screen_components;
 
+import Experiment.TheClearValueDelegate;
+import Experiment.TheParserActionDelegate;
 import controller.CommandBoxController;
 import controller.CommandHistoryBoxController;
 import controller.CustomCommandController;
@@ -22,10 +24,15 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     private Button clearButton;
     private VBox commandList;
 
-    private CustomCommandController controller;
+    private TheParserActionDelegate theParserActionDelegate;
+    private TheClearValueDelegate theClearValueDelegate;
 
-    public void setController(CustomCommandController controller){
-        this.controller = controller;
+    public void setTheParserActionDelegate(TheParserActionDelegate theParserActionDelegate){
+        this.theParserActionDelegate = theParserActionDelegate;
+    }
+
+    public  void setTheClearValueDelegate(TheClearValueDelegate theClearValueDelegate){
+        this.theClearValueDelegate = theClearValueDelegate;
     }
 
     private void addButtonAndLabels(BorderPane borderPane) {
@@ -55,7 +62,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
             Button commandButton = new Button(command);
             commandButton.getStyleClass().add("runnableCommandButton");
             commandButton.setOnAction((event -> {
-                controller.passCommand(commandButton.getText());
+                theParserActionDelegate.performParserAction(parser -> parser.parseString(commandButton.getText()));
             }));
             commandList.getChildren().add(commandButton);
         }
@@ -64,7 +71,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     @Override
     protected void mapUserActions() {
         clearButton.setOnAction((event -> {
-            controller.clearCustomCommands();
+            theClearValueDelegate.clear();
         }));
     }
 

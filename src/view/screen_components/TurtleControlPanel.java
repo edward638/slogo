@@ -1,5 +1,6 @@
 package view.screen_components;
 
+import Experiment.TheParserActionDelegate;
 import controller.TurtleControlPanelController;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -10,7 +11,7 @@ import javafx.scene.layout.VBox;
 public class TurtleControlPanel extends ScreenComponent {
     private static final double STEP_SIZE = 50;
     private static final double TURN_SIZE = 20;
-    private TurtleControlPanelController controller;
+    private TheParserActionDelegate theParserActionDelegate;
     private Button forwardButton;
     private Button backwardButton;
     private Button leftTurnButton;
@@ -23,16 +24,16 @@ public class TurtleControlPanel extends ScreenComponent {
     @Override
     protected void mapUserActions() {
         forwardButton.setOnAction((event -> {
-            controller.forward(STEP_SIZE);
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString("fd 50")));
         }));
         backwardButton.setOnAction((event -> {
-            controller.backward(STEP_SIZE);
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString("bk 50")));
         }));
         rightTurnButton.setOnAction((event -> {
-            controller.rightTurn(TURN_SIZE);
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString("rt 50")));
         }));
         leftTurnButton.setOnAction((event -> {
-            controller.leftTurn(TURN_SIZE);
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString("lt 50")));
         }));
     }
 
@@ -59,7 +60,7 @@ public class TurtleControlPanel extends ScreenComponent {
         borderPane.setCenter(vbox);
     }
 
-    public void setController(TurtleControlPanelController controller){
-        this.controller = controller;
+    public void setController(TheParserActionDelegate theParserActionDelegate){
+        this.theParserActionDelegate = theParserActionDelegate;
     }
 }

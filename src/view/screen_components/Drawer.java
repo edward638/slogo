@@ -1,5 +1,6 @@
 package view.screen_components;
 
+import Experiment.ThePaletteDelegate;
 import controller.DrawerController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -36,6 +37,12 @@ public class Drawer extends ScreenComponent implements Observer{
 	private DrawerController controller;
 	public Drawer(){
 		super();
+	}
+
+	private ThePaletteDelegate thePaletteDelegate;
+
+	public void setThePaletteDelegate(ThePaletteDelegate thePaletteDelegate){
+		this.thePaletteDelegate = thePaletteDelegate;
 	}
 
 	public void setController(DrawerController controller){
@@ -133,6 +140,7 @@ public class Drawer extends ScreenComponent implements Observer{
 
 	@Override
 	public void notifyOfChanges() {
+		System.out.println("hiasdfasd");
 		update();
 	}
 }

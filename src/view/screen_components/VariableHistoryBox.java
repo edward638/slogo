@@ -1,5 +1,7 @@
 package view.screen_components;
 
+import Experiment.TheClearValueDelegate;
+import Experiment.TheValueModifierDelegate;
 import controller.VariableHistoryBoxController;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -15,7 +17,8 @@ import java.util.Map;
 
 public class VariableHistoryBox extends ScreenComponent implements Observer {
 	private VariableHistoryObservable variableHistory;
-	private VariableHistoryBoxController controller;
+	private TheClearValueDelegate theClearValueDelegate;
+	private TheValueModifierDelegate theValueModifierDelegate;
 	private TextArea textArea;
 	private Button clearButton;
 	private Button submitButton;
@@ -25,8 +28,12 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 		super();
 	}
 
-	public void setController(VariableHistoryBoxController controller){
-		this.controller = controller;
+	public void setClearValueDelegate(TheClearValueDelegate theClearValueDelegate){
+		this.theClearValueDelegate = theClearValueDelegate;
+	}
+
+	public void setValueModifierDelegate(TheValueModifierDelegate theValueModifierDelegate){
+		this.theValueModifierDelegate = theValueModifierDelegate;
 	}
 
 	public void setVariableHistory(VariableHistoryObservable variableHistory){
@@ -36,10 +43,10 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 	@Override
 	protected void mapUserActions() {
 		clearButton.setOnAction((event -> {
-			controller.clearVariableBox();
+			theClearValueDelegate.clear();
 		}));
 		submitButton.setOnAction((event -> {
-			controller.changeVariableValue(variableComboBox.getValue(), editValueField.getText());
+			theValueModifierDelegate.changeValue(variableComboBox.getValue(), editValueField.getText());
 		}));
 	}
 
