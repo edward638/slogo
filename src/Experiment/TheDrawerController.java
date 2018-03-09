@@ -4,9 +4,10 @@ import javafx.scene.paint.Color;
 import model.Model;
 import view.GUI;
 import view.screen_components.Drawer;
+import view.screen_components.TheDrawer;
 
 public class TheDrawerController extends TheController implements ThePaletteDelegate{
-    private Drawer drawer;
+    private TheDrawer drawer;
     private Model model;
     public TheDrawerController(GUI gui, Model model){
         super(gui);
@@ -15,15 +16,15 @@ public class TheDrawerController extends TheController implements ThePaletteDele
 
     @Override
     protected void initializeScreenComponents() {
-        drawer = new Drawer();
+        drawer = new TheDrawer();
     }
 
     @Override
     protected void setUpConnections() {
+        drawer.setTurtlesFetcher(model);
         drawer.setThePaletteDelegate(this);
-        drawer.setTurtle(model.getActiveTurtles().get(0));
         drawer.notifyOfChanges();
-        model.getActiveTurtles().get(0).addObserver(drawer);
+        model.addDrawerObserver(drawer);
     }
 
     @Override

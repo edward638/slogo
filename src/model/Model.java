@@ -37,7 +37,6 @@ public class Model implements ColorIndexObservable, TurtlesFetcher {
 	private Observer drawerObserver;
 
 	private Observer colorIndexObserver;
-	private Observer drawerObserver;
 	
 	public Model(double width, double height)
 	{
