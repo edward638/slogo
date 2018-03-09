@@ -20,7 +20,6 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     public static final int SCROLLPANE_HEIGHT = 100;
     private CustomCommandObservable customCommandHolder;
     private Button clearButton;
-    private Button helpButton;
     private VBox commandList;
 
     private TheParserActionDelegate theParserActionDelegate;
@@ -37,7 +36,6 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     private void addButtonAndLabels(BorderPane borderPane) {
         HBox topComponent = new HBox();
         clearButton = new Button("Clear");
-        helpButton = new Button("Help");
         Label label = new Label("Custom Commands");
         topComponent.getChildren().add(label);
         topComponent.getChildren().add(clearButton);
@@ -48,8 +46,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
         scrollPane.setPrefHeight(SCROLLPANE_HEIGHT);
         scrollPane.setContent(commandList);
         borderPane.setCenter(scrollPane);
-        borderPane.setBottom(helpButton);
-        BorderPane.setAlignment(helpButton, Pos.BOTTOM_RIGHT);
+
 
     }
 
@@ -75,10 +72,6 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     protected void mapUserActions() {
         clearButton.setOnAction((event -> {
             theClearValueDelegate.clear();
-        }));
-        helpButton.setOnAction((event -> {
-            HelpPopup popup = new HelpPopup();
-            popup.open();
         }));
     }
 

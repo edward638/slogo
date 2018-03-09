@@ -11,13 +11,15 @@ public class HelpSubPopup {
     Stage popupStage;
 
     public HelpSubPopup (Image image, String string){
-        Group popupRoot = new Group();
-        Stage popupStage = new Stage();
+        popupRoot = new Group();
+        popupStage = new Stage();
         popupStage.setTitle(string);
         popupStage.setScene(new Scene(popupRoot, (int)image.getWidth(),(int)image.getHeight()));
         ImageView imageView = new ImageView();
         imageView.setImage(image);
         popupRoot.getChildren().add(imageView);
+    }
+    public void show(){
         popupStage.show();
     }
 }

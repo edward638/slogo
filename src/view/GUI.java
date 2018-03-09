@@ -2,13 +2,15 @@ package view;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import view.help_items.HelpPopup;
 import view.screen_components.*;
 import view.view_exceptions.ImproperScreenComponentException;
 
 public class GUI{
-	private static final String NAME = "Slogo Programming Environment";
+    private static final String NAME = "Slogo Programming Environment";
 	private static final int WIDTH = 1100;
 	private static final int HEIGHT = 650;
     public static final int TITLE_PANEL_X = 670;
@@ -41,6 +43,8 @@ public class GUI{
     public static final int PALETTE_X = 0;
     public static final int PALETTE_Y= 0;
 
+    private Button helpButton;
+
 
 	private Group root = new Group();
     public GUI(){
@@ -62,6 +66,7 @@ public class GUI{
         startScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setScene(startScene);
         this.addTitle();
+        this.addHelp();
         stage.show();
 
     }
@@ -102,5 +107,16 @@ public class GUI{
         titlePane.setLayoutX(TITLE_PANEL_X);
         titlePane.setLayoutY(TITLE_PANEL_Y);
         root.getChildren().add(titlePane);
+    }
+
+    private void addHelp(){
+        helpButton = new Button("Help");
+        helpButton.setLayoutX(HELP_BUTTON_X);
+        helpButton.setLayoutY(HELP_BUTTON_Y);
+        helpButton.setOnAction((event -> {
+            HelpPopup popup = new HelpPopup();
+            popup.open();
+        }));
+        root.getChildren().add(helpButton);
     }
 }
