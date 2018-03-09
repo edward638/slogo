@@ -14,8 +14,8 @@ import view.Observer;
 import java.util.List;
 
 public class CustomCommandsBox extends ScreenComponent implements Observer {
-    public static final int SCROLLPANE_WIDTH = 200;
-    public static final int SCROLLPANE_HEIGHT = 100;
+    private static final int SCROLLPANE_WIDTH = 200;
+    private static final int SCROLLPANE_HEIGHT = 100;
     private CustomCommandObservable customCommandHolder;
     private Button clearButton;
     private VBox commandList;
@@ -27,7 +27,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
         this.parserActionDelegate = parserActionDelegate;
     }
 
-    public  void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
+    public void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
         this.clearValueDelegate = clearValueDelegate;
     }
 
@@ -68,9 +68,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
 
     @Override
     protected void mapUserActions() {
-        clearButton.setOnAction((event -> {
-            clearValueDelegate.clear();
-        }));
+        clearButton.setOnAction((event -> clearValueDelegate.clear()));
     }
 
     @Override

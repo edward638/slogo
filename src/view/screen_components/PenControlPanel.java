@@ -7,9 +7,6 @@ import javafx.scene.layout.VBox;
 import propertiesFiles.ResourceBundleManager;
 
 public class PenControlPanel extends ScreenComponent{
-    private static final double SMALL_PEN_SIZE = 50;
-    private static final double MED_PEN_SIZE = 50;
-    private static final double LARGE_PEN_SIZE = 50;
     private ParserActionDelegate parserActionDelegate;
     private Button penUpButton;
     private Button penDownButton;
