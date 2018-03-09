@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,24 +23,30 @@ public class Model implements ColorIndexObservable{
 	private static final String TURTLE_5 = "lt_arrow.png";
 	private static final String TURTLE_6 = "bk_arrow.png";
 
-
 	private Color backgroundColor;
 	private List<Color> colorOptions;
 	private List<String> shapeOptions;
 	private List<Turtle> activeTurtles;
 	private Map<Double,Turtle> allTurtles;
+
+	private static double XHome;
+	private static double YHome;
+
+	private int currentTurtle = 0;
+
 	private Observer colorIndexObserver;
 	
 	public Model(double width, double height)
 	{
-		//needs actual colors
 		initializeColors();
 		initializeShapes();
 		activeTurtles = new ArrayList<>();
 		allTurtles = new HashMap<>();
+		XHome = width;
+		YHome = height;
 		
-		Turtle initial = new Turtle(width, height, colorOptions.get(0), 1.0, TURTLE_0);
-		
+		Turtle initial = new Turtle(XHome, YHome, colorOptions.get(0), 1.0, TURTLE_0);
+
 		allTurtles.put(1.0, initial);
 		activeTurtles.add(initial);
 
@@ -77,8 +84,10 @@ public class Model implements ColorIndexObservable{
 		return allTurtles;
 	}
 
-	public void addTurtle(Turtle turt) {
-		allTurtles.put((double) turt.getValue(), turt);
+	public void addTurtle(double ID) {
+		Turtle t = new Turtle (XHome, YHome, Color.BLUE, ID, TURTLE_0);
+		allTurtles.put((double) t.getValue(), t);
+		activeTurtles.add(t);
 	}
 	
 	public void addActiveTurtle(Turtle turt) {
@@ -89,6 +98,12 @@ public class Model implements ColorIndexObservable{
 	{
 		return backgroundColor;
 	}
+	
+	public void setBackgroundColor(Color c)
+	{
+		this.backgroundColor = c;
+	}
+	
 	
 	public void setBackgroundColor(double index) 
 	{
@@ -112,16 +127,27 @@ public class Model implements ColorIndexObservable{
 		colorIndexObserver.notifyOfChanges();
 		return colorOptions.get((int)index);
 	}
+
+	public Turtle getActiveTurtle() 
+	{ 
+		return activeTurtles.get(currentTurtle); 
+	}
 	
 	public List<Turtle> getActiveTurtles()
 	{
 		return activeTurtles;
 	}
 
+	public void setActiveTurtles(List<Turtle> newActives) {
+		activeTurtles = newActives;
+	}
+
 	public void update (Consumer<Turtle> T) {
 		for (Turtle t: getActiveTurtles()) {
 			T.accept(t);
+			currentTurtle++;
 		}
+		currentTurtle = 0;
 	}
 
 
