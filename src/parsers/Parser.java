@@ -206,11 +206,7 @@ public class Parser
 					else
 					{
 						NodeInterface node = NodeFactory.createNode(key, text, varHistory, model, myTranslation, comHistory, children);
-						if(node != null)
-						{
-							nodeList.add(node);
-						}
-						
+						nodeList.add(node);
 					}
 				}
 			}
