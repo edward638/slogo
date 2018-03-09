@@ -17,7 +17,6 @@ public class TheDrawerLineComponent {
     public void draw(List<Line> linesToDraw){
         for(Line line : linesToDraw){
             gc.setStroke(line.getStroke());
-            System.out.println(line.getStrokeWidth());
             gc.setLineWidth(line.getStrokeWidth());
             gc.strokeLine(line.getStartX(), line.getStartY(), line.getEndX(), line.getEndY());
         }

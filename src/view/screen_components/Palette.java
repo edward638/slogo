@@ -23,7 +23,7 @@ public class Palette extends ScreenComponent implements Observer{
     public static final int VBOX_SPACING = 10;
     private VBox vBox;
 
-    private PaletteObservable colorIndex;
+    private PaletteObservable paletteObservable;
 
     public Palette(){
         super();
@@ -34,8 +34,8 @@ public class Palette extends ScreenComponent implements Observer{
 
     }
 
-    public void setColorIndex(PaletteObservable colorIndex){
-        this.colorIndex = colorIndex;
+    public void setPaletteObservable(PaletteObservable paletteObservable){
+        this.paletteObservable = paletteObservable;
     }
 
     @Override
@@ -78,6 +78,6 @@ public class Palette extends ScreenComponent implements Observer{
 
     @Override
     public void notifyOfChanges() {
-        updatePalette(colorIndex.getColorList(), colorIndex.getShapeOptions());
+        updatePalette(paletteObservable.getColorList(), paletteObservable.getShapeOptions());
     }
 }
