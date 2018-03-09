@@ -1,5 +1,6 @@
 package view.screen_components;
 
+import Experiment.ThePaletteDelegate;
 import controller.DrawerController;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
@@ -38,6 +39,8 @@ public class TheDrawer extends ScreenComponent implements Observer{
     private List<TurtleObservable> linkedTurtles;
     private TheDrawerBackgroundComponent backgroundComponent;
 
+    private ThePaletteDelegate thePaletteDelegate;
+
     private StackPane drawingScreen;
     private Canvas linesLayer;
     private Canvas backgroundLayer;
@@ -51,6 +54,10 @@ public class TheDrawer extends ScreenComponent implements Observer{
     public void setTurtlesFetcher(TurtlesFetcher turtlesFetcher){
         this.turtlesFetcher = turtlesFetcher;
         this.update();
+    }
+
+    public void setThePaletteDelegate(ThePaletteDelegate thePaletteDelegate){
+        this.thePaletteDelegate = thePaletteDelegate;
     }
 
     @Override
@@ -89,15 +96,23 @@ public class TheDrawer extends ScreenComponent implements Observer{
 
     private void changeBackgroundColor(){
         String color = backgroundColorBox.getValue();
-        //TODO:figure out a way to change background color
+        switch (color){
+            case "White": thePaletteDelegate.changeBackgroundColor(Color.WHITE);
+            case "Blue": thePaletteDelegate.changeBackgroundColor(Color.BLUE);
+        }
     }
 
     private void changePenColor(){
-        //TODO:
+        String color = backgroundColorBox.getValue();
+        switch (color){
+            case "Black": thePaletteDelegate.changeBackgroundColor(Color.BLACK);
+            case "Red": thePaletteDelegate.changeBackgroundColor(Color.RED);
+            case "Green": thePaletteDelegate.changeBackgroundColor(Color.GREEN);
+        }
     }
 
     private void changeTurtleImage(){
-        //TODO:
+        thePaletteDelegate.changeTurtleImage(turtleImageBox.getValue());
     }
 
     private void addFrontEndTurtle(TurtleObservable turtleObservable){
@@ -106,11 +121,9 @@ public class TheDrawer extends ScreenComponent implements Observer{
     }
 
     public void update(){
-        System.out.println("howdy");
         for(TurtleObservable turt : turtlesFetcher.getTurtleObservables()){
             if(!linkedTurtles.contains(turt)){
                 this.addFrontEndTurtle(turt);
-                System.out.println("hi");
             }
         }
     }

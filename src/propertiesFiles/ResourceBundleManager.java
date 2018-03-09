@@ -6,6 +6,7 @@ public final class ResourceBundleManager {
     public static final String BUTTON_LABELS = "ButtonLabels";
     public static final String HELP_POPUP = "HelpPopup";
     public static final String LABELS = "Labels";
+    public static final String ON_SCREEN_COMMANDS = "OnScreenCommands";
     private static ResourceBundle resources;
     private static final String DEFAULT_RESOURCE_PATH = "propertiesFiles/";
 
@@ -23,5 +24,8 @@ public final class ResourceBundleManager {
         resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + LABELS);
         return resources.getString(s);
     }
-
+    public static String retrieveOnScreenCommand(String s){
+        resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + ON_SCREEN_COMMANDS);
+        return resources.getString(s);
+    }
 }

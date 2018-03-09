@@ -75,6 +75,7 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 	}
 
 	private void initializeScreenComponents(){
+		/*
 		palette = new Palette();
 		drawer = new TheDrawer();
 		commandBox = new CommandBox();
@@ -90,6 +91,7 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 		customCommandsBox.setController(this);
 		penControlPanel = new PenControlPanel();
 		penControlPanel.setController(this);
+		*/
 	}
 
 	private void addToGUI(){
