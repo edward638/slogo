@@ -33,6 +33,11 @@ public class NodeFactory
 	//private static String PARAMETER_FILE = "parsers/commandToConstructorParameters";
 	private static final String NODE_PACKAGE = "commandNode.";
 	
+	public NodeFactory() 
+	{
+		
+	}
+	
 	/**
 	 * A messy method that tries to take some of the burden off of parser in terms of creating nodes.
 	 * Handles the creation of command, variable, and constant nodes.
@@ -59,9 +64,9 @@ public class NodeFactory
 			String commandType = checkLanguage(text, myTranslation, comHistory);
 			try 
 			{
-				return (GeneralCommand) NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), model, children.get(commandType));
+				return (GeneralCommand) NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), model, children.get(commandType), comHistory);
 			}
-			catch(ClassNotFoundException e)
+			catch(Exception e)
 			{
 				comHistory.addCommand("Error: Could not access constructor for command " + text );
 				throw new InvalidEntryException("Error: Could not access Node constructor");
@@ -108,10 +113,11 @@ public class NodeFactory
 	 * @param clazz
 	 * @param model
 	 * @param numChildren
+	 * @param comHistory 
 	 * 
 	 * @return a new instance of the correct command node
 	 */
-	public static Object makeNode(Class<?> clazz,Model model, int numChildren)
+	public static Object makeNode(Class<?> clazz,Model model, int numChildren, CommandHistory comHistory)
 	{
 		try
 		{
@@ -122,10 +128,9 @@ public class NodeFactory
 		}
 		catch(Exception e) 
 		{
-			//CHANGE THIS EXCEPTION
-			e.printStackTrace();
+			comHistory.addCommand("Error: Invalid entry, no such command" );
+			throw new InvalidEntryException("Error: Invalid entry, no such command");
 		}
-		return null;
 	}
 
 	
