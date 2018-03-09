@@ -74,7 +74,7 @@ public class Turtle implements TurtleObservable, NodeInterface
 		{
 			addLine(l);
 		}
-
+		System.out.println(ID);
 		turtleObserver.notifyOfChanges();
 	}
 

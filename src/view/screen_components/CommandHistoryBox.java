@@ -1,6 +1,5 @@
 package view.screen_components;
 
-import controller.CommandBoxController;
 import controller.CommandHistoryBoxController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,8 +11,6 @@ import model.CommandHistory;
 import model.CommandHistoryObservable;
 import propertiesFiles.ResourceBundleManager;
 import view.Observer;
-import view.constants.ButtonConstants;
-import view.constants.LabelConstants;
 
 import java.util.List;
 
