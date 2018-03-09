@@ -44,6 +44,6 @@ public class Variable extends Variables implements NodeInterface {
 	}
 
 	public String toString() {
-		return name;
+		return name; //toString method for showing on screen
 	}
 }

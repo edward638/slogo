@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import model.ColorIndexObservable;
+import model.PaletteObservable;
 import view.Observer;
 
 import java.util.List;
@@ -20,9 +20,10 @@ public class Palette extends ScreenComponent implements Observer{
     public static final int RECT_WIDTH = 60;
     public static final int RECT_HEIGHT = 20;
     public static final String PALETTE_TITLE = "Color and Image Palette";
+    public static final int VBOX_SPACING = 10;
     private VBox vBox;
 
-    private ColorIndexObservable colorIndex;
+    private PaletteObservable paletteObservable;
 
     public Palette(){
         super();
@@ -33,21 +34,20 @@ public class Palette extends ScreenComponent implements Observer{
 
     }
 
-    public void setColorIndex(ColorIndexObservable colorIndex){
-        this.colorIndex = colorIndex;
+    public void setPaletteObservable(PaletteObservable paletteObservable){
+        this.paletteObservable = paletteObservable;
     }
 
     @Override
-    protected void generateGUIComponent() {
+    public void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();
         generateVBox(borderPane);
     }
 
     private void generateVBox(BorderPane borderPane){
-
         vBox = new VBox();
-        vBox.setPadding(new Insets(10,10,10,10));
-        vBox.setSpacing(10);
+        vBox.setPadding(new Insets(VBOX_SPACING, VBOX_SPACING, VBOX_SPACING, VBOX_SPACING));
+        vBox.setSpacing(VBOX_SPACING);
         Label title2 = new Label(PALETTE_TITLE);
         borderPane.setTop(title2);
         BorderPane.setAlignment(title2, Pos.CENTER);
@@ -78,6 +78,6 @@ public class Palette extends ScreenComponent implements Observer{
 
     @Override
     public void notifyOfChanges() {
-        updatePalette(colorIndex.getColorList(), colorIndex.getShapeOptions());
+        updatePalette(paletteObservable.getColorList(), paletteObservable.getShapeOptions());
     }
 }

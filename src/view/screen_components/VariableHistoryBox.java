@@ -1,21 +1,23 @@
 package view.screen_components;
 
-import controller.VariableHistoryBoxController;
+import controller.ClearValueDelegate;
+import controller.ValueModifierDelegate;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import model.VariableHistoryObservable;
 import propertiesFiles.ResourceBundleManager;
 import view.Observer;
-import view.constants.ButtonConstants;
-import view.constants.LabelConstants;
-import view.constants.TextAreaConstants;
 
 import java.util.Map;
 
 public class VariableHistoryBox extends ScreenComponent implements Observer {
+	private static final int TEXTAREA_ROWS = 10;
+	private static final int VALUEFIELD_WIDTH = 30;
+	private static final int VARIABLE_COLUMNS = 12;
 	private VariableHistoryObservable variableHistory;
-	private VariableHistoryBoxController controller;
+	private ClearValueDelegate clearValueDelegate;
+	private ValueModifierDelegate valueModifierDelegate;
 	private TextArea textArea;
 	private Button clearButton;
 	private Button submitButton;
@@ -25,8 +27,12 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 		super();
 	}
 
-	public void setController(VariableHistoryBoxController controller){
-		this.controller = controller;
+	public void setClearValueDelegate(ClearValueDelegate theClearValueDelegate){
+		this.clearValueDelegate = theClearValueDelegate;
+	}
+
+	public void setValueModifierDelegate(ValueModifierDelegate valueModifierDelegate){
+		this.valueModifierDelegate = valueModifierDelegate;
 	}
 
 	public void setVariableHistory(VariableHistoryObservable variableHistory){
@@ -36,10 +42,10 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 	@Override
 	protected void mapUserActions() {
 		clearButton.setOnAction((event -> {
-			controller.clearVariableBox();
+			clearValueDelegate.clear();
 		}));
 		submitButton.setOnAction((event -> {
-			controller.changeVariableValue(variableComboBox.getValue(), editValueField.getText());
+			valueModifierDelegate.changeValue(variableComboBox.getValue(), editValueField.getText());
 		}));
 	}
 
@@ -59,7 +65,6 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 		}
 		textArea.setText(commandsToDisplay.toString());
 
-		//new stuff with map
 		variableComboBox.getItems().clear();
 		for(String variableName : variableMap.keySet()){
 			variableComboBox.getItems().add(variableName);
@@ -69,7 +74,7 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 
 	private void addButtonAndLabels(BorderPane borderPane){
 		HBox topComponent = new HBox();
-		clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("VARIABLE_BUTTON_LABEL"));
+		clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("CLEAR"));
 		Label label = new Label(ResourceBundleManager.retrieveLabel("VARIABLE_LABEL_TEXT"));
 		topComponent.getChildren().add(label);
 		topComponent.getChildren().add(clearButton);
@@ -78,9 +83,9 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 		variableComboBox = new ComboBox<>();
 		bottomComponent.getChildren().add(variableComboBox);
 		editValueField = new TextField();
-		editValueField.setMaxWidth(30);
+		editValueField.setMaxWidth(VALUEFIELD_WIDTH);
 		bottomComponent.getChildren().add(editValueField);
-		submitButton = new Button("Submit");
+		submitButton = new Button(ResourceBundleManager.retrieveButtonLabel("SUBMIT"));
 		bottomComponent.getChildren().add(submitButton);
 		borderPane.setBottom(bottomComponent);
 	}
@@ -89,8 +94,8 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 	private void addTextArea(BorderPane borderPane){
 		textArea = new TextArea();
 		textArea.setEditable(false);
-		textArea.setPrefRowCount(10);
-		textArea.setPrefColumnCount(TextAreaConstants.VARIABLE_COLUMNS);
+		textArea.setPrefRowCount(TEXTAREA_ROWS);
+		textArea.setPrefColumnCount(VARIABLE_COLUMNS);
 		borderPane.setCenter(textArea);
 	}
 

@@ -1,61 +1,67 @@
 package view.screen_components;
 
-import controller.CommandBoxController;
-import controller.CommandHistoryBoxController;
-import controller.CustomCommandController;
+import controller.ClearValueDelegate;
+import controller.ParserActionDelegate;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.CommandHistoryObservable;
 import model.CustomCommandObservable;
+import propertiesFiles.ResourceBundleManager;
 import view.Observer;
-import view.constants.ButtonConstants;
-import view.constants.LabelConstants;
 
 import java.util.List;
 
 public class CustomCommandsBox extends ScreenComponent implements Observer {
-    private CustomCommandObservable customCommandHolder;
+    public static final int SCROLLPANE_WIDTH = 200;
+    public static final int SCROLLPANE_HEIGHT = 100;
+    private CustomCommandObservable customCommandObservable;
     private Button clearButton;
     private VBox commandList;
 
-    private CustomCommandController controller;
+    private ParserActionDelegate parserActionDelegate;
+    private ClearValueDelegate clearValueDelegate;
 
-    public void setController(CustomCommandController controller){
-        this.controller = controller;
+    public void setParserActionDelegate(ParserActionDelegate parserActionDelegate){
+        this.parserActionDelegate = parserActionDelegate;
+    }
+
+    public void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
+        this.clearValueDelegate = clearValueDelegate;
     }
 
     private void addButtonAndLabels(BorderPane borderPane) {
         HBox topComponent = new HBox();
-        clearButton = new Button("Clear");
+        clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("CLEAR"));
         Label label = new Label("Custom Commands");
         topComponent.getChildren().add(label);
         topComponent.getChildren().add(clearButton);
         borderPane.setTop(topComponent);
         commandList = new VBox();
         ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setMaxWidth(200);
-        scrollPane.setPrefHeight(100);
+        scrollPane.setMaxWidth(SCROLLPANE_WIDTH);
+        scrollPane.setPrefHeight(SCROLLPANE_HEIGHT);
         scrollPane.setContent(commandList);
         borderPane.setCenter(scrollPane);
+
+
     }
 
-    public void setCustomCommandHolder(CustomCommandObservable holder){
-        this.customCommandHolder = holder;
+    public void setCustomCommandObservable(CustomCommandObservable holder){
+        this.customCommandObservable = holder;
     }
 
     @Override
     public void notifyOfChanges() {
-        List<String> commands = customCommandHolder.getCommands();
+        List<String> commands = customCommandObservable.getCommands();
         commandList.getChildren().clear();
         for(String command: commands){
             Button commandButton = new Button(command);
             commandButton.getStyleClass().add("runnableCommandButton");
             commandButton.setOnAction((event -> {
-                controller.passCommand(commandButton.getText());
+                parserActionDelegate.performParserAction(parser -> parser.passTextCommand(commandButton.getText()));
             }));
             commandList.getChildren().add(commandButton);
         }
@@ -63,13 +69,11 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
 
     @Override
     protected void mapUserActions() {
-        clearButton.setOnAction((event -> {
-            controller.clearCustomCommands();
-        }));
+        clearButton.setOnAction((event -> clearValueDelegate.clear()));
     }
 
     @Override
-    protected void generateGUIComponent() {
+    public void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();
         this.addButtonAndLabels(borderPane);
     }

@@ -3,8 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Model;
-import model.Turtle;
-import nodes.*;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
+import nodes.ListNode;
+import nodes.ImproperNodeException;
 
 /**
  * @author Belanie Nagiel
@@ -35,19 +37,18 @@ public class IfElse extends GeneralCommand {
 	public double evaluate(List<NodeInterface> args) {
 		try {
 			value = 0;
-			if(args.get(0).getValue() != 0)
-			{
+			if(args.get(0).getValue() != 0) {
 				ListNode l1 = (ListNode) args.get(1);
 				value = l1.evaluate();
 			}
-			else
-			{
+			else {
 				ListNode l2 = (ListNode) args.get(1);
 				value = l2.evaluate();
 			}
 			return value;
 		}
 		catch (ClassCastException e) {
+			e.printStackTrace();
 			throw new ImproperNodeException();
 		}
 	}

@@ -6,7 +6,6 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
-import javafx.scene.shape.Shape;
 import nodes.NodeInterface;
 
 
@@ -30,9 +29,7 @@ public class Turtle implements TurtleObservable, NodeInterface
 
 	private String turtleShape;
 	private double ID;
-	
-	//THIS IS ANDY'S SUGGESTION
-	private Observer turtleObserver;
+
 
 	//Could pass pen color in parameter! Right now we call setPenColor in controller. TODO: Discuss this idea, Also screen size in constructor?
 	public Turtle(double width, double height, Color color, double ID, String startShape)
@@ -45,16 +42,12 @@ public class Turtle implements TurtleObservable, NodeInterface
 		directionAngle = 90;
 		penShowing = true;
 		turtleShowing = true;
-		lines = new ArrayList<Line>();
+		lines = new ArrayList<>();
 		penColor = color;
 		penSize = 1.0;
 		this.ID = ID;
 		turtleShape = startShape;
 		toroidal = new WraparoundHandler(width, height);
-	}
-
-	public void addObserver(Observer turtleObserver){
-		this.turtleObserver = turtleObserver;
 	}
 
 	public double getXCoordinate() {
@@ -75,8 +68,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 		{
 			addLine(l);
 		}
-
-		turtleObserver.notifyOfChanges();
 	}
 
 	public double[] getHome(){
@@ -90,7 +81,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 
 	public void setDirectionAngle(double directionAngle) {
 		this.directionAngle = directionAngle;
-		turtleObserver.notifyOfChanges();
 	}
 
 
@@ -110,7 +100,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 	public void clearLines()
 	{
 		lines = new ArrayList<Line>();
-		turtleObserver.notifyOfChanges();
 	}
 
 
@@ -121,7 +110,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 
 	public void setPenShowing(boolean penShowing) {
 		this.penShowing = penShowing;
-		turtleObserver.notifyOfChanges();
 	}
 
 	public boolean getTurtleShowing() {
@@ -140,7 +128,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 
 	public void setTurtleShowing(boolean turtleShowing) {
 		this.turtleShowing = turtleShowing;
-		turtleObserver.notifyOfChanges();
 	}
 
 	public void setPenSize(double pixels) {
@@ -154,7 +141,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 	public void setTurtleShape(String turtleShape)
 	{
 		this.turtleShape = turtleShape;
-		turtleObserver.notifyOfChanges();
 	}
 
 	@Override

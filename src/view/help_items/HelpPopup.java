@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import propertiesFiles.ResourceBundleManager;
 
 public class HelpPopup {
-    public static final int STAGE_WIDTH = 450;
+    public static final int STAGE_WIDTH = 600;
     public static final int STAGE_HEIGHT = 250;
     public static final int HBOX_OFFSET = 10;
     public static final int HBOX1_Y = 150;
@@ -23,6 +23,9 @@ public class HelpPopup {
     private Button mathOperationsButton;
     private Button booleanOperationsButton;
     private Button variablesButton;
+    private Button displayCommandsButton;
+    private Button multipleTurtlesButton;
+
     private HBox hBox1;
     private HBox hBox2;
 
@@ -37,6 +40,9 @@ public class HelpPopup {
         addSecondButtonRow();
         addTitle();
         setButtonActions();
+    }
+
+    public void open(){
         helpStage.show();
     }
 
@@ -46,9 +52,11 @@ public class HelpPopup {
         basicSyntaxButton = new Button(ResourceBundleManager.retrieveHelpPopupConstant("BASIC_SYNTAX"));
         turtleCommandsButton = new Button(ResourceBundleManager.retrieveHelpPopupConstant("TURTLE_COMMANDS"));
         turtleQueriesButton = new Button(ResourceBundleManager.retrieveHelpPopupConstant("TURTLE_QUERIES"));
+        displayCommandsButton = new Button(ResourceBundleManager.retrieveHelpPopupConstant("DISPLAY_COMMANDS"));
         hBox1.getChildren().add(basicSyntaxButton);
         hBox1.getChildren().add(turtleCommandsButton);
         hBox1.getChildren().add(turtleQueriesButton);
+        hBox1.getChildren().add(displayCommandsButton);
         hBox1.setLayoutX(HBOX_OFFSET);
         hBox1.setLayoutY(HBOX1_Y);
         helpRoot.getChildren().add(hBox1);
@@ -58,9 +66,11 @@ public class HelpPopup {
         mathOperationsButton = new Button(ResourceBundleManager.retrieveHelpPopupConstant("MATH_OPERATIONS"));
         booleanOperationsButton = new Button(ResourceBundleManager.retrieveHelpPopupConstant("BOOLEAN_OPERATIONS"));
         variablesButton = new Button(ResourceBundleManager.retrieveHelpPopupConstant("VARIABLES"));
+        multipleTurtlesButton = new Button(ResourceBundleManager.retrieveHelpPopupConstant("MULTIPLE_TURTLES"));
         hBox2.getChildren().add(mathOperationsButton);
         hBox2.getChildren().add(booleanOperationsButton);
         hBox2.getChildren().add(variablesButton);
+        hBox2.getChildren().add(multipleTurtlesButton);
         hBox2.setLayoutX(HBOX_OFFSET);
         hBox2.setLayoutY(HBOX2_Y);
         helpRoot.getChildren().add(hBox2);
@@ -68,39 +78,43 @@ public class HelpPopup {
 
     private void setButtonActions(){
         basicSyntaxButton.setOnAction((event -> {
-            Image image = new Image(getClass().getClassLoader().getResourceAsStream(ResourceBundleManager.retrieveHelpPopupConstant("syntaxImage")));
-            generatePopup(image, ResourceBundleManager.retrieveHelpPopupConstant("BASIC_SYNTAX"));
+            generatePopup("syntaxImage", "BASIC_SYNTAX");
         }));
         turtleCommandsButton.setOnAction((event -> {
-            Image image = new Image(getClass().getClassLoader().getResourceAsStream(ResourceBundleManager.retrieveHelpPopupConstant("commandsImage")));
-            generatePopup(image, ResourceBundleManager.retrieveHelpPopupConstant("TURTLE_COMMANDS"));
+            generatePopup("commandsImage", "TURTLE_COMMANDS");
         }));
         turtleQueriesButton.setOnAction((event -> {
-            Image image = new Image(getClass().getClassLoader().getResourceAsStream(ResourceBundleManager.retrieveHelpPopupConstant("queriesImage")));
-            generatePopup(image, ResourceBundleManager.retrieveHelpPopupConstant("TURTLE_QUERIES"));
+            generatePopup("queriesImage", "TURTLE_QUERIES");
         }));
         mathOperationsButton.setOnAction((event -> {
-            Image image = new Image(getClass().getClassLoader().getResourceAsStream(ResourceBundleManager.retrieveHelpPopupConstant("mathImage")));
-            generatePopup(image, ResourceBundleManager.retrieveHelpPopupConstant("MATH_OPERATIONS"));
+            generatePopup("mathImage", "MATH_OPERATIONS");
         }));
         booleanOperationsButton.setOnAction((event -> {
-            Image image = new Image(getClass().getClassLoader().getResourceAsStream(ResourceBundleManager.retrieveHelpPopupConstant("booleanImage")));
-            generatePopup(image, ResourceBundleManager.retrieveHelpPopupConstant("BOOLEAN_OPERATIONS"));
+            generatePopup("booleanImage", "BOOLEAN_OPERATIONS");
         }));
         variablesButton.setOnAction((event -> {
-            Image image = new Image(getClass().getClassLoader().getResourceAsStream(ResourceBundleManager.retrieveHelpPopupConstant("variablesImage")));
-            generatePopup(image, ResourceBundleManager.retrieveHelpPopupConstant("VARIABLES"));
+            generatePopup("variablesImage", "VARIABLES");
+        }));
+        multipleTurtlesButton.setOnAction((event -> {
+            generatePopup("multipleImage", "MULTIPLE_TURTLES");
+        }));
+        displayCommandsButton.setOnAction((event -> {
+            generatePopup("displayImage", "DISPLAY_COMMANDS");
         }));
     }
+
     private void addTitle(){
         Image image = new Image(getClass().getClassLoader().getResourceAsStream(ResourceBundleManager.retrieveHelpPopupConstant("helpTitle")));
         ImageView imageView = new ImageView();
         imageView.setImage(image);
+        imageView.setLayoutX(75);
         helpRoot.getChildren().add(imageView);
     }
 
-    private void generatePopup(Image image, String string){
-        HelpSubPopup subPopup = new HelpSubPopup(image, string);
+    private void generatePopup(String stringImage, String string){
+        Image image = new Image(getClass().getClassLoader().getResourceAsStream(ResourceBundleManager.retrieveHelpPopupConstant(stringImage)));
+        HelpSubPopup subPopup = new HelpSubPopup(image, ResourceBundleManager.retrieveHelpPopupConstant(string));
+        subPopup.show();
     }
 
 }

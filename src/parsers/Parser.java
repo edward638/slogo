@@ -16,16 +16,17 @@ import model.VariablesHistory;
 import model.CommandHistory;
 import model.Model;
 import nodes.*;
+import propertiesFiles.ResourceBundleManager;
 
 /**
  * @author Belanie Nagiel
- * 
- * This class takes in command strings and outputs them as lists of nodes so that the the tree building class 
+ *
+ * This class takes in command strings and outputs them as lists of nodes so that the the tree building class
  * evaluate the command. It also throws errors for incorrect syntax and use of words that are not recognized
  * as commands.
  *
  */
-public class Parser 
+public class Parser
 {
 	protected Map<String,Pattern> myTranslation;
 	private boolean newCommand = true;
@@ -36,13 +37,13 @@ public class Parser
 	private VariablesHistory varHistory;
 	private CommandHistory comHistory;
 	private String lang;
-	
+
 	/**
 	 * Class Constructor
 	 * Creates the two hashmaps for the syntax recognition and command recognition
 	 * given the current language.
-	 * 
-	 * @param t the current turtle
+	 *
+	 * @param m the current model
 	 * @param VH the variable history
 	 * @param CH the command history
 	 */
@@ -52,16 +53,16 @@ public class Parser
 
 		regex = new HashMap<>();
 		addResources(REGEX_FILE, regex);
-		
+
 		createChildrenMap();
-		
+
 		model = m;
 		varHistory = VH;
 		comHistory = CH;
 		lang = "English";
 	}
-	
-	private void createChildrenMap() 
+
+	private void createChildrenMap()
 	{
 		children = new HashMap<>();
 		ResourceBundle numChildren = ResourceBundle.getBundle("parsers/numChildren");
@@ -69,16 +70,16 @@ public class Parser
 		while(keys.hasMoreElements())
 		{
 			String key = keys.nextElement();
-			children.put(key, Integer.parseInt(numChildren.getString(key)));	
+			children.put(key, Integer.parseInt(numChildren.getString(key)));
 		}
-		
+
 	}
 
 	/**
-	 * Creates a hashmap given a file path to a properties file and a map to fill. Used to 
+	 * Creates a hashmap given a file path to a properties file and a map to fill. Used to
 	 * create key value pairs of syntax to patterns and commands to patterns in the given
 	 * language
-	 * 
+	 *
 	 * @param filepath
 	 * @param map
 	 */
@@ -89,23 +90,23 @@ public class Parser
 		while(keys.hasMoreElements())
 		{
 			String key = keys.nextElement();
-			map.put(key, Pattern.compile(language.getString(key), Pattern.CASE_INSENSITIVE));	
+			map.put(key, Pattern.compile(language.getString(key), Pattern.CASE_INSENSITIVE));
 		}
 	}
-	
+
 	/**
 	 * Creates a list of nodes out of the string command given as an argument
-	 * 
-	 * @param command The string command from the GUI
+	 *
+	 * @param language The language from the GUI
 	 * @return a list of nodes that the tree builder can use to create the tree
-	 * @throws ClassNotFoundException 
-	 * @throws InvalidEntryException 
+	 * @throws ClassNotFoundException
+	 * @throws InvalidEntryException
 	 */
 	public void setLanguage(String language)
 	{
 		lang = language;
 	}
-	
+
 	public List<NodeInterface> parseString(String command)
 	{
 		String languageFilePath = "resources.languages/" + lang;
@@ -125,33 +126,34 @@ public class Parser
 		checkSyntax(commandList, nodeList);
 		return nodeList;
 	}
-	
-	public List<NodeInterface> parseString(String command, String language)
+
+	public void passActionCommand(String command)
 	{
 		String oldLanguage = lang;
-		
-		setLanguage(language);
-		
+		setLanguage(ResourceBundleManager.retrieveOnScreenCommand("DEFAULT_LANGUAGE"));
 		List<NodeInterface> fromButton = parseString(command);
-		
+		makeTree(fromButton);
 		setLanguage(oldLanguage);
-		
-		return fromButton;
-		
 	}
-	
+
+	public void passTextCommand(String command){
+		List<NodeInterface> nodeList = this.parseString(command);
+		this.makeTree(nodeList);
+	}
+
+
 	public void makeTree(List<NodeInterface> nodeList)
 	{
 		TreeMaker tm  = new TreeMaker(nodeList);
 		ArrayList<HeadInterface> heads = (ArrayList<HeadInterface>) tm.getHeads();
 		TreeEvaluator te = new TreeEvaluator();
-		te.evaluate(heads);	
+		te.evaluate(heads);
 	}
-	
+
 	/**
 	 * fill the nodeList with the appropriate nodes based on matching string input to node types
 	 * also checks for syntax errors
-	 * 
+	 *
 	 * @param commandList the list of strings given by the user
 	 * @param nodeList the empty nodeList that will be filled
 	 */
@@ -215,7 +217,7 @@ public class Parser
 				throw new InvalidEntryException("Error: Invalid entry, no such command");
 			}
 		}
-		
-	}	
+
+	}
 
 }

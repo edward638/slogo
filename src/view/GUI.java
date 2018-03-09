@@ -2,17 +2,16 @@ package view;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
-import view.factories.TitleFactory;
+import propertiesFiles.ResourceBundleManager;
+import view.help_items.HelpPopup;
 import view.screen_components.*;
 import view.view_exceptions.ImproperScreenComponentException;
 
 public class GUI{
-	private static final String NAME = "Slogo Programming Environment";
+    private static final String NAME = "Slogo Programming Environment";
 	private static final int WIDTH = 1100;
 	private static final int HEIGHT = 650;
     public static final int TITLE_PANEL_X = 670;
@@ -45,6 +44,8 @@ public class GUI{
     public static final int PALETTE_X = 0;
     public static final int PALETTE_Y= 0;
 
+    private Button helpButton;
+
 
 	private Group root = new Group();
     public GUI(){
@@ -66,6 +67,7 @@ public class GUI{
         startScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setScene(startScene);
         this.addTitle();
+        this.addHelp();
         stage.show();
 
     }
@@ -77,11 +79,9 @@ public class GUI{
             this.positionBorderPane(screenComponent.getGUIComponent(), CUSTOM_COMMANDS_X, CUSTOM_COMMANDS_Y);
         }else if(screenComponent instanceof CommandHistoryBox){
             this.positionBorderPane(screenComponent.getGUIComponent(), COMMAND_HISTORY_BOX_X, COMMAND_HISTORY_BOX_Y);
-        }else if(screenComponent instanceof Drawer){
+        }else if(screenComponent instanceof TheDrawer){
             this.positionBorderPane(screenComponent.getGUIComponent(), DRAWER_X, DRAWER_Y);
-        }else if(screenComponent instanceof HelpButton){
-            this.positionBorderPane(screenComponent.getGUIComponent(), HELP_BUTTON_X, HELP_BUTTON_Y);
-        }else if(screenComponent instanceof Palette){
+        } else if(screenComponent instanceof Palette){
             this.positionBorderPane(screenComponent.getGUIComponent(), PALETTE_X, PALETTE_Y);
         }else if(screenComponent instanceof PenControlPanel){
             this.positionBorderPane(screenComponent.getGUIComponent(), PEN_CONTROL_PANEL_X, PEN_CONTROL_PANEL_Y);
@@ -106,5 +106,16 @@ public class GUI{
         titlePane.setLayoutX(TITLE_PANEL_X);
         titlePane.setLayoutY(TITLE_PANEL_Y);
         root.getChildren().add(titlePane);
+    }
+
+    private void addHelp(){
+        helpButton = new Button(ResourceBundleManager.retrieveButtonLabel("HELP"));
+        helpButton.setLayoutX(HELP_BUTTON_X);
+        helpButton.setLayoutY(HELP_BUTTON_Y);
+        helpButton.setOnAction((event -> {
+            HelpPopup popup = new HelpPopup();
+            popup.open();
+        }));
+        root.getChildren().add(helpButton);
     }
 }
