@@ -28,7 +28,7 @@ import nodes.*;
 public class Parser 
 {
 	protected Map<String,Pattern> myTranslation;
-	private static boolean NEW_COMMAND = true;
+	private boolean newCommand = true;
 	private Map<String,Pattern> regex;
 	protected Map<String,Integer> children;
 	private String languageFilePath;
@@ -54,6 +54,16 @@ public class Parser
 		regex = new HashMap<>();
 		addResources(REGEX_FILE, regex);
 		
+		createChildrenMap();
+		
+		model = m;
+		varHistory = VH;
+		comHistory = CH;
+		lang = "English";
+	}
+	
+	private void createChildrenMap() 
+	{
 		children = new HashMap<>();
 		ResourceBundle numChildren = ResourceBundle.getBundle("parsers/numChildren");
 		Enumeration<String> keys = numChildren.getKeys();
@@ -62,12 +72,9 @@ public class Parser
 			String key = keys.nextElement();
 			children.put(key, Integer.parseInt(numChildren.getString(key)));	
 		}
-		model = m;
-		varHistory = VH;
-		comHistory = CH;
-		lang = "English";
+		
 	}
-	
+
 	/**
 	 * Creates a hashmap given a file path to a properties file and a map to fill. Used to 
 	 * create key value pairs of syntax to patterns and commands to patterns in the given
@@ -104,27 +111,20 @@ public class Parser
 	{
 		languageFilePath = "resources.languages/" + lang;
 		addResources(languageFilePath, myTranslation);
-
-		if(NEW_COMMAND)
+		if(newCommand)
 		{
 			comHistory.addCommand(command);
 		}
-		
-		NEW_COMMAND = true;
-
+		newCommand = true;
 		int commentIndex = command.indexOf("#");
 		if (commentIndex >= 0)
 		{
 			command = command.substring(0, commentIndex);
 		}
-		
 		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])(?![^\\(]*\\))");
 		List<NodeInterface> nodeList = new ArrayList<>();
-	
 		checkSyntax(commandList, nodeList);
-		
 		return nodeList;
-		
 	}
 	
 	public List<NodeInterface> parseString(String command, String language)
@@ -178,7 +178,7 @@ public class Parser
 						ListNode l = new ListNode();
 						String noBrackets = text.substring(1,text.length()-1);
 						String trimmed = noBrackets.trim();
-						NEW_COMMAND = false;
+						newCommand = false;
 						List<NodeInterface> listNodes = parseString(trimmed);
 						for(NodeInterface ln: listNodes)
 						{
@@ -190,7 +190,7 @@ public class Parser
 					{
 						String noParentheses = text.substring(1,text.length()-1);
 						String trimmed = noParentheses.trim();
-						NEW_COMMAND = false;
+						newCommand = false;
 						List<NodeInterface> listNodes = parseString(trimmed);
 						NodeInterface com = listNodes.get(0);
 						String firstCommand =  com.getClass().toString().substring(com.getClass().toString().indexOf(".") + 1).trim();
