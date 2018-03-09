@@ -38,7 +38,6 @@ public class Model implements ColorIndexObservable{
 	
 	public Model(double width, double height)
 	{
-		//needs actual colors
 		initializeColors();
 		initializeShapes();
 		activeTurtles = new ArrayList<>();
