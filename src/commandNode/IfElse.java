@@ -37,13 +37,11 @@ public class IfElse extends GeneralCommand {
 	public double evaluate(List<NodeInterface> args) {
 		try {
 			value = 0;
-			if(args.get(0).getValue() != 0)
-			{
+			if(args.get(0).getValue() != 0) {
 				ListNode l1 = (ListNode) args.get(1);
 				value = l1.evaluate();
 			}
-			else
-			{
+			else {
 				ListNode l2 = (ListNode) args.get(1);
 				value = l2.evaluate();
 			}

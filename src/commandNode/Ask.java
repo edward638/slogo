@@ -19,21 +19,17 @@ public class Ask extends GeneralCommand {
     public double evaluate(List<NodeInterface> args) {
         ListNode turtles = (ListNode) args.get(0);
         ListNode commands = (ListNode) args.get(1);
-
         List<Turtle> tempActive = new ArrayList<>();
         List<Turtle> oldActive = model.getActiveTurtles();
-
         int i = 0;
         while (turtles.getElement(i) != null ) {
             Turtle newActive = model.getAllTurtles().get(turtles.getElement(i).getValue());
             tempActive.add(newActive);
             i++;
         }
-
         model.setActiveTurtles(tempActive);
         model.update(t -> command(commands));
         model.setActiveTurtles(oldActive);
-
         return value;
     }
 

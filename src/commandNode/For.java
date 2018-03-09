@@ -28,14 +28,11 @@ public class For extends GeneralCommand  {
 			Constant start = (Constant) l.getElement(1);
 			Constant end = (Constant) l.getElement(2);
 			Constant increment = (Constant) l.getElement(3);
-
 			ListNode commands = (ListNode) args.get(1);
-
 			for (double i = start.getValue(); i <= end.getValue(); i+=increment.getValue()) {
 				v.setNewValue(i); //update the variable
 				value = commands.evaluate();
 			}
-
 			return value;
 		}
 		catch (ClassCastException e) {
@@ -43,5 +40,4 @@ public class For extends GeneralCommand  {
 			throw new ImproperNodeException();
 		}
 	}
-
 }

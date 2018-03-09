@@ -15,8 +15,8 @@ import nodes.CommandInterface;
  */
 public class TreeMaker {
 	private ArrayList<NodeInterface> nodes;
-	private ArrayList<HeadInterface> heads;
-	private int index;
+	private ArrayList<HeadInterface> heads = new ArrayList<>();
+	private int index = 0;
 
 	/**
 	 * Constructor which initializes its values and begins the tree-making process
@@ -24,24 +24,16 @@ public class TreeMaker {
 	 */
 	public TreeMaker (List<NodeInterface> nodes) {
 		this.nodes = (ArrayList<NodeInterface>) nodes;
-		heads = new ArrayList<>();
-		index = 0;
 		while (index < this.nodes.size()) {
-			try {
-				if (this.nodes.get(index) instanceof HeadInterface &&
-						!(this.nodes.get(index) instanceof CommandInterface)) {
-					HeadInterface head = (HeadInterface) this.nodes.get(index);
-					heads.add(head); //add this head node to the head nodes which represent trees
-					index++;
-				}
-				else {
-					CommandInterface head = (CommandInterface) this.nodes.get(index);
-					heads.add(makeTree(head));
-				}
+			if (this.nodes.get(index) instanceof HeadInterface &&
+					!(this.nodes.get(index) instanceof CommandInterface)) {
+				HeadInterface head = (HeadInterface) this.nodes.get(index);
+				heads.add(head); //add this head node to the head nodes which represent trees
+				index++;
 			}
-			catch (ClassCastException e) {
-				e.printStackTrace();
-				throw new HeadException(); //cannot have a head of tree that is node a head node
+			else {
+				CommandInterface head = (CommandInterface) this.nodes.get(index);
+				heads.add(makeTree(head));
 			}
 		}
 	}
@@ -59,21 +51,14 @@ public class TreeMaker {
 	private HeadInterface makeTree(CommandInterface node) {
 		index+=1; //moves to next index when a head is called
 		while (node!=null && node.hasNext()) { //while there are nodes in the list
-			try {
-				NodeInterface curr = nodes.get(index);
-				node.add(curr);
-				if (curr instanceof CommandInterface) {
-					CommandInterface head = (CommandInterface) curr;
-					makeTree(head); //add the next node in the list index
-				}
-				else {
-					//moves to next node in the list while in the loop for non-heads
-					index++;
-				}
+			NodeInterface curr = nodes.get(index);
+			node.add(curr);
+			if (curr instanceof CommandInterface) {
+				CommandInterface head = (CommandInterface) curr;
+				makeTree(head); //add the next node in the list index
 			}
-			catch (IndexOutOfBoundsException e) {
-				e.printStackTrace();
-				throw new NodeArgumentException(); //if a child is expected but nothing there throws error
+			else {
+				index++; //moves to next node in the list while in the loop for non-heads
 			}
 		}
 		node.reset(); //resets so can be sorted through later

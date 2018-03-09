@@ -31,19 +31,14 @@ public class DoTimes extends GeneralCommand {
 			ListNode l = (ListNode) args.get(0);
 			Variable v = (Variable) l.getElement(0);
 			Constant limit = (Constant) l.getElement(1);
-
 			ListNode l2 = (ListNode) args.get(1);
-
 			while (v.getValue() <= limit.getValue()) {
 				System.out.println(v.getValue());
 				value = l2.evaluate();
-
 				double next = v.getValue();
 				next++;
-
 				v.setNewValue(next);
 			}
-
 			return value;
 		}
 		catch (ClassCastException e) {

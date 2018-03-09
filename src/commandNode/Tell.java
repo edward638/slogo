@@ -26,9 +26,7 @@ public class Tell extends GeneralCommand {
                 Turtle t = model.getAllTurtles().get(value);
                 if (!model.getActiveTurtles().contains(t)) { model.addActiveTurtle(t); }
             }
-            else {
-                model.addTurtle(value);
-            }
+            else { model.addTurtle(value); }
             i++;
         }
         return value;

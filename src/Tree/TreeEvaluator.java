@@ -52,15 +52,10 @@ public class TreeEvaluator {
 		while (node.hasNext()) {	 //if there is a child node
 			NodeInterface curr = node.getNext(); //curr is set to the child
 			if (curr instanceof CommandInterface) {
-				//if the child is another command, cast and enter recursion
 				CommandInterface head = (CommandInterface) curr;
-				evaluateHead(head);
-				nArgs.add(curr);
+				evaluateHead(head); //if the child is another command, cast and enter recursion
 			}
-			else {
-				//if not another command add to the args
-				nArgs.add(curr);
-			}
+			nArgs.add(curr);
 		}
 		node.reset(); //sets the node's pointer to its first child for later use
 		returnValue = node.evaluate(nArgs); //returnValue set to the return of evaluate of a node

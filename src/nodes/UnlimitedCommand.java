@@ -29,14 +29,12 @@ public class UnlimitedCommand implements HeadInterface, NodeInterface {
             ArrayList<NodeInterface> nodes = new ArrayList<>();
             nodes.add(command);
             while (!children.empty() && childrenTracker<numChildren) {
-                if (children.peek() instanceof Constant) {
-                    childrenTracker++;
-                }
+                if (children.peek() instanceof Constant) { childrenTracker++; }
                 nodes.add((NodeInterface) children.pop());
             }
             childrenTracker = 0;
             TreeMaker tm = new TreeMaker(nodes);
-            value += te.evaluate( (ArrayList) tm.getHeads());
+            value += te.evaluate(tm.getHeads());
         }
         return value;
     }
