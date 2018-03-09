@@ -10,17 +10,18 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import propertiesFiles.ResourceBundleManager;
-import view.constants.TextAreaConstants;
 import view.factories.ComboBoxFactory;
 
 public class CommandBox extends ScreenComponent{
-	public static final String[] LANGUAGE_LIST = {"English", "Chinese"};
+	private static final String[] LANGUAGE_LIST = {"English", "Chinese"};
 	private Button commandClearButton;
     private Button commandRunButton;
     private TextArea commandTextArea;
     private Label commandLabel;
     private ComboBox<String> languageBox;
     private ParserActionDelegate parserActionDelegate;
+	private final int COMMAND_ROWS = 4;
+	private final int COMMAND_COLUMNS = 30;
 
 	public CommandBox() {
 		super();
@@ -57,8 +58,8 @@ public class CommandBox extends ScreenComponent{
 	
 	private void addConsoleWindow(BorderPane borderPane){
 		commandTextArea = new TextArea();
-		commandTextArea.setPrefRowCount(TextAreaConstants.COMMAND_ROWS);
-		commandTextArea.setPrefColumnCount(TextAreaConstants.COMMAND_COLUMNS);
+		commandTextArea.setPrefRowCount(COMMAND_ROWS);
+		commandTextArea.setPrefColumnCount(COMMAND_COLUMNS);
 		borderPane.setCenter(commandTextArea);
 	}
 	

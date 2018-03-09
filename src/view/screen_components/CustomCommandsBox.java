@@ -28,7 +28,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
         this.parserActionDelegate = parserActionDelegate;
     }
 
-    public  void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
+    public void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
         this.clearValueDelegate = clearValueDelegate;
     }
 
@@ -69,9 +69,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
 
     @Override
     protected void mapUserActions() {
-        clearButton.setOnAction((event -> {
-            clearValueDelegate.clear();
-        }));
+        clearButton.setOnAction((event -> clearValueDelegate.clear()));
     }
 
     @Override

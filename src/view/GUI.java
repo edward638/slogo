@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import propertiesFiles.ResourceBundleManager;
 import view.help_items.HelpPopup;
 import view.screen_components.*;
 import view.view_exceptions.ImproperScreenComponentException;
@@ -80,9 +81,7 @@ public class GUI{
             this.positionBorderPane(screenComponent.getGUIComponent(), COMMAND_HISTORY_BOX_X, COMMAND_HISTORY_BOX_Y);
         }else if(screenComponent instanceof TheDrawer){
             this.positionBorderPane(screenComponent.getGUIComponent(), DRAWER_X, DRAWER_Y);
-        }else if(screenComponent instanceof HelpButton){
-            this.positionBorderPane(screenComponent.getGUIComponent(), HELP_BUTTON_X, HELP_BUTTON_Y);
-        }else if(screenComponent instanceof Palette){
+        } else if(screenComponent instanceof Palette){
             this.positionBorderPane(screenComponent.getGUIComponent(), PALETTE_X, PALETTE_Y);
         }else if(screenComponent instanceof PenControlPanel){
             this.positionBorderPane(screenComponent.getGUIComponent(), PEN_CONTROL_PANEL_X, PEN_CONTROL_PANEL_Y);
@@ -110,7 +109,7 @@ public class GUI{
     }
 
     private void addHelp(){
-        helpButton = new Button("Help");
+        helpButton = new Button(ResourceBundleManager.retrieveButtonLabel("COMMAND_HELP_BUTTON_LABEL"));
         helpButton.setLayoutX(HELP_BUTTON_X);
         helpButton.setLayoutY(HELP_BUTTON_Y);
         helpButton.setOnAction((event -> {
