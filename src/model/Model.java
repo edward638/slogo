@@ -1,28 +1,14 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import java.util.function.Consumer;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
 import view.Observer;
-import view.screen_components.Palette;
+import view.constants.PalletteConstants;
 
-public class Model implements ColorIndexObservable, TurtlesFetcher {
-
-	private static final String TURTLE_0 = "black_and_white_turtle.PNG";
-	private static final String TURTLE_1 = "colorful_turtle.png";
-	private static final String TURTLE_2 = "green_turtle.png";
-	private static final String TURTLE_3 = "SLogo.PNG";
-	private static final String TURTLE_4 = "fd_arrow.png";
-	private static final String TURTLE_5 = "lt_arrow.png";
-	private static final String TURTLE_6 = "bk_arrow.png";
-
+public class Model implements PaletteObservable, TurtlesFetcher {
 	private Color backgroundColor;
 	private List<Color> colorOptions;
 	private List<String> shapeOptions;
@@ -47,7 +33,7 @@ public class Model implements ColorIndexObservable, TurtlesFetcher {
 		XHome = width;
 		YHome = height;
 		
-		Turtle initial = new Turtle(XHome, YHome, colorOptions.get(0), 1.0, TURTLE_0);
+		Turtle initial = new Turtle(XHome, YHome, colorOptions.get(0), 1.0, shapeOptions.get(0));
 
 		allTurtles.put(1.0, initial);
 		activeTurtles.add(initial);
@@ -55,25 +41,11 @@ public class Model implements ColorIndexObservable, TurtlesFetcher {
 	}
 
 	private void initializeColors(){
-		colorOptions = new ArrayList<>();
-		colorOptions.add(Color.RED);
-		colorOptions.add(Color.ORANGE);
-		colorOptions.add(Color.YELLOW);
-		colorOptions.add(Color.GREEN);
-		colorOptions.add(Color.BLUE);
-		colorOptions.add(Color.INDIGO);
-		colorOptions.add(Color.VIOLET);
+		colorOptions = Arrays.asList(PalletteConstants.COLORS);
 	}
 
 	private void initializeShapes(){
-		shapeOptions = new ArrayList<>();
-		shapeOptions.add(TURTLE_0);
-		shapeOptions.add(TURTLE_1);
-		shapeOptions.add(TURTLE_2);
-		shapeOptions.add(TURTLE_3);
-		shapeOptions.add(TURTLE_4);
-		shapeOptions.add(TURTLE_5);
-		shapeOptions.add(TURTLE_6);
+		shapeOptions = Arrays.asList(PalletteConstants.TURTLE_IMAGES);
 	}
 	
 	public List<String> getShapeOptions()
@@ -87,7 +59,7 @@ public class Model implements ColorIndexObservable, TurtlesFetcher {
 	}
 
 	public void addTurtle(double ID) {
-		Turtle t = new Turtle (XHome, YHome, Color.BLUE, ID, TURTLE_0);
+		Turtle t = new Turtle (XHome, YHome, Color.BLUE, ID, shapeOptions.get(0));
 		allTurtles.put( t.getValue(), t);
 		activeTurtles.add(t);
 		drawerObserver.notifyOfChanges();
@@ -97,20 +69,15 @@ public class Model implements ColorIndexObservable, TurtlesFetcher {
 		activeTurtles.add(turt);
 	}
 
-	public Color getBackgroundColor() 
-	{
+	@Override
+	public Color getBackgroundColor() {
 		return backgroundColor;
 	}
-	
-	public void setBackgroundColor(Color c)
-	{
-		this.backgroundColor = c;
-	}
-	
-	
-	public void setBackgroundColor(double index) 
+
+	public void setBackgroundColor(double index)
 	{
 		this.backgroundColor = colorOptions.get((int) index);
+		drawerObserver.notifyOfChanges();
 	}
 	
 	public List<Color> getColorOptions() 

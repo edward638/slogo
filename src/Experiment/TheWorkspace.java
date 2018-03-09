@@ -41,7 +41,7 @@ public class TheWorkspace {
         controllerList.add(new TheButtonCommandPanelController(gui, parser));
         controllerList.add(new TheVariableHistoryBoxController(gui, variableHistory));
         controllerList.add(new ThePaletteController(gui, model));
-        controllerList.add(new TheDrawerController(gui, model));
+        controllerList.add(new TheDrawerController(gui, model,parser));
         controllerList.add(new TheCustomCommandBoxController(gui, variableHistory, parser));
         controllerList.add(new TheCommandHistoryBoxController(gui, commandHistory, parser));
         controllerList.add(new TheCommandBoxController(gui, parser));
@@ -50,11 +50,7 @@ public class TheWorkspace {
     private void initializeControllers(){
         for(TheController controller : controllerList){
             controller.initializeScreenComponents();
-        }
-        for(TheController controller : controllerList){
             controller.setUpConnections();
-        }
-        for(TheController controller : controllerList){
             controller.addToGUI();
         }
     }

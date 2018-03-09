@@ -7,7 +7,7 @@ import javafx.scene.layout.StackPane;
 import model.TurtleObservable;
 import view.Observer;
 
-public class TheDrawerTurtleComponent implements Observer {
+public class TheDrawerTurtleComponent {
     private static final int TURTLE_WIDTH = 50;
     private static final int TURTLE_HEIGHT = 50;
     private final double X_OFFSET;
@@ -18,7 +18,6 @@ public class TheDrawerTurtleComponent implements Observer {
     private TheDrawerLineComponent theDrawerLineComponent;
     public TheDrawerTurtleComponent(TurtleObservable turtle, StackPane drawingScreen, Canvas lineCanvas){
         this.turtle = turtle;
-        turtle.addObserver(this);
         this.drawingScreen = drawingScreen;
         this.theDrawerLineComponent = new TheDrawerLineComponent(lineCanvas);
         X_OFFSET = lineCanvas.getWidth()/2;
@@ -32,9 +31,6 @@ public class TheDrawerTurtleComponent implements Observer {
     }
 
     private void drawLines(){
-        if(turtle.getLines().isEmpty()){
-            theDrawerLineComponent.clearCanvas();
-        }
         theDrawerLineComponent.draw(turtle.getLines());
     }
 
@@ -49,17 +45,11 @@ public class TheDrawerTurtleComponent implements Observer {
         drawingScreen.getChildren().add(turtleImage);
     }
 
-    private void update(){
+    public void update(){
         if(!turtle.getTurtleShowing()) turtleImage.setVisible(false);
         this.setTurtleImage();
         turtleImage.setRotate(-turtle.getDirectionAngle());
         this.move();
         this.drawLines();
-    }
-
-
-    @Override
-    public void notifyOfChanges() {
-        update();
     }
 }

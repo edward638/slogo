@@ -75,7 +75,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 		{
 			addLine(l);
 		}
-		turtleObserver.notifyOfChanges();
 	}
 
 	public double[] getHome(){
@@ -89,7 +88,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 
 	public void setDirectionAngle(double directionAngle) {
 		this.directionAngle = directionAngle;
-		turtleObserver.notifyOfChanges();
 	}
 
 
@@ -109,7 +107,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 	public void clearLines()
 	{
 		lines = new ArrayList<Line>();
-		turtleObserver.notifyOfChanges();
 	}
 
 
@@ -120,7 +117,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 
 	public void setPenShowing(boolean penShowing) {
 		this.penShowing = penShowing;
-		turtleObserver.notifyOfChanges();
 	}
 
 	public boolean getTurtleShowing() {
@@ -139,7 +135,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 
 	public void setTurtleShowing(boolean turtleShowing) {
 		this.turtleShowing = turtleShowing;
-		turtleObserver.notifyOfChanges();
 	}
 
 	public void setPenSize(double pixels) {
@@ -153,7 +148,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 	public void setTurtleShape(String turtleShape)
 	{
 		this.turtleShape = turtleShape;
-		turtleObserver.notifyOfChanges();
 	}
 
 	@Override

@@ -26,6 +26,7 @@ public class TheVariableHistoryBoxController extends TheController implements Th
         variablesHistory.addObserver(variableHistoryBox);
     }
 
+
     @Override
     protected void addToGUI() {
         super.getGui().addToScreen(variableHistoryBox);

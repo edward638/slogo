@@ -21,10 +21,13 @@ public class SetShape extends GeneralCommand {
 	 * @return given index
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
+		model.update((t)->t.setTurtleShape(model.getShapeOptions().get((int) arguments.get(0).getValue())));
+		/*
 		for (Turtle turtle: model.getActiveTurtles())
 		{
 			turtle.setTurtleShape(model.getShapeOptions().get((int) arguments.get(0).getValue()));
 		}
+		*/
 		value = arguments.get(0).getValue();
 		return value;
 	}

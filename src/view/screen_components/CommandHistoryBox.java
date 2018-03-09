@@ -2,8 +2,6 @@ package view.screen_components;
 
 import Experiment.TheClearValueDelegate;
 import Experiment.TheParserActionDelegate;
-import controller.CommandBoxController;
-import controller.CommandHistoryBoxController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;

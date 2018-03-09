@@ -22,7 +22,4 @@ public class TheDrawerLineComponent {
             gc.strokeLine(line.getStartX(), line.getStartY(), line.getEndX(), line.getEndY());
         }
     }
-    public void clearCanvas(){
-        gc.clearRect(0,0,Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT);
-    }
 }
