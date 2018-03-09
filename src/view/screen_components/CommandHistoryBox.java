@@ -52,7 +52,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 
 	private void addButtonAndLabels(BorderPane borderPane){
 		HBox topComponent = new HBox();
-		clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("HISTORY_BUTTON_LABEL"));
+		clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("CLEAR"));
 		Label label = new Label(ResourceBundleManager.retrieveLabel("HISTORY_LABEL_TEXT"));
 		topComponent.getChildren().add(label);
 		topComponent.getChildren().add(clearButton);
@@ -73,7 +73,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 			Button commandButton = new Button(command);
 			commandButton.getStyleClass().add("runnableCommandButton");
 			commandButton.setOnAction((event -> {
-				parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString(commandButton.getText())));
+				parserActionDelegate.performParserAction(parser -> parser.passTextCommand(commandButton.getText()));
 			}));
 			commandList.getChildren().add(commandButton);
 		}

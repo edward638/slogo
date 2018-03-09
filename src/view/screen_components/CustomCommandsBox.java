@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.CustomCommandObservable;
+import propertiesFiles.ResourceBundleManager;
 import view.Observer;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 public class CustomCommandsBox extends ScreenComponent implements Observer {
     public static final int SCROLLPANE_WIDTH = 200;
     public static final int SCROLLPANE_HEIGHT = 100;
-    private CustomCommandObservable customCommandHolder;
+    private CustomCommandObservable customCommandObservable;
     private Button clearButton;
     private VBox commandList;
 
@@ -33,7 +34,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
 
     private void addButtonAndLabels(BorderPane borderPane) {
         HBox topComponent = new HBox();
-        clearButton = new Button("Clear");
+        clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("CLEAR"));
         Label label = new Label("Custom Commands");
         topComponent.getChildren().add(label);
         topComponent.getChildren().add(clearButton);
@@ -48,19 +49,19 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
 
     }
 
-    public void setCustomCommandHolder(CustomCommandObservable holder){
-        this.customCommandHolder = holder;
+    public void setCustomCommandObservable(CustomCommandObservable holder){
+        this.customCommandObservable = holder;
     }
 
     @Override
     public void notifyOfChanges() {
-        List<String> commands = customCommandHolder.getCommands();
+        List<String> commands = customCommandObservable.getCommands();
         commandList.getChildren().clear();
         for(String command: commands){
             Button commandButton = new Button(command);
             commandButton.getStyleClass().add("runnableCommandButton");
             commandButton.setOnAction((event -> {
-                parserActionDelegate.performParserAction(parser -> parser.parseString(commandButton.getText()));
+                parserActionDelegate.performParserAction(parser -> parser.passTextCommand(commandButton.getText()));
             }));
             commandList.getChildren().add(commandButton);
         }
