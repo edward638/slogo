@@ -87,7 +87,7 @@ public class Model implements ColorIndexObservable, TurtlesFetcher {
 
 	public void addTurtle(double ID) {
 		Turtle t = new Turtle (XHome, YHome, Color.BLUE, ID, TURTLE_0);
-		allTurtles.put((double) t.getValue(), t);
+		allTurtles.put( t.getValue(), t);
 		activeTurtles.add(t);
 		drawerObserver.notifyOfChanges();
 	}
