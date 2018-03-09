@@ -1,4 +1,4 @@
-package nodes;
+package parsers;
 
 import java.lang.reflect.*;
 import java.util.Enumeration;
@@ -6,17 +6,79 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import commandNode.MakeUserInstruction;
+import model.CommandHistory;
 import model.Model;
 import model.Turtle;
 import model.VariablesHistory;
-import parsers.InvalidEntryException;
+import nodes.Constant;
+import nodes.CustomCommand;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
+import nodes.Variable;
 
 public class NodeFactory 
 {	
 	//private Map<String,Class[]> commandToParams;
 	//private static String PARAMETER_FILE = "parsers/commandToConstructorParameters";
+	private static final String NODE_PACKAGE = "commandNode.";
+	
+	public static NodeInterface createNode(String key, String text, VariablesHistory varHistory, Model model, Map<String, Pattern> myTranslation, CommandHistory comHistory, Map<String, Integer> children) 
+	{
+		// TODO Auto-generated method stub
+		if (varHistory.getCommandKeys().contains(text))
+		{
+			return varHistory.getCommand(text);
+		}
+		else if (key.equals("Command"))
+		{
+			String commandType = checkLanguage(text, myTranslation, comHistory);
+			try 
+			{
+				return (GeneralCommand) NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), model, children.get(commandType));
+			}
+			catch(ClassNotFoundException e)
+			{
+				comHistory.addCommand("Error: Could not access constructor for command " + text );
+				throw new InvalidEntryException("Error: Could not access Node constructor");
+			}
+				
+		}
+		else if (key.equals("Constant"))
+		{
+			return new Constant(Integer.parseInt(text));
+		}
+		else if(key.equals("Variable"))
+		{
+			return new Variable(text.substring(1), varHistory);
+		}
+		
+		return null;	
+	}
+	
+	/**
+	 * Given a command in any language will return the appropriate command type
+	 * Checks for invalid command errors
+	 * 
+	 * @param command string identified as command syntax in a user input
+	 * @param comHistory 
+	 * @return a string indicating the appropriate command type
+	 * @throws InvalidEntryException didnt match any of the commands in the given language
+	 */
+	private static String checkLanguage(String command, Map<String,Pattern> myTranslation, CommandHistory comHistory)
+	{
+		for (String key: myTranslation.keySet())
+		{
+			if(myTranslation.get(key).matcher(command).matches())
+			{
+				return key;
+			}
+		}
+		comHistory.addCommand("Error: Cannot recognize language");
+		throw new InvalidEntryException("Error: Cannot recognize language");
+	}
 
 	public static Object makeNode(Class<?> clazz,Model model, int numChildren)
 	{
@@ -34,6 +96,8 @@ public class NodeFactory
 		}
 		return null;
 	}
+
+	
 	
 	
 //	private void buildParameterMap() 

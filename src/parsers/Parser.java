@@ -27,18 +27,16 @@ import nodes.*;
  */
 public class Parser 
 {
-	private Map<String,Pattern> myTranslation;
+	protected Map<String,Pattern> myTranslation;
 	private static boolean NEW_COMMAND = true;
 	private Map<String,Pattern> regex;
-	private Map<String,Integer> children;
+	protected Map<String,Integer> children;
 	private String languageFilePath;
 	private static final String REGEX_FILE = "parsers/regex";
-	private static final String NODE_PACKAGE = "commandNode.";
 	private Model model;
 	private VariablesHistory varHistory;
 	private CommandHistory comHistory;
 	private String lang;
-	private NodeFactory nodeMaker;
 	
 	/**
 	 * Class Constructor
@@ -170,43 +168,9 @@ public class Parser
 				{
 					match = true;
 					//nf.makeToken(key, text, varHistory, model, children.get(commandType));
-					
-					if (key.equals("Command"))
+					if(key.equals("Command") && nodeList.size() > 0 && nodeList.get(i-1) instanceof MakeUserInstruction)
 					{
-						if (varHistory.getCommandKeys().contains(text))
-						{
-							CustomCommand n = varHistory.getCommand(text);
-							nodeList.add(n);
-						}
-						else if(nodeList.size() > 0 && nodeList.get(i-1) instanceof MakeUserInstruction)
-						{
-							CustomCommand n = new CustomCommand(text,varHistory);
-							nodeList.add(n);
-						}
-						else
-						{
-							String commandType = checkLanguage(text);
-							try 
-							{
-								GeneralCommand n = (GeneralCommand) NodeFactory.makeNode(Class.forName(NODE_PACKAGE + commandType), model, children.get(commandType));
-								nodeList.add(n);
-							}
-							catch(ClassNotFoundException e)
-							{
-								comHistory.addCommand("Error: Could not access constructor for command " + text );
-								throw new InvalidEntryException("Error: Could not access Node constructor");
-							}
-						}
-							
-					}
-					else if (key.equals("Constant"))
-					{
-						Constant n = new Constant(Integer.parseInt(text));
-						nodeList.add(n);
-					}
-					else if(key.equals("Variable"))
-					{
-						Variable n = new Variable(text.substring(1), varHistory);
+						CustomCommand n = new CustomCommand(text,varHistory);
 						nodeList.add(n);
 					}
 					else if(key.equals("List"))
@@ -239,6 +203,15 @@ public class Parser
 						}
 						nodeList.add(l);
 					}
+					else
+					{
+						NodeInterface node = NodeFactory.createNode(key, text, varHistory, model, myTranslation, comHistory, children);
+						if(node != null)
+						{
+							nodeList.add(node);
+						}
+						
+					}
 				}
 			}
 			if(!match)
@@ -250,24 +223,4 @@ public class Parser
 		
 	}	
 
-	/**
-	 * Given a command in any language will return the appropriate command type
-	 * Checks for invalid command errors
-	 * 
-	 * @param command string identified as command syntax in a user input
-	 * @return a string indicating the appropriate command type
-	 * @throws InvalidEntryException didnt match any of the commands in the given language
-	 */
-	private String checkLanguage(String command)
-	{
-		for (String key: myTranslation.keySet())
-		{
-			if(myTranslation.get(key).matcher(command).matches())
-			{
-				return key;
-			}
-		}
-		comHistory.addCommand("Error: Cannot recognize language");
-		throw new InvalidEntryException("Error: Cannot recognize language");
-	}
 }
