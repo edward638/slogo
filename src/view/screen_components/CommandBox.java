@@ -10,9 +10,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import propertiesFiles.ResourceBundleManager;
-import view.constants.ButtonConstants;
 import view.constants.ComboBoxConstants;
-import view.constants.LabelConstants;
 import view.constants.TextAreaConstants;
 
 public class CommandBox extends ScreenComponent{
