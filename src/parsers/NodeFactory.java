@@ -19,12 +19,34 @@ import nodes.GeneralCommand;
 import nodes.NodeInterface;
 import nodes.Variable;
 
+/**
+ * @author Belanie Nagiel
+ * 
+ * A rather messy class that tried to take some of the burden of node making off of Parser.
+ * Handles command, variable, and constant nodes, and uses reflection to make command nodes.
+ * Also handles language checking for nodes.
+ *
+ */
 public class NodeFactory 
 {	
 	//private Map<String,Class[]> commandToParams;
 	//private static String PARAMETER_FILE = "parsers/commandToConstructorParameters";
 	private static final String NODE_PACKAGE = "commandNode.";
 	
+	/**
+	 * A messy method that tries to take some of the burden off of parser in terms of creating nodes.
+	 * Handles the creation of command, variable, and constant nodes.
+	 * 
+	 * @param key
+	 * @param text
+	 * @param varHistory
+	 * @param model
+	 * @param myTranslation
+	 * @param comHistory
+	 * @param children
+	 * 
+	 * @return a node to add to node list
+	 */
 	public static NodeInterface createNode(String key, String text, VariablesHistory varHistory, Model model, Map<String, Pattern> myTranslation, CommandHistory comHistory, Map<String, Integer> children) 
 	{
 		// TODO Auto-generated method stub
@@ -80,6 +102,15 @@ public class NodeFactory
 		throw new InvalidEntryException("Error: Cannot recognize language");
 	}
 
+	/**
+	 * Uses reflection to create the correct type of command node from the many command nodes in the command node package.
+	 * 
+	 * @param clazz
+	 * @param model
+	 * @param numChildren
+	 * 
+	 * @return a new instance of the correct command node
+	 */
 	public static Object makeNode(Class<?> clazz,Model model, int numChildren)
 	{
 		try
