@@ -23,6 +23,7 @@ public class Turtle implements TurtleObservable, NodeInterface
 	private boolean turtleShowing;
 	private Color penColor;
 	private double penSize;
+	private boolean activeStatus;
 
 	
 	private WraparoundHandler toroidal;
@@ -146,5 +147,14 @@ public class Turtle implements TurtleObservable, NodeInterface
 	@Override
 	public double getValue() {
 		return ID;
+	}
+
+	public void setTurtleStatus(boolean active) {
+		this.activeStatus = active;
+	}
+	
+	@Override
+	public boolean getTurtleStatus() {
+		return activeStatus;
 	}
 }
