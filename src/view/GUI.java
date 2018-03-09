@@ -109,7 +109,7 @@ public class GUI{
     }
 
     private void addHelp(){
-        helpButton = new Button(ResourceBundleManager.retrieveButtonLabel("COMMAND_HELP_BUTTON_LABEL"));
+        helpButton = new Button(ResourceBundleManager.retrieveButtonLabel("HELP"));
         helpButton.setLayoutX(HELP_BUTTON_X);
         helpButton.setLayoutY(HELP_BUTTON_Y);
         helpButton.setOnAction((event -> {
