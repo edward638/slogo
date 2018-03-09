@@ -34,7 +34,7 @@ public class VariableHistoryBoxController extends Controller implements ClearVal
 
     @Override
     public void clear() {
-        variablesHistory.clearHistory();
+        variablesHistory.clearCommandHistory();
     }
 
     @Override

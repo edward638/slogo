@@ -93,18 +93,19 @@ public class TheDrawer extends ScreenComponent implements Observer{
     }
 
     private void changeBackgroundColor(){
-        parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_BG") + backgroundColorBox.getValue())));
+        parserActionDelegate.performParserAction(parser -> parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_BG") + backgroundColorBox.getValue()));
     }
 
     private void changePenColor(){
-        parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_PC") + penColorBox.getValue())));
+        parserActionDelegate.performParserAction(parser -> parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_PC") + penColorBox.getValue()));
 
     }
 
     private void changeTurtleImage(){
-        parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_SH") + turtleImageBox.getValue())));
+        parserActionDelegate.performParserAction(parser -> parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_SH") + turtleImageBox.getValue()));
 
     }
+
 
     private void addFrontEndTurtle(TurtleObservable turtleObservable){
         linkedTurtles.add(turtleObservable);
