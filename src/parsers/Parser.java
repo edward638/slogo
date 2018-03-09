@@ -31,7 +31,6 @@ public class Parser
 	private boolean newCommand = true;
 	private Map<String,Pattern> regex;
 	protected Map<String,Integer> children;
-	private String languageFilePath;
 	private static final String REGEX_FILE = "parsers/regex";
 	private Model model;
 	private VariablesHistory varHistory;
@@ -109,7 +108,7 @@ public class Parser
 	
 	public List<NodeInterface> parseString(String command)
 	{
-		languageFilePath = "resources.languages/" + lang;
+		String languageFilePath = "resources.languages/" + lang;
 		addResources(languageFilePath, myTranslation);
 		if(newCommand)
 		{
@@ -168,7 +167,7 @@ public class Parser
 				{
 					match = true;
 					//nf.makeToken(key, text, varHistory, model, children.get(commandType));
-					if(key.equals("Command") && nodeList.size() > 0 && nodeList.get(i-1) instanceof MakeUserInstruction)
+					if(key.equals("Command") && !nodeList.isEmpty() && nodeList.get(i-1) instanceof MakeUserInstruction)
 					{
 						CustomCommand n = new CustomCommand(text,varHistory);
 						nodeList.add(n);
