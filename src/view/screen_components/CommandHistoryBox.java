@@ -1,5 +1,8 @@
 package view.screen_components;
 
+import Experiment.TheClearValueDelegate;
+import Experiment.TheParserActionDelegate;
+import controller.CommandBoxController;
 import controller.CommandHistoryBoxController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,10 +25,15 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 		super();
 	}
 
-	private CommandHistoryBoxController controller;
+	private TheParserActionDelegate theParserActionDelegate;
+	private TheClearValueDelegate theClearValueDelegate;
 
-	public void setController(CommandHistoryBoxController controller){
-		this.controller = controller;
+	public void setTheParserActionDelegate(TheParserActionDelegate theParserActionDelegate){
+		this.theParserActionDelegate = theParserActionDelegate;
+	}
+
+	public void setTheClearValueDelegate(TheClearValueDelegate theClearValueDelegate){
+		this.theClearValueDelegate = theClearValueDelegate;
 	}
 
 	public void setCommandHistory(CommandHistory commandHistory){
@@ -35,7 +43,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 	@Override
 	protected void mapUserActions() {
 		clearButton.setOnAction((event -> {
-			controller.clearCommandHistoryBox();
+			theClearValueDelegate.clear();
 		}));
 	}
 
@@ -67,7 +75,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 			Button commandButton = new Button(command);
 			commandButton.getStyleClass().add("runnableCommandButton");
 			commandButton.setOnAction((event -> {
-				controller.passCommand(commandButton.getText());
+				theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString(commandButton.getText())));
 			}));
 			commandList.getChildren().add(commandButton);
 		}

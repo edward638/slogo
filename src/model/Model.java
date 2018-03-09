@@ -34,6 +34,8 @@ public class Model implements ColorIndexObservable, TurtlesFetcher {
 
 	private int currentTurtle = 0;
 
+	private Observer drawerObserver;
+
 	private Observer colorIndexObserver;
 	private Observer drawerObserver;
 	
@@ -153,6 +155,9 @@ public class Model implements ColorIndexObservable, TurtlesFetcher {
 		drawerObserver.notifyOfChanges();
 	}
 
+	public void addDrawerObserver(Observer observer){
+		drawerObserver = observer;
+	}
 
 	public void addObserver(Observer colorListObserver) {
 		this.colorIndexObserver = colorListObserver;
