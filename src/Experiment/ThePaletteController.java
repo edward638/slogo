@@ -21,6 +21,7 @@ public class ThePaletteController extends TheController{
     protected void setUpConnections() {
         palette.setColorIndex(model);
         model.addObserver(palette);
+        model.initializePalette();
     }
 
     @Override

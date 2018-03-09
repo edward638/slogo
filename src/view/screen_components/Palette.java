@@ -45,7 +45,6 @@ public class Palette extends ScreenComponent implements Observer{
     }
 
     private void generateVBox(BorderPane borderPane){
-
         vBox = new VBox();
         vBox.setPadding(new Insets(VBOX_SPACING, VBOX_SPACING, VBOX_SPACING, VBOX_SPACING));
         vBox.setSpacing(VBOX_SPACING);
