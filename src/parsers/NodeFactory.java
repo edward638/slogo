@@ -117,7 +117,7 @@ public class NodeFactory
 	 * 
 	 * @return a new instance of the correct command node
 	 */
-	public static Object makeNode(Class<?> clazz,Model model, int numChildren, CommandHistory comHistory)
+	private static Object makeNode(Class<?> clazz,Model model, int numChildren, CommandHistory comHistory)
 	{
 		try
 		{
