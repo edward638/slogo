@@ -9,7 +9,8 @@ import propertiesFiles.ResourceBundleManager;
 
 
 public class TurtleControlPanel extends ScreenComponent {
-
+    private static final int STEP_SIZE = 50;
+    private static final int TURN_SIZE = 20;
     private static final String FD_BUTTON = "fdButton";
     private static final String BK_BUTTON = "bkButton";
     private static final String LT_BUTTON = "ltButton";
@@ -27,17 +28,18 @@ public class TurtleControlPanel extends ScreenComponent {
     @Override
     protected void mapUserActions() {
         forwardButton.setOnAction((event -> {
-            parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("FORWARD"))));
+            parserActionDelegate.performParserAction(parser -> parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("FORWARD") + STEP_SIZE));
         }));
         backwardButton.setOnAction((event -> {
-            parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("BACKWARD"))));
+            parserActionDelegate.performParserAction(parser -> parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("BACKWARD") + STEP_SIZE));
         }));
         rightTurnButton.setOnAction((event -> {
-            parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("RIGHT"))));
+            parserActionDelegate.performParserAction(parser -> parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("RIGHT") + TURN_SIZE));
         }));
         leftTurnButton.setOnAction((event -> {
-            parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("LEFT"))));
+            parserActionDelegate.performParserAction(parser -> parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("LEFT") + TURN_SIZE));
         }));
+
     }
 
     @Override

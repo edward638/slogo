@@ -23,7 +23,7 @@ public class Model implements PaletteObservable, DrawerObservable {
 	private Observer drawerObserver;
 
 	private Observer colorIndexObserver;
-	
+
 	public Model(double width, double height)
 	{
 		initializeColors();
@@ -32,7 +32,7 @@ public class Model implements PaletteObservable, DrawerObservable {
 		allTurtles = new HashMap<>();
 		XHome = width;
 		YHome = height;
-		
+
 		Turtle initial = new Turtle(XHome, YHome, colorOptions.get(0), 1.0, shapeOptions.get(0));
 
 		allTurtles.put(1.0, initial);
@@ -47,13 +47,13 @@ public class Model implements PaletteObservable, DrawerObservable {
 	private void initializeShapes(){
 		shapeOptions = Arrays.asList(PaletteConstants.TURTLE_IMAGES);
 	}
-	
+
 	public List<String> getShapeOptions()
 	{
 		return shapeOptions;
 	}
 
-	public Map<Double, Turtle> getAllTurtles() 
+	public Map<Double, Turtle> getAllTurtles()
 	{
 		return allTurtles;
 	}
@@ -64,7 +64,7 @@ public class Model implements PaletteObservable, DrawerObservable {
 		activeTurtles.add(t);
 		drawerObserver.notifyOfChanges();
 	}
-	
+
 	public void addActiveTurtle(Turtle turt) {
 		activeTurtles.add(turt);
 	}
@@ -79,18 +79,18 @@ public class Model implements PaletteObservable, DrawerObservable {
 		this.backgroundColor = colorOptions.get((int) index);
 		drawerObserver.notifyOfChanges();
 	}
-	
-	public List<Color> getColorOptions() 
+
+	public List<Color> getColorOptions()
 	{
 		return colorOptions;
 	}
-	
+
 	public void setColorOptions(double index, double R, double G, double B) {
 		//EXCEPTION FOR IF R,G,B ARE OUT OF BOUNDS
 		colorOptions.set((int) index, Color.rgb((int) R, (int) G, (int) B));
 		colorIndexObserver.notifyOfChanges();
 	}
-	
+
 	public Color getColorAtIndex(double index)
 	{
 		//EXCEPTION FOR IF AN INDEX IS OUT OF BOUNDS
@@ -98,11 +98,11 @@ public class Model implements PaletteObservable, DrawerObservable {
 		return colorOptions.get((int)index);
 	}
 
-	public Turtle getActiveTurtle() 
-	{ 
-		return activeTurtles.get(currentTurtle); 
+	public Turtle getActiveTurtle()
+	{
+		return activeTurtles.get(currentTurtle);
 	}
-	
+
 	public List<Turtle> getActiveTurtles()
 	{
 		return activeTurtles;

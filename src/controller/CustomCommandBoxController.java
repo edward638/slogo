@@ -26,7 +26,7 @@ public class CustomCommandBoxController extends Controller implements ParserActi
     protected void setUpConnections() {
         customCommandsBox.setClearValueDelegate(this);
         customCommandsBox.setParserActionDelegate(this);
-        customCommandsBox.setCustomCommandHolder(variablesHistory);
+        customCommandsBox.setCustomCommandObservable(variablesHistory);
         variablesHistory.addCustomCommandObserver(customCommandsBox);
     }
 
@@ -43,6 +43,6 @@ public class CustomCommandBoxController extends Controller implements ParserActi
 
     @Override
     public void clear() {
-        variablesHistory.clearHistory();
+        variablesHistory.clearVariableHistory();
     }
 }

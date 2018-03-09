@@ -7,6 +7,9 @@ import javafx.scene.layout.VBox;
 import propertiesFiles.ResourceBundleManager;
 
 public class PenControlPanel extends ScreenComponent{
+    private static final int SMALL_PEN_SIZE = 5;
+    private static final int MED_PEN_SIZE = 15;
+    private static final int LARGE_PEN_SIZE = 30;
     private ParserActionDelegate parserActionDelegate;
     private Button penUpButton;
     private Button penDownButton;
@@ -25,30 +28,31 @@ public class PenControlPanel extends ScreenComponent{
     @Override
     protected void mapUserActions() {
         penUpButton.setOnAction((event -> {
-            parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("PENUP"))));
+            parserActionDelegate.performParserAction((parser -> parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("PENUP"))));
         }));
         penDownButton.setOnAction((event -> {
-            parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("PENDOWN"))));
+            parserActionDelegate.performParserAction((parser -> parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("PENDOWN"))));
         }));
         smallPenButton.setOnAction((event -> {
-            parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SMALL_FONT"))));
+            parserActionDelegate.performParserAction((parser -> parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_PS") + SMALL_PEN_SIZE)));
         }));
         medPenButton.setOnAction((event -> {
-            parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("MED_FONT"))));
+            parserActionDelegate.performParserAction((parser -> parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_PS") + MED_PEN_SIZE)));
         }));
         largePenButton.setOnAction((event -> {
-            parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("LARGE_FONT"))));
+            parserActionDelegate.performParserAction((parser -> parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_PS") + LARGE_PEN_SIZE)));
         }));
+
     }
 
     @Override
     public void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();
-        penUpButton = new Button(ResourceBundleManager.retrieveOnScreenCommand("UP_BUTTON"));
-        penDownButton = new Button(ResourceBundleManager.retrieveOnScreenCommand("DOWN_BUTTON"));
-        smallPenButton = new Button(ResourceBundleManager.retrieveOnScreenCommand("SMALL_BUTTON"));
-        medPenButton = new Button(ResourceBundleManager.retrieveOnScreenCommand("MED_BUTTON"));
-        largePenButton = new Button(ResourceBundleManager.retrieveOnScreenCommand("LARGE_BUTTON"));
+        penUpButton = new Button(ResourceBundleManager.retrieveButtonLabel("PEN_UP"));
+        penDownButton = new Button(ResourceBundleManager.retrieveButtonLabel("PEN_DOWN"));
+        smallPenButton = new Button(ResourceBundleManager.retrieveButtonLabel("PEN_SMALL"));
+        medPenButton = new Button(ResourceBundleManager.retrieveButtonLabel("PEN_MED"));
+        largePenButton = new Button(ResourceBundleManager.retrieveButtonLabel("PEN_LARGE"));
         VBox vbox = new VBox();
         vbox.getChildren().add(penUpButton);
         vbox.getChildren().add(penDownButton);

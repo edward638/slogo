@@ -74,7 +74,7 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 
 	private void addButtonAndLabels(BorderPane borderPane){
 		HBox topComponent = new HBox();
-		clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("VARIABLE_BUTTON_LABEL"));
+		clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("CLEAR"));
 		Label label = new Label(ResourceBundleManager.retrieveLabel("VARIABLE_LABEL_TEXT"));
 		topComponent.getChildren().add(label);
 		topComponent.getChildren().add(clearButton);
