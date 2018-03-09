@@ -13,4 +13,5 @@ public interface TurtleObservable {
     List<Line> getLines();
     boolean getTurtleShowing();
     String getTurtleShape();
+    boolean getTurtleStatus();
 }
