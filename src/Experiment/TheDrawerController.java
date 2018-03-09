@@ -24,8 +24,7 @@ public class TheDrawerController extends TheController implements TheParserActio
 
     @Override
     protected void setUpConnections() {
-        drawer.setPaletteObservable(model);
-        drawer.setTurtlesFetcher(model);
+        drawer.setDrawerObservable(model);
         drawer.setTheParserActionDelegate(this);
         drawer.notifyOfChanges();
         model.addDrawerObserver(drawer);
