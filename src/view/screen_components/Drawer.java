@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import model.Turtle;
 import model.TurtleObservable;
+import model.TurtlesFetcher;
 import view.Observer;
 import view.constants.CanvasConstants;
 import view.constants.ComboBoxConstants;
@@ -29,17 +30,19 @@ public class Drawer extends ScreenComponent implements Observer{
 	private ComboBox<String> backgroundColorBox;
 	private ComboBox<String> penColorBox;
 	private ComboBox<String> turtleImageBox;
+	private TurtlesFetcher turtlesFetcher;
 	private TurtleObservable turtle;
 	private HBox hbox;
-	private DrawerController controller;
 	public Drawer(){
 		super();
 	}
 
-	public void setController(DrawerController controller){
-		this.controller = controller;
-		drawerCanvas.setController(controller);
+	public void setTurtlesFetcher(TurtlesFetcher turtlesFetcher){
+		this.turtlesFetcher = turtlesFetcher;
 	}
+
+
+
 
 	public void setTurtle(TurtleObservable turtle){
 		this.turtle = turtle;
@@ -79,26 +82,34 @@ public class Drawer extends ScreenComponent implements Observer{
 	}
 
 	private void changeBackgroundColor(){
+		/*
 		String color = backgroundColorBox.getValue();
 		drawerCanvas.changeBackgroundColor(color);
 		update();
+		*/
 	}
 
 	private void changePenColor(){
-		controller.setPenColor(Color.valueOf(penColorBox.getValue()));
+		//controller.setPenColor(Color.valueOf(penColorBox.getValue()));
 	}
 
 	private void changeTurtleImage(){
+		/*
 		String imageName = turtleImageBox.getValue();
 		drawerCanvas.changeTurtleImage(imageName);
 		update();
+		*/
 	}
 
 
 	public void update(){
+		/*
+		for(List<Tur>)
+		turtlesFetcher.getTurtleObservables()
 		drawerCanvas.setTurtle(turtle);
 		drawerCanvas.changeTurtleImage(turtle.getTurtleShape());
 		drawerCanvas.update();
+		*/
 	}
 
 	@Override

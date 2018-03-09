@@ -23,7 +23,7 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 	private Parser parser;
 	private CommandHistory commandHistory;
 	private VariablesHistory variableHistory;
-	private Drawer drawer;
+	private TheDrawer drawer;
 	private CommandBox commandBox;
 	private CommandHistoryBox commandHistoryBox;
 	private VariableHistoryBox variableHistoryBox;
@@ -51,12 +51,17 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 	}
 
 	private void setUpConnections(){
+		/*
 		for (Turtle turtle: model.getActiveTurtles())
 		{
+
 			turtle.addObserver(drawer);
 			drawer.setTurtle(turtle);
 			drawer.update();
 		}
+		*/
+		model.setDrawerObserver(drawer);
+		drawer.setTurtlesFetcher(model);
 		model.addObserver(palette);
 		palette.setColorIndex(model);
 		model.initializePalette();
@@ -71,8 +76,7 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 
 	private void initializeScreenComponents(){
 		palette = new Palette();
-		drawer = new Drawer();
-		drawer.setController(this);
+		drawer = new TheDrawer();
 		commandBox = new CommandBox();
 		commandBox.setController(this);
 		commandHistoryBox = new CommandHistoryBox();
