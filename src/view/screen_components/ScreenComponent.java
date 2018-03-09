@@ -13,7 +13,7 @@ public abstract class ScreenComponent {
 	public BorderPane getGUIComponent(){
 		mapUserActions();
 		return borderPane;
-	};
+	}
 	protected BorderPane getBorderPane(){
 		return borderPane;
 	}
