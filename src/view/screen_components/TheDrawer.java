@@ -1,7 +1,6 @@
 package view.screen_components;
 
-import Experiment.ThePaletteDelegate;
-import controller.DrawerController;
+import Experiment.TheParserActionDelegate;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ComboBox;
@@ -9,12 +8,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import model.ModelInterface;
+import model.PaletteObservable;
 import model.TurtleObservable;
 import model.TurtlesFetcher;
+import propertiesFiles.ResourceBundleManager;
 import view.Observer;
-import view.constants.CanvasConstants;
-import view.constants.ComboBoxConstants;
+import view.constants.PalletteConstants;
 import view.factories.ComboBoxFactory;
 
 import java.util.ArrayList;
@@ -30,20 +29,22 @@ public class TheDrawer extends ScreenComponent implements Observer{
     // https://pixabay.com/en/turtle-animal-reptile-water-green-294522/
     // https://pixabay.com/en/sea-turtle-floral-flowers-2952470/
 
-    private ComboBox<String> backgroundColorBox;
-    private ComboBox<String> penColorBox;
-    private ComboBox<String> turtleImageBox;
+    private ComboBox<Integer> backgroundColorBox;
+    private ComboBox<Integer> penColorBox;
+    private ComboBox<Integer> turtleImageBox;
 
     private TurtlesFetcher turtlesFetcher;
     private List<TheDrawerTurtleComponent> turtlesOnScreen;
     private List<TurtleObservable> linkedTurtles;
     private TheDrawerBackgroundComponent backgroundComponent;
 
-    private ThePaletteDelegate thePaletteDelegate;
+    private TheParserActionDelegate parserActionDelegate;
 
     private StackPane drawingScreen;
     private Canvas linesLayer;
     private Canvas backgroundLayer;
+
+    private PaletteObservable paletteObservable;
 
     public TheDrawer(){
         super();
@@ -56,8 +57,12 @@ public class TheDrawer extends ScreenComponent implements Observer{
         this.update();
     }
 
-    public void setThePaletteDelegate(ThePaletteDelegate thePaletteDelegate){
-        this.thePaletteDelegate = thePaletteDelegate;
+    public void setTheParserActionDelegate(TheParserActionDelegate theParserActionDelegate){
+        this.parserActionDelegate = theParserActionDelegate;
+    }
+
+    public void setPaletteObservable(PaletteObservable paletteObservable){
+        this.paletteObservable = paletteObservable;
     }
 
     @Override
@@ -87,32 +92,25 @@ public class TheDrawer extends ScreenComponent implements Observer{
 
     private void generateListOptions(BorderPane borderPane){
         HBox hbox = new HBox();
-        backgroundColorBox = ComboBoxFactory.generateComboBox(ComboBoxFactory.BACKGROUND_COLOR_LIST);
-        penColorBox = ComboBoxFactory.generateComboBox(ComboBoxFactory.PEN_COLOR_LIST);
-        turtleImageBox = ComboBoxFactory.generateComboBox(ComboBoxFactory.TURTLE_IMAGE_LIST);
+        backgroundColorBox = ComboBoxFactory.generateIntegerComboBox("Background Color", PalletteConstants.COLORS.length);
+        penColorBox = ComboBoxFactory.generateIntegerComboBox("Pen Color",PalletteConstants.COLORS.length);
+        turtleImageBox = ComboBoxFactory.generateIntegerComboBox("Turtle Image",PalletteConstants.TURTLE_IMAGES.length);
         hbox.getChildren().addAll(backgroundColorBox,penColorBox,turtleImageBox);
         borderPane.setBottom(hbox);
     }
 
     private void changeBackgroundColor(){
-        String color = backgroundColorBox.getValue();
-        switch (color){
-            case "White": thePaletteDelegate.changeBackgroundColor(Color.WHITE);
-            case "Blue": thePaletteDelegate.changeBackgroundColor(Color.BLUE);
-        }
+        parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString(ResourceBundleManager.retrieveOnScreenCommand("SET_BG") + backgroundColorBox.getValue())));
     }
 
     private void changePenColor(){
-        String color = backgroundColorBox.getValue();
-        switch (color){
-            case "Black": thePaletteDelegate.changeBackgroundColor(Color.BLACK);
-            case "Red": thePaletteDelegate.changeBackgroundColor(Color.RED);
-            case "Green": thePaletteDelegate.changeBackgroundColor(Color.GREEN);
-        }
+        parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString(ResourceBundleManager.retrieveOnScreenCommand("SET_PC") + penColorBox.getValue())));
+
     }
 
     private void changeTurtleImage(){
-        thePaletteDelegate.changeTurtleImage(turtleImageBox.getValue());
+        parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString(ResourceBundleManager.retrieveOnScreenCommand("SET_SH") + turtleImageBox.getValue())));
+
     }
 
     private void addFrontEndTurtle(TurtleObservable turtleObservable){
@@ -126,6 +124,11 @@ public class TheDrawer extends ScreenComponent implements Observer{
                 this.addFrontEndTurtle(turt);
             }
         }
+        linesLayer.getGraphicsContext2D().clearRect(0,0,CANVAS_WIDTH, CANVAS_HEIGHT);
+        for(TheDrawerTurtleComponent frontEndTurtle : turtlesOnScreen){
+            frontEndTurtle.update();
+        }
+        backgroundComponent.changeBackgroundColor(paletteObservable.getBackgroundColor());
     }
 
     @Override

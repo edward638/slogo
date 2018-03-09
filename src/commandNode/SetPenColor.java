@@ -21,10 +21,13 @@ public class SetPenColor extends GeneralCommand {
 	 * @return given index
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
+		model.update((t)->t.setPenColor(model.getColorAtIndex(arguments.get(0).getValue())));
+		/*
 		for (Turtle turtle: model.getActiveTurtles())
 		{
 			turtle.setPenColor(model.getColorAtIndex(arguments.get(0).getValue()));
 		}
+		*/
 		value = arguments.get(0).getValue();
 		return value;
 	}

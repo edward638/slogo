@@ -1,16 +1,9 @@
 package view.screen_components;
 
-import Experiment.ThePaletteDelegate;
-import controller.DrawerController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import model.Turtle;
 import model.TurtleObservable;
 import model.TurtlesFetcher;
 import view.Observer;

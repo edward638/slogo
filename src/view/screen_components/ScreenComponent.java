@@ -6,7 +6,7 @@ public abstract class ScreenComponent {
 	private BorderPane borderPane;
 	public ScreenComponent(){
 		borderPane = new BorderPane();
-		generateGUIComponent();
+		this.generateGUIComponent();
 	}
 	protected abstract void mapUserActions();
 	protected abstract void generateGUIComponent();

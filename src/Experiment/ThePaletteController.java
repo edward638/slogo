@@ -24,6 +24,7 @@ public class ThePaletteController extends TheController{
         model.initializePalette();
     }
 
+
     @Override
     protected void addToGUI() {
         super.getGui().addToScreen(palette);

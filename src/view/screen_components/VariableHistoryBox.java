@@ -2,7 +2,6 @@ package view.screen_components;
 
 import Experiment.TheClearValueDelegate;
 import Experiment.TheValueModifierDelegate;
-import controller.VariableHistoryBoxController;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
