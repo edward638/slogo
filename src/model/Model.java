@@ -23,7 +23,6 @@ public class Model implements ColorIndexObservable{
 	private static final String TURTLE_5 = "lt_arrow.png";
 	private static final String TURTLE_6 = "bk_arrow.png";
 
-
 	private Color backgroundColor;
 	private List<Color> colorOptions;
 	private List<String> shapeOptions;
@@ -46,6 +45,7 @@ public class Model implements ColorIndexObservable{
 		allTurtles = new HashMap<>();
 		XHome = width;
 		YHome = height;
+		
 		Turtle initial = new Turtle(XHome, YHome, colorOptions.get(0), 1.0, TURTLE_0);
 
 		allTurtles.put(1.0, initial);
@@ -100,6 +100,12 @@ public class Model implements ColorIndexObservable{
 		return backgroundColor;
 	}
 	
+	public void setBackgroundColor(Color c)
+	{
+		this.backgroundColor = c;
+	}
+	
+	
 	public void setBackgroundColor(double index) 
 	{
 		this.backgroundColor = colorOptions.get((int) index);
@@ -123,7 +129,10 @@ public class Model implements ColorIndexObservable{
 		return colorOptions.get((int)index);
 	}
 
-	public Turtle getActiveTurtle() { return activeTurtles.get(currentTurtle); }
+	public Turtle getActiveTurtle() 
+	{ 
+		return activeTurtles.get(currentTurtle); 
+	}
 	
 	public List<Turtle> getActiveTurtles()
 	{

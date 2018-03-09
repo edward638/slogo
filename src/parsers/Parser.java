@@ -129,6 +129,20 @@ public class Parser
 		
 	}
 	
+	public List<NodeInterface> parseString(String command, String language)
+	{
+		String oldLanguage = lang;
+		
+		setLanguage(language);
+		
+		List<NodeInterface> fromButton = parseString(command);
+		
+		setLanguage(oldLanguage);
+		
+		return fromButton;
+		
+	}
+	
 	public void makeTree(List<NodeInterface> nodeList)
 	{
 		TreeMaker tm  = new TreeMaker(nodeList);
