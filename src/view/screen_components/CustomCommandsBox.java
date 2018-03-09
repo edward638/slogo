@@ -2,9 +2,6 @@ package view.screen_components;
 
 import Experiment.TheClearValueDelegate;
 import Experiment.TheParserActionDelegate;
-import controller.CommandBoxController;
-import controller.CommandHistoryBoxController;
-import controller.CustomCommandController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -75,7 +72,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     }
 
     @Override
-    protected void generateGUIComponent() {
+    public void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();
         this.addButtonAndLabels(borderPane);
     }

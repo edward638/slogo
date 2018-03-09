@@ -1,17 +1,20 @@
 package Experiment;
 
-import javafx.scene.paint.Color;
 import model.Model;
+import parsers.Parser;
 import view.GUI;
-import view.screen_components.Drawer;
 import view.screen_components.TheDrawer;
 
-public class TheDrawerController extends TheController implements ThePaletteDelegate{
+import java.util.function.Consumer;
+
+public class TheDrawerController extends TheController implements TheParserActionDelegate{
     private TheDrawer drawer;
     private Model model;
-    public TheDrawerController(GUI gui, Model model){
+    private Parser parser;
+    public TheDrawerController(GUI gui, Model model, Parser parser){
         super(gui);
         this.model = model;
+        this.parser = parser;
     }
 
     @Override
@@ -21,30 +24,22 @@ public class TheDrawerController extends TheController implements ThePaletteDele
 
     @Override
     protected void setUpConnections() {
+        drawer.setPaletteObservable(model);
         drawer.setTurtlesFetcher(model);
-        drawer.setThePaletteDelegate(this);
+        drawer.setTheParserActionDelegate(this);
         drawer.notifyOfChanges();
         model.addDrawerObserver(drawer);
     }
+
 
     @Override
     protected void addToGUI() {
         super.getGui().addToScreen(drawer);
     }
 
-    @Override
-    public void changeBackgroundColor(Color color) {
-        //TODO:fix
-        model.setBackgroundColor(0);
-    }
 
     @Override
-    public void changePenColor(Color color) {
-        model.update((t)->t.setPenColor(color));
-    }
-
-    @Override
-    public void changeTurtleImage(String image) {
-        model.update((t)->t.setTurtleShape(image));
+    public void performParserAction(Consumer<Parser> p) {
+        p.accept(parser);
     }
 }

@@ -1,8 +1,6 @@
 package view.screen_components;
 
 import Experiment.TheParserActionDelegate;
-import controller.PenPanelController;
-import controller.TurtleControlPanelController;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -47,7 +45,7 @@ public class PenControlPanel extends ScreenComponent{
     }
 
     @Override
-    protected void generateGUIComponent() {
+    public void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();
         penUpButton = new Button(ResourceBundleManager.retrieveOnScreenCommand("UP_BUTTON"));
         penDownButton = new Button(ResourceBundleManager.retrieveOnScreenCommand("DOWN_BUTTON"));

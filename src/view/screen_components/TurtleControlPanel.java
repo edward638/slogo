@@ -1,7 +1,6 @@
 package view.screen_components;
 
 import Experiment.TheParserActionDelegate;
-import controller.TurtleControlPanelController;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -38,7 +37,7 @@ public class TurtleControlPanel extends ScreenComponent {
     }
 
     @Override
-    protected void generateGUIComponent() {
+    public void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();
         forwardButton = new Button();
         forwardButton.getStyleClass().add("fdButton");
