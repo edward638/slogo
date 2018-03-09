@@ -12,8 +12,10 @@ import javafx.scene.layout.VBox;
 import propertiesFiles.ResourceBundleManager;
 import view.constants.ComboBoxConstants;
 import view.constants.TextAreaConstants;
+import view.factories.ComboBoxFactory;
 
 public class CommandBox extends ScreenComponent{
+	public static final String[] LANGUAGE_LIST = {"English", "Chinese"};
 	private Button commandClearButton;
     private Button commandRunButton;
     private TextArea commandTextArea;
@@ -65,21 +67,11 @@ public class CommandBox extends ScreenComponent{
 		VBox rightComponent = new VBox();
 		commandRunButton = new Button(ResourceBundleManager.retrieveButtonLabel("COMMAND_RUN_BUTTON_LABEL"));
 		commandClearButton = new Button(ResourceBundleManager.retrieveButtonLabel("COMMAND_CLEAR_BUTTON_LABEL"));
-		languageBox = this.getLanguageBox();
+		languageBox = ComboBoxFactory.generateStringComboBox(LANGUAGE_LIST);
 		rightComponent.getChildren().add(commandRunButton);
 		rightComponent.getChildren().add(commandClearButton);
 		rightComponent.getChildren().add(languageBox);
 		borderPane.setRight(rightComponent);
-	}
-
-	private ComboBox<String> getLanguageBox(){
-		languageBox = new ComboBox<>();
-		String[] options = ComboBoxConstants.LANGUAGE_LIST;
-		for (int i = 0 ; i < options.length; i++) {
-            languageBox.getItems().add(options[i]);
-            languageBox.getSelectionModel().selectFirst();
-        }
-		return languageBox;
 	}
 
 	private void changeLanguage(){

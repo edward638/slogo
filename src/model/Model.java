@@ -6,9 +6,9 @@ import java.util.function.Consumer;
 
 import javafx.scene.paint.Color;
 import view.Observer;
-import view.constants.PalletteConstants;
+import view.constants.PaletteConstants;
 
-public class Model implements PaletteObservable, TurtlesFetcher {
+public class Model implements PaletteObservable, DrawerObservable {
 	private Color backgroundColor;
 	private List<Color> colorOptions;
 	private List<String> shapeOptions;
@@ -41,11 +41,11 @@ public class Model implements PaletteObservable, TurtlesFetcher {
 	}
 
 	private void initializeColors(){
-		colorOptions = Arrays.asList(PalletteConstants.COLORS);
+		colorOptions = Arrays.asList(PaletteConstants.COLORS);
 	}
 
 	private void initializeShapes(){
-		shapeOptions = Arrays.asList(PalletteConstants.TURTLE_IMAGES);
+		shapeOptions = Arrays.asList(PaletteConstants.TURTLE_IMAGES);
 	}
 	
 	public List<String> getShapeOptions()

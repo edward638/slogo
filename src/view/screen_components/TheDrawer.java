@@ -10,10 +10,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import model.PaletteObservable;
 import model.TurtleObservable;
-import model.TurtlesFetcher;
+import model.DrawerObservable;
 import propertiesFiles.ResourceBundleManager;
 import view.Observer;
-import view.constants.PalletteConstants;
+import view.constants.PaletteConstants;
 import view.factories.ComboBoxFactory;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class TheDrawer extends ScreenComponent implements Observer{
     private ComboBox<Integer> penColorBox;
     private ComboBox<Integer> turtleImageBox;
 
-    private TurtlesFetcher turtlesFetcher;
+    private DrawerObservable drawerObservable;
     private List<TheDrawerTurtleComponent> turtlesOnScreen;
     private List<TurtleObservable> linkedTurtles;
     private TheDrawerBackgroundComponent backgroundComponent;
@@ -44,25 +44,19 @@ public class TheDrawer extends ScreenComponent implements Observer{
     private Canvas linesLayer;
     private Canvas backgroundLayer;
 
-    private PaletteObservable paletteObservable;
-
     public TheDrawer(){
         super();
         linkedTurtles = new ArrayList<>();
         turtlesOnScreen = new ArrayList<>();
     }
 
-    public void setTurtlesFetcher(TurtlesFetcher turtlesFetcher){
-        this.turtlesFetcher = turtlesFetcher;
+    public void setDrawerObservable(DrawerObservable drawerObservable){
+        this.drawerObservable = drawerObservable;
         this.update();
     }
 
     public void setTheParserActionDelegate(TheParserActionDelegate theParserActionDelegate){
         this.parserActionDelegate = theParserActionDelegate;
-    }
-
-    public void setPaletteObservable(PaletteObservable paletteObservable){
-        this.paletteObservable = paletteObservable;
     }
 
     @Override
@@ -92,9 +86,9 @@ public class TheDrawer extends ScreenComponent implements Observer{
 
     private void generateListOptions(BorderPane borderPane){
         HBox hbox = new HBox();
-        backgroundColorBox = ComboBoxFactory.generateIntegerComboBox("Background Color", PalletteConstants.COLORS.length);
-        penColorBox = ComboBoxFactory.generateIntegerComboBox("Pen Color",PalletteConstants.COLORS.length);
-        turtleImageBox = ComboBoxFactory.generateIntegerComboBox("Turtle Image",PalletteConstants.TURTLE_IMAGES.length);
+        backgroundColorBox = ComboBoxFactory.generateIntegerComboBox(PaletteConstants.COLORS.length);
+        penColorBox = ComboBoxFactory.generateIntegerComboBox(PaletteConstants.COLORS.length);
+        turtleImageBox = ComboBoxFactory.generateIntegerComboBox(PaletteConstants.TURTLE_IMAGES.length);
         hbox.getChildren().addAll(backgroundColorBox,penColorBox,turtleImageBox);
         borderPane.setBottom(hbox);
     }
@@ -119,7 +113,7 @@ public class TheDrawer extends ScreenComponent implements Observer{
     }
 
     public void update(){
-        for(TurtleObservable turt : turtlesFetcher.getTurtleObservables()){
+        for(TurtleObservable turt : drawerObservable.getTurtleObservables()){
             if(!linkedTurtles.contains(turt)){
                 this.addFrontEndTurtle(turt);
             }
@@ -128,7 +122,7 @@ public class TheDrawer extends ScreenComponent implements Observer{
         for(TheDrawerTurtleComponent frontEndTurtle : turtlesOnScreen){
             frontEndTurtle.update();
         }
-        backgroundComponent.changeBackgroundColor(paletteObservable.getBackgroundColor());
+        backgroundComponent.changeBackgroundColor(drawerObservable.getBackgroundColor());
     }
 
     @Override

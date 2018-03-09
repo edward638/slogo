@@ -30,7 +30,7 @@ public class TheWorkspace {
     }
 
     private void initializeModelElements(){
-        this.model = new Model(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT);
+        this.model = new Model(TheDrawer.CANVAS_WIDTH, TheDrawer.CANVAS_HEIGHT);
         this.commandHistory = new CommandHistory();
         this.variableHistory = new VariablesHistory();
         this.parser = new Parser(model, variableHistory, commandHistory);
