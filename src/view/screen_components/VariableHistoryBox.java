@@ -1,7 +1,7 @@
 package view.screen_components;
 
-import Experiment.TheClearValueDelegate;
-import Experiment.TheValueModifierDelegate;
+import controller.ClearValueDelegate;
+import controller.ValueModifierDelegate;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -16,8 +16,8 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 	public static final int TEXTAREA_ROWS = 10;
 	public static final int EDITVALUEFIELD_WIDTH = 30;
 	private VariableHistoryObservable variableHistory;
-	private TheClearValueDelegate theClearValueDelegate;
-	private TheValueModifierDelegate theValueModifierDelegate;
+	private ClearValueDelegate clearValueDelegate;
+	private ValueModifierDelegate valueModifierDelegate;
 	private TextArea textArea;
 	private Button clearButton;
 	private Button submitButton;
@@ -27,12 +27,12 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 		super();
 	}
 
-	public void setClearValueDelegate(TheClearValueDelegate theClearValueDelegate){
-		this.theClearValueDelegate = theClearValueDelegate;
+	public void setClearValueDelegate(ClearValueDelegate theClearValueDelegate){
+		this.clearValueDelegate = theClearValueDelegate;
 	}
 
-	public void setValueModifierDelegate(TheValueModifierDelegate theValueModifierDelegate){
-		this.theValueModifierDelegate = theValueModifierDelegate;
+	public void setValueModifierDelegate(ValueModifierDelegate valueModifierDelegate){
+		this.valueModifierDelegate = valueModifierDelegate;
 	}
 
 	public void setVariableHistory(VariableHistoryObservable variableHistory){
@@ -42,10 +42,10 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 	@Override
 	protected void mapUserActions() {
 		clearButton.setOnAction((event -> {
-			theClearValueDelegate.clear();
+			clearValueDelegate.clear();
 		}));
 		submitButton.setOnAction((event -> {
-			theValueModifierDelegate.changeValue(variableComboBox.getValue(), editValueField.getText());
+			valueModifierDelegate.changeValue(variableComboBox.getValue(), editValueField.getText());
 		}));
 	}
 

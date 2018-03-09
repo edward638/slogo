@@ -1,9 +1,9 @@
-package Experiment;
+package controller;
 
 import parsers.Parser;
 
 import java.util.function.Consumer;
 
-public interface TheParserActionDelegate {
+public interface ParserActionDelegate {
     void performParserAction(Consumer<Parser> p);
 }

@@ -1,4 +1,4 @@
-package Experiment;
+package controller;
 
 import model.Model;
 import parsers.Parser;
@@ -7,11 +7,11 @@ import view.screen_components.TheDrawer;
 
 import java.util.function.Consumer;
 
-public class TheDrawerController extends TheController implements TheParserActionDelegate{
+public class DrawerController extends Controller implements ParserActionDelegate {
     private TheDrawer drawer;
     private Model model;
     private Parser parser;
-    public TheDrawerController(GUI gui, Model model, Parser parser){
+    public DrawerController(GUI gui, Model model, Parser parser){
         super(gui);
         this.model = model;
         this.parser = parser;

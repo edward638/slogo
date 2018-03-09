@@ -1,8 +1,7 @@
 package view.screen_components;
 
-import Experiment.TheClearValueDelegate;
-import Experiment.TheParserActionDelegate;
-import javafx.geometry.Pos;
+import controller.ClearValueDelegate;
+import controller.ParserActionDelegate;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -11,7 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.CustomCommandObservable;
 import view.Observer;
-import view.help_items.HelpPopup;
 
 import java.util.List;
 
@@ -22,15 +20,15 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     private Button clearButton;
     private VBox commandList;
 
-    private TheParserActionDelegate theParserActionDelegate;
-    private TheClearValueDelegate theClearValueDelegate;
+    private ParserActionDelegate parserActionDelegate;
+    private ClearValueDelegate clearValueDelegate;
 
-    public void setTheParserActionDelegate(TheParserActionDelegate theParserActionDelegate){
-        this.theParserActionDelegate = theParserActionDelegate;
+    public void setParserActionDelegate(ParserActionDelegate parserActionDelegate){
+        this.parserActionDelegate = parserActionDelegate;
     }
 
-    public  void setTheClearValueDelegate(TheClearValueDelegate theClearValueDelegate){
-        this.theClearValueDelegate = theClearValueDelegate;
+    public  void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
+        this.clearValueDelegate = clearValueDelegate;
     }
 
     private void addButtonAndLabels(BorderPane borderPane) {
@@ -62,7 +60,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
             Button commandButton = new Button(command);
             commandButton.getStyleClass().add("runnableCommandButton");
             commandButton.setOnAction((event -> {
-                theParserActionDelegate.performParserAction(parser -> parser.parseString(commandButton.getText()));
+                parserActionDelegate.performParserAction(parser -> parser.parseString(commandButton.getText()));
             }));
             commandList.getChildren().add(commandButton);
         }
@@ -71,7 +69,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     @Override
     protected void mapUserActions() {
         clearButton.setOnAction((event -> {
-            theClearValueDelegate.clear();
+            clearValueDelegate.clear();
         }));
     }
 

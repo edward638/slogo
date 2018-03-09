@@ -1,6 +1,6 @@
 package view.screen_components;
 
-import Experiment.TheParserActionDelegate;
+import controller.ParserActionDelegate;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ComboBox;
@@ -8,7 +8,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import model.PaletteObservable;
 import model.TurtleObservable;
 import model.DrawerObservable;
 import propertiesFiles.ResourceBundleManager;
@@ -38,7 +37,7 @@ public class TheDrawer extends ScreenComponent implements Observer{
     private List<TurtleObservable> linkedTurtles;
     private TheDrawerBackgroundComponent backgroundComponent;
 
-    private TheParserActionDelegate parserActionDelegate;
+    private ParserActionDelegate parserActionDelegate;
 
     private StackPane drawingScreen;
     private Canvas linesLayer;
@@ -55,8 +54,8 @@ public class TheDrawer extends ScreenComponent implements Observer{
         this.update();
     }
 
-    public void setTheParserActionDelegate(TheParserActionDelegate theParserActionDelegate){
-        this.parserActionDelegate = theParserActionDelegate;
+    public void setTheParserActionDelegate(ParserActionDelegate parserActionDelegate){
+        this.parserActionDelegate = parserActionDelegate;
     }
 
     @Override
