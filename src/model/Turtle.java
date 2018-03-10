@@ -65,6 +65,11 @@ public class Turtle implements TurtleObservable, NodeInterface
 		toroidal = new WraparoundHandler(width, height);
 	}
 
+	public void addObserver(Observer turtleObserver){
+		//System.out.println("hi");
+		this.turtleObserver = turtleObserver;
+	}
+
 	/**
 	 *
 	 * @return the current x coordinate
