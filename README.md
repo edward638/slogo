@@ -11,7 +11,7 @@ Belanie worked with the team on parsing commands, creating classes for the vario
 
 ### Resources used
     
-To begin setting up the structure of the program, Edward and Andy looked at a a section from  Head First Design Patterns by Bert Bates, Kathy Sierra, Eric Freeman, and Elisabeth Robson about ModelViewController. In addition, Edward consulted with his TA Ben Schwennesen to better understand how to connect the Model and View in the program’s structure.
+To begin setting up the structure of the program, Edward and Andy looked at a a section from  Head First Design Patterns by Bert Bates, Kathy Sierra, Eric Freeman, and Elisabeth Robson about ModelViewController. In addition, Edward consulted with his TA Ben Schwennesen to better understand how to connect the Model and View in the program’s structure. Charlie spoke with his friend Conrad Mitchell. 
 
 These online resources were used:
 
@@ -72,7 +72,9 @@ In setting up the Palette, we decided to use images instead of shapes to represe
 
 ###   Any known bugs, crashes, or problems with the project's functionality
     
-If an on screen turtle reaches the corner of its visual container, it has the may accidentally be positioned outside of its drawer component on the next move command.
+* If an on screen turtle reaches the corner of its visual container, it has the may accidentally be positioned outside of its drawer component on the next move command.
+* For unlimited commands the unlimited command object does not have a return value on its first call
+* When using a specific turtle's ID to move, it cannot do so when being a child node of the non-head node
 
 ###  Any extra features included in the project
     
