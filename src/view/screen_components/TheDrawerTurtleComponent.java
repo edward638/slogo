@@ -1,8 +1,11 @@
 package view.screen_components;
 
+import controller.DeactivationDelegate;
+import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.layout.StackPane;
 import model.TurtleObservable;
 import view.Observer;
@@ -15,7 +18,10 @@ public class TheDrawerTurtleComponent {
     private ImageView turtleImage;
     private TurtleObservable turtle;
     private StackPane drawingScreen;
+
     private TheDrawerLineComponent theDrawerLineComponent;
+    private DeactivationDelegate deactivationDelegate;
+    private TurtleInformationPanel informationPanel;
     public TheDrawerTurtleComponent(TurtleObservable turtle, StackPane drawingScreen, Canvas lineCanvas){
         this.turtle = turtle;
         this.drawingScreen = drawingScreen;
@@ -28,6 +34,18 @@ public class TheDrawerTurtleComponent {
         this.setTurtleImage();
         drawingScreen.getChildren().add(turtleImage);
         this.update();
+    }
+
+    public void setDeactivationDelegate(DeactivationDelegate deactivationDelegate){
+        this.deactivationDelegate = deactivationDelegate;
+        System.out.println(deactivationDelegate == null);
+        turtleImage.setOnMouseClicked((e)->deactivationDelegate.deactivate(turtle.getID()));
+        this.setClickable();
+    }
+
+    private void setClickable(){
+        informationPanel = new TurtleInformationPanel(turtle);
+        turtleImage.setOnMouseEntered(event -> informationPanel.renderInformation());
     }
 
     private void drawLines(){
@@ -46,7 +64,7 @@ public class TheDrawerTurtleComponent {
     }
 
     public void update(){
-        if(!turtle.getTurtleShowing()) turtleImage.setVisible(false);
+        turtleImage.setVisible(turtle.getTurtleShowing());
         this.setTurtleImage();
         turtleImage.setRotate(-turtle.getDirectionAngle());
         this.move();
