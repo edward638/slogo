@@ -53,7 +53,7 @@ public class Turtle implements TurtleObservable, NodeInterface
 	}
 
 	public void addObserver(Observer turtleObserver){
-		System.out.println("hi");
+		//System.out.println("hi");
 		this.turtleObserver = turtleObserver;
 	}
 
