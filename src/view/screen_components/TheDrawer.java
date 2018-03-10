@@ -1,5 +1,6 @@
 package view.screen_components;
 
+import controller.DeactivationDelegate;
 import controller.ParserActionDelegate;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
@@ -31,10 +32,6 @@ public class TheDrawer extends ScreenComponent implements Observer{
     private static final int VERTICAL_INSET = 10;
     private static final int HORIZONTAL_INSET = 20;
 
-    //other turtle images taken from:
-    // https://pixabay.com/en/turtle-animal-reptile-water-green-294522/
-    // https://pixabay.com/en/sea-turtle-floral-flowers-2952470/
-
     private ComboBox<Integer> backgroundColorBox;
     private ComboBox<Integer> penColorBox;
     private ComboBox<Integer> turtleImageBox;
@@ -45,6 +42,7 @@ public class TheDrawer extends ScreenComponent implements Observer{
     private TheDrawerBackgroundComponent backgroundComponent;
 
     private ParserActionDelegate parserActionDelegate;
+    private DeactivationDelegate deactivationDelegate;
 
     private StackPane drawingScreen;
     private Canvas linesLayer;
@@ -57,6 +55,7 @@ public class TheDrawer extends ScreenComponent implements Observer{
      */
     public TheDrawer(){
         super();
+        this.deactivationDelegate = deactivationDelegate;
         linkedTurtles = new ArrayList<>();
         turtlesOnScreen = new ArrayList<>();
     }
@@ -154,7 +153,9 @@ public class TheDrawer extends ScreenComponent implements Observer{
      */
     private void addFrontEndTurtle(TurtleObservable turtleObservable){
         linkedTurtles.add(turtleObservable);
-        turtlesOnScreen.add(new TheDrawerTurtleComponent(turtleObservable, drawingScreen, linesLayer));
+        TheDrawerTurtleComponent additionalTurtle = new TheDrawerTurtleComponent(turtleObservable, drawingScreen, linesLayer);
+        additionalTurtle.setDeactivationDelegate(deactivationDelegate);
+        turtlesOnScreen.add(additionalTurtle);
     }
 
     /**
