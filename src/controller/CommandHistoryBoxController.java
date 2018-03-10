@@ -19,13 +19,11 @@ public class CommandHistoryBoxController extends Controller implements ParserAct
 
     @Override
     protected void initializeScreenComponents() {
-        commandHistoryBox = new CommandHistoryBox();
+        commandHistoryBox = new CommandHistoryBox((ParserActionDelegate) this, (ClearValueDelegate) this);
     }
 
     @Override
     protected void setUpConnections() {
-        commandHistoryBox.setParserActionDelegate(this);
-        commandHistoryBox.setClearValueDelegate(this);
         commandHistoryBox.setCommandHistory(commandHistory);
         commandHistory.addObserver(commandHistoryBox);
     }
