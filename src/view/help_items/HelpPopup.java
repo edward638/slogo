@@ -9,6 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import propertiesFiles.ResourceBundleManager;
 
+/**
+ * CLass which provides a popup box with various buttons which provide images of Slogo commands
+ */
 public class HelpPopup {
     public static final int STAGE_WIDTH = 600;
     public static final int STAGE_HEIGHT = 250;
@@ -26,10 +29,13 @@ public class HelpPopup {
     private Button variablesButton;
     private Button displayCommandsButton;
     private Button multipleTurtlesButton;
-
     private HBox hBox1;
     private HBox hBox2;
 
+    /**
+     * Constructor
+     * Sets up HelpPopup window, but does not show it
+     */
     public HelpPopup(){
         helpRoot = new Group();
         helpStage = new Stage();
@@ -43,11 +49,16 @@ public class HelpPopup {
         setButtonActions();
     }
 
+    /**
+     * Shows the popup
+     */
     public void open(){
         helpStage.show();
     }
 
-
+    /**
+     * Adds first row of buttons to helpRoot
+     */
     private void addFirstButtonRow(){
         hBox1 = new HBox();
         basicSyntaxButton = new Button(ResourceBundleManager.retrieveHelpPopupConstant("BASIC_SYNTAX"));
@@ -62,6 +73,10 @@ public class HelpPopup {
         hBox1.setLayoutY(HBOX1_Y);
         helpRoot.getChildren().add(hBox1);
     }
+
+    /**
+     * Adds second row of buttons to helpRoot
+     */
     private void addSecondButtonRow(){
         hBox2 = new HBox();
         mathOperationsButton = new Button(ResourceBundleManager.retrieveHelpPopupConstant("MATH_OPERATIONS"));
@@ -77,6 +92,9 @@ public class HelpPopup {
         helpRoot.getChildren().add(hBox2);
     }
 
+    /**
+     * Sets up actions for buttons. Each button generates a popup with an image containing specific commands
+     */
     private void setButtonActions(){
         basicSyntaxButton.setOnAction((event -> {
             generatePopup("syntaxImage", "BASIC_SYNTAX");
@@ -104,6 +122,9 @@ public class HelpPopup {
         }));
     }
 
+    /**
+     * Adds title to helpRoot
+     */
     private void addTitle(){
         Image image = new Image(getClass().getClassLoader().getResourceAsStream(ResourceBundleManager.retrieveHelpPopupConstant("helpTitle")));
         ImageView imageView = new ImageView();
@@ -112,6 +133,11 @@ public class HelpPopup {
         helpRoot.getChildren().add(imageView);
     }
 
+    /**
+     *
+     * @param stringImage name of image
+     * @param string name of subPopup window
+     */
     private void generatePopup(String stringImage, String string){
         Image image = new Image(getClass().getClassLoader().getResourceAsStream(ResourceBundleManager.retrieveHelpPopupConstant(stringImage)));
         HelpSubPopup subPopup = new HelpSubPopup(image, ResourceBundleManager.retrieveHelpPopupConstant(string));
