@@ -18,6 +18,12 @@ import view.factories.ComboBoxFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  Represents the drawer portion of SLogo.
+ *  Connected to backend which holds data to be represented on screen.
+ *  @author Andy Nguyen
+ *  @author Edward Zhuang
+ */
 public class TheDrawer extends ScreenComponent implements Observer{
     public static final double CANVAS_WIDTH = 450;
     public static final double CANVAS_HEIGHT = 450;
@@ -43,17 +49,30 @@ public class TheDrawer extends ScreenComponent implements Observer{
     private Canvas linesLayer;
     private Canvas backgroundLayer;
 
+    /**
+     * Constructor
+     * @see ScreenComponent
+     * Adds two arraylists which hold information about turtles
+     */
     public TheDrawer(){
         super();
         linkedTurtles = new ArrayList<>();
         turtlesOnScreen = new ArrayList<>();
     }
 
+    /**
+     * Sets up Drawer's DrawerObservable
+     * @param drawerObservable interface with methods to access turtles and background color
+     */
     public void setDrawerObservable(DrawerObservable drawerObservable){
         this.drawerObservable = drawerObservable;
         this.update();
     }
 
+    /**
+     * Set's up Drawer's ParserActionDelegate
+     * @param parserActionDelegate interface which allows Drawer to pass commands to parser
+     */
     public void setTheParserActionDelegate(ParserActionDelegate parserActionDelegate){
         this.parserActionDelegate = parserActionDelegate;
     }
