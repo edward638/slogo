@@ -71,7 +71,7 @@ public class TheDrawer extends ScreenComponent implements Observer{
     }
 
     /**
-     * Set's up Drawer's ParserActionDelegate
+     * Sets up Drawer's ParserActionDelegate
      * @param parserActionDelegate interface which allows Drawer to pass commands to parser
      */
     public void setTheParserActionDelegate(ParserActionDelegate parserActionDelegate){
