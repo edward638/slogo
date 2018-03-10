@@ -19,13 +19,11 @@ public class CustomCommandBoxController extends Controller implements ParserActi
 
     @Override
     protected void initializeScreenComponents() {
-        customCommandsBox = new CustomCommandsBox();
+        customCommandsBox = new CustomCommandsBox((ParserActionDelegate)this, (ClearValueDelegate) this);
     }
 
     @Override
     protected void setUpConnections() {
-        customCommandsBox.setClearValueDelegate(this);
-        customCommandsBox.setParserActionDelegate(this);
         customCommandsBox.setCustomCommandObservable(variablesHistory);
         variablesHistory.addCustomCommandObserver(customCommandsBox);
     }
@@ -43,6 +41,6 @@ public class CustomCommandBoxController extends Controller implements ParserActi
 
     @Override
     public void clear() {
-        variablesHistory.clearVariableHistory();
+        variablesHistory.clearCommandHistory();
     }
 }

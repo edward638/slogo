@@ -18,13 +18,12 @@ public class ButtonCommandPanelController extends Controller implements ParserAc
 
     @Override
     protected void initializeScreenComponents() {
-        turtleControlPanel = new TurtleControlPanel();
+        turtleControlPanel = new TurtleControlPanel(this);
         penControlPanel = new PenControlPanel();
     }
 
     @Override
     protected void setUpConnections() {
-        turtleControlPanel.setController(this);
         penControlPanel.setController(this);
     }
 

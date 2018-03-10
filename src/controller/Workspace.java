@@ -11,6 +11,11 @@ import view.screen_components.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Andy Nguyen
+ * @collaboratory Edward Zhuang
+ * The purpose of this class is to create the elements of the model and then create the
+ */
 public class Workspace {
     private GUI gui;
     private Parser parser;
@@ -21,6 +26,10 @@ public class Workspace {
 
     private List<Controller> controllerList;
 
+    /**
+     *
+     * @param stage
+     */
     public Workspace(Stage stage){
         gui = new GUI();
         this.initializeModelElements();
@@ -30,7 +39,7 @@ public class Workspace {
     }
 
     private void initializeModelElements(){
-        this.model = new Model(TheDrawer.CANVAS_WIDTH, TheDrawer.CANVAS_HEIGHT);
+        this.model = new Model(Drawer.CANVAS_WIDTH, Drawer.CANVAS_HEIGHT);
         this.commandHistory = new CommandHistory();
         this.variableHistory = new VariablesHistory();
         this.parser = new Parser(model, variableHistory, commandHistory);
@@ -55,6 +64,9 @@ public class Workspace {
         }
     }
 
+    /**
+     *
+     */
     public void startUp(){
         gui.start(stage);
     }

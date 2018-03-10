@@ -16,12 +16,11 @@ public class CommandBoxController extends Controller implements ParserActionDele
 
     @Override
     protected void initializeScreenComponents() {
-        commandBox = new CommandBox();
+        commandBox = new CommandBox(this);
     }
 
     @Override
     protected void setUpConnections() {
-        commandBox.setController(this);
     }
 
     @Override

@@ -15,17 +15,14 @@ public class VariableHistoryBoxController extends Controller implements ClearVal
 
     @Override
     protected void initializeScreenComponents() {
-        variableHistoryBox = new VariableHistoryBox();
+        variableHistoryBox = new VariableHistoryBox((ValueModifierDelegate)this, (ClearValueDelegate) this);
     }
 
     @Override
     protected void setUpConnections() {
-        variableHistoryBox.setClearValueDelegate(this);
-        variableHistoryBox.setValueModifierDelegate(this);
         variableHistoryBox.setVariableHistory(variablesHistory);
-        variablesHistory.addObserver(variableHistoryBox);
+        variablesHistory.addVariableObserver(variableHistoryBox);
     }
-
 
     @Override
     protected void addToGUI() {
@@ -34,7 +31,7 @@ public class VariableHistoryBoxController extends Controller implements ClearVal
 
     @Override
     public void clear() {
-        variablesHistory.clearCommandHistory();
+        variablesHistory.clearVariableHistory();
     }
 
     @Override
