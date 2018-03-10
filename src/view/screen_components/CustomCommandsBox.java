@@ -1,10 +1,7 @@
 package view.screen_components;
 
-import Experiment.TheClearValueDelegate;
-import Experiment.TheParserActionDelegate;
-import controller.CommandBoxController;
-import controller.CommandHistoryBoxController;
-import controller.CustomCommandController;
+import controller.ClearValueDelegate;
+import controller.ParserActionDelegate;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -12,31 +9,56 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.CustomCommandObservable;
+import propertiesFiles.ResourceBundleManager;
 import view.Observer;
 
 import java.util.List;
 
+/**
+ * Class which sets up front end representation of custom commands
+ * @author Andy Nguyen
+ * @author Edward Zhuang
+ */
 public class CustomCommandsBox extends ScreenComponent implements Observer {
     public static final int SCROLLPANE_WIDTH = 200;
     public static final int SCROLLPANE_HEIGHT = 100;
-    private CustomCommandObservable customCommandHolder;
+    private CustomCommandObservable customCommandObservable;
     private Button clearButton;
     private VBox commandList;
 
-    private TheParserActionDelegate theParserActionDelegate;
-    private TheClearValueDelegate theClearValueDelegate;
+    private ParserActionDelegate parserActionDelegate;
+    private ClearValueDelegate clearValueDelegate;
 
-    public void setTheParserActionDelegate(TheParserActionDelegate theParserActionDelegate){
-        this.theParserActionDelegate = theParserActionDelegate;
+    /**
+     * @see ScreenComponent
+     */
+    public CustomCommandsBox(){
+        super();
     }
 
-    public  void setTheClearValueDelegate(TheClearValueDelegate theClearValueDelegate){
-        this.theClearValueDelegate = theClearValueDelegate;
+    /**
+     * Sets up class' ParserActionDelegate
+     * @param parserActionDelegate interface which allows passing of commands to parser
+     */
+    public void setParserActionDelegate(ParserActionDelegate parserActionDelegate){
+        this.parserActionDelegate = parserActionDelegate;
     }
 
+    /**
+     * Set's up this class' clearValueDelegate
+     * @param clearValueDelegate interface which allows clearing of values
+     */
+    public void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
+        this.clearValueDelegate = clearValueDelegate;
+    }
+
+    /**
+     * Adds buttons and labels to a passed in BorderPane
+     * @param borderPane BorderPane on which buttons and labels are added
+     */
     private void addButtonAndLabels(BorderPane borderPane) {
         HBox topComponent = new HBox();
-        clearButton = new Button("Clear");
+        clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("CLEAR"));
         Label label = new Label("Custom Commands");
         topComponent.getChildren().add(label);
         topComponent.getChildren().add(clearButton);
@@ -47,35 +69,50 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
         scrollPane.setPrefHeight(SCROLLPANE_HEIGHT);
         scrollPane.setContent(commandList);
         borderPane.setCenter(scrollPane);
+
+
     }
 
-    public void setCustomCommandHolder(CustomCommandObservable holder){
-        this.customCommandHolder = holder;
+    /**
+     * Sets up customCommandObservable
+     * @param holder interface with methods to manipulate custom commands
+     */
+    public void setCustomCommandObservable(CustomCommandObservable holder){
+        this.customCommandObservable = holder;
     }
 
+    /**
+     * updates custom command history
+     */
     @Override
     public void notifyOfChanges() {
-        List<String> commands = customCommandHolder.getCommands();
+        List<String> commands = customCommandObservable.getCommands();
         commandList.getChildren().clear();
         for(String command: commands){
             Button commandButton = new Button(command);
             commandButton.getStyleClass().add("runnableCommandButton");
             commandButton.setOnAction((event -> {
-                theParserActionDelegate.performParserAction(parser -> parser.parseString(commandButton.getText()));
+                parserActionDelegate.performParserAction(parser -> parser.passTextCommand(commandButton.getText()));
             }));
             commandList.getChildren().add(commandButton);
         }
     }
 
+    /**
+     * Maps actions of this class' buttons
+     * clearButton clears history
+     */
     @Override
     protected void mapUserActions() {
-        clearButton.setOnAction((event -> {
-            theClearValueDelegate.clear();
-        }));
+        clearButton.setOnAction((event -> clearValueDelegate.clear()));
     }
 
+    /**
+     * Creates BorderPane and adds front end items to it
+     * @see ScreenComponent
+     */
     @Override
-    protected void generateGUIComponent() {
+    public void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();
         this.addButtonAndLabels(borderPane);
     }

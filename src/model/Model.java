@@ -1,28 +1,21 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import java.util.function.Consumer;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
 import view.Observer;
-import view.screen_components.Palette;
+import view.constants.PaletteConstants;
 
-public class Model implements ColorIndexObservable, TurtlesFetcher {
-
-	private static final String TURTLE_0 = "black_and_white_turtle.PNG";
-	private static final String TURTLE_1 = "colorful_turtle.png";
-	private static final String TURTLE_2 = "green_turtle.png";
-	private static final String TURTLE_3 = "SLogo.PNG";
-	private static final String TURTLE_4 = "fd_arrow.png";
-	private static final String TURTLE_5 = "lt_arrow.png";
-	private static final String TURTLE_6 = "bk_arrow.png";
-
+/**
+ * This class serves as a way to keep track of the background color, the shape of the turtle, and the current active and 
+ * non active turtles.
+ * 
+ * @author Belanie Nagiel, Charlie Dracos, and Andy Nguyen
+ *
+ */
+public class Model implements PaletteObservable, DrawerObservable {
 	private Color backgroundColor;
 	private List<Color> colorOptions;
 	private List<String> shapeOptions;
@@ -37,7 +30,13 @@ public class Model implements ColorIndexObservable, TurtlesFetcher {
 	private Observer drawerObserver;
 
 	private Observer colorIndexObserver;
-	
+
+	/**
+	 * Class Constructor
+	 * 
+	 * @param width
+	 * @param height
+	 */
 	public Model(double width, double height)
 	{
 		initializeColors();
@@ -46,103 +45,168 @@ public class Model implements ColorIndexObservable, TurtlesFetcher {
 		allTurtles = new HashMap<>();
 		XHome = width;
 		YHome = height;
-		
-		Turtle initial = new Turtle(XHome, YHome, colorOptions.get(0), 1.0, TURTLE_0);
+
+		Turtle initial = new Turtle(XHome, YHome, colorOptions.get(0), 1.0, shapeOptions.get(0));
 
 		allTurtles.put(1.0, initial);
 		activeTurtles.add(initial);
 
 	}
 
+	/**
+	 * Initializes the color options
+	 * 
+	 */
 	private void initializeColors(){
-		colorOptions = new ArrayList<>();
-		colorOptions.add(Color.RED);
-		colorOptions.add(Color.ORANGE);
-		colorOptions.add(Color.YELLOW);
-		colorOptions.add(Color.GREEN);
-		colorOptions.add(Color.BLUE);
-		colorOptions.add(Color.INDIGO);
-		colorOptions.add(Color.VIOLET);
+		colorOptions = Arrays.asList(PaletteConstants.COLORS);
 	}
 
+	/**
+	 * Initializes the turtle shape options
+	 * 
+	 */
 	private void initializeShapes(){
-		shapeOptions = new ArrayList<>();
-		shapeOptions.add(TURTLE_0);
-		shapeOptions.add(TURTLE_1);
-		shapeOptions.add(TURTLE_2);
-		shapeOptions.add(TURTLE_3);
-		shapeOptions.add(TURTLE_4);
-		shapeOptions.add(TURTLE_5);
-		shapeOptions.add(TURTLE_6);
+		shapeOptions = Arrays.asList(PaletteConstants.TURTLE_IMAGES);
 	}
-	
+
+	/**
+	 * 
+	 * @return the list of image options as strings
+	 */
 	public List<String> getShapeOptions()
 	{
 		return shapeOptions;
 	}
 
-	public Map<Double, Turtle> getAllTurtles() 
+	/**
+	 * @return the map of all turtles whether active or not
+	 */
+	public Map<Double, Turtle> getAllTurtles()
 	{
 		return allTurtles;
 	}
 
+	/**
+	 * adds a turtle to the map of all turtles
+	 * 
+	 * @param ID
+	 */
 	public void addTurtle(double ID) {
-		Turtle t = new Turtle (XHome, YHome, Color.BLUE, ID, TURTLE_0);
+		Turtle t = new Turtle (XHome, YHome, Color.BLUE, ID, shapeOptions.get(0));
 		allTurtles.put( t.getValue(), t);
 		activeTurtles.add(t);
 		drawerObserver.notifyOfChanges();
 	}
-	
+
+	/**
+	 * adds a turtle to the list of active turtles
+	 * 
+	 * @param turt
+	 */
 	public void addActiveTurtle(Turtle turt) {
 		activeTurtles.add(turt);
+		turt.setTurtleStatus(true);
 	}
 
-	public Color getBackgroundColor() 
-	{
+	@Override
+	/**
+	 * @return the current background color
+	 */
+	public Color getBackgroundColor() {
 		return backgroundColor;
 	}
-	
-	public void setBackgroundColor(Color c)
-	{
-		this.backgroundColor = c;
-	}
-	
-	
-	public void setBackgroundColor(double index) 
+
+	/**
+	 * Sets the background color to the color in color options at index
+	 * 
+	 * @param index
+	 */
+	public void setBackgroundColor(double index)
 	{
 		this.backgroundColor = colorOptions.get((int) index);
+		drawerObserver.notifyOfChanges();
 	}
-	
-	public List<Color> getColorOptions() 
+
+	/**
+	 * returns the list of color options
+	 * 
+	 * @return
+	 */
+	public List<Color> getColorOptions()
 	{
 		return colorOptions;
 	}
-	
+
+	/**
+	 * Sets the color in color options at index o a new color made from RGB
+	 * 
+	 * @param index
+	 * @param R
+	 * @param G
+	 * @param B
+	 */
 	public void setColorOptions(double index, double R, double G, double B) {
-		//EXCEPTION FOR IF R,G,B ARE OUT OF BOUNDS
 		colorOptions.set((int) index, Color.rgb((int) R, (int) G, (int) B));
 		colorIndexObserver.notifyOfChanges();
 	}
-	
+
+	/** 
+	 * @param index
+	 * @return the color at a given index in the color options list
+	 */
 	public Color getColorAtIndex(double index)
 	{
-		//EXCEPTION FOR IF AN INDEX IS OUT OF BOUNDS
 		colorIndexObserver.notifyOfChanges();
 		return colorOptions.get((int)index);
 	}
 
-	public Turtle getActiveTurtle() 
-	{ 
-		return activeTurtles.get(currentTurtle); 
+	/**
+	 * @return the current active turtle
+	 */
+	public Turtle getActiveTurtle()
+	{
+		return activeTurtles.get(currentTurtle);
 	}
-	
+
+	/**
+	 * 
+	 * @return the list of active turtles
+	 */
 	public List<Turtle> getActiveTurtles()
 	{
 		return activeTurtles;
 	}
 
+	/**
+	 * Sets the list of active turtles to a new list of turtles
+	 * @param newActives
+	 */
 	public void setActiveTurtles(List<Turtle> newActives) {
 		activeTurtles = newActives;
+		for(Turtle t: newActives)
+		{
+			t.setTurtleStatus(true);
+		}
+	}
+	
+	/**
+	 * Sets the turtle of ID to not active
+	 * @param turtleID
+	 */
+	public void setTurtleInactive(double turtleID)
+	{
+		activeTurtles.remove(allTurtles.get(turtleID));
+		allTurtles.get(turtleID).setTurtleStatus(false);
+	}
+	
+	/**
+	 * Sets the turtle of ID to active
+	 * @param turtleID
+	 */
+	public void setTurtleActive(double turtleID)
+	{
+		activeTurtles.add(allTurtles.get(turtleID));
+		allTurtles.get(turtleID).setTurtleStatus(true);
 	}
 
 	public void update (Consumer<Turtle> T) {
@@ -163,19 +227,26 @@ public class Model implements ColorIndexObservable, TurtlesFetcher {
 	}
 
 	@Override
+	/**
+	 * 
+	 * @return the list of color options
+	 */
 	public List<Color> getColorList() {
 		return colorOptions;
 	}
 
+	/**
+	 * notifies the observer of changes to the color palette
+	 * 
+	 */
 	public void initializePalette(){
 		colorIndexObserver.notifyOfChanges();
 	}
 
-	public void setDrawerObserver(Observer observer){
-		drawerObserver = observer;
-	}
-
 	@Override
+	/**
+	 * Gets the information for the view from each active turtle 
+	 */
 	public List<TurtleObservable> getTurtleObservables() {
 		List<TurtleObservable> turtleList = new ArrayList<>();
 		for(double key: this.getAllTurtles().keySet()){

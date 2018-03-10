@@ -20,10 +20,13 @@ public class SetPenSize extends GeneralCommand {
 	 * @return given pixels
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
+		model.update((t)->t.setPenSize(arguments.get(0).getValue()));
+		/*
 		for (Turtle turtle: model.getActiveTurtles())
 		{
 			turtle.setPenSize(arguments.get(0).getValue());
 		}
+		*/
 		value = arguments.get(0).getValue();
 		return value;
 	}
