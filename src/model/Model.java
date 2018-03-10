@@ -67,6 +67,7 @@ public class Model implements PaletteObservable, DrawerObservable {
 
 	public void addActiveTurtle(Turtle turt) {
 		activeTurtles.add(turt);
+		turt.setTurtleStatus(true);
 	}
 
 	@Override
@@ -110,6 +111,16 @@ public class Model implements PaletteObservable, DrawerObservable {
 
 	public void setActiveTurtles(List<Turtle> newActives) {
 		activeTurtles = newActives;
+		for(Turtle t: newActives)
+		{
+			t.setTurtleStatus(true);
+		}
+	}
+	
+	public void setTurtleInactive(double turtleID)
+	{
+		activeTurtles.remove(allTurtles.get(turtleID));
+		allTurtles.get(turtleID).setTurtleStatus(false);
 	}
 
 	public void update (Consumer<Turtle> T) {
