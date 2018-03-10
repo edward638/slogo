@@ -15,6 +15,7 @@ public class HelpPopup {
     public static final int HBOX_OFFSET = 10;
     public static final int HBOX1_Y = 150;
     public static final int HBOX2_Y = 200;
+    public static final int TITLE_OFFSET = 75;
     private Stage helpStage;
     private Group helpRoot;
     private Button basicSyntaxButton;
@@ -107,7 +108,7 @@ public class HelpPopup {
         Image image = new Image(getClass().getClassLoader().getResourceAsStream(ResourceBundleManager.retrieveHelpPopupConstant("helpTitle")));
         ImageView imageView = new ImageView();
         imageView.setImage(image);
-        imageView.setLayoutX(75);
+        imageView.setLayoutX(TITLE_OFFSET);
         helpRoot.getChildren().add(imageView);
     }
 
