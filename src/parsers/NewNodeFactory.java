@@ -14,6 +14,12 @@ import model.CommandHistory;
 import model.VariablesHistory;
 import nodes.NodeInterface;
 
+/**
+ * @author Belanie Nagiel
+ * 
+ * A class that was an attempt at refactoring the Parser by making nodes elsewhere but I am still having trouble implementing it.
+ *
+ */
 public class NewNodeFactory 
 {
 	private Map<String,Class[]> commandToParams;
@@ -29,6 +35,13 @@ public class NewNodeFactory
 		buildArgumentMap();
 	}
 	
+	/**
+	 * Returns a new Node based on the type and all the possible inputs
+	 * 
+	 * @param type
+	 * @param args
+	 * @return new Node
+	 */
 	public NodeInterface makeNode(String type, Object ... args)
 	{
 		Object[] realArgs = getArguments(type, args);
@@ -40,6 +53,13 @@ public class NewNodeFactory
 		return n;
 	}
 	
+	/**
+	 * Creates the node based on type and the arguments.
+	 * 
+	 * @param type
+	 * @param realArgs
+	 * @return
+	 */
 	private NodeInterface nodeReflection(String type, Object[] realArgs)
 	{
 		try
@@ -66,6 +86,13 @@ public class NewNodeFactory
 		return null;	
 	}
 	
+	/**
+	 * Creates the list of real arguments for the new instance of a class.
+	 * 
+	 * @param type
+	 * @param args
+	 * @return
+	 */
 	private Object[] getArguments(String type, Object ... args)
 	{
 		Class[] argTypes = commandToArgs.get(type);
@@ -85,6 +112,10 @@ public class NewNodeFactory
 		return arguments;
 	}
 	
+	/**
+	 * Creates the map of node types to parameters.
+	 * 
+	 */
 	private void buildParameterMap() 
 	{
 		commandToParams = new HashMap<>();
@@ -99,6 +130,12 @@ public class NewNodeFactory
 		}
 	}
 	
+	/**
+	 * Creates the list of classes based on the .property file.
+	 * 
+	 * @param classStrings
+	 * @return
+	 */
 	private Class[] getParameterClasses(String[] classStrings)
 	{
 		Class[] parameterClasses = new Class[classStrings.length];
@@ -130,6 +167,10 @@ public class NewNodeFactory
 		return parameterClasses;
 	}
 	
+	/**
+	 * Creates map of node types to argument types
+	 * 
+	 */
 	private void buildArgumentMap()
 	{
 		commandToArgs = new HashMap<>();
@@ -145,6 +186,12 @@ public class NewNodeFactory
 		
 	}
 	
+	/**
+	 * Creates the list of classes based on the .property file.
+	 * 
+	 * @param classStrings
+	 * @return
+	 */
 	private Class[] getArgumentClasses(String[] classStrings)
 	{
 		Class[] argClasses = new Class[classStrings.length];
@@ -165,6 +212,10 @@ public class NewNodeFactory
 		return argClasses;
 	}
 	
+	/**
+	 * Creates a map of commands to the number of children they have.
+	 * 
+	 */
 	private void createChildrenMap()
 	{
 		children = new HashMap<>();
@@ -178,16 +229,17 @@ public class NewNodeFactory
 
 	}
 	
-	private String checkLanguage(String command, Map<String,Pattern> myTranslation, CommandHistory comHistory)
-	{
-		for (String key: myTranslation.keySet())
-		{
-			if(myTranslation.get(key).matcher(command).matches())
-			{
-				return key;
-			}
-		}
-		comHistory.addCommand("Error: Cannot recognize language");
-		throw new InvalidEntryException("Error: Cannot recognize language");
-	}
+//	
+//	private String checkLanguage(String command, Map<String,Pattern> myTranslation, CommandHistory comHistory)
+//	{
+//		for (String key: myTranslation.keySet())
+//		{
+//			if(myTranslation.get(key).matcher(command).matches())
+//			{
+//				return key;
+//			}
+//		}
+//		comHistory.addCommand("Error: Cannot recognize language");
+//		throw new InvalidEntryException("Error: Cannot recognize language");
+//	}
 }

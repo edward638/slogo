@@ -5,7 +5,10 @@ import java.util.List;
 import model.Model;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
-
+/**
+ * @author Belanie Nagiel
+ *
+ */
 public class SetPalette extends GeneralCommand {
 
 	public SetPalette(Model model, int numChildren) {
