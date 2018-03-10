@@ -18,6 +18,7 @@ import nodes.NodeInterface;
  * @author Belanie Nagiel
  * 
  * A class that was an attempt at refactoring the Parser by making nodes elsewhere but I am still having trouble implementing it.
+ * This is not currently being used.
  *
  */
 public class NewNodeFactory 

@@ -8,6 +8,7 @@ import nodes.NodeInterface;
 /**
  * @author Belanie Nagiel
  *
+ * Sets a new color in the color palette.
  */
 public class SetPalette extends GeneralCommand {
 
